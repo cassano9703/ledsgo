@@ -7,7 +7,7 @@ export async function getAiSuggestions(input: DesignSuggestionInput) {
     const result = await generateDesignSuggestion(input);
     return { success: true, suggestions: result.suggestions };
   } catch (error) {
-    console.error("Error generating AI suggestions:", error);
-    return { success: false, error: "Failed to generate suggestions. Please try again." };
+    console.error("Error al generar sugerencias de IA:", error);
+    return { success: false, error: "No se pudieron generar sugerencias. Por favor, inténtalo de nuevo." };
   }
 }
