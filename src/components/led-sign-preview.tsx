@@ -12,7 +12,7 @@ interface LedSignPreviewProps {
 }
 
 export function LedSignPreview({ text, font, color, size }: LedSignPreviewProps) {
-  const previewText = text || 'Your Text Here';
+  const previewText = text || 'Tu Texto Aquí';
 
   const baseFontSize = 3; // base font size in rem
   const dynamicFontSize = `${baseFontSize * size.multiplier}rem`;

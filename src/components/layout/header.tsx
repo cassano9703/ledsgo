@@ -19,17 +19,17 @@ export function Header() {
           className="text-sm font-medium hover:underline underline-offset-4"
           prefetch={false}
         >
-          Create
+          Crear
         </Link>
         <Link
           href="#catalog"
           className="text-sm font-medium hover:underline underline-offset-4"
           prefetch={false}
         >
-          Catalog
+          Catálogo
         </Link>
         <Button asChild>
-          <Link href="#configurator">Order Now</Link>
+          <Link href="#configurator">Ordenar Ahora</Link>
         </Button>
       </nav>
     </header>

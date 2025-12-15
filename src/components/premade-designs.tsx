@@ -34,7 +34,7 @@ export function PremadeDesigns() {
           </CardContent>
           <CardFooter>
             <Button asChild className="w-full">
-              <Link href="#configurator">Customize & Order</Link>
+              <Link href="#configurator">Personalizar y Ordenar</Link>
             </Button>
           </CardFooter>
         </Card>

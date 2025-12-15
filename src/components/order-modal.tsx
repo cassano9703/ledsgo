@@ -24,9 +24,9 @@ import { useToast } from "@/hooks/use-toast";
 import type { FontConfig, SizeConfig } from "@/lib/config";
 
 const orderSchema = z.object({
-  name: z.string().min(2, "Name must be at least 2 characters."),
-  email: z.string().email("Please enter a valid email address."),
-  address: z.string().min(10, "Please enter a full shipping address."),
+  name: z.string().min(2, "El nombre debe tener al menos 2 caracteres."),
+  email: z.string().email("Por favor, introduce una dirección de correo electrónico válida."),
+  address: z.string().min(10, "Por favor, introduce una dirección de envío completa."),
 });
 
 type OrderFormValues = z.infer<typeof orderSchema>;
@@ -54,10 +54,10 @@ export function OrderModal({ isOpen, onClose, config }: OrderModalProps) {
   });
 
   const onSubmit = (data: OrderFormValues) => {
-    console.log("Order placed:", { customer: data, sign: config });
+    console.log("Pedido realizado:", { customer: data, sign: config });
     toast({
-      title: "🎉 Order Placed!",
-      description: "Thank you! We've received your order and will be in touch shortly.",
+      title: "🎉 ¡Pedido Realizado!",
+      description: "¡Gracias! Hemos recibido tu pedido y nos pondremos en contacto en breve.",
     });
     form.reset();
     onClose();
@@ -67,20 +67,20 @@ export function OrderModal({ isOpen, onClose, config }: OrderModalProps) {
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>Place Your Order</DialogTitle>
+          <DialogTitle>Realiza tu Pedido</DialogTitle>
           <DialogDescription>
-            Review your design and provide your shipping details to complete the purchase.
+            Revisa tu diseño y proporciona tus datos de envío para completar la compra.
           </DialogDescription>
         </DialogHeader>
         <div className="grid gap-4 py-4">
           <div className="rounded-md border p-4">
-            <h4 className="font-semibold mb-2">Your Sign:</h4>
-            <p className="text-sm"><strong>Text:</strong> {config.text}</p>
-            <p className="text-sm"><strong>Font:</strong> {config.font.name}</p>
+            <h4 className="font-semibold mb-2">Tu Letrero:</h4>
+            <p className="text-sm"><strong>Texto:</strong> {config.text}</p>
+            <p className="text-sm"><strong>Fuente:</strong> {config.font.name}</p>
             <p className="text-sm flex items-center"><strong>Color:</strong>
               <span className="w-4 h-4 rounded-full inline-block ml-2 border" style={{ backgroundColor: config.color }}></span>
             </p>
-            <p className="text-sm"><strong>Size:</strong> {config.size.name}</p>
+            <p className="text-sm"><strong>Tamaño:</strong> {config.size.name}</p>
           </div>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
@@ -89,9 +89,9 @@ export function OrderModal({ isOpen, onClose, config }: OrderModalProps) {
                 name="name"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Full Name</FormLabel>
+                    <FormLabel>Nombre Completo</FormLabel>
                     <FormControl>
-                      <Input placeholder="John Doe" {...field} />
+                      <Input placeholder="Juan Pérez" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -102,9 +102,9 @@ export function OrderModal({ isOpen, onClose, config }: OrderModalProps) {
                 name="email"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Email Address</FormLabel>
+                    <FormLabel>Correo Electrónico</FormLabel>
                     <FormControl>
-                      <Input placeholder="you@example.com" {...field} />
+                      <Input placeholder="tu@ejemplo.com" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -115,15 +115,15 @@ export function OrderModal({ isOpen, onClose, config }: OrderModalProps) {
                 name="address"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Shipping Address</FormLabel>
+                    <FormLabel>Dirección de Envío</FormLabel>
                     <FormControl>
-                      <Input placeholder="123 Main St, Anytown, USA" {...field} />
+                      <Input placeholder="Calle Principal 123, Ciudad, País" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
               />
-              <Button type="submit" className="w-full">Confirm Order</Button>
+              <Button type="submit" className="w-full">Confirmar Pedido</Button>
             </form>
           </Form>
         </div>

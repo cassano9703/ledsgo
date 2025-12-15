@@ -67,15 +67,15 @@ export function LedSignConfigurator() {
         
         <Card>
           <CardHeader>
-            <CardTitle>Sign Details</CardTitle>
-            <CardDescription>Enter text and choose your options below.</CardDescription>
+            <CardTitle>Detalles del Letrero</CardTitle>
+            <CardDescription>Ingresa el texto y elige tus opciones a continuación.</CardDescription>
           </CardHeader>
           <CardContent className="space-y-6">
             <div className="space-y-2">
-              <Label htmlFor="sign-text">Text</Label>
+              <Label htmlFor="sign-text">Texto</Label>
               <Input
                 id="sign-text"
-                placeholder="Your text here"
+                placeholder="Tu texto aquí"
                 value={text}
                 onChange={(e) => setText(e.target.value)}
               />
@@ -83,10 +83,10 @@ export function LedSignConfigurator() {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label htmlFor="font-select">Font</Label>
+                <Label htmlFor="font-select">Fuente</Label>
                 <Select value={font.name} onValueChange={handleFontChange}>
                   <SelectTrigger id="font-select">
-                    <SelectValue placeholder="Select a font" />
+                    <SelectValue placeholder="Selecciona una fuente" />
                   </SelectTrigger>
                   <SelectContent>
                     {fonts.map((f) => (
@@ -98,10 +98,10 @@ export function LedSignConfigurator() {
                 </Select>
               </div>
               <div className="space-y-2">
-                <Label htmlFor="size-select">Size</Label>
+                <Label htmlFor="size-select">Tamaño</Label>
                 <Select value={size.name} onValueChange={(val) => setSize(sizes.find(s => s.name === val)!)}>
                   <SelectTrigger id="size-select">
-                    <SelectValue placeholder="Select a size" />
+                    <SelectValue placeholder="Selecciona un tamaño" />
                   </SelectTrigger>
                   <SelectContent>
                     {sizes.map((s) => (
@@ -133,10 +133,10 @@ export function LedSignConfigurator() {
             <div className="space-y-4 pt-4">
               <Button onClick={handleAiSuggest} disabled={isAiLoading} className="w-full sm:w-auto">
                 {isAiLoading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <Wand2 className="mr-2 h-4 w-4" />}
-                Get AI Design Suggestions
+                Obtener Sugerencias de IA
               </Button>
                <p className="text-xs text-muted-foreground">
-                Our AI will act as your personal design expert, offering tips to make your sign look even better.
+                Nuestra IA actuará como tu experto en diseño personal, ofreciéndote consejos para que tu letrero se vea aún mejor.
               </p>
               
               {isAiLoading && (
@@ -150,11 +150,11 @@ export function LedSignConfigurator() {
               {aiSuggestions.length > 0 && (
                 <Alert>
                   <Lightbulb className="h-4 w-4" />
-                  <AlertTitle>Design Tips from AI</AlertTitle>
+                  <AlertTitle>Consejos de Diseño de la IA</AlertTitle>
                   <AlertDescription>
                     <Accordion type="single" collapsible className="w-full">
                       <AccordionItem value="item-1">
-                        <AccordionTrigger>Here are some suggestions to improve your design:</AccordionTrigger>
+                        <AccordionTrigger>Estas son algunas sugerencias para mejorar tu diseño:</AccordionTrigger>
                         <AccordionContent>
                           <ul className="list-disc pl-5 space-y-1 mt-2">
                             {aiSuggestions.map((suggestion, index) => (
@@ -172,7 +172,7 @@ export function LedSignConfigurator() {
           </CardContent>
           <CardFooter>
             <Button size="lg" className="w-full" onClick={() => setOrderModalOpen(true)}>
-              Order Your Custom Sign
+              Ordenar Tu Letrero Personalizado
             </Button>
           </CardFooter>
         </Card>
