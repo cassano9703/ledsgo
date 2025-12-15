@@ -41,7 +41,9 @@ const prompt = ai.definePrompt({
   Font: {{{font}}}
   Size: {{{size}}}
   Color: {{{color}}}
+  {{#if additionalDetails}}
   Additional Details: {{{additionalDetails}}}
+  {{/if}}
   `,
 });
 
