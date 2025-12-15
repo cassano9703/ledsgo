@@ -124,7 +124,7 @@ export function LedSignConfigurator() {
                 {colors.map((c) => (
                   <Label key={c.name} htmlFor={c.name} className={`relative flex items-center justify-center rounded-full w-8 h-8 cursor-pointer border-2 ${color.name === c.name ? 'border-primary' : 'border-transparent'}`}>
                     <RadioGroupItem value={c.name} id={c.name} className="sr-only" />
-                    <span className={`w-full h-full rounded-full ${c.twClass}`} />
+                    <span className="w-full h-full rounded-full" style={{ backgroundColor: c.value }} />
                   </Label>
                 ))}
               </RadioGroup>
@@ -135,6 +135,9 @@ export function LedSignConfigurator() {
                 {isAiLoading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <Wand2 className="mr-2 h-4 w-4" />}
                 Get AI Design Suggestions
               </Button>
+               <p className="text-xs text-muted-foreground">
+                Our AI will act as your personal design expert, offering tips to make your sign look even better.
+              </p>
               
               {isAiLoading && (
                 <div className="space-y-2">
