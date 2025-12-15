@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useRef, useState, useLayoutEffect } from 'react';
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
 import type { FontConfig, SizeConfig, BackgroundConfig, BaseShapeConfig } from '@/lib/config';
@@ -17,9 +17,30 @@ interface LedSignPreviewProps {
 export function LedSignPreview({ text, font, color, size, background, baseShape }: LedSignPreviewProps) {
   const previewText = text || 'Tu Texto Aquí';
 
+  const textRef = useRef<HTMLParagraphElement>(null);
+  const [textDimensions, setTextDimensions] = useState({ width: 0, height: 0 });
+
   const baseFontSize = 3; // base font size in rem
   const dynamicFontSize = `${baseFontSize * size.multiplier}rem`;
   const lineHeight = `${baseFontSize * size.multiplier * 1.2}rem`;
+
+  useLayoutEffect(() => {
+    if (textRef.current) {
+      setTextDimensions({
+        width: textRef.current.offsetWidth,
+        height: textRef.current.offsetHeight,
+      });
+    }
+  }, [text, font, size]);
+
+  const textStyle = {
+    '--glow-color': color,
+    fontFamily: font.style.fontFamily,
+    fontSize: dynamicFontSize,
+    lineHeight: lineHeight,
+    color: color,
+    ...font.style,
+  } as React.CSSProperties;
 
   return (
     <div className="relative w-full aspect-[16/9] bg-slate-900 rounded-lg overflow-hidden flex items-center justify-center p-8 shadow-2xl border-4 border-slate-700">
@@ -40,27 +61,21 @@ export function LedSignPreview({ text, font, color, size, background, baseShape 
       <div className="relative w-full h-full flex items-center justify-center">
         {baseShape.value === 'rectangular' && (
           <div 
-            className="absolute bg-black/20 backdrop-blur-[2px] rounded-md"
+            className="absolute bg-black/20 backdrop-blur-[2px] rounded-md transition-all duration-300 ease-in-out"
             style={{
-              width: `calc(100% * ${size.multiplier * 0.6})`,
-              height: `calc(100% * ${size.multiplier * 0.6})`
+              width: `${textDimensions.width + 32}px`, // 32px for padding
+              height: `${textDimensions.height + 16}px`, // 16px for padding
             }}
           />
         )}
         <p
+          ref={textRef}
           className={cn(
             'relative text-center font-bold break-words transition-all duration-300 ease-in-out',
             color !== '#FFFFFF' && 'animate-glow',
-            baseShape.value === 'cutout' && '[filter:drop-shadow(0_0_15px_rgba(0,0,0,0.5))]'
+            baseShape.value === 'cutout' && 'drop-shadow-[0_0_8px_rgba(255,255,255,0.7)]'
           )}
-          style={{
-            '--glow-color': color,
-            fontFamily: font.style.fontFamily,
-            fontSize: dynamicFontSize,
-            lineHeight: lineHeight,
-            color: color,
-            ...font.style
-          } as React.CSSProperties}
+          style={textStyle}
         >
           {previewText}
         </p>
