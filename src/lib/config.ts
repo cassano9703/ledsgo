@@ -3,12 +3,26 @@ export type FontConfig = {
   style: React.CSSProperties;
 };
 
+// Inspired by https://neon51.com/
 export const fonts: FontConfig[] = [
-  { name: "Poppins", style: { fontFamily: "'Poppins', sans-serif" } },
-  { name: "Lobster", style: { fontFamily: "'Lobster', cursive" } },
-  { name: "Pacifico", style: { fontFamily: "'Pacifico', cursive" } },
-  { name: "Bebas Neue", style: { fontFamily: "'Bebas Neue', sans-serif" } },
+    { name: "Amsterdam", style: { fontFamily: "'Dancing Script', cursive" } },
+    { name: "Freehand", style: { fontFamily: "'Kalam', cursive" } },
+    { name: "Barcelona", style: { fontFamily: "'Alex Brush', cursive" } },
+    { name: "Photogenic", style: { fontFamily: "'Parisienne', cursive" } },
+    { name: "Beachfront", style: { fontFamily: "'Caveat', cursive" } },
+    { name: "Alexa", style: { fontFamily: "'Allura', cursive" } },
+    { name: "Bayview", style: { fontFamily: "'Cedarville Cursive', cursive" } },
+    { name: "Rocket", style: { fontFamily: "'Orbitron', sans-serif" } },
+    { name: "Sorrento", style: { fontFamily: "'Tangerine', cursive" } },
+    { name: "Vintage", style: { fontFamily: "'Yeseva One', cursive" } },
+    { name: "MONACO", style: { fontFamily: "'Bebas Neue', sans-serif" } },
+    { name: "Funky", style: { fontFamily: "'Lobster', cursive" } },
+    { name: "Neotokyo", style: { fontFamily: "'Poppins', sans-serif" } },
+    { name: "Avante", style: { fontFamily: "'Avant Garde', sans-serif" } },
+    { name: "Melbourne", style: { fontFamily: "'Pacifico', cursive" } },
+    { name: "OUTLINE", style: { fontFamily: "'Poppins', sans-serif", WebkitTextStroke: '1px', WebkitTextFillColor: 'transparent' } },
 ];
+
 
 export type ColorConfig = {
   name: string;
@@ -35,4 +49,19 @@ export const sizes: SizeConfig[] = [
   { name: "Medium", multiplier: 1 },
   { name: "Large", multiplier: 1.2 },
   { name: "Extra Large", multiplier: 1.5 },
+];
+
+export type BackgroundConfig = {
+    name: string;
+    imageUrl: string;
+    imageHint: string;
+};
+
+export const backgrounds: BackgroundConfig[] = [
+    { name: "Pared de Ladrillo", imageUrl: "https://picsum.photos/seed/brickwall/600/400", imageHint: "brick wall" },
+    { name: "Pared de Hojas", imageUrl: "https://picsum.photos/seed/leafwall/600/400", imageHint: "leaf wall" },
+    { name
+: "Interior Moderno", imageUrl: "https://picsum.photos/seed/moderninterior/600/400", imageHint: "modern interior" },
+    { name: "Pared Oscura", imageUrl: "https://picsum.photos/seed/darkwall/600/400", imageHint: "dark wall" },
+    { name: "Sin Fondo", imageUrl: "", imageHint: "" },
 ];

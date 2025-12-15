@@ -21,7 +21,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
-import type { FontConfig, SizeConfig } from "@/lib/config";
+import type { FontConfig, SizeConfig, BackgroundConfig } from "@/lib/config";
 
 const orderSchema = z.object({
   name: z.string().min(2, "El nombre debe tener al menos 2 caracteres."),
@@ -39,6 +39,7 @@ interface OrderModalProps {
     font: FontConfig;
     color: string;
     size: SizeConfig;
+    background: BackgroundConfig;
   };
 }
 
@@ -81,6 +82,7 @@ export function OrderModal({ isOpen, onClose, config }: OrderModalProps) {
               <span className="w-4 h-4 rounded-full inline-block ml-2 border" style={{ backgroundColor: config.color }}></span>
             </p>
             <p className="text-sm"><strong>Tamaño:</strong> {config.size.name}</p>
+            <p className="text-sm"><strong>Fondo:</strong> {config.background.name}</p>
           </div>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
@@ -113,7 +115,8 @@ export function OrderModal({ isOpen, onClose, config }: OrderModalProps) {
               <FormField
                 control={form.control}
                 name="address"
-                render={({ field }) => (
+                render={({ field })Espero que este nuevo enfoque de diseño te guste más. ¡Avísame si quieres hacer más ajustes!
+{
                   <FormItem>
                     <FormLabel>Dirección de Envío</FormLabel>
                     <FormControl>
