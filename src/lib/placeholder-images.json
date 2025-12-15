@@ -1,3 +1,46 @@
 {
-  "placeholderImages": []
+  "placeholderImages": [
+    {
+      "id": "premade-1",
+      "title": "Good Vibes",
+      "description": "A neon sign that radiates positivity.",
+      "imageUrl": "https://images.unsplash.com/photo-1569775931713-52512a1f1b96?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8bmVvbiUyMHNpZ258ZW58MHx8fHwxNzY1Nzk1NTg4fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "neon sign"
+    },
+    {
+      "id": "premade-2",
+      "title": "Pizza Zone",
+      "description": "Perfect for any pizzeria or kitchen.",
+      "imageUrl": "https://images.unsplash.com/photo-1668941826413-e8d3d62d40a6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxwaXp6YSUyMG5lb258ZW58MHx8fHwxNzY1ODMyNTI3fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "pizza neon"
+    },
+    {
+      "id": "premade-3",
+      "title": "Dream Big",
+      "description": "An inspirational sign for your workspace.",
+      "imageUrl": "https://images.unsplash.com/photo-1564410267841-915d8e4d71ea?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxpbnNwaXJhdGlvbmFsJTIwcXVvdGV8ZW58MHx8fHwxNzY1ODMyNTI3fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "inspirational quote"
+    },
+    {
+      "id": "premade-4",
+      "title": "Game On",
+      "description": "Level up your game room decor.",
+      "imageUrl": "https://images.unsplash.com/photo-1603481588273-2f908a9a7a1b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxnYW1pbmclMjBzZXR1cHxlbnwwfHx8fDE3NjU4MzI1Mjd8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "gaming setup"
+    },
+    {
+      "id": "premade-5",
+      "title": "Coffee Time",
+      "description": "For the love of coffee.",
+      "imageUrl": "https://images.unsplash.com/photo-1525610553991-2bede1a236e2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxjb2ZmZWUlMjBzaG9wfGVufDB8fHx8MTc2NTc0ODEyMXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "coffee shop"
+    },
+    {
+      "id": "premade-6",
+      "title": "Rock On",
+      "description": "A sign for music lovers.",
+      "imageUrl": "https://images.unsplash.com/photo-1499364615650-ec38552f4f34?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxtdXNpYyUyMGNvbmNlcnR8ZW58MHx8fHwxNzY1ODE3ODIyfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "music concert"
+    }
+  ]
 }
