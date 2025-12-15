@@ -16,6 +16,7 @@ import { Alert, AlertDescription, AlertTitle } from "./ui/alert";
 import { OrderModal } from "./order-modal";
 import { useToast } from "@/hooks/use-toast";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "./ui/accordion";
+import { cn } from "@/lib/utils";
 
 export function LedSignConfigurator() {
   const { toast } = useToast();
@@ -49,7 +50,7 @@ export function LedSignConfigurator() {
       } else {
         toast({
           variant: "destructive",
-          title: "Error",
+          title: "Error de IA",
           description: result.error,
         });
       }
@@ -124,7 +125,7 @@ export function LedSignConfigurator() {
                 {colors.map((c) => (
                   <Label key={c.name} htmlFor={c.name} className={`relative flex items-center justify-center rounded-full w-8 h-8 cursor-pointer border-2 ${color.name === c.name ? 'border-primary' : 'border-transparent'}`}>
                     <RadioGroupItem value={c.name} id={c.name} className="sr-only" />
-                    <span className="w-full h-full rounded-full" style={{ backgroundColor: c.value }} />
+                    <span className={cn("w-full h-full rounded-full", c.twClass)} />
                   </Label>
                 ))}
               </RadioGroup>
