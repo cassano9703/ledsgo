@@ -17,10 +17,10 @@ export type ColorConfig = {
 };
 
 export const colors: ColorConfig[] = [
-  { name: "Cyan", value: "#7DF9FF", twClass: "bg-[#7DF9FF]" },
-  { name: "Pink", value: "#FF00FF", twClass: "bg-[#FF00FF]" },
+  { name: "Cyan", value: "#00BFFF", twClass: "bg-[#00BFFF]" },
+  { name: "Fuchsia", value: "#FF00FF", twClass: "bg-[#FF00FF]" },
   { name: "Yellow", value: "#FFFF00", twClass: "bg-[#FFFF00]" },
-  { name: "Green", value: "#39FF14", twClass: "bg-[#39FF14]" },
+  { name: "Lime", value: "#32CD32", twClass: "bg-[#32CD32]" },
   { name: "Red", value: "#FF073A", twClass: "bg-[#FF073A]" },
   { name: "White", value: "#FFFFFF", twClass: "bg-[#FFFFFF]" },
 ];
