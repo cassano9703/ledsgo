@@ -82,7 +82,7 @@ export function LedSignConfigurator() {
                     className="flex flex-wrap gap-2"
                 >
                     {colors.map((c) => (
-                    <Label key={c.name} htmlFor={c.name} className={`relative flex items-center justify-center rounded-full w-8 h-8 cursor-pointer border-2 ${color.name === c.name ? 'border-primary' : 'border-transparent'}`}>
+                    <Label key={c.name} htmlFor={c.name} className={`relative flex items-center justify-center rounded-full w-8 h-8 cursor-pointer transition-all ${color.name === c.name ? 'ring-2 ring-primary ring-offset-2' : 'ring-1 ring-border'}`}>
                         <RadioGroupItem value={c.name} id={c.name} className="sr-only" />
                         <span className={cn("w-full h-full rounded-full", c.twClass)} />
                     </Label>
