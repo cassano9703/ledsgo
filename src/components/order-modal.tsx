@@ -21,7 +21,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
-import type { FontConfig, SizeConfig, BackgroundConfig } from "@/lib/config";
+import type { FontConfig, SizeConfig, BackgroundConfig, BaseShapeConfig } from "@/lib/config";
 
 const orderSchema = z.object({
   name: z.string().min(2, "El nombre debe tener al menos 2 caracteres."),
@@ -40,6 +40,7 @@ interface OrderModalProps {
     color: string;
     size: SizeConfig;
     background: BackgroundConfig;
+    baseShape: BaseShapeConfig;
   };
 }
 
@@ -83,6 +84,7 @@ export function OrderModal({ isOpen, onClose, config }: OrderModalProps) {
             </p>
             <p className="text-sm"><strong>Tamaño:</strong> {config.size.name}</p>
             <p className="text-sm"><strong>Fondo:</strong> {config.background.name}</p>
+            <p className="text-sm"><strong>Forma de Base:</strong> {config.baseShape.name}</p>
           </div>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
