@@ -18,7 +18,7 @@ export function LedSignConfigurator() {
   const [font, setFont] = useState<FontConfig>(fonts[4]); // Beachfront
   const [color, setColor] = useState<ColorConfig>(colors[5]); // White
   const [size, setSize] = useState<SizeConfig>(sizes[1]);
-  const [background, setBackground] = useState<BackgroundConfig>(backgrounds[1]);
+  const [background, setBackground] = useState<BackgroundConfig>(backgrounds[0]);
 
   const [isOrderModalOpen, setOrderModalOpen] = useState(false);
 
@@ -59,20 +59,19 @@ export function LedSignConfigurator() {
             </div>
 
             <div className="space-y-2">
-              <Label>Tipografía</Label>
-               <div className="grid grid-cols-3 gap-2">
-                {fonts.map((f) => (
-                  <Button
-                    key={f.name}
-                    variant={font.name === f.name ? "default" : "outline"}
-                    onClick={() => handleFontChange(f.name)}
-                    style={f.style}
-                    className="text-lg justify-center"
-                  >
-                    {f.name}
-                  </Button>
-                ))}
-              </div>
+                <Label htmlFor="font-select">Tipografía</Label>
+                <Select value={font.name} onValueChange={handleFontChange}>
+                  <SelectTrigger id="font-select">
+                    <SelectValue placeholder="Selecciona una tipografía" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {fonts.map((f) => (
+                      <SelectItem key={f.name} value={f.name} style={f.style}>
+                        {f.name}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
             </div>
             
             <div className="space-y-2">
