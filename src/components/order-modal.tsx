@@ -115,8 +115,7 @@ export function OrderModal({ isOpen, onClose, config }: OrderModalProps) {
               <FormField
                 control={form.control}
                 name="address"
-                render={({ field })Espero que este nuevo enfoque de diseño te guste más. ¡Avísame si quieres hacer más ajustes!
-{
+                render={({ field }) => (
                   <FormItem>
                     <FormLabel>Dirección de Envío</FormLabel>
                     <FormControl>
