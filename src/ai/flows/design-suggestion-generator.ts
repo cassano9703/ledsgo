@@ -59,7 +59,7 @@ const designSuggestionFlow = ai.defineFlow(
       ...input,
       additionalDetails: input.additionalDetails || undefined,
     };
-    const {output} = await prompt(sanitizedInput);
-    return output!;
+    const response = await prompt(sanitizedInput);
+    return response.output!;
   }
 );
