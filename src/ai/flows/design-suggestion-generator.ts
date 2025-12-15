@@ -42,8 +42,6 @@ const prompt = ai.definePrompt({
   Size: {{{size}}}
   Color: {{{color}}}
   Additional Details: {{{additionalDetails}}}
-
-  Provide the suggestions as a numbered list.
   `,
 });
 
