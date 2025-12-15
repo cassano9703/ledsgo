@@ -33,6 +33,14 @@ const prompt = ai.definePrompt({
   name: 'designSuggestionPrompt',
   input: {schema: DesignSuggestionInputSchema},
   output: {schema: DesignSuggestionOutputSchema},
+  config: {
+    safetySettings: [
+      {
+        category: 'HARM_CATEGORY_DANGEROUS_CONTENT',
+        threshold: 'BLOCK_NONE',
+      },
+    ],
+  },
   prompt: `Eres un experto en diseño de letreros LED, con un gran ojo para las tendencias de diseño actuales.
 
   Basado en el siguiente diseño de letrero LED, proporciona una lista de sugerencias para mejorar el diseño y hacerlo más atractivo y moderno. Ten en cuenta las tendencias de diseño actuales.
