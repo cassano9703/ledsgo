@@ -54,7 +54,12 @@ const designSuggestionFlow = ai.defineFlow(
     outputSchema: DesignSuggestionOutputSchema,
   },
   async input => {
-    const {output} = await prompt(input);
+    // Ensure we don't send empty strings for optional fields, which can confuse the model.
+    const sanitizedInput = {
+      ...input,
+      additionalDetails: input.additionalDetails || undefined,
+    };
+    const {output} = await prompt(sanitizedInput);
     return output!;
   }
 );
