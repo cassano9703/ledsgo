@@ -33,6 +33,11 @@ export function LedSignConfigurator() {
     if (newBg) setBackground(newBg);
   };
 
+  const handleSizeChange = (sizeName: string) => {
+    const newSize = sizes.find((s) => s.name === sizeName);
+    if (newSize) setSize(newSize);
+  };
+
   const currentConfig = { text, font, color: color.value, size, background };
 
   return (
@@ -91,21 +96,30 @@ export function LedSignConfigurator() {
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-               <div className="space-y-2">
-                <Label htmlFor="size-select" className="flex items-center gap-2"><Ruler className="w-4 h-4" /> Tamaño</Label>
-                <Select value={size.name} onValueChange={(val) => setSize(sizes.find(s => s.name === val)!)}>
-                  <SelectTrigger id="size-select">
-                    <SelectValue placeholder="Selecciona un tamaño" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {sizes.map((s) => (
-                      <SelectItem key={s.name} value={s.name}>
-                        {s.name} ({s.multiplier}x)
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
+              <div className="space-y-2">
+                <Label className="flex items-center gap-2"><Ruler className="w-4 h-4" /> Tamaño</Label>
+                <RadioGroup
+                  value={size.name}
+                  onValueChange={handleSizeChange}
+                  className="flex flex-wrap gap-2"
+                >
+                  {sizes.map((s) => (
+                    <Label
+                      key={s.name}
+                      htmlFor={`size-${s.name}`}
+                      className={`flex items-center justify-center rounded-md text-sm font-medium px-3 py-2 cursor-pointer transition-colors border ${
+                        size.name === s.name
+                          ? 'bg-primary text-primary-foreground border-primary'
+                          : 'bg-background hover:bg-accent hover:text-accent-foreground'
+                      }`}
+                    >
+                      <RadioGroupItem value={s.name} id={`size-${s.name}`} className="sr-only" />
+                      {s.name}
+                    </Label>
+                  ))}
+                </RadioGroup>
               </div>
+
                <div className="space-y-2">
                 <Label htmlFor="background-select">Fondo</Label>
                 <Select value={background.name} onValueChange={handleBackgroundChange}>
