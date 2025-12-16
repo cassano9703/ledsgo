@@ -70,11 +70,11 @@ export function LedSignConfigurator() {
             <div className="space-y-2">
               <Label>Añadir un Emoji</Label>
               <div className="flex gap-2">
-                <Button variant="outline" size="icon" onClick={() => addEmoji(' ❤️')}>
-                  <Heart className="w-4 h-4 fill-red-500 text-red-500" />
+                <Button variant="outline" size="icon" onClick={() => addEmoji('❤️')}>
+                  <Heart className="w-4 h-4" />
                 </Button>
-                <Button variant="outline" size="icon" onClick={() => addEmoji(' ⭐')}>
-                  <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                <Button variant="outline" size="icon" onClick={() => addEmoji('⭐')}>
+                  <Star className="w-4 h-4" />
                 </Button>
               </div>
             </div>
