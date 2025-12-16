@@ -24,8 +24,8 @@ export function LedSignPreview({ text, font, color, size, background }: LedSignP
   const [isDragging, setIsDragging] = useState(false);
   const dragStartPos = useRef({ x: 0, y: 0 });
 
-  const PIXELS_PER_CM = 2.4; // Calibrated conversion factor
-  const baseFontSize = 4.5; // base font size in rem
+  const PIXELS_PER_CM = 3.8; // Calibrated conversion factor
+  const baseFontSize = 4; // base font size in rem
   const dynamicFontSize = `${baseFontSize * size.multiplier}rem`;
   const lineHeight = `${baseFontSize * size.multiplier * 1.2}rem`;
 
