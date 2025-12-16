@@ -33,14 +33,22 @@ export function LedSignPreview({ text, font, color, size, background }: LedSignP
   }, [text, font, size]);
 
   const textStyle = {
-    '--glow-color': color,
     fontFamily: font.style.fontFamily,
     fontSize: dynamicFontSize,
     lineHeight: lineHeight,
     color: color,
-    textShadow: `0 0 8px rgba(255, 255, 255, 0.7), 0 0 10px ${color}, 0 0 20px ${color}`,
+    textShadow: `
+      0 0 5px #fff,
+      0 0 10px #fff,
+      0 0 15px ${color},
+      0 0 20px ${color},
+      0 0 25px ${color},
+      0 0 30px ${color},
+      0 0 35px ${color}
+    `,
     ...font.style,
   } as React.CSSProperties;
+
 
   return (
     <div className="relative w-full aspect-[16/9] bg-slate-900 rounded-lg overflow-hidden flex items-center justify-center p-8 shadow-2xl border-4 border-slate-700">
@@ -59,18 +67,17 @@ export function LedSignPreview({ text, font, color, size, background }: LedSignP
         aria-hidden="true"
       />
       <div className="relative w-full h-full flex items-center justify-center">
-          <div 
-            className="absolute bg-black/20 backdrop-blur-[2px] rounded-md transition-all duration-300 ease-in-out"
-            style={{
-              width: `${textDimensions.width + 32}px`, // 32px for padding
-              height: `${textDimensions.height + 16}px`, // 16px for padding
-            }}
-          />
+        <div 
+          className="absolute bg-black/20 backdrop-blur-[2px] rounded-md transition-all duration-300 ease-in-out"
+          style={{
+            width: `${textDimensions.width + 32}px`, // 32px for padding
+            height: `${textDimensions.height + 16}px`, // 16px for padding
+          }}
+        />
         <p
           ref={textRef}
           className={cn(
             'relative text-center font-bold break-words transition-all duration-300 ease-in-out',
-            color !== '#FFFFFF' && 'animate-glow',
           )}
           style={textStyle}
         >
