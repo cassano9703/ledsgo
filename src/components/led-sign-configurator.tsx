@@ -12,7 +12,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { LedSignPreview } from "./led-sign-preview";
 import { OrderModal } from "./order-modal";
 import { cn } from "@/lib/utils";
-import { Ruler } from "lucide-react";
+import { Ruler, Star, Heart } from "lucide-react";
 
 export function LedSignConfigurator() {
   const [text, setText] = useState("Leds Go!");
@@ -36,6 +36,10 @@ export function LedSignConfigurator() {
   const handleSizeChange = (sizeName: string) => {
     const newSize = sizes.find((s) => s.name === sizeName);
     if (newSize) setSize(newSize);
+  };
+  
+  const addEmoji = (emoji: string) => {
+    setText(text + emoji);
   };
 
   const currentConfig = { text, font, color: color.value, size, background };
@@ -61,6 +65,18 @@ export function LedSignConfigurator() {
                 value={text}
                 onChange={(e) => setText(e.target.value)}
               />
+            </div>
+            
+            <div className="space-y-2">
+              <Label>Añadir un Emoji</Label>
+              <div className="flex gap-2">
+                <Button variant="outline" size="icon" onClick={() => addEmoji(' ❤️')}>
+                  <Heart className="w-4 h-4 fill-red-500 text-red-500" />
+                </Button>
+                <Button variant="outline" size="icon" onClick={() => addEmoji(' ⭐')}>
+                  <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                </Button>
+              </div>
             </div>
 
             <div className="space-y-2">
