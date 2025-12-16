@@ -68,18 +68,36 @@ export function LedSignConfigurator() {
               />
             </div>
             
-            <div className="space-y-2">
-              <Label>Añadir un Emoji</Label>
-              <div className="flex gap-2">
-                <Button variant="outline" size="icon" onClick={() => addEmoji('♡')}>
-                  <Heart className="w-4 h-4" />
-                </Button>
-                <Button variant="outline" size="icon" onClick={() => addEmoji('☆')}>
-                  <Star className="w-4 h-4 fill-transparent" />
-                </Button>
-                <Button variant="outline" size="icon" onClick={() => addEmoji('♕')}>
-                  <SimpleCrown className="w-4 h-4" />
-                </Button>
+            <div className="flex flex-wrap gap-8">
+              <div className="space-y-2">
+                <Label>Añadir un Emoji</Label>
+                <div className="flex gap-2">
+                  <Button variant="outline" size="icon" onClick={() => addEmoji('♡')}>
+                    <Heart className="w-4 h-4" />
+                  </Button>
+                  <Button variant="outline" size="icon" onClick={() => addEmoji('☆')}>
+                    <Star className="w-4 h-4 fill-transparent" />
+                  </Button>
+                  <Button variant="outline" size="icon" onClick={() => addEmoji('♕')}>
+                    <SimpleCrown className="w-4 h-4" />
+                  </Button>
+                </div>
+              </div>
+
+              <div className="space-y-2">
+                  <Label>Color</Label>
+                  <RadioGroup
+                      value={color.name}
+                      onValueChange={(val) => setColor(colors.find(c => c.name === val)!)}
+                      className="flex flex-wrap gap-2"
+                  >
+                      {colors.map((c) => (
+                        <Label key={c.name} htmlFor={c.name} className={`relative flex items-center justify-center rounded-full w-8 h-8 cursor-pointer transition-all border-2 ${color.name === c.name ? 'border-primary ring-2 ring-primary ring-offset-2' : 'border-border'}`}>
+                            <RadioGroupItem value={c.name} id={c.name} className="sr-only" />
+                            <span className={cn("w-full h-full rounded-full", c.twClass)} />
+                        </Label>
+                      ))}
+                  </RadioGroup>
               </div>
             </div>
 
@@ -99,22 +117,6 @@ export function LedSignConfigurator() {
                 </Select>
             </div>
             
-            <div className="space-y-2">
-                <Label>Color</Label>
-                <RadioGroup
-                    value={color.name}
-                    onValueChange={(val) => setColor(colors.find(c => c.name === val)!)}
-                    className="flex flex-wrap gap-2"
-                >
-                    {colors.map((c) => (
-                      <Label key={c.name} htmlFor={c.name} className={`relative flex items-center justify-center rounded-full w-8 h-8 cursor-pointer transition-all border-2 ${color.name === c.name ? 'border-primary ring-2 ring-primary ring-offset-2' : 'border-border'}`}>
-                          <RadioGroupItem value={c.name} id={c.name} className="sr-only" />
-                          <span className={cn("w-full h-full rounded-full", c.twClass)} />
-                      </Label>
-                    ))}
-                </RadioGroup>
-            </div>
-
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label htmlFor="size-select" className="flex items-center gap-2"><Ruler className="w-4 h-4" /> Tamaño</Label>
