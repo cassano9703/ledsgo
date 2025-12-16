@@ -75,7 +75,7 @@ export function LedSignConfigurator() {
                   <Heart className="w-4 h-4" />
                 </Button>
                 <Button variant="outline" size="icon" onClick={() => addEmoji('☆')}>
-                  <Star className="w-4 h-4" />
+                  <Star className="w-4 h-4 fill-transparent" />
                 </Button>
                 <Button variant="outline" size="icon" onClick={() => addEmoji('♕')}>
                   <SimpleCrown className="w-4 h-4" />
