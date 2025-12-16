@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useRef, useState, useLayoutEffect, MouseEvent, TouchEvent, useEffect } from 'react';
+import React, { useRef, useState, MouseEvent, TouchEvent, useEffect } from 'react';
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
 import type { FontConfig, SizeConfig, BackgroundConfig } from '@/lib/config';
@@ -40,11 +40,11 @@ export function LedSignPreview({ text, font, color, size, background }: LedSignP
       }
     };
     
-    // We need to measure after the styles have been applied in the next paint.
+    // We measure after the styles have been applied in the next paint.
     // requestAnimationFrame ensures our measurement runs after the browser has painted the changes.
     const animationFrameId = requestAnimationFrame(measureText);
 
-    // If the component re-renders before the frame is painted, we should cancel the previous request.
+    // If the component re-renders before the frame is painted, we cancel the previous request.
     return () => cancelAnimationFrame(animationFrameId);
   }, [text, font, size]);
 

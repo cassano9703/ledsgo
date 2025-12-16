@@ -45,8 +45,8 @@ export type SizeConfig = {
 };
 
 export const sizes: SizeConfig[] = [
-  { name: "Mediano", multiplier: 1 },
   { name: "Pequeño", multiplier: 0.7 },
+  { name: "Mediano", multiplier: 1 },
   { name: "Grande", multiplier: 1.3 },
   { name: "Extra Grande", multiplier: 1.6 },
 ];
