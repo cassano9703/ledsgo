@@ -18,7 +18,7 @@ export function LedSignConfigurator() {
   const [text, setText] = useState("Leds Go!");
   const [font, setFont] = useState<FontConfig>(fonts[4]); // Beachfront
   const [color, setColor] = useState<ColorConfig>(colors[5]); // White
-  const [size, setSize] = useState<SizeConfig>(sizes[1]);
+  const [size, setSize] = useState<SizeConfig>(sizes[0]);
   const [background, setBackground] = useState<BackgroundConfig>(backgrounds[0]);
   
   const [isOrderModalOpen, setOrderModalOpen] = useState(false);
