@@ -30,13 +30,20 @@ export function LedSignPreview({ text, font, color, size, background }: LedSignP
   const lineHeight = `${baseFontSize * size.multiplier * 1.2}rem`;
 
   useLayoutEffect(() => {
-    if (textRef.current) {
-      const { offsetWidth, offsetHeight } = textRef.current;
-      setTextDimensions({
-        width: offsetWidth,
-        height: offsetHeight,
-      });
-    }
+    const measureText = () => {
+      if (textRef.current) {
+        const { offsetWidth, offsetHeight } = textRef.current;
+        setTextDimensions({
+          width: offsetWidth,
+          height: offsetHeight,
+        });
+      }
+    };
+    
+    // The timeout ensures that the measurement happens after the DOM has been updated with the new styles.
+    const timeoutId = setTimeout(measureText, 0);
+
+    return () => clearTimeout(timeoutId);
   }, [text, font, size]);
 
   const handleDragStart = (e: MouseEvent<HTMLDivElement> | TouchEvent<HTMLDivElement>) => {
