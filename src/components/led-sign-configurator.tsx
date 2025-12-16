@@ -14,6 +14,8 @@ import { OrderModal } from "./order-modal";
 import { cn } from "@/lib/utils";
 import { Ruler, Heart, Star } from "lucide-react";
 
+const EMOJIS = ["♡", "☆"];
+
 export function LedSignConfigurator() {
   const [text, setText] = useState("Leds Go!");
   const [font, setFont] = useState<FontConfig>(fonts[4]);
@@ -38,9 +40,38 @@ export function LedSignConfigurator() {
     if (newSize) setSize(newSize);
   };
   
+  const removeEmojis = (str: string) => {
+    let newStr = str;
+    for (const e of EMOJIS) {
+      newStr = newStr.replaceAll(` ${e}`, "");
+    }
+    return newStr;
+  }
+
   const addEmoji = (emoji: string) => {
-    setText(text + " " + emoji);
+    const textWithoutEmojis = removeEmojis(text);
+    setText(textWithoutEmojis + " " + emoji);
   };
+  
+  const handleTextChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newText = e.target.value;
+    const lastChar = newText.slice(-1);
+
+    // If the user is adding an emoji via keyboard, we let it pass for a moment
+    // but it will be cleaned up on next emoji button click.
+    if (EMOJIS.includes(lastChar)) {
+       setText(newText);
+       return;
+    }
+
+    // If user types anything else, remove existing emojis.
+    if (EMOJIS.some(emoji => text.includes(` ${emoji}`))) {
+      setText(removeEmojis(newText));
+    } else {
+      setText(newText);
+    }
+  }
+
 
   const currentConfig = { text, font, color: color.value, size, background };
 
@@ -63,7 +94,7 @@ export function LedSignConfigurator() {
                 id="sign-text"
                 placeholder="Tu texto aquí"
                 value={text}
-                onChange={(e) => setText(e.target.value)}
+                onChange={handleTextChange}
               />
             </div>
             
