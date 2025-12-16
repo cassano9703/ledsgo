@@ -24,3 +24,20 @@ export function Logo(props: SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
+
+export function SimpleCrown(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      {...props}
+    >
+      <path d="M4 19 L20 19 M4 22 L20 22 M6 19 L6 16 L18 16 L18 19 M6 16 L12 6 L18 16" />
+    </svg>
+  );
+}
