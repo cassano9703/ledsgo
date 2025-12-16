@@ -12,6 +12,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { LedSignPreview } from "./led-sign-preview";
 import { OrderModal } from "./order-modal";
 import { cn } from "@/lib/utils";
+import { Ruler } from "lucide-react";
 
 export function LedSignConfigurator() {
   const [text, setText] = useState("Leds Go!");
@@ -91,7 +92,7 @@ export function LedSignConfigurator() {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                <div className="space-y-2">
-                <Label htmlFor="size-select">Tamaño</Label>
+                <Label htmlFor="size-select" className="flex items-center gap-2"><Ruler className="w-4 h-4" /> Tamaño</Label>
                 <Select value={size.name} onValueChange={(val) => setSize(sizes.find(s => s.name === val)!)}>
                   <SelectTrigger id="size-select">
                     <SelectValue placeholder="Selecciona un tamaño" />

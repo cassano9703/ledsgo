@@ -24,16 +24,17 @@ export function LedSignPreview({ text, font, color, size, background }: LedSignP
   const [isDragging, setIsDragging] = useState(false);
   const dragStartPos = useRef({ x: 0, y: 0 });
 
-
+  const PIXELS_PER_CM = 3.78; // Approximate conversion factor
   const baseFontSize = 3; // base font size in rem
   const dynamicFontSize = `${baseFontSize * size.multiplier}rem`;
   const lineHeight = `${baseFontSize * size.multiplier * 1.2}rem`;
 
   useLayoutEffect(() => {
     if (textRef.current) {
+      const { offsetWidth, offsetHeight } = textRef.current;
       setTextDimensions({
-        width: textRef.current.offsetWidth,
-        height: textRef.current.offsetHeight,
+        width: offsetWidth,
+        height: offsetHeight,
       });
     }
   }, [text, font, size]);
@@ -53,6 +54,7 @@ export function LedSignPreview({ text, font, color, size, background }: LedSignP
   
   const handleDragMove = (e: MouseEvent<HTMLDivElement> | TouchEvent<HTMLDivElement>) => {
     if (!isDragging) return;
+    e.preventDefault(); // Prevents text selection while dragging
     const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX;
     const clientY = 'touches' in e ? e.touches[0].clientY : e.clientY;
     
@@ -68,7 +70,6 @@ export function LedSignPreview({ text, font, color, size, background }: LedSignP
       signContainerRef.current.style.cursor = 'grab';
     }
   };
-
 
   const textStyle = {
     fontFamily: font.style.fontFamily,
@@ -87,6 +88,8 @@ export function LedSignPreview({ text, font, color, size, background }: LedSignP
     ...font.style,
   } as React.CSSProperties;
 
+  const signWidthCm = (textDimensions.width / PIXELS_PER_CM).toFixed(0);
+  const signHeightCm = (textDimensions.height / PIXELS_PER_CM).toFixed(0);
 
   return (
     <div 
@@ -118,16 +121,6 @@ export function LedSignPreview({ text, font, color, size, background }: LedSignP
         onMouseDown={handleDragStart}
         onTouchStart={handleDragStart}
       >
-        <div 
-          className="absolute bg-black/20 backdrop-blur-[2px] rounded-md transition-all duration-300 ease-in-out"
-          style={{
-            width: `${textDimensions.width + 32}px`,
-            height: `${textDimensions.height + 16}px`, 
-            top: '50%',
-            left: '50%',
-            transform: 'translate(-50%, -50%)',
-          }}
-        />
         <p
           ref={textRef}
           className={cn(
@@ -137,6 +130,29 @@ export function LedSignPreview({ text, font, color, size, background }: LedSignP
         >
           {previewText}
         </p>
+
+        {/* Dimension Lines */}
+        {textDimensions.width > 0 && (
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" style={{width: textDimensions.width, height: textDimensions.height}}>
+            {/* Width Dimension */}
+            <div className="absolute -bottom-6 left-0 w-full flex flex-col items-center">
+              <div className="w-full h-px bg-white/70 relative">
+                <div className="absolute left-0 -top-1 w-px h-2 bg-white/70"></div>
+                <div className="absolute right-0 -top-1 w-px h-2 bg-white/70"></div>
+              </div>
+              <span className="text-white/80 text-xs font-mono mt-1 select-none">{signWidthCm} cm</span>
+            </div>
+
+            {/* Height Dimension */}
+            <div className="absolute -left-10 top-0 h-full flex items-center">
+              <div className="h-full w-px bg-white/70 relative">
+                <div className="absolute top-0 -left-1 h-px w-2 bg-white/70"></div>
+                <div className="absolute bottom-0 -left-1 h-px w-2 bg-white/70"></div>
+              </div>
+              <span className="text-white/80 text-xs font-mono ml-2 transform -rotate-90 origin-center select-none">{signHeightCm} cm</span>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
