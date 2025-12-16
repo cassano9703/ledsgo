@@ -13,7 +13,6 @@ import { LedSignPreview } from "./led-sign-preview";
 import { OrderModal } from "./order-modal";
 import { cn } from "@/lib/utils";
 import { Ruler, Heart, Star } from "lucide-react";
-import { SimpleCrown } from "@/components/icons";
 
 export function LedSignConfigurator() {
   const [text, setText] = useState("Leds Go!");
@@ -40,7 +39,7 @@ export function LedSignConfigurator() {
   };
   
   const addEmoji = (emoji: string) => {
-    setText(text + emoji);
+    setText(text + " " + emoji);
   };
 
   const currentConfig = { text, font, color: color.value, size, background };
@@ -77,9 +76,6 @@ export function LedSignConfigurator() {
                   </Button>
                   <Button variant="outline" size="icon" onClick={() => addEmoji('☆')}>
                     <Star className="w-4 h-4 fill-transparent" />
-                  </Button>
-                  <Button variant="outline" size="icon" onClick={() => addEmoji('♕')}>
-                    <SimpleCrown className="w-4 h-4" />
                   </Button>
                 </div>
               </div>
