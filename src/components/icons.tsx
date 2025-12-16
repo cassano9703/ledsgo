@@ -37,7 +37,12 @@ export function SimpleCrown(props: SVGProps<SVGSVGElement>) {
       strokeLinejoin="round"
       {...props}
     >
-      <path d="M2 4l3 12h14l3-12-6 7-4-7-4 7-6-7zm3 16h14" />
+      <path d="M4 18h16v-4H4v4zM12 14V4M8.5 14L6 7m7 7l2.5-7M5 14l-3-4m17 4l3-4" />
+      <circle cx="12" cy="3" r="1" fill="currentColor"/>
+      <circle cx="5.5" cy="6" r="1" fill="currentColor"/>
+      <circle cx="18.5" cy="6" r="1" fill="currentColor"/>
+      <circle cx="2.5" cy="9" r="1" fill="currentColor"/>
+      <circle cx="21.5" cy="9" r="1" fill="currentColor"/>
     </svg>
   );
 }

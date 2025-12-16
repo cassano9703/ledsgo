@@ -12,7 +12,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { LedSignPreview } from "./led-sign-preview";
 import { OrderModal } from "./order-modal";
 import { cn } from "@/lib/utils";
-import { Ruler, Star, Heart } from "lucide-react";
+import { Ruler, Heart, Star } from "lucide-react";
 import { SimpleCrown } from "@/components/icons";
 
 export function LedSignConfigurator() {
