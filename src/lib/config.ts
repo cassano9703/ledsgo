@@ -58,7 +58,7 @@ export type BackgroundConfig = {
 };
 
 export const backgrounds: BackgroundConfig[] = [
-    { name: "Pared de Ladrillo", imageUrl: "https://picsum.photos/seed/brickwall/600/400", imageHint: "brick wall" },
+    { name: "Pared de Ladrillo", imageUrl: "https://i.imgur.com/aAelWay.jpeg", imageHint: "brick wall" },
     { name: "Interior Moderno", imageUrl: "https://picsum.photos/seed/moderninterior/600/400", imageHint: "modern interior" },
     { name: "Pared de Vegetación", imageUrl: "https://picsum.photos/seed/greenwall/600/400", imageHint: "vegetation wall" },
     { name: "Interior Oscuro", imageUrl: "https://picsum.photos/seed/darkinterior/600/400", imageHint: "dark interior" },
