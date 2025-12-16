@@ -63,14 +63,3 @@ export const backgrounds: BackgroundConfig[] = [
     { name: "Pared de Vegetación", imageUrl: "https://picsum.photos/seed/greenwall/600/400", imageHint: "vegetation wall" },
     { name: "Sin Fondo", imageUrl: "", imageHint: "" },
 ];
-
-export type BaseShapeConfig = {
-  name: string;
-  value: "cutout" | "rectangular";
-  description: string;
-}
-
-export const baseShapes: BaseShapeConfig[] = [
-  { name: "Silueta", value: "cutout", description: "Recortaremos la base a la forma de las letras." },
-  { name: "Rectangular", value: "rectangular", description: "Una base con forma rectangular." },
-]

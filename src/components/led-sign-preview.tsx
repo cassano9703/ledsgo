@@ -3,7 +3,7 @@
 import React, { useRef, useState, useLayoutEffect } from 'react';
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
-import type { FontConfig, SizeConfig, BackgroundConfig, BaseShapeConfig } from '@/lib/config';
+import type { FontConfig, SizeConfig, BackgroundConfig } from '@/lib/config';
 
 interface LedSignPreviewProps {
   text: string;
@@ -11,10 +11,9 @@ interface LedSignPreviewProps {
   color: string;
   size: SizeConfig;
   background: BackgroundConfig;
-  baseShape: BaseShapeConfig;
 }
 
-export function LedSignPreview({ text, font, color, size, background, baseShape }: LedSignPreviewProps) {
+export function LedSignPreview({ text, font, color, size, background }: LedSignPreviewProps) {
   const previewText = text || 'Tu Texto Aquí';
 
   const textRef = useRef<HTMLParagraphElement>(null);
@@ -39,6 +38,7 @@ export function LedSignPreview({ text, font, color, size, background, baseShape 
     fontSize: dynamicFontSize,
     lineHeight: lineHeight,
     color: color,
+    textShadow: `0 0 8px rgba(255, 255, 255, 0.7), 0 0 10px ${color}, 0 0 20px ${color}`,
     ...font.style,
   } as React.CSSProperties;
 
@@ -59,7 +59,6 @@ export function LedSignPreview({ text, font, color, size, background, baseShape 
         aria-hidden="true"
       />
       <div className="relative w-full h-full flex items-center justify-center">
-        {baseShape.value === 'rectangular' && (
           <div 
             className="absolute bg-black/20 backdrop-blur-[2px] rounded-md transition-all duration-300 ease-in-out"
             style={{
@@ -67,13 +66,11 @@ export function LedSignPreview({ text, font, color, size, background, baseShape 
               height: `${textDimensions.height + 16}px`, // 16px for padding
             }}
           />
-        )}
         <p
           ref={textRef}
           className={cn(
             'relative text-center font-bold break-words transition-all duration-300 ease-in-out',
             color !== '#FFFFFF' && 'animate-glow',
-            baseShape.value === 'cutout' && 'drop-shadow-[0_0_8px_rgba(255,255,255,0.7)]'
           )}
           style={textStyle}
         >

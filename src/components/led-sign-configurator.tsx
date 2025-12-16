@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { fonts, colors, sizes, backgrounds, baseShapes } from "@/lib/config";
-import type { FontConfig, ColorConfig, SizeConfig, BackgroundConfig, BaseShapeConfig } from "@/lib/config";
+import { fonts, colors, sizes, backgrounds } from "@/lib/config";
+import type { FontConfig, ColorConfig, SizeConfig, BackgroundConfig } from "@/lib/config";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -19,8 +19,7 @@ export function LedSignConfigurator() {
   const [color, setColor] = useState<ColorConfig>(colors[5]); // White
   const [size, setSize] = useState<SizeConfig>(sizes[1]);
   const [background, setBackground] = useState<BackgroundConfig>(backgrounds[0]);
-  const [baseShape, setBaseShape] = useState<BaseShapeConfig>(baseShapes[0]);
-
+  
   const [isOrderModalOpen, setOrderModalOpen] = useState(false);
 
   const handleFontChange = (fontName: string) => {
@@ -33,13 +32,13 @@ export function LedSignConfigurator() {
     if (newBg) setBackground(newBg);
   };
 
-  const currentConfig = { text, font, color: color.value, size, background, baseShape };
+  const currentConfig = { text, font, color: color.value, size, background };
 
   return (
     <>
       <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 items-start">
         <div className="sticky top-24">
-          <LedSignPreview text={text} font={font} color={color.value} size={size} background={background} baseShape={baseShape} />
+          <LedSignPreview text={text} font={font} color={color.value} size={size} background={background} />
         </div>
         
         <Card>
@@ -82,29 +81,12 @@ export function LedSignConfigurator() {
                     className="flex flex-wrap gap-2"
                 >
                     {colors.map((c) => (
-                      <Label key={c.name} htmlFor={c.name} className={`relative flex items-center justify-center rounded-full w-8 h-8 cursor-pointer transition-all border hover:ring-primary ${color.name === c.name ? 'ring-2 ring-primary ring-offset-2' : 'border-border'}`}>
+                      <Label key={c.name} htmlFor={c.name} className={`relative flex items-center justify-center rounded-full w-8 h-8 cursor-pointer transition-all border-2 ${color.name === c.name ? 'border-primary ring-2 ring-primary ring-offset-2' : 'border-border'}`}>
                           <RadioGroupItem value={c.name} id={c.name} className="sr-only" />
                           <span className={cn("w-full h-full rounded-full", c.twClass)} />
                       </Label>
                     ))}
                 </RadioGroup>
-            </div>
-
-            <div className="space-y-2">
-              <Label>Forma de Base</Label>
-              <RadioGroup
-                value={baseShape.value}
-                onValueChange={(val) => setBaseShape(baseShapes.find(s => s.value === val)!)}
-                className="grid grid-cols-1 sm:grid-cols-2 gap-4"
-              >
-                {baseShapes.map((shape) => (
-                  <Label key={shape.value} htmlFor={shape.value} className={`flex flex-col items-start justify-center rounded-md border-2 p-4 cursor-pointer transition-all ${baseShape.value === shape.value ? 'border-primary ring-2 ring-primary ring-offset-2' : 'border-border'}`}>
-                    <RadioGroupItem value={shape.value} id={shape.value} className="sr-only" />
-                    <span className="font-semibold">{shape.name}</span>
-                    <span className="text-sm text-muted-foreground">{shape.description}</span>
-                  </Label>
-                ))}
-              </RadioGroup>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
