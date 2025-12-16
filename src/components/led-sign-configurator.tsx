@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useLayoutEffect, useRef } from "react";
 import { fonts, colors, sizes, backgrounds } from "@/lib/config";
 import type { FontConfig, ColorConfig, SizeConfig, BackgroundConfig } from "@/lib/config";
 import { Button } from "@/components/ui/button";
@@ -76,7 +76,7 @@ export function LedSignConfigurator() {
                 <Button variant="outline" size="icon" onClick={() => addEmoji('☆')}>
                   <Star className="w-4 h-4" />
                 </Button>
-                <Button variant="outline" size="icon" onClick={() => addEmoji('♔')}>
+                <Button variant="outline" size="icon" onClick={() => addEmoji('♕')}>
                   <Crown className="w-4 h-4" />
                 </Button>
               </div>
