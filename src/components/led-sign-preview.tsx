@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useRef, useState, useLayoutEffect } from 'react';
+import React, { useRef, useState, useLayoutEffect, MouseEvent, TouchEvent } from 'react';
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
 import type { FontConfig, SizeConfig, BackgroundConfig } from '@/lib/config';
@@ -17,7 +17,13 @@ export function LedSignPreview({ text, font, color, size, background }: LedSignP
   const previewText = text || 'Tu Texto Aquí';
 
   const textRef = useRef<HTMLParagraphElement>(null);
+  const signContainerRef = useRef<HTMLDivElement>(null);
   const [textDimensions, setTextDimensions] = useState({ width: 0, height: 0 });
+  
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const [isDragging, setIsDragging] = useState(false);
+  const dragStartPos = useRef({ x: 0, y: 0 });
+
 
   const baseFontSize = 3; // base font size in rem
   const dynamicFontSize = `${baseFontSize * size.multiplier}rem`;
@@ -31,6 +37,38 @@ export function LedSignPreview({ text, font, color, size, background }: LedSignP
       });
     }
   }, [text, font, size]);
+
+  const handleDragStart = (e: MouseEvent<HTMLDivElement> | TouchEvent<HTMLDivElement>) => {
+    setIsDragging(true);
+    const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX;
+    const clientY = 'touches' in e ? e.touches[0].clientY : e.clientY;
+    dragStartPos.current = {
+      x: clientX - position.x,
+      y: clientY - position.y,
+    };
+    if (signContainerRef.current) {
+      signContainerRef.current.style.cursor = 'grabbing';
+    }
+  };
+  
+  const handleDragMove = (e: MouseEvent<HTMLDivElement> | TouchEvent<HTMLDivElement>) => {
+    if (!isDragging) return;
+    const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX;
+    const clientY = 'touches' in e ? e.touches[0].clientY : e.clientY;
+    
+    setPosition({
+      x: clientX - dragStartPos.current.x,
+      y: clientY - dragStartPos.current.y,
+    });
+  };
+  
+  const handleDragEnd = () => {
+    setIsDragging(false);
+    if (signContainerRef.current) {
+      signContainerRef.current.style.cursor = 'grab';
+    }
+  };
+
 
   const textStyle = {
     fontFamily: font.style.fontFamily,
@@ -51,7 +89,14 @@ export function LedSignPreview({ text, font, color, size, background }: LedSignP
 
 
   return (
-    <div className="relative w-full aspect-[16/9] bg-slate-900 rounded-lg overflow-hidden flex items-center justify-center p-8 shadow-2xl border-4 border-slate-700">
+    <div 
+      className="relative w-full aspect-[16/9] bg-slate-900 rounded-lg overflow-hidden flex items-center justify-center p-8 shadow-2xl border-4 border-slate-700"
+      onMouseMove={handleDragMove}
+      onMouseUp={handleDragEnd}
+      onMouseLeave={handleDragEnd}
+      onTouchMove={handleDragMove}
+      onTouchEnd={handleDragEnd}
+    >
       {background.imageUrl && (
         <Image
           src={background.imageUrl}
@@ -66,18 +111,27 @@ export function LedSignPreview({ text, font, color, size, background }: LedSignP
         style={!background.imageUrl ? {backgroundImage: 'radial-gradient(hsla(0,0%,100%,.05) 1px, transparent 0)'} : {}}
         aria-hidden="true"
       />
-      <div className="relative w-full h-full flex items-center justify-center">
+      <div 
+        ref={signContainerRef}
+        className="absolute cursor-grab"
+        style={{ transform: `translate(${position.x}px, ${position.y}px)` }}
+        onMouseDown={handleDragStart}
+        onTouchStart={handleDragStart}
+      >
         <div 
           className="absolute bg-black/20 backdrop-blur-[2px] rounded-md transition-all duration-300 ease-in-out"
           style={{
-            width: `${textDimensions.width + 32}px`, // 32px for padding
-            height: `${textDimensions.height + 16}px`, // 16px for padding
+            width: `${textDimensions.width + 32}px`,
+            height: `${textDimensions.height + 16}px`, 
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
           }}
         />
         <p
           ref={textRef}
           className={cn(
-            'relative text-center font-bold break-words transition-all duration-300 ease-in-out',
+            'relative text-center font-bold break-words transition-all duration-300 ease-in-out select-none',
           )}
           style={textStyle}
         >
