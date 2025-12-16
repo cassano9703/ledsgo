@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useRef, useState, MouseEvent, TouchEvent, useEffect } from 'react';
+import React, { useRef, useState, MouseEvent, TouchEvent, useEffect, useLayoutEffect } from 'react';
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
 import type { FontConfig, SizeConfig, BackgroundConfig } from '@/lib/config';
@@ -29,15 +29,28 @@ export function LedSignPreview({ text, font, color, size, background }: LedSignP
   const dynamicFontSize = `${baseFontSize * size.multiplier}rem`;
   const lineHeight = `${baseFontSize * size.multiplier * 1.2}rem`;
 
-  useEffect(() => {
-    if (textRef.current) {
-      const { offsetWidth, offsetHeight } = textRef.current;
-      setTextDimensions({
-        width: offsetWidth,
-        height: offsetHeight,
-      });
-    }
-  }, [text, font, size]); // Re-run when text, font, or size changes
+  useLayoutEffect(() => {
+    const textElement = textRef.current;
+    if (!textElement) return;
+
+    // Use ResizeObserver to reliably detect size changes.
+    const observer = new ResizeObserver(entries => {
+      for (let entry of entries) {
+        const { width, height } = entry.contentRect;
+        setTextDimensions({
+          width: width,
+          height: height,
+        });
+      }
+    });
+
+    observer.observe(textElement);
+
+    // Clean up the observer when the component unmounts or dependencies change.
+    return () => {
+      observer.disconnect();
+    };
+  }, [text, font, size]); // Re-observe when these change
 
   const handleDragStart = (e: MouseEvent<HTMLDivElement> | TouchEvent<HTMLDivElement>) => {
     setIsDragging(true);
@@ -132,7 +145,7 @@ export function LedSignPreview({ text, font, color, size, background }: LedSignP
         </p>
 
         {textDimensions.width > 0 && (
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" style={{width: textDimensions.width, height: textDimensions.height}}>
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none" style={{width: textDimensions.width, height: textDimensions.height}}>
             <div className="absolute -bottom-6 left-0 w-full flex flex-col items-center">
               <div className="w-full h-px bg-white/70 relative">
                 <div className="absolute left-0 -top-1 w-px h-2 bg-white/70"></div>

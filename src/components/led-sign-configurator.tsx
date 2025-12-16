@@ -16,9 +16,9 @@ import { Ruler } from "lucide-react";
 
 export function LedSignConfigurator() {
   const [text, setText] = useState("Leds Go!");
-  const [font, setFont] = useState<FontConfig>(fonts[4]); // Beachfront
-  const [color, setColor] = useState<ColorConfig>(colors[5]); // White
-  const [size, setSize] = useState<SizeConfig>(sizes[1]); // Mediano
+  const [font, setFont] = useState<FontConfig>(fonts[4]);
+  const [color, setColor] = useState<ColorConfig>(colors[5]);
+  const [size, setSize] = useState<SizeConfig>(sizes[1]);
   const [background, setBackground] = useState<BackgroundConfig>(backgrounds[0]);
   
   const [isOrderModalOpen, setOrderModalOpen] = useState(false);
@@ -97,27 +97,19 @@ export function LedSignConfigurator() {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label className="flex items-center gap-2"><Ruler className="w-4 h-4" /> Tamaño</Label>
-                <RadioGroup
-                  value={size.name}
-                  onValueChange={handleSizeChange}
-                  className="flex flex-wrap gap-2"
-                >
-                  {sizes.map((s) => (
-                    <Label
-                      key={s.name}
-                      htmlFor={`size-${s.name}`}
-                      className={`flex items-center justify-center rounded-md text-sm font-medium px-3 py-2 cursor-pointer transition-colors border ${
-                        size.name === s.name
-                          ? 'bg-primary text-primary-foreground border-primary'
-                          : 'bg-background hover:bg-accent hover:text-accent-foreground'
-                      }`}
-                    >
-                      <RadioGroupItem value={s.name} id={`size-${s.name}`} className="sr-only" />
-                      {s.name}
-                    </Label>
-                  ))}
-                </RadioGroup>
+                <Label htmlFor="size-select" className="flex items-center gap-2"><Ruler className="w-4 h-4" /> Tamaño</Label>
+                <Select value={size.name} onValueChange={handleSizeChange}>
+                  <SelectTrigger id="size-select">
+                    <SelectValue placeholder="Selecciona un tamaño" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {sizes.map((s) => (
+                      <SelectItem key={s.name} value={s.name}>
+                        {s.name}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
               </div>
 
                <div className="space-y-2">
