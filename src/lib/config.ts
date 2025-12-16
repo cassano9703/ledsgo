@@ -45,10 +45,10 @@ export type SizeConfig = {
 };
 
 export const sizes: SizeConfig[] = [
-  { name: "Small", multiplier: 0.8 },
-  { name: "Medium", multiplier: 1 },
-  { name: "Large", multiplier: 1.2 },
-  { name: "Extra Large", multiplier: 1.5 },
+  { name: "Pequeño", multiplier: 0.8 },
+  { name: "Mediano", multiplier: 1 },
+  { name: "Grande", multiplier: 1.2 },
+  { name: "Extra Grande", multiplier: 1.5 },
 ];
 
 export type BackgroundConfig = {
