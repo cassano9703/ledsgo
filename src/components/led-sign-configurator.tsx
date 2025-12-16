@@ -43,29 +43,22 @@ export function LedSignConfigurator() {
   const removeEmojis = (str: string) => {
     let newStr = str;
     for (const e of EMOJIS) {
-      newStr = newStr.replaceAll(` ${e}`, "");
+      newStr = newStr.replaceAll(e, "");
     }
     return newStr;
   }
 
   const addEmoji = (emoji: string) => {
     const textWithoutEmojis = removeEmojis(text);
-    setText(textWithoutEmojis + " " + emoji);
+    setText(textWithoutEmojis + emoji);
   };
   
   const handleTextChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newText = e.target.value;
-    const lastChar = newText.slice(-1);
-
-    // If the user is adding an emoji via keyboard, we let it pass for a moment
-    // but it will be cleaned up on next emoji button click.
-    if (EMOJIS.includes(lastChar)) {
-       setText(newText);
-       return;
-    }
-
-    // If user types anything else, remove existing emojis.
-    if (EMOJIS.some(emoji => text.includes(` ${emoji}`))) {
+    
+    // If user types anything, remove existing emojis.
+    // This gives a cleaner experience as the user can add it back with one click.
+    if (EMOJIS.some(emoji => text.includes(emoji)) && !EMOJIS.some(emoji => newText.endsWith(emoji))) {
       setText(removeEmojis(newText));
     } else {
       setText(newText);
