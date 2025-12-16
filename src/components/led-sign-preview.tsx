@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useRef, useState, useLayoutEffect, MouseEvent, TouchEvent } from 'react';
+import React, { useRef, useState, useLayoutEffect, MouseEvent, TouchEvent, useEffect } from 'react';
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
 import type { FontConfig, SizeConfig, BackgroundConfig } from '@/lib/config';
@@ -29,7 +29,7 @@ export function LedSignPreview({ text, font, color, size, background }: LedSignP
   const dynamicFontSize = `${baseFontSize * size.multiplier}rem`;
   const lineHeight = `${baseFontSize * size.multiplier * 1.2}rem`;
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const measureText = () => {
       if (textRef.current) {
         const { offsetWidth, offsetHeight } = textRef.current;
@@ -40,10 +40,12 @@ export function LedSignPreview({ text, font, color, size, background }: LedSignP
       }
     };
     
-    // The timeout ensures that the measurement happens after the DOM has been updated with the new styles.
-    const timeoutId = setTimeout(measureText, 0);
+    // We need to measure after the styles have been applied in the next paint.
+    // requestAnimationFrame ensures our measurement runs after the browser has painted the changes.
+    const animationFrameId = requestAnimationFrame(measureText);
 
-    return () => clearTimeout(timeoutId);
+    // If the component re-renders before the frame is painted, we should cancel the previous request.
+    return () => cancelAnimationFrame(animationFrameId);
   }, [text, font, size]);
 
   const handleDragStart = (e: MouseEvent<HTMLDivElement> | TouchEvent<HTMLDivElement>) => {
