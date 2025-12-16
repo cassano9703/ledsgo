@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useLayoutEffect, useRef } from "react";
+import { useState } from "react";
 import { fonts, colors, sizes, backgrounds } from "@/lib/config";
 import type { FontConfig, ColorConfig, SizeConfig, BackgroundConfig } from "@/lib/config";
 import { Button } from "@/components/ui/button";
@@ -12,7 +12,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { LedSignPreview } from "./led-sign-preview";
 import { OrderModal } from "./order-modal";
 import { cn } from "@/lib/utils";
-import { Ruler, Star, Heart } from "lucide-react";
+import { Ruler, Star, Heart, Crown } from "lucide-react";
 
 export function LedSignConfigurator() {
   const [text, setText] = useState("Leds Go!");
@@ -75,6 +75,9 @@ export function LedSignConfigurator() {
                 </Button>
                 <Button variant="outline" size="icon" onClick={() => addEmoji('☆')}>
                   <Star className="w-4 h-4" />
+                </Button>
+                <Button variant="outline" size="icon" onClick={() => addEmoji('♔')}>
+                  <Crown className="w-4 h-4" />
                 </Button>
               </div>
             </div>
