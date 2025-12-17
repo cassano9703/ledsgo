@@ -12,15 +12,10 @@ export const fonts: FontConfig[] = [
     { name: "Beachfront", style: { fontFamily: "'Caveat', cursive" } },
     { name: "Alexa", style: { fontFamily: "'Allura', cursive" } },
     { name: "Bayview", style: { fontFamily: "'Cedarville Cursive', cursive" } },
-    { name: "Rocket", style: { fontFamily: "'Orbitron', sans-serif" } },
     { name: "Sorrento", style: { fontFamily: "'Tangerine', cursive" } },
     { name: "Vintage", style: { fontFamily: "'Yeseva One', cursive" } },
-    { name: "MONACO", style: { fontFamily: "'Bebas Neue', sans-serif" } },
     { name: "Funky", style: { fontFamily: "'Lobster', cursive" } },
-    { name: "Neotokyo", style: { fontFamily: "'Poppins', sans-serif" } },
-    { name: "Avante", style: { fontFamily: "'Avant Garde', sans-serif" } },
     { name: "Melbourne", style: { fontFamily: "'Pacifico', cursive" } },
-    { name: "OUTLINE", style: { fontFamily: "'Poppins', sans-serif", WebkitTextStroke: '1px', WebkitTextFillColor: 'transparent' } },
 ];
 
 
