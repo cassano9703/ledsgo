@@ -4,7 +4,7 @@ import { useState } from "react";
 import { fonts, colors, sizes, backgrounds } from "@/lib/config";
 import type { FontConfig, ColorConfig, SizeConfig, BackgroundConfig } from "@/lib/config";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
@@ -12,7 +12,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { LedSignPreview } from "./led-sign-preview";
 import { OrderModal } from "./order-modal";
 import { cn } from "@/lib/utils";
-import { Ruler, Heart, Star } from "lucide-react";
+import { Ruler, Heart, Star, Camera } from "lucide-react";
 
 const EMOJIS = ["♡", "☆"];
 
@@ -45,7 +45,6 @@ export function LedSignConfigurator() {
   }
 
   const addEmoji = (emoji: string) => {
-    // If text already has an emoji, replace it. Otherwise, append.
     if (EMOJIS.some(e => text.includes(e))) {
       const textWithoutEmojis = removeEmojis(text);
       setText(textWithoutEmojis + emoji);
@@ -57,7 +56,6 @@ export function LedSignConfigurator() {
   const handleTextChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newText = e.target.value;
     
-    // If an emoji was present but is now being deleted by typing
     if (EMOJIS.some(emoji => text.includes(emoji)) && !EMOJIS.some(emoji => newText.includes(emoji))) {
       setText(removeEmojis(newText));
     } else {
@@ -72,7 +70,7 @@ export function LedSignConfigurator() {
     <>
       <div className="mt-12 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
         <div className="lg:col-span-9 sticky top-24">
-          <LedSignPreview 
+           <LedSignPreview 
             backgrounds={backgrounds}
             background={background} 
             onBackgroundChange={setBackground}
@@ -82,6 +80,15 @@ export function LedSignConfigurator() {
             color={color.value} 
             size={size} 
           />
+          <div className="mt-4 flex justify-center gap-4">
+            <Button size="lg" variant="outline">
+              <Camera className="mr-2 h-4 w-4" />
+              Capturar Diseño
+            </Button>
+            <Button size="lg" onClick={() => setOrderModalOpen(true)}>
+              Ordenar Tu Letrero Personalizado
+            </Button>
+          </div>
         </div>
         
         <Card className="lg:col-span-3 sticky top-24">
@@ -165,11 +172,6 @@ export function LedSignConfigurator() {
             </div>
 
           </CardContent>
-          <CardFooter>
-            <Button size="lg" className="w-full" onClick={() => setOrderModalOpen(true)}>
-              Ordenar Tu Letrero Personalizado
-            </Button>
-          </CardFooter>
         </Card>
       </div>
       <OrderModal isOpen={isOrderModalOpen} onClose={() => setOrderModalOpen(false)} config={currentConfig} />
