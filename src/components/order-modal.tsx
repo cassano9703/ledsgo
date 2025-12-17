@@ -3,6 +3,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -41,6 +42,7 @@ interface OrderModalProps {
     color: string;
     size: SizeConfig;
     background: BackgroundConfig;
+    capturedImage: string | null;
   };
 }
 
@@ -67,25 +69,32 @@ export function OrderModal({ isOpen, onClose, config }: OrderModalProps) {
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent className="sm:max-w-md">
         <DialogHeader>
           <DialogTitle>Realiza tu Pedido</DialogTitle>
           <DialogDescription>
-            Revisa tu diseño y proporciona tus datos de envío para completar la compra.
+            Revisa tu diseño y proporciona tus datos para completar la compra.
           </DialogDescription>
         </DialogHeader>
-        <div className="grid gap-4 py-4">
-          <div className="rounded-md border p-4">
-            <h4 className="font-semibold mb-2">Tu Letrero:</h4>
-            <p className="text-sm"><strong>Texto:</strong> {config.text}</p>
-            {config.text2 && <p className="text-sm"><strong>Texto 2:</strong> {config.text2}</p>}
-            <p className="text-sm"><strong>Fuente:</strong> {config.font.name}</p>
-            <p className="text-sm flex items-center"><strong>Color:</strong>
-              <span className="w-4 h-4 rounded-full inline-block ml-2 border" style={{ backgroundColor: config.color }}></span>
-            </p>
-            <p className="text-sm"><strong>Tamaño:</strong> {config.size.name}</p>
-            <p className="text-sm"><strong>Fondo:</strong> {config.background.name}</p>
+        <div className="space-y-4">
+          <div>
+            <h4 className="font-semibold mb-2 text-center">Vista Previa Final</h4>
+            {config.capturedImage ? (
+              <div className="rounded-md overflow-hidden border bg-slate-900">
+                <Image 
+                  src={config.capturedImage} 
+                  alt="Vista previa del letrero LED"
+                  width={450}
+                  height={253}
+                  className="w-full h-auto"
+                />
+              </div>
+            ) : (
+              <div className="w-full aspect-video bg-slate-200 animate-pulse rounded-md" />
+            )}
+             <p className="text-xs text-muted-foreground mt-1">Este es un render. El producto final puede tener ligeras variaciones.</p>
           </div>
+          
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
               <FormField

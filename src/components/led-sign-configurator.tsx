@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useCallback } from "react";
 import { fonts, colors, sizes, backgrounds } from "@/lib/config";
 import type { FontConfig, ColorConfig, SizeConfig, BackgroundConfig } from "@/lib/config";
 import { Button } from "@/components/ui/button";
@@ -13,6 +13,8 @@ import { LedSignPreview } from "./led-sign-preview";
 import { OrderModal } from "./order-modal";
 import { cn } from "@/lib/utils";
 import { Ruler, Heart, Star, Camera } from "lucide-react";
+import { toPng } from 'html-to-image';
+import { useToast } from "@/hooks/use-toast";
 
 const EMOJIS = ["♡", "☆"];
 
@@ -25,6 +27,10 @@ export function LedSignConfigurator() {
   const [background, setBackground] = useState<BackgroundConfig>(backgrounds[0]);
   
   const [isOrderModalOpen, setOrderModalOpen] = useState(false);
+  const [capturedImage, setCapturedImage] = useState<string | null>(null);
+  
+  const previewRef = useRef<HTMLDivElement>(null);
+  const { toast } = useToast();
 
   const handleFontChange = (fontName: string) => {
     const newFont = fonts.find((f) => f.name === fontName);
@@ -63,14 +69,57 @@ export function LedSignConfigurator() {
     }
   }
 
+  const captureAndDownload = useCallback(() => {
+    if (previewRef.current === null) {
+      return;
+    }
 
-  const currentConfig = { text, text2, font, color: color.value, size, background };
+    toPng(previewRef.current, { cacheBust: true })
+      .then((dataUrl) => {
+        const link = document.createElement('a');
+        link.download = 'letrero-leds-go.png';
+        link.href = dataUrl;
+        link.click();
+      })
+      .catch((err) => {
+        console.error(err);
+        toast({
+          variant: "destructive",
+          title: "Error al capturar la imagen",
+          description: "No se pudo generar la imagen. Por favor, inténtalo de nuevo.",
+        });
+      });
+  }, [previewRef, toast]);
+  
+  const handleOpenOrderModal = useCallback(() => {
+    if (previewRef.current === null) {
+      return;
+    }
+
+    toPng(previewRef.current, { cacheBust: true, quality: 0.95, pixelRatio: 1.5 })
+      .then((dataUrl) => {
+        setCapturedImage(dataUrl);
+        setOrderModalOpen(true);
+      })
+      .catch((err) => {
+        console.error(err);
+         toast({
+          variant: "destructive",
+          title: "Error al procesar el pedido",
+          description: "No se pudo generar la vista previa. Por favor, inténtalo de nuevo.",
+        });
+      });
+  }, [previewRef, toast]);
+
+
+  const currentConfig = { text, text2, font, color: color.value, size, background, capturedImage };
 
   return (
     <>
       <div className="mt-12 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
         <div className="lg:col-span-9 sticky top-24">
            <LedSignPreview 
+            ref={previewRef}
             backgrounds={backgrounds}
             background={background} 
             onBackgroundChange={setBackground}
@@ -81,11 +130,11 @@ export function LedSignConfigurator() {
             size={size} 
           />
           <div className="mt-4 flex justify-center gap-4">
-            <Button size="lg" variant="outline">
+            <Button size="lg" variant="outline" onClick={captureAndDownload}>
               <Camera className="mr-2 h-4 w-4" />
               Capturar Diseño
             </Button>
-            <Button size="lg" onClick={() => setOrderModalOpen(true)}>
+            <Button size="lg" onClick={handleOpenOrderModal}>
               Ordenar Tu Letrero Personalizado
             </Button>
           </div>
