@@ -30,11 +30,6 @@ export function LedSignConfigurator() {
     if (newFont) setFont(newFont);
   };
 
-  const handleBackgroundChange = (bgName: string) => {
-    const newBg = backgrounds.find((b) => b.name === bgName);
-    if (newBg) setBackground(newBg);
-  };
-
   const handleSizeChange = (sizeName: string) => {
     const newSize = sizes.find((s) => s.name === sizeName);
     if (newSize) setSize(newSize);
@@ -56,8 +51,6 @@ export function LedSignConfigurator() {
   const handleTextChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newText = e.target.value;
     
-    // If user types anything, remove existing emojis.
-    // This gives a cleaner experience as the user can add it back with one click.
     if (EMOJIS.some(emoji => text.includes(emoji)) && !EMOJIS.some(emoji => newText.endsWith(emoji))) {
       setText(removeEmojis(newText));
     } else {
@@ -72,7 +65,7 @@ export function LedSignConfigurator() {
     <>
       <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 items-start">
         <div className="sticky top-24">
-          <LedSignPreview text={text} font={font} color={color.value} size={size} background={background} />
+          <LedSignPreview text={text} font={font} color={color.value} size={size} background={background} onBackgroundChange={setBackground} />
         </div>
         
         <Card>
@@ -154,21 +147,6 @@ export function LedSignConfigurator() {
                 </Select>
               </div>
 
-               <div className="space-y-2">
-                <Label htmlFor="background-select">Fondo</Label>
-                <Select value={background.name} onValueChange={handleBackgroundChange}>
-                  <SelectTrigger id="background-select">
-                    <SelectValue placeholder="Selecciona un fondo" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {backgrounds.map((b) => (
-                      <SelectItem key={b.name} value={b.name}>
-                        {b.name}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
             </div>
 
           </CardContent>

@@ -1,8 +1,9 @@
 'use client';
 
-import React, { useRef, useState, MouseEvent, TouchEvent, useEffect, useLayoutEffect } from 'react';
+import React, { useRef, useState, MouseEvent, TouchEvent, useLayoutEffect } from 'react';
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
+import { backgrounds } from "@/lib/config";
 import type { FontConfig, SizeConfig, BackgroundConfig } from '@/lib/config';
 
 interface LedSignPreviewProps {
@@ -11,9 +12,10 @@ interface LedSignPreviewProps {
   color: string;
   size: SizeConfig;
   background: BackgroundConfig;
+  onBackgroundChange: (bg: BackgroundConfig) => void;
 }
 
-export function LedSignPreview({ text, font, color, size, background }: LedSignPreviewProps) {
+export function LedSignPreview({ text, font, color, size, background, onBackgroundChange }: LedSignPreviewProps) {
   const previewText = text || 'Tu Texto Aquí';
 
   const textRef = useRef<HTMLParagraphElement>(null);
@@ -33,7 +35,6 @@ export function LedSignPreview({ text, font, color, size, background }: LedSignP
     const textElement = textRef.current;
     if (!textElement) return;
 
-    // Use ResizeObserver to reliably detect size changes.
     const observer = new ResizeObserver(entries => {
       for (let entry of entries) {
         const { width, height } = entry.contentRect;
@@ -45,12 +46,10 @@ export function LedSignPreview({ text, font, color, size, background }: LedSignP
     });
 
     observer.observe(textElement);
-
-    // Clean up the observer when the component unmounts or dependencies change.
     return () => {
       observer.disconnect();
     };
-  }, [text, font, size]); // Re-observe when these change
+  }, [text, font, size]);
 
   const handleDragStart = (e: MouseEvent<HTMLDivElement> | TouchEvent<HTMLDivElement>) => {
     setIsDragging(true);
@@ -105,64 +104,89 @@ export function LedSignPreview({ text, font, color, size, background }: LedSignP
   const signHeightCm = (textDimensions.height / PIXELS_PER_CM).toFixed(0);
 
   return (
-    <div 
-      className="relative w-full aspect-[16/9] bg-slate-900 rounded-lg overflow-hidden flex items-center justify-center p-8 shadow-2xl border-4 border-slate-700"
-      onMouseMove={handleDragMove}
-      onMouseUp={handleDragEnd}
-      onMouseLeave={handleDragEnd}
-      onTouchMove={handleDragMove}
-      onTouchEnd={handleDragEnd}
-    >
-      {background.imageUrl && (
-        <Image
-          src={background.imageUrl}
-          alt={background.name}
-          fill
-          className="object-cover"
-          data-ai-hint={background.imageHint}
-        />
-      )}
+    <div className="relative w-full aspect-[16/9] bg-slate-900 rounded-lg overflow-hidden flex flex-col justify-start items-center shadow-2xl border-4 border-slate-700">
+      <div className="w-full p-2 bg-slate-800/50 backdrop-blur-sm">
+        <div className="flex gap-2 justify-center">
+          {backgrounds.map((bg) => (
+            <button
+              key={bg.name}
+              onClick={() => onBackgroundChange(bg)}
+              className={cn(
+                "w-16 h-10 rounded-md overflow-hidden border-2 transition-all",
+                background.name === bg.name ? "border-primary ring-2 ring-primary" : "border-slate-600 hover:border-primary/70"
+              )}
+            >
+              <Image
+                src={bg.imageUrl}
+                alt={bg.name}
+                width={64}
+                height={40}
+                className="object-cover w-full h-full"
+              />
+            </button>
+          ))}
+        </div>
+      </div>
+
       <div 
-        className={cn("absolute inset-0", background.imageUrl ? 'bg-black/20' : "bg-repeat bg-[length:20px_20px]")}
-        style={!background.imageUrl ? {backgroundImage: 'radial-gradient(hsla(0,0%,100%,.05) 1px, transparent 0)'} : {}}
-        aria-hidden="true"
-      />
-      <div 
-        ref={signContainerRef}
-        className="absolute cursor-grab"
-        style={{ transform: `translate(${position.x}px, ${position.y}px)` }}
-        onMouseDown={handleDragStart}
-        onTouchStart={handleDragStart}
+        className="relative w-full flex-1 flex items-center justify-center p-8"
+        onMouseMove={handleDragMove}
+        onMouseUp={handleDragEnd}
+        onMouseLeave={handleDragEnd}
+        onTouchMove={handleDragMove}
+        onTouchEnd={handleDragEnd}
       >
-        <p
-          ref={textRef}
-          className={cn(
-            'relative text-center font-bold break-words transition-all duration-300 ease-in-out select-none',
-          )}
-          style={textStyle}
-        >
-          {previewText}
-        </p>
-
-        {textDimensions.width > 0 && (
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none" style={{width: textDimensions.width, height: textDimensions.height}}>
-            <div className="absolute -bottom-6 left-0 w-full flex flex-col items-center">
-              <div className="w-full h-px bg-white/70 relative">
-                <div className="absolute left-0 -top-1 w-px h-2 bg-white/70"></div>
-                <div className="absolute right-0 -top-1 w-px h-2 bg-white/70"></div>
-              </div>
-              <span className="text-white/80 text-xs font-mono mt-1 select-none">{signWidthCm} cm</span>
-            </div>
-
-            <div className="absolute -left-10 top-0 h-full flex items-center">
-              <div className="h-full w-px bg-white/70 relative">
-                <div className="absolute top-0 -left-1 h-px w-2 bg-white/70"></div>
-                <div className="absolute bottom-0 -left-1 h-px w-2 bg-white/70"></div>
-              </div>
-              <span className="text-white/80 text-xs font-mono ml-2 transform -rotate-90 origin-center select-none">{signHeightCm} cm</span>
-            </div>
-          </div>
+        {background.imageUrl && (
+          <Image
+            src={background.imageUrl}
+            alt={background.name}
+            fill
+            className="object-cover"
+            data-ai-hint={background.imageHint}
+          />
         )}
+        <div 
+          className={cn("absolute inset-0", background.imageUrl ? 'bg-black/20' : "bg-repeat bg-[length:20px_20px]")}
+          style={!background.imageUrl ? {backgroundImage: 'radial-gradient(hsla(0,0%,100%,.05) 1px, transparent 0)'} : {}}
+          aria-hidden="true"
+        />
+        <div 
+          ref={signContainerRef}
+          className="absolute cursor-grab"
+          style={{ transform: `translate(${position.x}px, ${position.y}px)` }}
+          onMouseDown={handleDragStart}
+          onTouchStart={handleDragStart}
+        >
+          <p
+            ref={textRef}
+            className={cn(
+              'relative text-center font-bold break-words transition-all duration-300 ease-in-out select-none',
+            )}
+            style={textStyle}
+          >
+            {previewText}
+          </p>
+
+          {textDimensions.width > 0 && (
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none" style={{width: textDimensions.width, height: textDimensions.height}}>
+              <div className="absolute -bottom-6 left-0 w-full flex flex-col items-center">
+                <div className="w-full h-px bg-white/70 relative">
+                  <div className="absolute left-0 -top-1 w-px h-2 bg-white/70"></div>
+                  <div className="absolute right-0 -top-1 w-px h-2 bg-white/70"></div>
+                </div>
+                <span className="text-white/80 text-xs font-mono mt-1 select-none">{signWidthCm} cm</span>
+              </div>
+
+              <div className="absolute -left-10 top-0 h-full flex items-center">
+                <div className="h-full w-px bg-white/70 relative">
+                  <div className="absolute top-0 -left-1 h-px w-2 bg-white/70"></div>
+                  <div className="absolute bottom-0 -left-1 h-px w-2 bg-white/70"></div>
+                </div>
+                <span className="text-white/80 text-xs font-mono ml-2 transform -rotate-90 origin-center select-none">{signHeightCm} cm</span>
+              </div>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
