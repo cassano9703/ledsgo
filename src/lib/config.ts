@@ -36,6 +36,10 @@ export const colors: ColorConfig[] = [
   { name: "Yellow", value: "#FFFF00", twClass: "bg-yellow-300" },
   { name: "Lime", value: "#32CD32", twClass: "bg-lime-500" },
   { name: "Red", value: "#FF073A", twClass: "bg-red-600" },
+  { name: "Blue", value: "#0000FF", twClass: "bg-blue-600" },
+  { name: "Purple", value: "#A020F0", twClass: "bg-purple-600" },
+  { name: "Orange", value: "#FFA500", twClass: "bg-orange-500" },
+  { name: "Amber", value: "#FFBF00", twClass: "bg-amber-400" },
   { name: "White", value: "#FFFFFF", twClass: "bg-white" },
 ];
 
