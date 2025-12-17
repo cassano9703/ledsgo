@@ -4,7 +4,7 @@ import { useState } from "react";
 import { fonts, colors, sizes, backgrounds } from "@/lib/config";
 import type { FontConfig, ColorConfig, SizeConfig, BackgroundConfig } from "@/lib/config";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
@@ -83,42 +83,36 @@ export function LedSignConfigurator() {
           <CardContent className="space-y-6">
             <div className="space-y-2">
               <Label htmlFor="sign-text">Texto</Label>
-              <Input
-                id="sign-text"
-                placeholder="Tu texto aquí"
-                value={text}
-                onChange={handleTextChange}
-              />
+              <div className="flex items-center gap-2">
+                <Input
+                  id="sign-text"
+                  placeholder="Tu texto aquí"
+                  value={text}
+                  onChange={handleTextChange}
+                />
+                <Button variant="outline" size="icon" onClick={() => addEmoji('♡')}>
+                  <Heart className="w-4 h-4" />
+                </Button>
+                <Button variant="outline" size="icon" onClick={() => addEmoji('☆')}>
+                  <Star className="w-4 h-4 fill-transparent" />
+                </Button>
+              </div>
             </div>
             
-            <div className="flex flex-wrap gap-8">
-              <div className="space-y-2">
-                <Label>Añadir un Emoji</Label>
-                <div className="flex gap-2">
-                  <Button variant="outline" size="icon" onClick={() => addEmoji('♡')}>
-                    <Heart className="w-4 h-4" />
-                  </Button>
-                  <Button variant="outline" size="icon" onClick={() => addEmoji('☆')}>
-                    <Star className="w-4 h-4 fill-transparent" />
-                  </Button>
-                </div>
-              </div>
-
-              <div className="space-y-2">
-                  <Label>Color</Label>
-                  <RadioGroup
-                      value={color.name}
-                      onValueChange={(val) => setColor(colors.find(c => c.name === val)!)}
-                      className="flex flex-wrap gap-2"
-                  >
-                      {colors.map((c) => (
-                        <Label key={c.name} htmlFor={c.name} className={`relative flex items-center justify-center rounded-full w-8 h-8 cursor-pointer transition-all border-2 ${color.name === c.name ? 'border-primary ring-2 ring-primary ring-offset-2' : 'border-border'}`}>
-                            <RadioGroupItem value={c.name} id={c.name} className="sr-only" />
-                            <span className={cn("w-full h-full rounded-full", c.twClass)} />
-                        </Label>
-                      ))}
-                  </RadioGroup>
-              </div>
+            <div className="space-y-2">
+              <Label>Color</Label>
+              <RadioGroup
+                  value={color.name}
+                  onValueChange={(val) => setColor(colors.find(c => c.name === val)!)}
+                  className="flex flex-wrap gap-2"
+              >
+                  {colors.map((c) => (
+                    <Label key={c.name} htmlFor={c.name} className={`relative flex items-center justify-center rounded-full w-8 h-8 cursor-pointer transition-all border-2 ${color.name === c.name ? 'border-primary ring-2 ring-primary ring-offset-2' : 'border-border'}`}>
+                        <RadioGroupItem value={c.name} id={c.name} className="sr-only" />
+                        <span className={cn("w-full h-full rounded-full", c.twClass)} />
+                    </Label>
+                  ))}
+              </RadioGroup>
             </div>
 
             <div className="space-y-2">
