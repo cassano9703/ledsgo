@@ -36,6 +36,7 @@ interface OrderModalProps {
   onClose: () => void;
   config: {
     text: string;
+    text2?: string;
     font: FontConfig;
     color: string;
     size: SizeConfig;
@@ -77,6 +78,7 @@ export function OrderModal({ isOpen, onClose, config }: OrderModalProps) {
           <div className="rounded-md border p-4">
             <h4 className="font-semibold mb-2">Tu Letrero:</h4>
             <p className="text-sm"><strong>Texto:</strong> {config.text}</p>
+            {config.text2 && <p className="text-sm"><strong>Texto 2:</strong> {config.text2}</p>}
             <p className="text-sm"><strong>Fuente:</strong> {config.font.name}</p>
             <p className="text-sm flex items-center"><strong>Color:</strong>
               <span className="w-4 h-4 rounded-full inline-block ml-2 border" style={{ backgroundColor: config.color }}></span>

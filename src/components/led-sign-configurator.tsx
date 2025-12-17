@@ -18,6 +18,7 @@ const EMOJIS = ["♡", "☆"];
 
 export function LedSignConfigurator() {
   const [text, setText] = useState("Leds Go!");
+  const [text2, setText2] = useState("");
   const [font, setFont] = useState<FontConfig>(fonts[4]);
   const [color, setColor] = useState<ColorConfig>(colors[5]);
   const [size, setSize] = useState<SizeConfig>(sizes[1]);
@@ -44,14 +45,20 @@ export function LedSignConfigurator() {
   }
 
   const addEmoji = (emoji: string) => {
-    const textWithoutEmojis = removeEmojis(text);
-    setText(textWithoutEmojis + emoji);
+    // If text already has an emoji, replace it. Otherwise, append.
+    if (EMOJIS.some(e => text.includes(e))) {
+      const textWithoutEmojis = removeEmojis(text);
+      setText(textWithoutEmojis + emoji);
+    } else {
+      setText(text + emoji);
+    }
   };
   
   const handleTextChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newText = e.target.value;
     
-    if (EMOJIS.some(emoji => text.includes(emoji)) && !EMOJIS.some(emoji => newText.endsWith(emoji))) {
+    // If an emoji was present but is now being deleted by typing
+    if (EMOJIS.some(emoji => text.includes(emoji)) && !EMOJIS.some(emoji => newText.includes(emoji))) {
       setText(removeEmojis(newText));
     } else {
       setText(newText);
@@ -59,7 +66,7 @@ export function LedSignConfigurator() {
   }
 
 
-  const currentConfig = { text, font, color: color.value, size, background };
+  const currentConfig = { text, text2, font, color: color.value, size, background };
 
   return (
     <>
@@ -70,6 +77,7 @@ export function LedSignConfigurator() {
             background={background} 
             onBackgroundChange={setBackground}
             text={text} 
+            text2={text2}
             font={font} 
             color={color.value} 
             size={size} 
@@ -81,7 +89,7 @@ export function LedSignConfigurator() {
             <CardTitle>Edición</CardTitle>
           </CardHeader>
           <CardContent className="space-y-6">
-            <div className="space-y-2">
+            <div className="space-y-3">
               <Label htmlFor="sign-text">Texto</Label>
               <div className="flex items-center gap-2">
                 <Input
@@ -97,6 +105,12 @@ export function LedSignConfigurator() {
                   <Star className="w-4 h-4 fill-transparent" />
                 </Button>
               </div>
+              <Input
+                id="sign-text-2"
+                placeholder="Segunda línea (opcional)"
+                value={text2}
+                onChange={(e) => setText2(e.target.value)}
+              />
             </div>
             
             <div className="space-y-2">

@@ -3,22 +3,24 @@
 import React, { useRef, useState, MouseEvent, TouchEvent, useLayoutEffect } from 'react';
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
-import { backgrounds } from "@/lib/config";
-import type { FontConfig, SizeConfig, BackgroundConfig } from '@/lib/config';
+import type { BackgroundConfig, FontConfig, SizeConfig } from '@/lib/config';
 
 interface LedSignPreviewProps {
   text: string;
+  text2?: string;
   font: FontConfig;
   color: string;
   size: SizeConfig;
   background: BackgroundConfig;
   onBackgroundChange: (bg: BackgroundConfig) => void;
+  backgrounds: BackgroundConfig[];
 }
 
-export function LedSignPreview({ text, font, color, size, background, onBackgroundChange }: LedSignPreviewProps) {
+export function LedSignPreview({ text, text2, font, color, size, background, onBackgroundChange, backgrounds }: LedSignPreviewProps) {
   const previewText = text || 'Tu Texto Aquí';
+  const hasSecondLine = text2 && text2.trim() !== '';
 
-  const textRef = useRef<HTMLParagraphElement>(null);
+  const textRef = useRef<HTMLDivElement>(null);
   const signContainerRef = useRef<HTMLDivElement>(null);
   const [textDimensions, setTextDimensions] = useState({ width: 0, height: 0 });
   
@@ -49,7 +51,7 @@ export function LedSignPreview({ text, font, color, size, background, onBackgrou
     return () => {
       observer.disconnect();
     };
-  }, [text, font, size]);
+  }, [text, text2, font, size]);
 
   const handleDragStart = (e: MouseEvent<HTMLDivElement> | TouchEvent<HTMLDivElement>) => {
     setIsDragging(true);
@@ -155,15 +157,16 @@ export function LedSignPreview({ text, font, color, size, background, onBackgrou
             onMouseDown={handleDragStart}
             onTouchStart={handleDragStart}
           >
-            <p
+            <div
               ref={textRef}
               className={cn(
                 'relative text-center font-bold break-words transition-all duration-300 ease-in-out select-none',
               )}
               style={textStyle}
             >
-              {previewText}
-            </p>
+              <p>{previewText}</p>
+              {hasSecondLine && <p>{text2}</p>}
+            </div>
 
             {textDimensions.width > 0 && (
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none" style={{width: textDimensions.width, height: textDimensions.height}}>
