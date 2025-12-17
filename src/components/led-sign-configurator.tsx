@@ -78,8 +78,7 @@ export function LedSignConfigurator() {
         
         <Card className="lg:col-span-3 sticky top-24">
           <CardHeader>
-            <CardTitle>Detalles del Letrero</CardTitle>
-            <CardDescription>Ingresa el texto y elige tus opciones a continuación.</CardDescription>
+            <CardTitle>Edición</CardTitle>
           </CardHeader>
           <CardContent className="space-y-6">
             <div className="space-y-2">
