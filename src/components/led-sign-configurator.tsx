@@ -64,7 +64,7 @@ export function LedSignConfigurator() {
   return (
     <>
       <div className="mt-12 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
-        <div className="lg:col-span-7 sticky top-24">
+        <div className="lg:col-span-9 sticky top-24">
           <LedSignPreview 
             backgrounds={backgrounds}
             background={background} 
@@ -76,7 +76,7 @@ export function LedSignConfigurator() {
           />
         </div>
         
-        <Card className="lg:col-span-5">
+        <Card className="lg:col-span-3">
           <CardHeader>
             <CardTitle>Detalles del Letrero</CardTitle>
             <CardDescription>Ingresa el texto y elige tus opciones a continuación.</CardDescription>
