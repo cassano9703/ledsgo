@@ -105,13 +105,13 @@ export function LedSignConfigurator() {
     <>
       <div className="mt-12 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
         
-        <div className="lg:col-span-2">
+        <div className="lg:col-span-1">
             <div className="flex lg:flex-col gap-2">
                 {backgrounds.map(bg => (
                     <div 
                         key={bg.name}
                         className={cn(
-                            "rounded-md border-2 overflow-hidden cursor-pointer transition-all",
+                            "rounded-md border-2 overflow-hidden cursor-pointer transition-all w-20 h-auto",
                             background.name === bg.name ? "border-primary ring-2 ring-primary" : "border-transparent"
                         )}
                         onClick={() => setBackground(bg)}
@@ -119,8 +119,8 @@ export function LedSignConfigurator() {
                         <Image 
                             src={bg.imageUrl}
                             alt={bg.name}
-                            width={100}
-                            height={75}
+                            width={80}
+                            height={60}
                             className="object-cover w-full h-full"
                         />
                     </div>
@@ -128,7 +128,7 @@ export function LedSignConfigurator() {
             </div>
         </div>
         
-        <div className="lg:col-span-7">
+        <div className="lg:col-span-8">
            <LedSignPreview 
             ref={previewRef}
             text={text} 
