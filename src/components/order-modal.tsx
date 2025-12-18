@@ -8,7 +8,6 @@ import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
@@ -71,9 +70,6 @@ export function OrderModal({ isOpen, onClose, config }: OrderModalProps) {
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
           <DialogTitle>Realiza tu Pedido</DialogTitle>
-          <DialogDescription>
-            Revisa tu diseño y proporciona tus datos para completar la compra.
-          </DialogDescription>
         </DialogHeader>
         <div className="space-y-4">
           <div>
