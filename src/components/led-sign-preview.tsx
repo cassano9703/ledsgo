@@ -141,20 +141,23 @@ export const LedSignPreview = forwardRef<HTMLDivElement, LedSignPreviewProps>(
 
                 {textDimensions.width > 0 && (
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none" style={{width: textDimensions.width, height: textDimensions.height}}>
-                    <div className="absolute -bottom-6 left-0 w-full flex flex-col items-center">
-                    <div className="w-full h-px bg-white/70 relative">
-                        <div className="absolute left-0 -top-1 w-px h-2 bg-white/70"></div>
-                        <div className="absolute right-0 -top-1 w-px h-2 bg-white/70"></div>
-                    </div>
-                    <span className="text-white/80 text-xs font-mono mt-1 select-none">{signWidthCm} cm</span>
+                    
+                    {/* Horizontal measurement */}
+                    <div className="absolute -bottom-8 left-0 w-full flex flex-col items-center">
+                      <div className="w-full h-px bg-white/70 relative">
+                          <div className="absolute left-0 -top-1 w-px h-2 bg-white/70"></div>
+                          <div className="absolute right-0 -top-1 w-px h-2 bg-white/70"></div>
+                      </div>
+                      <span className="text-white/80 text-xs font-mono mt-1.5 select-none">{signWidthCm} cm</span>
                     </div>
 
-                    <div className="absolute -right-10 top-0 h-full flex items-center">
-                    <div className="h-full w-px bg-white/70 relative">
-                        <div className="absolute top-0 -left-1 h-px w-2 bg-white/70"></div>
-                        <div className="absolute bottom-0 -left-1 h-px w-2 bg-white/70"></div>
-                    </div>
-                    <span className="text-white/80 text-xs font-mono ml-2 transform -rotate-90 origin-center select-none">{signHeightCm} cm</span>
+                    {/* Vertical measurement */}
+                    <div className="absolute -left-12 top-0 h-full flex flex-row items-center">
+                      <div className="h-full w-px bg-white/70 relative">
+                          <div className="absolute top-0 -left-1 h-px w-2 bg-white/70"></div>
+                          <div className="absolute bottom-0 -left-1 h-px w-2 bg-white/70"></div>
+                      </div>
+                      <span className="text-white/80 text-xs font-mono ml-1.5 transform -rotate-90 origin-center select-none whitespace-nowrap">{signHeightCm} cm</span>
                     </div>
                 </div>
                 )}
