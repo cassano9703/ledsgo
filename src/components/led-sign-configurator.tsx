@@ -11,6 +11,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { LedSignPreview } from "./led-sign-preview";
 import { OrderModal } from "./order-modal";
+import { PreviewModal } from "./preview-modal";
 import { cn } from "@/lib/utils";
 import { Ruler, Heart, Star, Camera } from "lucide-react";
 import { toPng } from 'html-to-image';
@@ -27,6 +28,7 @@ export function LedSignConfigurator() {
   const [background, setBackground] = useState<BackgroundConfig>(backgrounds[0]);
   
   const [isOrderModalOpen, setOrderModalOpen] = useState(false);
+  const [isPreviewModalOpen, setPreviewModalOpen] = useState(false);
   const [capturedImage, setCapturedImage] = useState<string | null>(null);
   
   const previewRef = useRef<HTMLDivElement>(null);
@@ -69,18 +71,13 @@ export function LedSignConfigurator() {
     }
   }
 
-  const captureAndDownload = useCallback(() => {
+  const captureImage = useCallback((callback: (dataUrl: string) => void) => {
     if (previewRef.current === null) {
       return;
     }
 
-    toPng(previewRef.current, { cacheBust: true })
-      .then((dataUrl) => {
-        const link = document.createElement('a');
-        link.download = 'letrero-leds-go.png';
-        link.href = dataUrl;
-        link.click();
-      })
+    toPng(previewRef.current, { cacheBust: true, pixelRatio: 1.5 })
+      .then(callback)
       .catch((err) => {
         console.error(err);
         toast({
@@ -90,26 +87,20 @@ export function LedSignConfigurator() {
         });
       });
   }, [previewRef, toast]);
-  
-  const handleOpenOrderModal = useCallback(() => {
-    if (previewRef.current === null) {
-      return;
-    }
 
-    toPng(previewRef.current, { cacheBust: true, quality: 0.95, pixelRatio: 1.5 })
-      .then((dataUrl) => {
-        setCapturedImage(dataUrl);
-        setOrderModalOpen(true);
-      })
-      .catch((err) => {
-        console.error(err);
-         toast({
-          variant: "destructive",
-          title: "Error al procesar el pedido",
-          description: "No se pudo generar la vista previa. Por favor, inténtalo de nuevo.",
-        });
-      });
-  }, [previewRef, toast]);
+  const handleCaptureAndShow = () => {
+    captureImage((dataUrl) => {
+      setCapturedImage(dataUrl);
+      setPreviewModalOpen(true);
+    });
+  };
+  
+  const handleOpenOrderModal = () => {
+    captureImage((dataUrl) => {
+      setCapturedImage(dataUrl);
+      setOrderModalOpen(true);
+    });
+  };
 
 
   const currentConfig = { text, text2, font, color: color.value, size, background, capturedImage };
@@ -130,7 +121,7 @@ export function LedSignConfigurator() {
             size={size} 
           />
           <div className="mt-4 flex justify-center gap-4">
-            <Button size="lg" variant="outline" onClick={captureAndDownload}>
+            <Button size="lg" variant="outline" onClick={handleCaptureAndShow}>
               <Camera className="mr-2 h-4 w-4" />
               Capturar Diseño
             </Button>
@@ -224,6 +215,7 @@ export function LedSignConfigurator() {
         </Card>
       </div>
       <OrderModal isOpen={isOrderModalOpen} onClose={() => setOrderModalOpen(false)} config={currentConfig} />
+      <PreviewModal isOpen={isPreviewModalOpen} onClose={() => setPreviewModalOpen(false)} imageUrl={capturedImage} />
     </>
   );
 }
