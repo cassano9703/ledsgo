@@ -53,7 +53,7 @@ export type BackgroundConfig = {
 };
 
 export const backgrounds: BackgroundConfig[] = [
+    { name: "Grass Sintético", imageUrl: "https://images.unsplash.com/photo-1599419799298-f10557053530" },
+    { name: "Panel de Madera", imageUrl: "https://images.unsplash.com/photo-1616047006789-b7af5afb8c20" },
     { name: "Pared de Ladrillo", imageUrl: "https://images.unsplash.com/photo-1561053258-ed994eea349a" },
-    { name: "Pared Oscura", imageUrl: "https://images.unsplash.com/photo-1533130061794-3d35a1637534" },
-    { name: "Pared Blanca", imageUrl: "https://images.unsplash.com/photo-1563283124-7a7e371a34a0" },
 ];
