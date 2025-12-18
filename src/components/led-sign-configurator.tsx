@@ -45,16 +45,12 @@ export function LedSignConfigurator() {
     for (const e of EMOJIS) {
       newStr = newStr.replaceAll(e, "");
     }
-    return newStr;
+    return newStr.trim();
   }
 
   const addEmoji = (emoji: string) => {
-    if (EMOJIS.some(e => text.includes(e))) {
-      const textWithoutEmojis = removeEmojis(text);
-      setText(textWithoutEmojis + emoji);
-    } else {
-      setText(text + emoji);
-    }
+    const textWithoutEmojis = removeEmojis(text);
+    setText(textWithoutEmojis + " " + emoji);
   };
   
   const handleTextChange = (e: React.ChangeEvent<HTMLInputElement>) => {
