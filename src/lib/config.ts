@@ -49,9 +49,11 @@ export const sizes: SizeConfig[] = [
 
 export type BackgroundConfig = {
     name: string;
+    imageUrl: string;
 };
 
 export const backgrounds: BackgroundConfig[] = [
-    { name: "Corte de Silueta" },
-    { name: "Corte Rectangular" },
+    { name: "Pared de Ladrillo", imageUrl: "https://i.imgur.com/uG9sYbd.jpeg" },
+    { name: "Pared Oscura", imageUrl: "https://i.imgur.com/k2oVv8S.jpeg" },
+    { name: "Pared Blanca", imageUrl: "https://i.imgur.com/K5f3t8Z.jpeg" },
 ];

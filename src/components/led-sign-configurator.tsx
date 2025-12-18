@@ -1,8 +1,8 @@
 "use client";
 
 import { useState, useRef, useCallback } from "react";
-import { fonts, colors, sizes, backgrounds } from "@/lib/config";
-import type { FontConfig, ColorConfig, SizeConfig, BackgroundConfig } from "@/lib/config";
+import { fonts, colors, sizes } from "@/lib/config";
+import type { FontConfig, ColorConfig, SizeConfig } from "@/lib/config";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -25,7 +25,6 @@ export function LedSignConfigurator() {
   const [font, setFont] = useState<FontConfig>(fonts[4]);
   const [color, setColor] = useState<ColorConfig>(colors[5]);
   const [size, setSize] = useState<SizeConfig>(sizes[1]);
-  const [background, setBackground] = useState<BackgroundConfig>(backgrounds[0]);
   
   const [isOrderModalOpen, setOrderModalOpen] = useState(false);
   const [isPreviewModalOpen, setPreviewModalOpen] = useState(false);
@@ -42,11 +41,6 @@ export function LedSignConfigurator() {
   const handleSizeChange = (sizeName: string) => {
     const newSize = sizes.find((s) => s.name === sizeName);
     if (newSize) setSize(newSize);
-  };
-
-  const handleBackgroundChange = (backgroundName: string) => {
-    const newBackground = backgrounds.find((b) => b.name === backgroundName);
-    if (newBackground) setBackground(newBackground);
   };
   
   const removeEmojis = (str: string) => {
@@ -108,7 +102,7 @@ export function LedSignConfigurator() {
   };
 
 
-  const currentConfig = { text, text2, font, color: color.value, size, background, capturedImage };
+  const currentConfig = { text, text2, font, color: color.value, size, capturedImage };
 
   return (
     <>
@@ -116,7 +110,6 @@ export function LedSignConfigurator() {
         <div className="lg:col-span-9 sticky top-24">
            <LedSignPreview 
             ref={previewRef}
-            background={background} 
             text={text} 
             text2={text2}
             font={font} 
@@ -211,22 +204,6 @@ export function LedSignConfigurator() {
                   </SelectContent>
                 </Select>
               </div>
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="background-select">Fondo de Acrílico</Label>
-              <Select value={background.name} onValueChange={handleBackgroundChange}>
-                <SelectTrigger id="background-select">
-                  <SelectValue placeholder="Selecciona un fondo" />
-                </SelectTrigger>
-                <SelectContent>
-                  {backgrounds.map((b) => (
-                    <SelectItem key={b.name} value={b.name}>
-                      {b.name}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
             </div>
           </CardContent>
         </Card>

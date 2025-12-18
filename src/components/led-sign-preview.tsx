@@ -3,7 +3,7 @@
 import React, { useRef, useState, MouseEvent, TouchEvent, useLayoutEffect, forwardRef } from 'react';
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
-import type { BackgroundConfig, FontConfig, SizeConfig } from '@/lib/config';
+import type { FontConfig, SizeConfig } from '@/lib/config';
 
 interface LedSignPreviewProps {
   text: string;
@@ -11,11 +11,10 @@ interface LedSignPreviewProps {
   font: FontConfig;
   color: string;
   size: SizeConfig;
-  background: BackgroundConfig;
 }
 
 export const LedSignPreview = forwardRef<HTMLDivElement, LedSignPreviewProps>(
-  ({ text, text2, font, color, size, background }, ref) => {
+  ({ text, text2, font, color, size }, ref) => {
     const previewText = text || 'Tu Texto Aquí';
     const hasSecondLine = text2 && text2.trim() !== '';
 
@@ -30,7 +29,6 @@ export const LedSignPreview = forwardRef<HTMLDivElement, LedSignPreviewProps>(
     const PIXELS_PER_CM = 3.8;
     const baseFontSize = 4;
     const dynamicFontSize = `${baseFontSize * size.multiplier}rem`;
-    const lineHeight = `${baseFontSize * size.multiplier * 1.2}rem`;
 
     useLayoutEffect(() => {
       const textElement = textRef.current;
@@ -87,7 +85,7 @@ export const LedSignPreview = forwardRef<HTMLDivElement, LedSignPreviewProps>(
     const textStyle = {
       fontFamily: font.style.fontFamily,
       fontSize: dynamicFontSize,
-      lineHeight: lineHeight,
+      lineHeight: `${baseFontSize * size.multiplier * 1.2}rem`,
       color: color,
       textShadow: `
         0 0 5px #fff,
@@ -103,50 +101,6 @@ export const LedSignPreview = forwardRef<HTMLDivElement, LedSignPreviewProps>(
 
     const signWidthCm = (textDimensions.width / PIXELS_PER_CM).toFixed(0);
     const signHeightCm = (textDimensions.height / PIXELS_PER_CM).toFixed(0);
-
-    const isCutToShape = background.name === 'Corte de Silueta';
-    const isRectangular = background.name === 'Corte Rectangular';
-
-    const getMaskSvg = (textToMask: string) => {
-      // Basic sanitization
-      const sanitizedText = textToMask.replace(/</g, "&lt;").replace(/>/g, "&gt;");
-      return `url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${textDimensions.width} ${textDimensions.height}"><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="white" style="font-family: ${font.style.fontFamily}; font-size: ${dynamicFontSize}; font-weight: ${font.style.fontWeight || 'normal'};">${sanitizedText}</text></svg>')`;
-    };
-    
-    const getMaskStyle = () => {
-      if (!isCutToShape || !textDimensions.width || !textDimensions.height) return {};
-    
-      let fullText = previewText;
-      if (hasSecondLine) {
-        // This is tricky because SVG <text> doesn't wrap lines like HTML.
-        // For a simple two-liner, we can use two <text> elements with dy.
-        const sanitizedLine1 = previewText.replace(/</g, "&lt;").replace(/>/g, "&gt;");
-        const sanitizedLine2 = text2.replace(/</g, "&lt;").replace(/>/g, "&gt;");
-        
-        const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${textDimensions.width} ${textDimensions.height}">
-                      <text x="50%" y="50%" dy="-${(parseFloat(lineHeight) / 4)}rem" dominant-baseline="middle" text-anchor="middle" fill="white" style="font-family: ${font.style.fontFamily}; font-size: ${dynamicFontSize}; font-weight: ${font.style.fontWeight || 'normal'};">${sanitizedLine1}</text>
-                      <text x="50%" y="50%" dy="${(parseFloat(lineHeight) / 3)}rem" dominant-baseline="middle" text-anchor="middle" fill="white" style="font-family: ${font.style.fontFamily}; font-size: ${dynamicFontSize}; font-weight: ${font.style.fontWeight || 'normal'};">${sanitizedLine2}</text>
-                    </svg>`;
-
-        return {
-          maskImage: `url('data:image/svg+xml;utf8,${encodeURIComponent(svg)}')`,
-          maskSize: '100% 100%',
-          maskRepeat: 'no-repeat',
-          maskPosition: 'center',
-        };
-      } else {
-         const sanitizedText = previewText.replace(/</g, "&lt;").replace(/>/g, "&gt;");
-         const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${textDimensions.width} ${textDimensions.height}">
-                       <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="white" style="font-family: ${font.style.fontFamily}; font-size: ${dynamicFontSize}; font-weight: ${font.style.fontWeight || 'normal'};">${sanitizedText}</text>
-                     </svg>`;
-        return {
-          maskImage: `url('data:image/svg+xml;utf8,${encodeURIComponent(svg)}')`,
-          maskSize: '100% 100%',
-          maskRepeat: 'no-repeat',
-          maskPosition: 'center',
-        };
-      }
-    };
 
     return (
       <div className="flex gap-4 items-start">
@@ -176,20 +130,6 @@ export const LedSignPreview = forwardRef<HTMLDivElement, LedSignPreviewProps>(
               onMouseDown={handleDragStart}
               onTouchStart={handleDragStart}
             >
-               <div
-                className={cn(
-                  "absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transition-all duration-300",
-                  "bg-black/30 backdrop-blur-sm",
-                  isRectangular && "rounded-md",
-                )}
-                style={{
-                  width: isCutToShape ? textDimensions.width : (textDimensions.width + 60),
-                  height: isCutToShape ? textDimensions.height: (textDimensions.height + 60),
-                  padding: isCutToShape ? '15px' : '0',
-                  opacity: isCutToShape || isRectangular ? 1 : 0,
-                  ...getMaskStyle(),
-                }}
-              />
               <div
                 ref={textRef}
                 className={cn(

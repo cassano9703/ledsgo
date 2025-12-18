@@ -22,7 +22,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
-import type { FontConfig, SizeConfig, BackgroundConfig } from "@/lib/config";
+import type { FontConfig, SizeConfig } from "@/lib/config";
 
 const orderSchema = z.object({
   name: z.string().min(2, "El nombre debe tener al menos 2 caracteres."),
@@ -41,7 +41,6 @@ interface OrderModalProps {
     font: FontConfig;
     color: string;
     size: SizeConfig;
-    background: BackgroundConfig;
     capturedImage: string | null;
   };
 }
