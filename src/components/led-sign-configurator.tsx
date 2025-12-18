@@ -4,7 +4,7 @@ import { useState, useRef, useCallback } from "react";
 import { fonts, colors, sizes, backgrounds } from "@/lib/config";
 import type { FontConfig, ColorConfig, SizeConfig, BackgroundConfig } from "@/lib/config";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";

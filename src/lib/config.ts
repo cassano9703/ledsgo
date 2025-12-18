@@ -49,10 +49,9 @@ export const sizes: SizeConfig[] = [
 
 export type BackgroundConfig = {
     name: string;
-    style: 'cut-to-shape' | 'rectangular';
 };
 
 export const backgrounds: BackgroundConfig[] = [
-    { name: "Corte de Silueta", style: 'cut-to-shape' },
-    { name: "Corte Rectangular", style: 'rectangular' },
+    { name: "Corte de Silueta" },
+    { name: "Corte Rectangular" },
 ];

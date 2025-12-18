@@ -107,14 +107,55 @@ export const LedSignPreview = forwardRef<HTMLDivElement, LedSignPreviewProps>(
     const isCutToShape = background.name === 'Corte de Silueta';
     const isRectangular = background.name === 'Corte Rectangular';
 
+    const getMaskSvg = (textToMask: string) => {
+      // Basic sanitization
+      const sanitizedText = textToMask.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+      return `url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${textDimensions.width} ${textDimensions.height}"><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="white" style="font-family: ${font.style.fontFamily}; font-size: ${dynamicFontSize}; font-weight: ${font.style.fontWeight || 'normal'};">${sanitizedText}</text></svg>')`;
+    };
+    
+    const getMaskStyle = () => {
+      if (!isCutToShape || !textDimensions.width || !textDimensions.height) return {};
+    
+      let fullText = previewText;
+      if (hasSecondLine) {
+        // This is tricky because SVG <text> doesn't wrap lines like HTML.
+        // For a simple two-liner, we can use two <text> elements with dy.
+        const sanitizedLine1 = previewText.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+        const sanitizedLine2 = text2.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+        
+        const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${textDimensions.width} ${textDimensions.height}">
+                      <text x="50%" y="50%" dy="-${(parseFloat(lineHeight) / 4)}rem" dominant-baseline="middle" text-anchor="middle" fill="white" style="font-family: ${font.style.fontFamily}; font-size: ${dynamicFontSize}; font-weight: ${font.style.fontWeight || 'normal'};">${sanitizedLine1}</text>
+                      <text x="50%" y="50%" dy="${(parseFloat(lineHeight) / 3)}rem" dominant-baseline="middle" text-anchor="middle" fill="white" style="font-family: ${font.style.fontFamily}; font-size: ${dynamicFontSize}; font-weight: ${font.style.fontWeight || 'normal'};">${sanitizedLine2}</text>
+                    </svg>`;
+
+        return {
+          maskImage: `url('data:image/svg+xml;utf8,${encodeURIComponent(svg)}')`,
+          maskSize: '100% 100%',
+          maskRepeat: 'no-repeat',
+          maskPosition: 'center',
+        };
+      } else {
+         const sanitizedText = previewText.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+         const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${textDimensions.width} ${textDimensions.height}">
+                       <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="white" style="font-family: ${font.style.fontFamily}; font-size: ${dynamicFontSize}; font-weight: ${font.style.fontWeight || 'normal'};">${sanitizedText}</text>
+                     </svg>`;
+        return {
+          maskImage: `url('data:image/svg+xml;utf8,${encodeURIComponent(svg)}')`,
+          maskSize: '100% 100%',
+          maskRepeat: 'no-repeat',
+          maskPosition: 'center',
+        };
+      }
+    };
+
     return (
       <div className="flex gap-4 items-start">
         <div className="flex-1">
           <div 
             ref={ref}
-            className="relative w-full aspect-[16/9] bg-slate-900 rounded-lg overflow-hidden flex items-center justify-center shadow-2xl border-4 border-slate-700 p-8"
+            className="relative w-full aspect-[16/9] bg-green-900/50 rounded-lg overflow-hidden flex items-center justify-center shadow-2xl border-4 border-slate-700 p-8"
             style={{ 
-              backgroundImage: `url('https://i.imgur.com/YoMyLHL.jpeg')`, 
+              backgroundImage: `url('https://i.imgur.com/uG9sYbd.jpeg')`, 
               backgroundSize: 'cover', 
               backgroundPosition: 'center' 
             }}
@@ -139,16 +180,14 @@ export const LedSignPreview = forwardRef<HTMLDivElement, LedSignPreviewProps>(
                 className={cn(
                   "absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transition-all duration-300",
                   "bg-black/30 backdrop-blur-sm",
-                  isCutToShape && "rounded-lg",
                   isRectangular && "rounded-md",
                 )}
                 style={{
-                  width: isCutToShape ? textDimensions.width + 30 : textDimensions.width + 60,
-                  height: isCutToShape ? textDimensions.height + 30 : textDimensions.height + 60,
+                  width: isCutToShape ? textDimensions.width : (textDimensions.width + 60),
+                  height: isCutToShape ? textDimensions.height: (textDimensions.height + 60),
+                  padding: isCutToShape ? '15px' : '0',
                   opacity: isCutToShape || isRectangular ? 1 : 0,
-                  WebkitMaskImage: isCutToShape ? `url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${textDimensions.width + 30} ${textDimensions.height + 30}"><text x="${(textDimensions.width + 30) / 2}" y="${(textDimensions.height + 30) / 2}" dominant-baseline="middle" text-anchor="middle" fill="white" font-family="${font.style.fontFamily}" font-size="${dynamicFontSize}" font-weight="bold">${previewText}</text></svg>')` : undefined,
-                  WebkitMaskRepeat: 'no-repeat',
-                  WebkitMaskPosition: 'center',
+                  ...getMaskStyle(),
                 }}
               />
               <div
@@ -172,7 +211,7 @@ export const LedSignPreview = forwardRef<HTMLDivElement, LedSignPreviewProps>(
                     <span className="text-white/80 text-xs font-mono mt-1 select-none">{signWidthCm} cm</span>
                   </div>
 
-                  <div className="absolute -left-10 top-0 h-full flex items-center">
+                  <div className="absolute -right-10 top-0 h-full flex items-center">
                     <div className="h-full w-px bg-white/70 relative">
                       <div className="absolute top-0 -left-1 h-px w-2 bg-white/70"></div>
                       <div className="absolute bottom-0 -left-1 h-px w-2 bg-white/70"></div>
