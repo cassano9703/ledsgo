@@ -3,7 +3,7 @@
 import React, { useRef, useState, MouseEvent, TouchEvent, useLayoutEffect, forwardRef } from 'react';
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
-import type { FontConfig, SizeConfig } from '@/lib/config';
+import type { FontConfig, SizeConfig, BackgroundConfig } from '@/lib/config';
 
 interface LedSignPreviewProps {
   text: string;
@@ -11,10 +11,11 @@ interface LedSignPreviewProps {
   font: FontConfig;
   color: string;
   size: SizeConfig;
+  background: BackgroundConfig;
 }
 
 export const LedSignPreview = forwardRef<HTMLDivElement, LedSignPreviewProps>(
-  ({ text, text2, font, color, size }, ref) => {
+  ({ text, text2, font, color, size, background }, ref) => {
     const previewText = text || 'Tu Texto Aquí';
     const hasSecondLine = text2 && text2.trim() !== '';
 
@@ -107,9 +108,9 @@ export const LedSignPreview = forwardRef<HTMLDivElement, LedSignPreviewProps>(
         <div className="flex-1">
           <div 
             ref={ref}
-            className="relative w-full aspect-[16/9] bg-green-900/50 rounded-lg overflow-hidden flex items-center justify-center shadow-2xl border-4 border-slate-700 p-8"
+            className="relative w-full aspect-[16/9] bg-slate-800 rounded-lg overflow-hidden flex items-center justify-center shadow-2xl border-4 border-slate-700 p-8 transition-all"
             style={{ 
-              backgroundImage: `url('https://i.imgur.com/uG9sYbd.jpeg')`, 
+              backgroundImage: `url('${background.imageUrl}')`, 
               backgroundSize: 'cover', 
               backgroundPosition: 'center' 
             }}

@@ -1,8 +1,8 @@
 "use client";
 
 import { useState, useRef, useCallback } from "react";
-import { fonts, colors, sizes } from "@/lib/config";
-import type { FontConfig, ColorConfig, SizeConfig } from "@/lib/config";
+import { fonts, colors, sizes, backgrounds } from "@/lib/config";
+import type { FontConfig, ColorConfig, SizeConfig, BackgroundConfig } from "@/lib/config";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -13,7 +13,7 @@ import { LedSignPreview } from "./led-sign-preview";
 import { OrderModal } from "./order-modal";
 import { PreviewModal } from "./preview-modal";
 import { cn } from "@/lib/utils";
-import { Ruler, Heart, Star, Camera } from "lucide-react";
+import { Ruler, Heart, Star, Camera, ImageIcon } from "lucide-react";
 import { toPng } from 'html-to-image';
 import { useToast } from "@/hooks/use-toast";
 
@@ -25,6 +25,7 @@ export function LedSignConfigurator() {
   const [font, setFont] = useState<FontConfig>(fonts[4]);
   const [color, setColor] = useState<ColorConfig>(colors[5]);
   const [size, setSize] = useState<SizeConfig>(sizes[1]);
+  const [background, setBackground] = useState<BackgroundConfig>(backgrounds[0]);
   
   const [isOrderModalOpen, setOrderModalOpen] = useState(false);
   const [isPreviewModalOpen, setPreviewModalOpen] = useState(false);
@@ -114,7 +115,8 @@ export function LedSignConfigurator() {
             text2={text2}
             font={font} 
             color={color.value} 
-            size={size} 
+            size={size}
+            background={background}
           />
           <div className="mt-4 flex justify-center gap-4">
             <Button size="lg" variant="outline" onClick={handleCaptureAndShow}>
@@ -187,6 +189,23 @@ export function LedSignConfigurator() {
                   </SelectContent>
                 </Select>
             </div>
+
+            <div className="space-y-2">
+                <Label className="flex items-center gap-2"><ImageIcon className="w-4 h-4" /> Fondo</Label>
+                <div className="flex flex-wrap gap-2">
+                  {backgrounds.map(bg => (
+                    <Button 
+                      key={bg.name}
+                      variant={background.name === bg.name ? "default" : "outline"}
+                      size="sm"
+                      onClick={() => setBackground(bg)}
+                      className="flex-1"
+                    >
+                      {bg.name}
+                    </Button>
+                  ))}
+                </div>
+              </div>
             
             <div className="grid grid-cols-1 gap-4">
               <div className="space-y-2">
