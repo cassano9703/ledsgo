@@ -20,7 +20,6 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { useToast } from "@/hooks/use-toast";
 import type { FontConfig, SizeConfig } from "@/lib/config";
 
 const orderSchema = z.object({
@@ -45,7 +44,6 @@ interface OrderModalProps {
 }
 
 export function OrderModal({ isOpen, onClose, config }: OrderModalProps) {
-  const { toast } = useToast();
   const form = useForm<OrderFormValues>({
     resolver: zodResolver(orderSchema),
     defaultValues: {
@@ -56,11 +54,30 @@ export function OrderModal({ isOpen, onClose, config }: OrderModalProps) {
   });
 
   const onSubmit = (data: OrderFormValues) => {
-    console.log("Pedido realizado:", { customer: data, sign: config });
-    toast({
-      title: "🎉 ¡Pedido Realizado!",
-      description: "¡Gracias! Hemos recibido tu pedido y nos pondremos en contacto en breve.",
-    });
+    // IMPORTANTE: Reemplaza este número con tu número de WhatsApp real, incluyendo el código de país.
+    const yourWhatsAppNumber = "34000000000"; 
+
+    const messageParts = [
+      `Hola Leds Go! 👋`,
+      `\n\nQuisiera hacer un pedido con los siguientes detalles:`,
+      `\n\n*Cliente:*`,
+      `- Nombre: ${data.name}`,
+      `- Teléfono: ${data.phone}`,
+      `- Dirección: ${data.address}`,
+      `\n*Detalles del Letrero:*`,
+      `- Texto 1: "${config.text}"`,
+      config.text2 ? `- Texto 2: "${config.text2}"` : null,
+      `- Tipografía: ${config.font.name}`,
+      `- Color: ${config.color}`,
+      `- Tamaño: ${config.size.name}`,
+      `\n_(Se adjuntará una vista previa del diseño)_`
+    ];
+
+    const message = messageParts.filter(Boolean).join("\n");
+    const whatsappUrl = `https://wa.me/${yourWhatsAppNumber}?text=${encodeURIComponent(message)}`;
+
+    window.open(whatsappUrl, "_blank");
+
     form.reset();
     onClose();
   };
@@ -131,7 +148,7 @@ export function OrderModal({ isOpen, onClose, config }: OrderModalProps) {
                   </FormItem>
                 )}
               />
-              <Button type="submit" className="w-full">Confirmar Pedido</Button>
+              <Button type="submit" className="w-full">Confirmar Pedido por WhatsApp</Button>
             </form>
           </Form>
         </div>
