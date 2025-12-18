@@ -12,12 +12,10 @@ interface LedSignPreviewProps {
   color: string;
   size: SizeConfig;
   background: BackgroundConfig;
-  onBackgroundChange: (bg: BackgroundConfig) => void;
-  backgrounds: BackgroundConfig[];
 }
 
 export const LedSignPreview = forwardRef<HTMLDivElement, LedSignPreviewProps>(
-  ({ text, text2, font, color, size, background, onBackgroundChange, backgrounds }, ref) => {
+  ({ text, text2, font, color, size, background }, ref) => {
     const previewText = text || 'Tu Texto Aquí';
     const hasSecondLine = text2 && text2.trim() !== '';
 
@@ -106,50 +104,28 @@ export const LedSignPreview = forwardRef<HTMLDivElement, LedSignPreviewProps>(
     const signWidthCm = (textDimensions.width / PIXELS_PER_CM).toFixed(0);
     const signHeightCm = (textDimensions.height / PIXELS_PER_CM).toFixed(0);
 
+    const isCutToShape = background.name === 'Corte de Silueta';
+    const isRectangular = background.name === 'Corte Rectangular';
+
     return (
       <div className="flex gap-4 items-start">
-        <div className="flex flex-col gap-2">
-          {backgrounds.map((bg) => (
-            <button
-              key={bg.name}
-              onClick={() => onBackgroundChange(bg)}
-              className={cn(
-                "w-20 h-12 rounded-md overflow-hidden border-2 transition-all",
-                background.name === bg.name ? "border-primary ring-2 ring-primary" : "border-slate-600 hover:border-primary/70"
-              )}
-            >
-              <Image
-                src={bg.imageUrl}
-                alt={bg.name}
-                width={80}
-                height={48}
-                className="object-cover w-full h-full"
-              />
-            </button>
-          ))}
-        </div>
         <div className="flex-1">
           <div 
             ref={ref}
             className="relative w-full aspect-[16/9] bg-slate-900 rounded-lg overflow-hidden flex items-center justify-center shadow-2xl border-4 border-slate-700 p-8"
+            style={{ 
+              backgroundImage: `url('https://i.imgur.com/YoMyLHL.jpeg')`, 
+              backgroundSize: 'cover', 
+              backgroundPosition: 'center' 
+            }}
             onMouseMove={handleDragMove}
             onMouseUp={handleDragEnd}
             onMouseLeave={handleDragEnd}
             onTouchMove={handleDragMove}
             onTouchEnd={handleDragEnd}
           >
-            {background.imageUrl && (
-              <Image
-                src={background.imageUrl}
-                alt={background.name}
-                fill
-                className="object-cover"
-                data-ai-hint={background.imageHint}
-              />
-            )}
             <div 
-              className={cn("absolute inset-0", background.imageUrl ? 'bg-black/20' : "bg-repeat bg-[length:20px_20px]")}
-              style={!background.imageUrl ? {backgroundImage: 'radial-gradient(hsla(0,0%,100%,.05) 1px, transparent 0)'} : {}}
+              className="absolute inset-0 bg-black/20"
               aria-hidden="true"
             />
             <div 
@@ -159,6 +135,22 @@ export const LedSignPreview = forwardRef<HTMLDivElement, LedSignPreviewProps>(
               onMouseDown={handleDragStart}
               onTouchStart={handleDragStart}
             >
+               <div
+                className={cn(
+                  "absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transition-all duration-300",
+                  "bg-black/30 backdrop-blur-sm",
+                  isCutToShape && "rounded-lg",
+                  isRectangular && "rounded-md",
+                )}
+                style={{
+                  width: isCutToShape ? textDimensions.width + 30 : textDimensions.width + 60,
+                  height: isCutToShape ? textDimensions.height + 30 : textDimensions.height + 60,
+                  opacity: isCutToShape || isRectangular ? 1 : 0,
+                  WebkitMaskImage: isCutToShape ? `url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${textDimensions.width + 30} ${textDimensions.height + 30}"><text x="${(textDimensions.width + 30) / 2}" y="${(textDimensions.height + 30) / 2}" dominant-baseline="middle" text-anchor="middle" fill="white" font-family="${font.style.fontFamily}" font-size="${dynamicFontSize}" font-weight="bold">${previewText}</text></svg>')` : undefined,
+                  WebkitMaskRepeat: 'no-repeat',
+                  WebkitMaskPosition: 'center',
+                }}
+              />
               <div
                 ref={textRef}
                 className={cn(

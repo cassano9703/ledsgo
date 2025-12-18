@@ -13,9 +13,6 @@ export const fonts: FontConfig[] = [
     { name: "Alexa", style: { fontFamily: "'Allura', cursive" } },
     { name: "Bayview", style: { fontFamily: "'Cedarville Cursive', cursive" } },
     { name: "Sorrento", style: { fontFamily: "'Tangerine', cursive" } },
-    { name: "Vintage", style: { fontFamily: "'Yeseva One', cursive" } },
-    { name: "Funky", style: { fontFamily: "'Lobster', cursive" } },
-    { name: "Melbourne", style: { fontFamily: "'Pacifico', cursive" } },
 ];
 
 
@@ -52,16 +49,10 @@ export const sizes: SizeConfig[] = [
 
 export type BackgroundConfig = {
     name: string;
-    imageUrl: string;
-    imageHint: string;
+    style: 'cut-to-shape' | 'rectangular';
 };
 
 export const backgrounds: BackgroundConfig[] = [
-    { name: "Grass artificial", imageUrl: "https://i.imgur.com/YoMyLHL.jpeg", imageHint: "brick wall" },
-    { name: "Wath Pannel", imageUrl: "https://i.imgur.com/LRqRxnY.jpeg", imageHint: "vegetation wall" },
-    { name: "Pared Blanca", imageUrl: "https://i.imgur.com/mAhInl0.jpeg", imageHint: "dark interior" },
-    { name: "Pared Negra", imageUrl: "https://i.imgur.com/UulMLJq.jpeg", imageHint: "black wall" },
-    { name: "Pared Ploma", imageUrl: "https://i.imgur.com/kHwV51f.jpeg", imageHint: "" },
-
-    
+    { name: "Corte de Silueta", style: 'cut-to-shape' },
+    { name: "Corte Rectangular", style: 'rectangular' },
 ];

@@ -4,7 +4,7 @@ import { useState, useRef, useCallback } from "react";
 import { fonts, colors, sizes, backgrounds } from "@/lib/config";
 import type { FontConfig, ColorConfig, SizeConfig, BackgroundConfig } from "@/lib/config";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
@@ -42,6 +42,11 @@ export function LedSignConfigurator() {
   const handleSizeChange = (sizeName: string) => {
     const newSize = sizes.find((s) => s.name === sizeName);
     if (newSize) setSize(newSize);
+  };
+
+  const handleBackgroundChange = (backgroundName: string) => {
+    const newBackground = backgrounds.find((b) => b.name === backgroundName);
+    if (newBackground) setBackground(newBackground);
   };
   
   const removeEmojis = (str: string) => {
@@ -111,9 +116,7 @@ export function LedSignConfigurator() {
         <div className="lg:col-span-9 sticky top-24">
            <LedSignPreview 
             ref={previewRef}
-            backgrounds={backgrounds}
             background={background} 
-            onBackgroundChange={setBackground}
             text={text} 
             text2={text2}
             font={font} 
@@ -192,7 +195,7 @@ export function LedSignConfigurator() {
                 </Select>
             </div>
             
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 gap-4">
               <div className="space-y-2">
                 <Label htmlFor="size-select" className="flex items-center gap-2"><Ruler className="w-4 h-4" /> Tamaño</Label>
                 <Select value={size.name} onValueChange={handleSizeChange}>
@@ -208,9 +211,23 @@ export function LedSignConfigurator() {
                   </SelectContent>
                 </Select>
               </div>
-
             </div>
 
+            <div className="space-y-2">
+              <Label htmlFor="background-select">Fondo de Acrílico</Label>
+              <Select value={background.name} onValueChange={handleBackgroundChange}>
+                <SelectTrigger id="background-select">
+                  <SelectValue placeholder="Selecciona un fondo" />
+                </SelectTrigger>
+                <SelectContent>
+                  {backgrounds.map((b) => (
+                    <SelectItem key={b.name} value={b.name}>
+                      {b.name}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
           </CardContent>
         </Card>
       </div>
