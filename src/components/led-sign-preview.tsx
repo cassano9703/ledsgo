@@ -105,7 +105,7 @@ export const LedSignPreview = forwardRef<HTMLDivElement, LedSignPreviewProps>(
     return (
         <div 
             ref={ref}
-            className="relative w-full aspect-[16/9] bg-slate-800 rounded-lg overflow-hidden flex items-center justify-center shadow-2xl border-4 border-slate-700 p-8 transition-all"
+            className="relative w-full aspect-[4/3] bg-slate-800 rounded-lg overflow-hidden flex items-center justify-center shadow-2xl border-4 border-slate-700 p-8 transition-all"
             style={{ 
                 backgroundImage: `url('${background.imageUrl}')`, 
                 backgroundSize: 'cover', 
