@@ -25,7 +25,7 @@ import type { FontConfig, SizeConfig } from "@/lib/config";
 
 const orderSchema = z.object({
   name: z.string().min(2, "El nombre debe tener al menos 2 caracteres."),
-  email: z.string().email("Por favor, introduce una dirección de correo electrónico válida."),
+  phone: z.string().min(9, "Por favor, introduce un número de teléfono válido."),
   address: z.string().min(10, "Por favor, introduce una dirección de envío completa."),
 });
 
@@ -50,7 +50,7 @@ export function OrderModal({ isOpen, onClose, config }: OrderModalProps) {
     resolver: zodResolver(orderSchema),
     defaultValues: {
       name: "",
-      email: "",
+      phone: "",
       address: "",
     },
   });
@@ -107,12 +107,12 @@ export function OrderModal({ isOpen, onClose, config }: OrderModalProps) {
               />
               <FormField
                 control={form.control}
-                name="email"
+                name="phone"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Correo Electrónico</FormLabel>
+                    <FormLabel>Número de Teléfono</FormLabel>
                     <FormControl>
-                      <Input placeholder="tu@ejemplo.com" {...field} />
+                      <Input type="tel" placeholder="Ej: 912 345 678" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
