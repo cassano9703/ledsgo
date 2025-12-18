@@ -4,7 +4,7 @@ import { useState, useRef, useCallback } from "react";
 import { fonts, colors, sizes, backgrounds } from "@/lib/config";
 import type { FontConfig, ColorConfig, SizeConfig, BackgroundConfig } from "@/lib/config";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
@@ -13,9 +13,10 @@ import { LedSignPreview } from "./led-sign-preview";
 import { OrderModal } from "./order-modal";
 import { PreviewModal } from "./preview-modal";
 import { cn } from "@/lib/utils";
-import { Ruler, Heart, Star, Camera, ImageIcon } from "lucide-react";
+import { Heart, Star, Camera } from "lucide-react";
 import { toPng } from 'html-to-image';
 import { useToast } from "@/hooks/use-toast";
+import Image from "next/image";
 
 const EMOJIS = ["♡", "☆"];
 
@@ -23,7 +24,7 @@ export function LedSignConfigurator() {
   const [text, setText] = useState("Leds Go!");
   const [text2, setText2] = useState("");
   const [font, setFont] = useState<FontConfig>(fonts[4]);
-  const [color, setColor] = useState<ColorConfig>(colors[5]);
+  const [color, setColor] = useState<ColorConfig>(colors[0]);
   const [size, setSize] = useState<SizeConfig>(sizes[1]);
   const [background, setBackground] = useState<BackgroundConfig>(backgrounds[0]);
   
@@ -39,11 +40,6 @@ export function LedSignConfigurator() {
     if (newFont) setFont(newFont);
   };
 
-  const handleSizeChange = (sizeName: string) => {
-    const newSize = sizes.find((s) => s.name === sizeName);
-    if (newSize) setSize(newSize);
-  };
-  
   const removeEmojis = (str: string) => {
     let newStr = str;
     for (const e of EMOJIS) {
@@ -108,7 +104,31 @@ export function LedSignConfigurator() {
   return (
     <>
       <div className="mt-12 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
-        <div className="lg:col-span-9 sticky top-24">
+        
+        <div className="lg:col-span-2">
+            <div className="flex lg:flex-col gap-2">
+                {backgrounds.map(bg => (
+                    <div 
+                        key={bg.name}
+                        className={cn(
+                            "rounded-md border-2 overflow-hidden cursor-pointer transition-all",
+                            background.name === bg.name ? "border-primary ring-2 ring-primary" : "border-transparent"
+                        )}
+                        onClick={() => setBackground(bg)}
+                    >
+                        <Image 
+                            src={bg.imageUrl}
+                            alt={bg.name}
+                            width={100}
+                            height={75}
+                            className="object-cover w-full h-full"
+                        />
+                    </div>
+                ))}
+            </div>
+        </div>
+        
+        <div className="lg:col-span-7">
            <LedSignPreview 
             ref={previewRef}
             text={text} 
@@ -118,20 +138,14 @@ export function LedSignConfigurator() {
             size={size}
             background={background}
           />
-          <div className="mt-4 flex justify-center gap-4">
-            <Button size="lg" variant="outline" onClick={handleCaptureAndShow}>
-              <Camera className="mr-2 h-4 w-4" />
-              Capturar Diseño
-            </Button>
-            <Button size="lg" onClick={handleOpenOrderModal}>
-              Ordenar Tu Letrero Personalizado
-            </Button>
-          </div>
         </div>
         
         <Card className="lg:col-span-3 sticky top-24">
           <CardHeader>
-            <CardTitle>Edición</CardTitle>
+            <CardTitle>Detalles del Letrero</CardTitle>
+            <CardDescription>
+                Ingresa el texto y elige tus opciones a continuación.
+            </CardDescription>
           </CardHeader>
           <CardContent className="space-y-6">
             <div className="space-y-3">
@@ -143,12 +157,6 @@ export function LedSignConfigurator() {
                   value={text}
                   onChange={handleTextChange}
                 />
-                <Button variant="outline" size="icon" onClick={() => addEmoji('♡')}>
-                  <Heart className="w-4 h-4" />
-                </Button>
-                <Button variant="outline" size="icon" onClick={() => addEmoji('☆')}>
-                  <Star className="w-4 h-4 fill-transparent" />
-                </Button>
               </div>
               <Input
                 id="sign-text-2"
@@ -158,6 +166,18 @@ export function LedSignConfigurator() {
               />
             </div>
             
+            <div className="space-y-2">
+              <Label>Añadir un Emoji</Label>
+              <div className="flex items-center gap-2">
+                <Button variant="outline" size="icon" onClick={() => addEmoji('♡')}>
+                    <Heart className="w-4 h-4" />
+                </Button>
+                <Button variant="outline" size="icon" onClick={() => addEmoji('☆')}>
+                    <Star className="w-4 h-4 fill-transparent" />
+                </Button>
+              </div>
+            </div>
+
             <div className="space-y-2">
               <Label>Color</Label>
               <RadioGroup
@@ -189,40 +209,33 @@ export function LedSignConfigurator() {
                   </SelectContent>
                 </Select>
             </div>
-
-            <div className="space-y-2">
-                <Label className="flex items-center gap-2"><ImageIcon className="w-4 h-4" /> Fondo</Label>
-                <div className="flex flex-wrap gap-2">
-                  {backgrounds.map(bg => (
-                    <Button 
-                      key={bg.name}
-                      variant={background.name === bg.name ? "default" : "outline"}
-                      size="sm"
-                      onClick={() => setBackground(bg)}
-                      className="flex-1"
-                    >
-                      {bg.name}
-                    </Button>
-                  ))}
-                </div>
-              </div>
             
             <div className="grid grid-cols-1 gap-4">
               <div className="space-y-2">
-                <Label htmlFor="size-select" className="flex items-center gap-2"><Ruler className="w-4 h-4" /> Tamaño</Label>
-                <Select value={size.name} onValueChange={handleSizeChange}>
+                 <Label htmlFor="size-select" className="flex items-center gap-2">Tamaño</Label>
+                <Select value={size.name} onValueChange={(val) => setSize(sizes.find(s => s.name === val)!)}>
                   <SelectTrigger id="size-select">
                     <SelectValue placeholder="Selecciona un tamaño" />
                   </SelectTrigger>
                   <SelectContent>
                     {sizes.map((s) => (
                       <SelectItem key={s.name} value={s.name}>
-                        {s.name}
+                        {s.name} ({s.multiplier}x)
                       </SelectItem>
                     ))}
                   </SelectContent>
                 </Select>
               </div>
+            </div>
+
+            <div className="mt-4 flex flex-col gap-2">
+                <Button size="lg" variant="outline" onClick={handleCaptureAndShow}>
+                    <Camera className="mr-2 h-4 w-4" />
+                    Capturar Diseño
+                </Button>
+                <Button size="lg" onClick={handleOpenOrderModal}>
+                    Ordenar Tu Letrero
+                </Button>
             </div>
           </CardContent>
         </Card>

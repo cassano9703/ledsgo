@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useRef, useState, MouseEvent, TouchEvent, useLayoutEffect, forwardRef } from 'react';
-import Image from 'next/image';
 import { cn } from '@/lib/utils';
 import type { FontConfig, SizeConfig, BackgroundConfig } from '@/lib/config';
 
@@ -104,67 +103,63 @@ export const LedSignPreview = forwardRef<HTMLDivElement, LedSignPreviewProps>(
     const signHeightCm = (textDimensions.height / PIXELS_PER_CM).toFixed(0);
 
     return (
-      <div className="flex gap-4 items-start">
-        <div className="flex-1">
-          <div 
+        <div 
             ref={ref}
             className="relative w-full aspect-[16/9] bg-slate-800 rounded-lg overflow-hidden flex items-center justify-center shadow-2xl border-4 border-slate-700 p-8 transition-all"
             style={{ 
-              backgroundImage: `url('${background.imageUrl}')`, 
-              backgroundSize: 'cover', 
-              backgroundPosition: 'center' 
+                backgroundImage: `url('${background.imageUrl}')`, 
+                backgroundSize: 'cover', 
+                backgroundPosition: 'center' 
             }}
             onMouseMove={handleDragMove}
             onMouseUp={handleDragEnd}
             onMouseLeave={handleDragEnd}
             onTouchMove={handleDragMove}
             onTouchEnd={handleDragEnd}
-          >
+        >
             <div 
-              className="absolute inset-0 bg-black/20"
-              aria-hidden="true"
+                className="absolute inset-0 bg-black/20"
+                aria-hidden="true"
             />
             <div 
-              ref={signContainerRef}
-              className="absolute cursor-grab"
-              style={{ transform: `translate(${position.x}px, ${position.y}px)` }}
-              onMouseDown={handleDragStart}
-              onTouchStart={handleDragStart}
+                ref={signContainerRef}
+                className="absolute cursor-grab"
+                style={{ transform: `translate(${position.x}px, ${position.y}px)` }}
+                onMouseDown={handleDragStart}
+                onTouchStart={handleDragStart}
             >
-              <div
+                <div
                 ref={textRef}
                 className={cn(
-                  'relative text-center font-bold break-words transition-all duration-300 ease-in-out select-none',
+                    'relative text-center font-bold break-words transition-all duration-300 ease-in-out select-none',
                 )}
                 style={textStyle}
-              >
+                >
                 <p>{previewText}</p>
                 {hasSecondLine && <p>{text2}</p>}
-              </div>
+                </div>
 
-              {textDimensions.width > 0 && (
+                {textDimensions.width > 0 && (
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none" style={{width: textDimensions.width, height: textDimensions.height}}>
-                  <div className="absolute -bottom-6 left-0 w-full flex flex-col items-center">
+                    <div className="absolute -bottom-6 left-0 w-full flex flex-col items-center">
                     <div className="w-full h-px bg-white/70 relative">
-                      <div className="absolute left-0 -top-1 w-px h-2 bg-white/70"></div>
-                      <div className="absolute right-0 -top-1 w-px h-2 bg-white/70"></div>
+                        <div className="absolute left-0 -top-1 w-px h-2 bg-white/70"></div>
+                        <div className="absolute right-0 -top-1 w-px h-2 bg-white/70"></div>
                     </div>
                     <span className="text-white/80 text-xs font-mono mt-1 select-none">{signWidthCm} cm</span>
-                  </div>
+                    </div>
 
-                  <div className="absolute -right-10 top-0 h-full flex items-center">
+                    <div className="absolute -right-10 top-0 h-full flex items-center">
                     <div className="h-full w-px bg-white/70 relative">
-                      <div className="absolute top-0 -left-1 h-px w-2 bg-white/70"></div>
-                      <div className="absolute bottom-0 -left-1 h-px w-2 bg-white/70"></div>
+                        <div className="absolute top-0 -left-1 h-px w-2 bg-white/70"></div>
+                        <div className="absolute bottom-0 -left-1 h-px w-2 bg-white/70"></div>
                     </div>
                     <span className="text-white/80 text-xs font-mono ml-2 transform -rotate-90 origin-center select-none">{signHeightCm} cm</span>
-                  </div>
+                    </div>
                 </div>
-              )}
+                )}
             </div>
-          </div>
         </div>
-      </div>
     );
   }
 );
