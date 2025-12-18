@@ -220,10 +220,6 @@ export function LedSignConfigurator() {
             </div>
 
             <div className="mt-4 flex flex-col gap-2">
-                <Button size="lg" variant="outline" onClick={handleCaptureAndShow}>
-                    <Camera className="mr-2 h-4 w-4" />
-                    Capturar Diseño
-                </Button>
                 <Button size="lg" onClick={handleOpenOrderModal}>
                     Ordenar Tu Letrero
                 </Button>
