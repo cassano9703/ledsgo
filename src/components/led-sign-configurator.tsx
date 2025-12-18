@@ -152,7 +152,14 @@ export function LedSignConfigurator() {
                   placeholder="Tu texto aquí"
                   value={text}
                   onChange={handleTextChange}
+                  className="flex-1"
                 />
+                <Button variant="outline" size="icon" onClick={() => addEmoji('♡')}>
+                    <Heart className="w-4 h-4" />
+                </Button>
+                <Button variant="outline" size="icon" onClick={() => addEmoji('☆')}>
+                    <Star className="w-4 h-4 fill-transparent" />
+                </Button>
               </div>
               <Input
                 id="sign-text-2"
@@ -162,18 +169,6 @@ export function LedSignConfigurator() {
               />
             </div>
             
-            <div className="space-y-2">
-              <Label>Añadir un Emoji</Label>
-              <div className="flex items-center gap-2">
-                <Button variant="outline" size="icon" onClick={() => addEmoji('♡')}>
-                    <Heart className="w-4 h-4" />
-                </Button>
-                <Button variant="outline" size="icon" onClick={() => addEmoji('☆')}>
-                    <Star className="w-4 h-4 fill-transparent" />
-                </Button>
-              </div>
-            </div>
-
             <div className="space-y-2">
               <Label>Color</Label>
               <RadioGroup
