@@ -55,7 +55,7 @@ export function OrderModal({ isOpen, onClose, config }: OrderModalProps) {
 
   const onSubmit = (data: OrderFormValues) => {
     // IMPORTANTE: Reemplaza este número con tu número de WhatsApp real, incluyendo el código de país.
-    const yourWhatsAppNumber = "34000000000"; 
+    const yourWhatsAppNumber = "907390992"; 
 
     const messageParts = [
       `Hola Leds Go! 👋`,
