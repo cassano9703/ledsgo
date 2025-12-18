@@ -107,7 +107,7 @@ export function LedSignConfigurator() {
                     <div 
                         key={bg.name}
                         className={cn(
-                            "rounded-md border-2 overflow-hidden cursor-pointer transition-all w-20 h-auto",
+                            "rounded-md border-2 overflow-hidden cursor-pointer transition-all w-20 h-16",
                             background.name === bg.name ? "border-primary ring-2 ring-primary" : "border-transparent"
                         )}
                         onClick={() => setBackground(bg)}
