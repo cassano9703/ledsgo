@@ -59,7 +59,7 @@ export function HeroCarousel() {
             </p>
           </div>
           <Button asChild size="lg" className="pointer-events-auto">
-            <Link href="#configurator">Crea tu letrero</Link>
+            <Link href="/crear">Crea tu letrero</Link>
           </Button>
         </div>
       </div>

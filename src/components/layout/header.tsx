@@ -6,7 +6,7 @@ export function Header() {
   return (
     <header className="px-4 lg:px-6 h-16 flex items-center bg-background/80 backdrop-blur-sm sticky top-0 z-50 border-b">
       <Link
-        href="#"
+        href="/"
         className="flex items-center justify-center"
         prefetch={false}
       >
@@ -15,21 +15,21 @@ export function Header() {
       </Link>
       <nav className="ml-auto flex gap-4 sm:gap-6 items-center">
         <Link
-          href="#configurator"
+          href="/crear"
           className="text-sm font-medium hover:underline underline-offset-4"
           prefetch={false}
         >
           Crear
         </Link>
         <Link
-          href="#catalog"
+          href="/#catalog"
           className="text-sm font-medium hover:underline underline-offset-4"
           prefetch={false}
         >
           Catálogo
         </Link>
         <Button asChild>
-          <Link href="#configurator">Ordenar Ahora</Link>
+          <Link href="/crear">Ordenar Ahora</Link>
         </Button>
       </nav>
     </header>
