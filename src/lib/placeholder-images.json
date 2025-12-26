@@ -1,4 +1,30 @@
 {
+  "heroImages": [
+    {
+      "id": "hero-1",
+      "alt": "Hombre instalando un letrero de neón personalizado.",
+      "imageUrl": "https://i.imgur.com/kGv0j2E.png",
+      "imageHint": "neon install"
+    },
+    {
+      "id": "hero-2",
+      "alt": "Letrero de neón 'Good Vibes Only' en una pared de ladrillos.",
+      "imageUrl": "https://images.unsplash.com/photo-1581492934099-79a0e4b8d70b?q=80&w=2070&auto=format&fit=crop",
+      "imageHint": "neon sign"
+    },
+    {
+      "id": "hero-3",
+      "alt": "Letrero de neón de una hamburguesa en un restaurante.",
+      "imageUrl": "https://images.unsplash.com/photo-1542838132-350bf66b2483?q=80&w=1974&auto=format&fit=crop",
+      "imageHint": "burger neon"
+    },
+    {
+      "id": "hero-4",
+      "alt": "Mujer posando frente a un letrero de neón de alas de ángel.",
+      "imageUrl": "https://images.unsplash.com/photo-1554941829-202a0b2303b3?q=80&w=1964&auto=format&fit=crop",
+      "imageHint": "angel wings"
+    }
+  ],
   "placeholderImages": [
     {
       "id": "premade-1",

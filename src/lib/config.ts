@@ -56,6 +56,7 @@ export const backgrounds: BackgroundConfig[] = [
     { name: "Grass Sintético", imageUrl: "https://i.imgur.com/sI68Yek.jpeg" },
     { name: "Panel de Madera", imageUrl: "https://i.imgur.com/aAelWay.jpeg" },
     { name: "Pared Cementada", imageUrl: "https://i.imgur.com/53KZ8PC.jpeg" },
-    { name: "Pared Oscura", imageUrl: "https://i.imgur.com/FacpyFd.jpeg" },
-    { name: "Pared Gris", imageUrl: "https://images.unsplash.com/photo-1619252584172-a83a949b6efd?q=80&w=1887&auto=format&fit=crop" },
-];
+    { name: "Pared Blanca", imageUrl: "https://i.imgur.com/43rzGcD.jpeg" },
+    { name: "Madera Negra", imageUrl: "https://i.imgur.com/YLmP78J.jpeg" },
+    { name: "Pared Negra", imageUrl: "https://i.imgur.com/x8649Os.jpeg" }, 
+  ];
