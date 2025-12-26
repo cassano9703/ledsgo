@@ -2,7 +2,7 @@
 
 import * as React from "react"
 import Autoplay from "embla-carousel-autoplay"
-import useEmblaCarousel, { type EmblaOptionsType } from 'embla-carousel-react'
+import useEmblaCarousel, { type EmblaCarouselType, type EmblaOptionsType } from 'embla-carousel-react'
 import Image from "next/image"
 
 import { OurJobsImages } from "@/lib/placeholder-images"
@@ -12,13 +12,52 @@ const OPTIONS: EmblaOptionsType = {
   loop: true,
   align: 'center',
   containScroll: false,
-  slidesToScroll: 1,
 }
 
-export function OurJobsCarousel() {
-  const [emblaRef, emblaApi] = useEmblaCarousel(OPTIONS, [Autoplay({ delay: 3000 })])
-  const [selectedIndex, setSelectedIndex] = React.useState(0)
+const SCALE_FACTOR = 4;
+const TRANSITION_DURATION = '500ms';
+
+type PropType = {
+  options?: EmblaOptionsType
+}
+
+export const OurJobsCarousel: React.FC<PropType> = (props) => {
+  const { options } = props
+  const [emblaRef, emblaApi] = useEmblaCarousel(options, [Autoplay({ delay: 3000 })])
   const [scrollSnaps, setScrollSnaps] = React.useState<number[]>([])
+  const [selectedIndex, setSelectedIndex] = React.useState(0)
+  const [scale, setScale] = React.useState<number[]>([])
+
+  const TWEEN_FACTOR = 4.2
+
+  const tweenScale = React.useCallback(
+    (emblaApi: EmblaCarouselType, eventName?: EmblaCarouselType['eventName']) => {
+      const engine = emblaApi.internalEngine()
+      const scrollProgress = emblaApi.scrollProgress()
+      const slidesInView = emblaApi.slidesInView()
+
+      const tweens = emblaApi.scrollSnapList().map((scrollSnap, snapIndex) => {
+        let diffToTarget = scrollSnap - scrollProgress
+        const slidesInSnap = engine.slideRegistry[snapIndex]
+
+        slidesInSnap.forEach((slideIndex) => {
+          if (eventName === 'scroll') {
+            if (slidesInView.indexOf(slideIndex) > -1) {
+              const diff = diffToTarget * (-1 / TWEEN_FACTOR)
+              const tween = 1 - Math.abs(diff)
+              setScale(prevScale => {
+                const newScale = [...prevScale];
+                newScale[slideIndex] = tween;
+                return newScale;
+              });
+            }
+          }
+        })
+        return diffToTarget
+      })
+    },
+    [],
+  )
 
   const scrollTo = React.useCallback(
     (index: number) => emblaApi && emblaApi.scrollTo(index),
@@ -30,13 +69,25 @@ export function OurJobsCarousel() {
     setSelectedIndex(emblaApi.selectedScrollSnap())
   }, [emblaApi, setSelectedIndex])
 
+
   React.useEffect(() => {
     if (!emblaApi) return
     onSelect()
+    tweenScale(emblaApi)
     setScrollSnaps(emblaApi.scrollSnapList())
-    emblaApi.on('select', onSelect)
-    emblaApi.on('reInit', onSelect)
-  }, [emblaApi, setScrollSnaps, onSelect])
+    emblaApi.on('select', onSelect).on('scroll', tweenScale).on('reInit', tweenScale)
+    
+    // Set initial scale
+    const initialScale = emblaApi.slidesInView().map((index) => (
+      index === emblaApi.selectedScrollSnap() ? 1 : 0.8
+    ));
+    const slides = emblaApi.slideNodes();
+    slides.forEach((_, index) => {
+      if(!initialScale[index]) initialScale[index] = 0.8;
+    });
+
+    setScale(initialScale);
+  }, [emblaApi, onSelect, tweenScale])
 
   return (
     <div className="w-full mt-12">
@@ -47,6 +98,16 @@ export function OurJobsCarousel() {
                     className="embla__slide" 
                     key={image.id}
                 >
+                  <div 
+                    className="embla__slide__inner"
+                    style={{
+                      ...(scale[index] !== undefined && {
+                        transform: `scale(${scale[index]})`,
+                        opacity: scale[index] < 0.8 ? 0.3 : 1
+                      }),
+                      transition: `transform ${TRANSITION_DURATION}, opacity ${TRANSITION_DURATION}`,
+                    }}
+                  >
                     <Image
                         src={image.imageUrl}
                         alt={image.alt}
@@ -55,6 +116,7 @@ export function OurJobsCarousel() {
                         className="rounded-lg object-contain"
                         data-ai-hint={image.imageHint}
                     />
+                  </div>
                 </div>
             ))}
             </div>
