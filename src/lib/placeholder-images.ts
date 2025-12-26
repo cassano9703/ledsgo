@@ -15,5 +15,13 @@ export type HeroImage = {
   imageHint: string;
 }
 
+export type OurJobsImage = {
+  id: string;
+  alt: string;
+  imageUrl: string;
+  imageHint: string;
+}
+
 export const HeroImages: HeroImage[] = data.heroImages;
 export const PlaceHolderImages: ImagePlaceholder[] = data.placeholderImages;
+export const OurJobsImages: OurJobsImage[] = data.ourJobsImages;

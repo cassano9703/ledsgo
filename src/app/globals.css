@@ -95,3 +95,32 @@
 .animate-glow {
   animation: neon-glow 1.5s ease-in-out infinite alternate;
 }
+
+/* Embla Carousel 3D */
+.embla {
+  overflow: hidden;
+}
+.embla__container {
+  display: flex;
+  backface-visibility: hidden;
+  touch-action: pan-y;
+}
+.embla__slide {
+  flex: 0 0 33.33%;
+  min-width: 0;
+  position: relative;
+  padding: 1rem;
+  perspective: 1000px;
+}
+.embla__slide img {
+  transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+  transform: scale(0.8) rotateY(0);
+  opacity: 0.5;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1), 0 6px 6px rgba(0,0,0,0.15);
+}
+
+.embla__slide.is-selected img {
+  transform: scale(1);
+  opacity: 1;
+  box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
+}

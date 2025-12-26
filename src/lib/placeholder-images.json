@@ -68,5 +68,37 @@
       "imageUrl": "https://images.unsplash.com/photo-1499364615650-ec38552f4f34?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxtdXNpYyUyMGNvbmNlcnR8ZW58MHx8fHwxNzY1ODE3ODIyfDA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "music concert"
     }
+  ],
+  "ourJobsImages": [
+    {
+      "id": "job-1",
+      "alt": "Cliente con un letrero de neón 'Skandaloso'.",
+      "imageUrl": "https://i.imgur.com/rGByb1L.png",
+      "imageHint": "client neon"
+    },
+    {
+      "id": "job-2",
+      "alt": "Cliente con un letrero de neón de alas y 'Lucas Art'.",
+      "imageUrl": "https://i.imgur.com/bXf43xQ.png",
+      "imageHint": "wings neon"
+    },
+    {
+      "id": "job-3",
+      "alt": "Letrero de neón 'Fall in love with your smile' en una silla elegante.",
+      "imageUrl": "https://i.imgur.com/2s4oTfX.png",
+      "imageHint": "chair neon"
+    },
+    {
+      "id": "job-4",
+      "alt": "Cliente con un letrero de neón 'Box Brand Box'.",
+      "imageUrl": "https://i.imgur.com/5l3aCj8.png",
+      "imageHint": "box neon"
+    },
+    {
+      "id": "job-5",
+      "alt": "Cliente con un letrero de neón de los Rolling Stones.",
+      "imageUrl": "https://i.imgur.com/3Z3Z3yP.png",
+      "imageHint": "stones neon"
+    }
   ]
 }
