@@ -25,7 +25,7 @@ export function HeroCarousel() {
         <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
       </div>
 
-      <div className="absolute inset-0 flex items-center justify-center text-center text-white pointer-events-none">
+      <div className="absolute inset-0 flex items-start justify-center pt-24 text-center text-white pointer-events-none md:pt-32">
         <div 
           className="relative bg-black/60 backdrop-blur-sm p-8 md:p-12 rounded-xl shadow-2xl overflow-hidden"
         >
