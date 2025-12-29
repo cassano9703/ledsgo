@@ -11,7 +11,7 @@ export function HeroCarousel() {
   const heroImage = HeroImages[0]; // Usamos la primera imagen como estática
 
   return (
-    <section className="relative w-full h-[60vh] md:h-[80vh] overflow-hidden">
+    <section className="relative w-full h-[80vh] md:h-[90vh] overflow-hidden">
       <div className="w-full h-full relative">
         <Image
           src={heroImage.imageUrl}
