@@ -50,13 +50,19 @@ export function HeroCarousel() {
       </Carousel>
       <div className="absolute inset-0 flex items-center justify-center text-center text-white pointer-events-none">
         <div className="flex flex-col items-center space-y-6">
-          <div className="bg-black/50 backdrop-blur-sm p-8 md:p-12 rounded-xl shadow-2xl">
-            <h1 className="text-4xl font-extrabold tracking-tight lg:text-6xl xl:text-7xl font-headline">
-              Diseña tu letrero <span className="text-primary animate-glow" style={{"--glow-color": "hsl(var(--primary))"} as React.CSSProperties}>Neón</span>
-            </h1>
-            <p className="max-w-2xl mt-4 text-lg text-neutral-200">
-              Iluminamos tus ideas con estrategia y diseño.
-            </p>
+          <div 
+            className="relative bg-cover bg-center backdrop-blur-sm p-8 md:p-12 rounded-xl shadow-2xl overflow-hidden"
+            style={{ backgroundImage: "url('https://images.unsplash.com/photo-1528459801416-a9e53bbf4e17?q=80&w=1912&auto=format&fit=crop')" }}
+          >
+            <div className="absolute inset-0 bg-black/60" />
+            <div className="relative z-10">
+              <h1 className="text-4xl font-extrabold tracking-tight lg:text-6xl xl:text-7xl font-headline">
+                Diseña tu letrero <span className="text-primary animate-glow" style={{"--glow-color": "hsl(var(--primary))"} as React.CSSProperties}>Neón</span>
+              </h1>
+              <p className="max-w-2xl mt-4 text-lg text-neutral-200">
+                Iluminamos tus ideas con estrategia y diseño.
+              </p>
+            </div>
           </div>
           <Button asChild size="lg" className="pointer-events-auto">
             <Link href="/crear">Crea tu letrero</Link>
