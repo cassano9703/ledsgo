@@ -13,7 +13,7 @@ import { SimpleCrown } from "./icons";
 
 export function PremadeDesigns() {
   return (
-    <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+    <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-4 mx-auto">
       {PlaceHolderImages.map((design) => (
         <Card key={design.id} className="overflow-hidden group">
           <CardHeader className="p-0">
