@@ -11,7 +11,7 @@ export default function Home() {
         <HeroCarousel />
 
         <section id="catalog" className="py-12 md:py-20 lg:py-24 bg-card">
-          <div className="container px-4 md:px-6">
+          <div className="container">
             <div className="flex flex-col items-center space-y-4 text-center">
               <div className="space-y-2">
                 <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl font-headline">
