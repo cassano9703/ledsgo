@@ -40,7 +40,7 @@ export function HeroCarousel() {
                   data-ai-hint={image.imageHint}
                   priority={image.id === "hero-1"}
                 />
-                <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-black/20" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
               </div>
             </CarouselItem>
           ))}
@@ -50,7 +50,7 @@ export function HeroCarousel() {
       </Carousel>
       <div className="absolute inset-0 flex items-center justify-center text-center text-white pointer-events-none">
         <div className="flex flex-col items-center space-y-6">
-          <div className="bg-black/50 p-6 rounded-lg shadow-2xl">
+          <div className="bg-black/50 backdrop-blur-sm p-8 md:p-12 rounded-xl shadow-2xl">
             <h1 className="text-4xl font-extrabold tracking-tight lg:text-6xl xl:text-7xl font-headline">
               Diseña tu letrero <span className="text-primary animate-glow" style={{"--glow-color": "hsl(var(--primary))"} as React.CSSProperties}>Neón</span>
             </h1>

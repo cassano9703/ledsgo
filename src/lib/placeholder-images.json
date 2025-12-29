@@ -2,8 +2,8 @@
   "heroImages": [
     {
       "id": "hero-1",
-      "alt": "Hombre instalando un letrero de neón personalizado.",
-      "imageUrl": "https://i.imgur.com/kGv0j2E.png",
+      "alt": "Salón moderno con un letrero de neón.",
+      "imageUrl": "https://images.unsplash.com/photo-1554995207-c18c203602cb?q=80&w=2070&auto=format&fit=crop",
       "imageHint": "neon install"
     },
     {
@@ -21,7 +21,7 @@
     {
       "id": "hero-4",
       "alt": "Mujer posando frente a un letrero de neón de alas de ángel.",
-      "imageUrl": "https://images.unsplash.com/photo-1554941829-202a0b2303b3?q=80&w=1964&auto=format&fit=crop",
+      "imageUrl": "https://i.imgur.com/zFjVtno.jpeg",
       "imageHint": "angel wings"
     }
   ],
