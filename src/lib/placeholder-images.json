@@ -2,9 +2,9 @@
   "heroImages": [
     {
       "id": "hero-1",
-      "alt": "Salón moderno con un letrero de neón.",
-      "imageUrl": "https://images.unsplash.com/photo-1540998145393-8c43715204d1?q=100&w=2070&auto=format&fit=crop",
-      "imageHint": "neon install"
+      "alt": "Calle de la ciudad lluviosa por la noche con muchas luces de neón.",
+      "imageUrl": "https://i.imgur.com/kGv0j2E.png",
+      "imageHint": "neon city"
     },
     {
       "id": "hero-2",
@@ -14,14 +14,14 @@
     },
     {
       "id": "hero-3",
-      "alt": "Letrero de neón de una hamburguesa en un restaurante.",
-      "imageUrl": "https://images.unsplash.com/photo-1542838132-350bf66b2483?q=80&w=1974&auto=format&fit=crop",
-      "imageHint": "burger neon"
+      "alt": "Salón moderno con un letrero de neón.",
+      "imageUrl": "https://i.imgur.com/D9TVlw5.jpeg",
+      "imageHint": "neon install"
     },
     {
       "id": "hero-4",
       "alt": "Mujer posando frente a un letrero de neón de alas de ángel.",
-      "imageUrl": "https://i.imgur.com/zFjVatno.jpeg",
+      "imageUrl": "https://i.imgur.com/zFjVtno.jpeg",
       "imageHint": "angel wings"
     }
   ],
