@@ -3,7 +3,7 @@
     {
       "id": "hero-1",
       "alt": "Salón moderno con un letrero de neón.",
-      "imageUrl": "https://images.unsplash.com/photo-1554995207-c18c203602cb?q=80&w=2070&auto=format&fit=crop",
+      "imageUrl": "https://i.imgur.com/zFjVtno.jpeg",
       "imageHint": "neon install"
     },
     {
@@ -21,7 +21,7 @@
     {
       "id": "hero-4",
       "alt": "Mujer posando frente a un letrero de neón de alas de ángel.",
-      "imageUrl": "https://i.imgur.com/zFjVtno.jpeg",
+      "imageUrl": "https://i.imgur.com/zFjVatno.jpeg",
       "imageHint": "angel wings"
     }
   ],
