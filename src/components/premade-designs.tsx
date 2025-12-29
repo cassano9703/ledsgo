@@ -13,9 +13,9 @@ import Link from "next/link";
 
 export function PremadeDesigns() {
   return (
-    <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+    <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3 place-items-center">
       {PlaceHolderImages.map((design) => (
-        <Card key={design.id} className="overflow-hidden group">
+        <Card key={design.id} className="overflow-hidden group max-w-sm">
           <CardHeader>
             <CardTitle>{design.title}</CardTitle>
             <CardDescription>{design.description}</CardDescription>
