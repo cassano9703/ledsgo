@@ -20,6 +20,7 @@ export function HeroCarousel() {
           className="object-cover"
           data-ai-hint={heroImage.imageHint}
           priority
+          quality={100}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
       </div>
