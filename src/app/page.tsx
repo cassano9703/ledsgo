@@ -12,14 +12,11 @@ export default function Home() {
 
         <section id="catalog" className="py-12 md:py-20 lg:py-24 bg-card">
           <div className="container">
-            <div className="flex flex-col items-center space-y-4 text-center">
+            <div className="flex flex-col space-y-4">
               <div className="space-y-2">
                 <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl font-headline">
-                  Inspírate con Nuestra Colección
+                  Discover Our Custom Products
                 </h2>
-                <p className="mx-auto max-w-[700px] text-muted-foreground md:text-xl">
-                  Elige uno de nuestros diseños populares o úsalo como punto de partida para tu propia creación.
-                </p>
               </div>
             </div>
             <PremadeDesigns />

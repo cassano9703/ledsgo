@@ -9,58 +9,44 @@
     {
       "id": "hero-2",
       "alt": "Letrero de neón 'Good Vibes Only' en una pared de ladrillos.",
-      "imageUrl": "https://i.imgur.com/D9TVlw5.jpeg",
+      "imageUrl": "https://images.unsplash.com/photo-1540998145393-8c43715204d1",
       "imageHint": "neon sign"
     },
     {
       "id": "hero-3",
       "alt": "Salón moderno con un letrero de neón.",
-      "imageUrl": "https://i.imgur.com/D9TVlw5.jpeg",
+      "imageUrl": "https://i.imgur.com/j6fgaA1.jpeg",
       "imageHint": "neon install"
     }
   ],
   "placeholderImages": [
     {
       "id": "premade-1",
-      "title": "Buenas Vibras",
-      "description": "Un letrero de neón que irradia positividad.",
-      "imageUrl": "https://images.unsplash.com/photo-1569775931713-52512a1f1b96?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8bmVvbiUyMHNpZ258ZW58MHx8fHwxNzY1Nzk1NTg4fDA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "neon sign"
+      "title": "ACRYLIC LOGOS",
+      "description": "3 PRODUCTS",
+      "imageUrl": "https://i.imgur.com/rGByb1L.png",
+      "imageHint": "acrylic logo"
     },
     {
       "id": "premade-2",
-      "title": "Zona de Pizza",
-      "description": "Perfecto para cualquier pizzería o cocina.",
-      "imageUrl": "https://images.unsplash.com/photo-1668941826413-e8d3d62d40a6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxwaXp6YSUyMG5lb258ZW58MHx8fHwxNzY1ODMyNTI3fDA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "pizza neon"
+      "title": "ACRYLIC PRINTING",
+      "description": "1 PRODUCT",
+      "imageUrl": "https://i.imgur.com/3Z3Z3yP.png",
+      "imageHint": "acrylic printing"
     },
     {
       "id": "premade-3",
-      "title": "Sueña en Grande",
-      "description": "Un letrero inspirador para tu espacio de trabajo.",
-      "imageUrl": "https://images.unsplash.com/photo-1564410267841-915d8e4d71ea?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxpbnNwaXJhdGlvbmFsJTIwcXVvdGV8ZW58MHx8fHwxNzY1ODMyNTI3fDA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "inspirational quote"
+      "title": "PRINTING",
+      "description": "5 PRODUCTS",
+      "imageUrl": "https://i.imgur.com/5l3aCj8.png",
+      "imageHint": "large format printing"
     },
     {
       "id": "premade-4",
-      "title": "A Jugar",
-      "description": "Sube de nivel la decoración de tu sala de juegos.",
-      "imageUrl": "https://images.unsplash.com/photo-1603481588273-2f908a9a7a1b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxnYW1pbmclMjBzZXR1cHxlbnwwfHx8fDE3NjU4MzI1Mjd8MA&ixlibrb-4.1.0&q=80&w=1080",
-      "imageHint": "gaming setup"
-    },
-    {
-      "id": "premade-5",
-      "title": "Hora del Café",
-      "description": "Por el amor al café.",
-      "imageUrl": "https://images.unsplash.com/photo-1525610553991-2bede1a236e2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxjb2ZmZWUlMjBzaG9wfGVufDB8fHx8MTc2NTc0ODEyMXww&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "coffee shop"
-    },
-    {
-      "id": "premade-6",
-      "title": "Rock On",
-      "description": "Un letrero para los amantes de la música.",
-      "imageUrl": "https://images.unsplash.com/photo-1499364615650-ec38552f4f34?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxtdXNpYyUyMGNvbmNlcnR8ZW58MHx8fHwxNzY1ODE3ODIyfDA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "music concert"
+      "title": "QR CODES",
+      "description": "1 PRODUCT",
+      "imageUrl": "https://i.imgur.com/bXf43xQ.png",
+      "imageHint": "custom qr code"
     }
   ],
   "ourJobsImages": [
