@@ -22,9 +22,7 @@ export default function Home() {
                 </p>
               </div>
             </div>
-            <div className="flex justify-center">
-              <PremadeDesigns />
-            </div>
+            <PremadeDesigns />
           </div>
         </section>
 
