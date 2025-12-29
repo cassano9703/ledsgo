@@ -48,12 +48,14 @@ export function HeroCarousel() {
         <CarouselPrevious className="absolute left-4 top-1/2 -translate-y-1/2 z-10 text-white bg-black/30 hover:bg-black/50 border-white/50 hover:border-white" />
         <CarouselNext className="absolute right-4 top-1/2 -translate-y-1/2 z-10 text-white bg-black/30 hover:bg-black/50 border-white/50 hover:border-white" />
       </Carousel>
+
       <div className="absolute inset-0 flex items-center justify-center text-center text-white pointer-events-none">
-        <div className="flex flex-col items-center space-y-6">
-          <div 
+      <div 
             className="relative bg-cover bg-center backdrop-blur-sm p-8 md:p-12 rounded-xl shadow-2xl overflow-hidden"
             style={{ backgroundImage: "url('https://images.unsplash.com/photo-1528459801416-a9e53bbf4e17?q=80&w=1912&auto=format&fit=crop')" }}
           >
+        <div className="flex flex-col items-center space-y-6">
+        
             <div className="absolute inset-0 bg-black/60" />
             <div className="relative z-10">
               <h1 className="text-4xl font-extrabold tracking-tight lg:text-6xl xl:text-7xl font-headline">
