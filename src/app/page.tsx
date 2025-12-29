@@ -29,7 +29,7 @@ export default function Home() {
         </section>
 
         <section id="our-jobs" className="py-12 md:py-20 lg:py-24">
-          <div className="container px-4 md:px-6">
+          <div className="container">
              <div className="flex flex-col items-center space-y-4 text-center">
               <div className="space-y-2">
                 <div className="inline-block rounded-lg bg-muted px-3 py-1 text-sm">BEST QUALITY PRICE</div>
