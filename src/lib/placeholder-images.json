@@ -22,31 +22,31 @@
   "placeholderImages": [
     {
       "id": "premade-1",
-      "title": "ACRYLIC LOGOS",
-      "description": "3 PRODUCTS",
-      "imageUrl": "https://i.imgur.com/rGByb1L.png",
-      "imageHint": "acrylic logo"
+      "title": "Neón para Bodas",
+      "description": "Crea un ambiente mágico en tu día especial con un letrero de neón personalizado. Perfecto para iniciales, fechas o frases románticas.",
+      "imageUrl": "https://images.unsplash.com/photo-1584242353192-7a1df2e855d8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHx3ZWRkaW5nJTIwbmVvbnxlbnwwfHx8fDE3NjcwNDQ5NDZ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "wedding neon"
     },
     {
       "id": "premade-2",
-      "title": "ACRYLIC PRINTING",
-      "description": "1 PRODUCT",
-      "imageUrl": "https://i.imgur.com/3Z3Z3yP.png",
-      "imageHint": "acrylic printing"
+      "title": "Logotipo para Negocio",
+      "description": "Destaca la identidad de tu marca con un logotipo de neón vibrante. Ideal para oficinas, tiendas, bares y restaurantes.",
+      "imageUrl": "https://images.unsplash.com/photo-1725544021661-b82d1ba78a04?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxidXNpbmVzcyUyMGxvZ298ZW58MHx8fHwxNzY3MDI0OTAxfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "business logo"
     },
     {
       "id": "premade-3",
-      "title": "PRINTING",
-      "description": "5 PRODUCTS",
-      "imageUrl": "https://i.imgur.com/5l3aCj8.png",
-      "imageHint": "large format printing"
+      "title": "Decoración para el Hogar",
+      "description": "Dale un toque moderno y personal a cualquier habitación. Desde tu frase favorita hasta un diseño abstracto.",
+      "imageUrl": "https://images.unsplash.com/photo-1617103996702-96ff29b1c467?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8aG9tZSUyMGRlY29yfGVufDB8fHx8MTc2NzA0MTk4MHww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "home decor"
     },
     {
       "id": "premade-4",
-      "title": "QR CODES",
-      "description": "1 PRODUCT",
-      "imageUrl": "https://i.imgur.com/bXf43xQ.png",
-      "imageHint": "custom qr code"
+      "title": "Eventos y Fiestas",
+      "description": "El detalle perfecto para cumpleaños, aniversarios o cualquier celebración. ¡Haz que tu evento brille!",
+      "imageUrl": "https://images.unsplash.com/photo-1759124649699-010eeb1f69f8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxwYXJ0eSUyMGV2ZW50fGVufDB8fHx8MTc2NzA0NDk0Nnww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "party event"
     }
   ],
   "ourJobsImages": [
