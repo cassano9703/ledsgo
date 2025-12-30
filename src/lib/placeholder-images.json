@@ -9,13 +9,13 @@
     {
       "id": "hero-2",
       "alt": "Letrero de neón 'Good Vibes Only' en una pared de ladrillos.",
-      "imageUrl": "https://i.imgur.com/D9TVlw5.jpeg1",
+      "imageUrl": "https://i.imgur.com/7Sg4V1S.jpeg",
       "imageHint": "neon sign"
     },
     {
       "id": "hero-3",
       "alt": "Salón moderno con un letrero de neón.",
-      "imageUrl": "https://i.imgur.com/D9TVlw5.jpeg",
+      "imageUrl": "https://i.imgur.com/oA12y6H.jpeg",
       "imageHint": "neon install"
     }
   ],
@@ -24,28 +24,28 @@
       "id": "premade-1",
       "title": "Neón para Bodas",
       "description": "Crea un ambiente mágico en tu día especial con un letrero de neón personalizado. Perfecto para iniciales, fechas o frases románticas.",
-      "imageUrl": "https://images.unsplash.com/photo-1584242353192-7a1df2e855d8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHx3ZWRkaW5nJTIwbmVvbnxlbnwwfHx8fDE3NjcwNDQ5NDZ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1763129636444-b590bec06c4f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHx3ZWRkaW5nJTIwbmVvbnxlbnwwfHx8fDE3NjcwNDQ5NDZ8MA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "wedding neon"
     },
     {
       "id": "premade-2",
       "title": "Logotipo para Negocio",
       "description": "Destaca la identidad de tu marca con un logotipo de neón vibrante. Ideal para oficinas, tiendas, bares y restaurantes.",
-      "imageUrl": "https://images.unsplash.com/photo-1725544021661-b82d1ba78a04?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxidXNpbmVzcyUyMGxvZ298ZW58MHx8fHwxNzY3MDI0OTAxfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1657885428127-38a40be4e232?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHxidXNpbmVzcyUyMGxvZ298ZW58MHx8fHwxNzY3MDI0OTAxfDA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "business logo"
     },
     {
       "id": "premade-3",
       "title": "Decoración para el Hogar",
       "description": "Dale un toque moderno y personal a cualquier habitación. Desde tu frase favorita hasta un diseño abstracto.",
-      "imageUrl": "https://images.unsplash.com/photo-1617103996702-96ff29b1c467?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8aG9tZSUyMGRlY29yfGVufDB8fHx8MTc2NzA0MTk4MHww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1572048572872-2394404cf1f3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxob21lJTIwZGVjb3J8ZW58MHx8fHwxNzY3MDQxOTgwfDA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "home decor"
     },
     {
       "id": "premade-4",
       "title": "Eventos y Fiestas",
       "description": "El detalle perfecto para cumpleaños, aniversarios o cualquier celebración. ¡Haz que tu evento brille!",
-      "imageUrl": "https://images.unsplash.com/photo-1759124649699-010eeb1f69f8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxwYXJ0eSUyMGV2ZW50fGVufDB8fHx8MTc2NzA0NDk0Nnww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1718096551424-910dff37709f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxwYXJ0eSUyMGV2ZW50fGVufDB8fHx8MTc2NzA0NDk0Nnww&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "party event"
     }
   ],
@@ -79,6 +79,14 @@
       "alt": "Cliente con un letrero de neón de los Rolling Stones.",
       "imageUrl": "https://i.imgur.com/3Z3Z3yP.png",
       "imageHint": "stones neon"
+    }
+  ],
+  "aboutUsImages": [
+    {
+      "id": "about-1",
+      "alt": "Taller de fabricación de letreros de neón.",
+      "imageUrl": "https://picsum.photos/seed/workshop/600/400",
+      "imageHint": "neon workshop"
     }
   ]
 }
