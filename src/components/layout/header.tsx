@@ -28,6 +28,13 @@ export function Header() {
         >
           Catálogo
         </Link>
+        <Link
+          href="/#about-us"
+          className="text-sm font-medium hover:underline underline-offset-4"
+          prefetch={false}
+        >
+          Nosotros
+        </Link>
         <Button asChild>
           <Link href="/crear">Ordenar Ahora</Link>
         </Button>
