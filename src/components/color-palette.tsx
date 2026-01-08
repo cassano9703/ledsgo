@@ -17,7 +17,7 @@ export function ColorPalette() {
               />
                <div
                 className={cn(
-                  "absolute inset-1 rounded-full",
+                  "absolute inset-2 rounded-full",
                   color.twClass
                 )}
               />
@@ -33,7 +33,6 @@ export function ColorPalette() {
                   0 0 5px #fff,
                   inset 0 0 5px #fff,
                   0 0 10px ${color.value},
-                  inset 0 0 10px ${color.value},
                   0 0 20px ${color.value}
                 `,
               }}
