@@ -31,7 +31,7 @@ export default function Home() {
             <PremadeDesigns />
           </div>
         </section>
-
+        
         <section id="colors" className="py-12 md:py-20 lg:py-24">
           <div className="container">
             <div className="flex flex-col items-center space-y-4 text-center">
