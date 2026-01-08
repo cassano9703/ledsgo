@@ -114,8 +114,8 @@
   color: hsl(210 40% 98%);
 }
 .dark #colors {
-  background-color: hsl(var(--background));
+  background-color: hsl(222.2 84% 4.9%);
 }
 .dark #colors h2, .dark #colors p {
-  color: hsl(var(--foreground));
+  color: hsl(210 40% 98%);
 }

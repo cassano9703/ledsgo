@@ -16,7 +16,7 @@ export default function Home() {
       <main className="flex-1">
         <HeroCarousel />
 
-        <section id="colors" className="py-12 md:py-20 lg:py-24 bg-card">
+        <section id="colors" className="py-12 md:py-20 lg:py-24">
           <div className="container">
             <div className="flex flex-col items-center space-y-4 text-center">
               <div className="space-y-2">
