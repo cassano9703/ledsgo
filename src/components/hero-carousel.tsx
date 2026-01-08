@@ -40,7 +40,7 @@ export function HeroCarousel() {
           <div className="relative z-10 flex flex-col items-center space-y-6">
             <div>
               <h1 className="text-4xl font-extrabold tracking-tight lg:text-6xl xl:text-7xl font-headline">
-                Diseña tu letrero <span className="text-primary animate-glow" style={{"--glow-color": "hsl(var(--primary))"} as React.CSSProperties}>Neón</span>
+                Diseña tu letrero <span className="text-accent animate-glow" style={{"--glow-color": "hsl(var(--accent))"} as React.CSSProperties}>Neón</span>
               </h1>
               <p className="max-w-2xl mt-4 text-lg text-neutral-200">
                 Iluminamos tus ideas con estrategia y diseño.

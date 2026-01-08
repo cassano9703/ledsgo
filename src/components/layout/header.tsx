@@ -10,7 +10,7 @@ export function Header() {
         className="flex items-center justify-center"
         prefetch={false}
       >
-        <Logo className="h-6 w-6 text-primary" />
+        <Logo className="h-6 w-6 text-accent" />
         <span className="ml-2 text-lg font-bold font-headline">Leds Go</span>
       </Link>
       <nav className="ml-auto flex gap-4 sm:gap-6 items-center">
