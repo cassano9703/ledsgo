@@ -6,7 +6,7 @@ export function ColorPalette() {
     <div className="mt-12 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-8 justify-center">
       {colors.map((color) => (
         <div key={color.name} className="flex flex-col items-center gap-4 group">
-          {color.name === "White" ? (
+          {color.name === "RGB" ? (
             <div className="relative w-24 h-24">
               <div className="absolute inset-0 rounded-full bg-gradient-to-r from-red-500 via-green-500 to-blue-500 animate-spin-around" />
               <div
@@ -36,11 +36,8 @@ export function ColorPalette() {
           <h3
             className="font-bold text-lg text-center transition-colors duration-300 group-hover:text-primary"
             style={{
-              color: color.name === "White" ? "#333" : color.value,
-              textShadow:
-                color.name === "White"
-                  ? `0 0 8px #ffffff`
-                  : `0 0 5px ${color.value}`,
+              color: color.value,
+              textShadow: `0 0 8px ${color.value}`,
             }}
           >
             {color.name}

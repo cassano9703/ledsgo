@@ -23,16 +23,16 @@ export type ColorConfig = {
 };
 
 export const colors: ColorConfig[] = [
-  { name: "Cyan", value: "#00BFFF", twClass: "bg-cyan-500" },
+  { name: "Cyan", value: "#00FFFF", twClass: "bg-cyan-400" },
   { name: "Fuchsia", value: "#FF00FF", twClass: "bg-fuchsia-500" },
   { name: "Yellow", value: "#FFFF00", twClass: "bg-yellow-300" },
-  { name: "Lime", value: "#32CD32", twClass: "bg-lime-500" },
-  { name: "Red", value: "#FF073A", twClass: "bg-red-600" },
-  { name: "Blue", value: "#0000FF", twClass: "bg-blue-600" },
-  { name: "Purple", value: "#A020F0", twClass: "bg-purple-600" },
-  { name: "Orange", value: "#FFA500", twClass: "bg-orange-500" },
+  { name: "Lime", value: "#7FFF00", twClass: "bg-lime-400" },
+  { name: "Red", value: "#FF0000", twClass: "bg-red-500" },
+  { name: "Blue", value: "#007FFF", twClass: "bg-blue-500" },
+  { name: "Purple", value: "#BF00FF", twClass: "bg-purple-500" },
+  { name: "Orange", value: "#FFA500", twClass: "bg-orange-400" },
   { name: "Amber", value: "#FFBF00", twClass: "bg-amber-400" },
-  { name: "White", value: "#FFFFFF", twClass: "bg-white" },
+  { name: "RGB", value: "#FFFFFF", twClass: "bg-white" },
 ];
 
 export type SizeConfig = {
