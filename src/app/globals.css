@@ -106,3 +106,16 @@
   flex: 0 0 100%;
   min-width: 0;
 }
+
+#colors {
+  background-color: hsl(222.2 84% 4.9%);
+}
+#colors h2, #colors p {
+  color: hsl(210 40% 98%);
+}
+.dark #colors {
+  background-color: hsl(var(--background));
+}
+.dark #colors h2, .dark #colors p {
+  color: hsl(var(--foreground));
+}
