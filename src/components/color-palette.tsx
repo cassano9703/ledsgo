@@ -15,8 +15,10 @@ export function ColorPalette() {
               boxShadow: `
                   0 0 10px ${color.value},
                   0 0 20px ${color.value},
-                  0 0 30px #fff,
-                  inset 0 0 8px ${color.value}
+                  0 0 30px ${color.value},
+                  0 0 40px ${color.value},
+                  0 0 50px #fff,
+                  inset 0 0 12px ${color.value}
                 `,
             }}
           />
