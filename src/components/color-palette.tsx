@@ -12,7 +12,7 @@ export function ColorPalette() {
             <div className="relative w-24 h-24">
               <div
                 className={cn(
-                  "absolute inset-0 rounded-full bg-gradient-to-r from-red-500 via-green-500 to-blue-500 animate-spin-around",
+                  "absolute inset-0 rounded-full bg-gradient-to-r from-red-500 via-green-500 to-blue-500 animate-spin",
                 )}
               />
                <div
