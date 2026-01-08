@@ -89,19 +89,10 @@ export default {
             height: '0',
           },
         },
-        'spin-around': {
-          '0%': {
-            transform: 'rotate(0deg)',
-          },
-          '100%': {
-            transform: 'rotate(360deg)',
-          },
-        },
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
-        'spin-around': 'spin-around 4s linear infinite',
       },
     },
   },
