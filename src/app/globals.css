@@ -107,6 +107,15 @@
   min-width: 0;
 }
 
+@keyframes spin-around {
+  '0%': {
+    transform: rotate(0deg);
+  }
+  '100%': {
+    transform: rotate(360deg);
+  }
+}
+
 #colors {
   background-color: hsl(222.2 84% 4.9%);
 }
