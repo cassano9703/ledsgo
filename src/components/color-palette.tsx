@@ -1,3 +1,5 @@
+'use client';
+
 import { colors } from "@/lib/config";
 import { cn } from "@/lib/utils";
 
@@ -8,10 +10,14 @@ export function ColorPalette() {
         <div key={color.name} className="flex flex-col items-center gap-4 group">
           {color.name === "RGB" ? (
             <div className="relative w-24 h-24">
-              <div className="absolute inset-0 rounded-full bg-gradient-to-r from-red-500 via-green-500 to-blue-500 animate-spin-around" />
               <div
                 className={cn(
-                  "absolute inset-1.5 rounded-full",
+                  "absolute inset-0 rounded-full bg-gradient-to-r from-red-500 via-green-500 to-blue-500 animate-spin-around",
+                )}
+              />
+               <div
+                className={cn(
+                  "absolute inset-1 rounded-full",
                   color.twClass
                 )}
               />
@@ -36,8 +42,8 @@ export function ColorPalette() {
           <h3
             className="font-bold text-lg text-center transition-colors duration-300 group-hover:text-primary"
             style={{
-              color: color.value,
-              textShadow: `0 0 8px ${color.value}`,
+              color: color.name === "RGB" ? "hsl(var(--foreground))" : color.value,
+              textShadow: color.name === "RGB" ? 'none' : `0 0 8px ${color.value}`,
             }}
           >
             {color.name}
