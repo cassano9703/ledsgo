@@ -13,10 +13,11 @@ export function ColorPalette() {
             )}
             style={{
               boxShadow: `
-                  0 0 5px #fff,
-                  inset 0 0 5px #fff,
-                  0 0 10px ${color.value},
-                  inset 0 0 10px ${color.value}
+                  0 0 2px #fff,
+                  inset 0 0 2px #fff,
+                  0 0 5px ${color.value},
+                  inset 0 0 5px ${color.value},
+                  0 0 15px ${color.value}
                 `,
             }}
           />
@@ -24,7 +25,7 @@ export function ColorPalette() {
             className="font-bold text-lg text-center transition-colors duration-300 group-hover:text-primary"
             style={{
                 color: color.name === 'White' ? '#333' : color.value,
-                textShadow: `0 0 8px ${color.value}`,
+                textShadow: `0 0 5px ${color.value}`,
             }}
           >
             {color.name}
