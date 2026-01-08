@@ -8,28 +8,23 @@ export function ColorPalette() {
         <div key={color.name} className="flex flex-col items-center gap-4 group">
           <div
             className={cn(
-              "relative w-28 h-28 rounded-full border-4 border-white/20 dark:border-gray-800/50 shadow-lg transition-all duration-300 group-hover:scale-105",
+              "relative w-24 h-24 rounded-full border-2 border-white/80 shadow-lg transition-all duration-300 group-hover:scale-105",
               color.twClass
             )}
             style={{
               boxShadow: `
+                  0 0 5px #fff,
+                  inset 0 0 5px #fff,
                   0 0 10px ${color.value},
-                  0 0 20px ${color.value},
-                  0 0 30px ${color.value},
-                  0 0 40px ${color.value},
-                  0 0 50px #fff,
-                  inset 0 0 12px ${color.value}
+                  inset 0 0 10px ${color.value}
                 `,
             }}
           />
           <h3
             className="font-bold text-lg text-center transition-colors duration-300 group-hover:text-primary"
             style={{
-                color: color.value,
-                textShadow: `
-                0 0 2px ${color.value},
-                0 0 5px #fff
-                `,
+                color: color.name === 'White' ? '#333' : color.value,
+                textShadow: `0 0 8px ${color.value}`,
             }}
           >
             {color.name}
