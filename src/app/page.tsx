@@ -49,10 +49,10 @@ export default function Home() {
         <section id="about-us" className="py-12 md:py-20 lg:py-24 bg-secondary">
           <div className="w-full px-6 md:px-10 lg:px-16">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-                <div className="lg:col-span-4 h-[500px]">
+                <div className="lg:col-span-5 h-[500px]">
                     <OurJobsCarousel />
                 </div>
-                <div className="lg:col-span-8">
+                <div className="lg:col-span-7">
                     <ProcessSteps />
                 </div>
             </div>

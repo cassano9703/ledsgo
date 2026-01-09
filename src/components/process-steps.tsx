@@ -1,6 +1,8 @@
 "use client";
 
 import { Lightbulb, MessageSquareQuote, Truck, Wrench, PackageCheck } from "lucide-react";
+import Link from "next/link";
+import { Button } from "./ui/button";
 
 const steps = [
   {
@@ -33,9 +35,17 @@ const steps = [
 export function ProcessSteps() {
   return (
     <div className="space-y-8 relative">
-      <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl font-headline text-center lg:text-left">
-        Nuestro Proceso de Atención
-      </h2>
+        <div className="space-y-4 mb-12 text-center lg:text-left">
+            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl font-headline">
+                Nuestros Trabajos
+            </h2>
+            <p className="text-muted-foreground md:text-lg">
+                Cada letrero es una historia de éxito. Aquí puedes ver algunos de los proyectos que hemos realizado para nuestros clientes.
+            </p>
+            <Button asChild>
+                <Link href="/crear">Crea tu propio diseño</Link>
+            </Button>
+        </div>
       
       {/* Vertical line */}
       <div className="absolute left-8 top-12 bottom-8 w-0.5 bg-primary/30 hidden md:block"></div>
