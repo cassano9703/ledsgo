@@ -32,18 +32,18 @@ const steps = [
 
 export function ProcessSteps() {
   return (
-    <div className="space-y-8 relative">
-      <div className="space-y-2 mb-8 text-center lg:text-left">
-          <h3 className="text-2xl font-bold tracking-tighter sm:text-3xl font-headline text-primary">
-              Proceso de Atención
-          </h3>
+    <div className="relative space-y-8">
+      <div className="mb-8 space-y-2 text-center lg:text-left">
+        <h3 className="text-2xl font-bold tracking-tighter text-primary sm:text-3xl font-headline">
+          Proceso de Atención
+        </h3>
       </div>
       
-      <div className="absolute left-8 top-20 bottom-8 w-0.5 bg-primary/30 hidden md:block"></div>
+      <div className="absolute left-8 top-20 bottom-8 w-0.5 bg-primary/30 hidden md:block" />
 
       {steps.map((step, index) => (
         <div key={index} className="flex items-start gap-6">
-          <div className="relative z-10 flex h-16 w-16 items-center justify-center rounded-full bg-primary/10 border-2 border-primary text-primary shadow-[0_0_15px_hsl(var(--primary)/0.5)]">
+          <div className="relative z-10 flex h-16 w-16 items-center justify-center rounded-full border-2 border-primary bg-primary/10 text-primary shadow-[0_0_15px_hsl(var(--primary)/0.5)]">
             <step.icon className="h-8 w-8" />
           </div>
           <div className="flex-1 pt-1">
