@@ -5,9 +5,8 @@ import { PremadeDesigns } from "@/components/premade-designs";
 import { ProductCategories } from "@/components/product-categories";
 import { Differentiators } from "@/components/differentiators";
 import { OurJobsCarousel } from "@/components/our-jobs-carousel";
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
 import { ColorPalette } from "@/components/color-palette";
+import { ProcessSteps } from "@/components/process-steps";
 
 export default function Home() {
   return (
@@ -16,7 +15,7 @@ export default function Home() {
       <main className="flex-1">
         <HeroCarousel />
         <MovingTextBar />
-        <section id="colors" className="py-12 md:py-20 lg:py-24 bg-background">
+        <section id="colors" className="py-12 md:py-20 lg:py-24">
           <div className="w-full">
             <div className="flex flex-col items-center space-y-4 text-center">
               <div className="space-y-2">
@@ -32,7 +31,7 @@ export default function Home() {
           </div>
         </section>
         <Differentiators />
-        <section id="catalog" className="py-12 md:py-20 lg:py-24 bg-secondary">
+        <section id="catalog" className="py-12 md:py-20 lg:py-24">
           <div className="w-full px-6 md:px-10 lg:px-16">
             <div className="flex flex-col items-center space-y-4 text-center">
               <div className="space-y-2">
@@ -47,22 +46,14 @@ export default function Home() {
             <PremadeDesigns />
           </div>
         </section>
-        <section id="about-us" className="py-12 md:py-20 lg:py-24 bg-background">
+        <section id="about-us" className="py-12 md:py-20 lg:py-24 bg-secondary">
           <div className="w-full px-6 md:px-10 lg:px-16">
-            <div className="grid grid-cols-12 gap-8 items-center">
-                <div className="col-span-12 lg:col-span-3 space-y-4 text-center lg:text-left">
-                    <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl font-headline">
-                        Nuestros Trabajos
-                    </h2>
-                    <p className="text-muted-foreground">
-                        Cada letrero es una historia de éxito. Aquí puedes ver algunos de los proyectos que hemos realizado para nuestros clientes.
-                    </p>
-                    <Button asChild>
-                        <Link href="/crear">Crea tu propio diseño</Link>
-                    </Button>
-                </div>
-                <div className="col-span-12 lg:col-span-9">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                <div className="lg:col-span-4 h-[500px]">
                     <OurJobsCarousel />
+                </div>
+                <div className="lg:col-span-8">
+                    <ProcessSteps />
                 </div>
             </div>
           </div>

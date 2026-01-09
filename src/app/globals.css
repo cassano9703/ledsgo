@@ -8,7 +8,7 @@
     --foreground: 210 40% 98%;
     --card: 217.2 32.6% 17.5%;
     --card-foreground: 210 40% 98%;
-    --popover: 240 10% 3.9%;
+    --popover: 240 3.7% 15.9%;
     --popover-foreground: 210 40% 98%;
     --primary: 330 84% 50%;
     --primary-foreground: 210 40% 98%;
@@ -43,7 +43,7 @@
     --foreground: 210 40% 98%;
     --card: 217.2 32.6% 17.5%;
     --card-foreground: 210 40% 98%;
-    --popover: 240 10% 3.9%;
+    --popover: 240 3.7% 15.9%;
     --popover-foreground: 210 40% 98%;
     --primary: 330 84% 50%;
     --primary-foreground: 210 40% 98%;
@@ -119,6 +119,13 @@
   min-width: 0;
 }
 
-.embla__slide--our-jobs {
-    flex: 0 0 33.3333%;
+.embla__container--vertical {
+  display: flex;
+  flex-direction: column;
+}
+
+.embla__slide--vertical {
+  flex: 0 0 33.3333%;
+  min-height: 0;
+  padding-bottom: 1rem;
 }
