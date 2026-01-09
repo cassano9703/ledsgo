@@ -129,10 +129,6 @@
   min-height: 0;
 }
 
-.diamond-clip {
-  clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
-}
-
 .neon-glow-primary {
   filter: drop-shadow(0 0 5px hsl(var(--primary))) drop-shadow(0 0 10px hsl(var(--primary)));
 }

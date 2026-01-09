@@ -63,7 +63,7 @@ export function ProcessSteps() {
             
             {steps.map((step, index) => (
                 <div key={index} className={cn("relative p-4", step.gridPosition)}>
-                  <div className="relative w-full h-full diamond-clip group">
+                  <div className="relative w-full h-full rounded-lg group overflow-hidden">
                      <Image
                         src={step.imageUrl}
                         alt={step.title}
