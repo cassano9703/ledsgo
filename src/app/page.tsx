@@ -16,7 +16,7 @@ export default function Home() {
       <main className="flex-1">
         <HeroCarousel />
         <MovingTextBar />
-        <section id="colors" className="py-12 md:py-20 lg:py-24 bg-background">
+        <section id="colors" className="py-12 md:py-20 lg:py-24 bg-secondary">
           <div className="container">
             <div className="flex flex-col items-center space-y-4 text-center">
               <div className="space-y-2">
@@ -48,24 +48,24 @@ export default function Home() {
         </section>
         <ProductCategories />
         <section id="about-us" className="py-12 md:py-20 lg:py-24 bg-secondary">
-            <div className="container">
-                <div className="grid grid-cols-12 gap-8 items-center">
-                    <div className="col-span-12 lg:col-span-3 space-y-4 text-center lg:text-left">
-                        <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl font-headline">
-                            Nuestros Trabajos
-                        </h2>
-                        <p className="text-muted-foreground">
-                            Cada letrero es una historia de éxito. Aquí puedes ver algunos de los proyectos que hemos realizado para nuestros clientes.
-                        </p>
-                        <Button asChild>
-                            <Link href="/crear">Crea tu propio diseño</Link>
-                        </Button>
-                    </div>
-                    <div className="col-span-12 lg:col-span-9">
-                        <OurJobsCarousel />
-                    </div>
+          <div className="container">
+            <div className="grid grid-cols-12 gap-8 items-center">
+                <div className="col-span-12 lg:col-span-3 space-y-4 text-center lg:text-left">
+                    <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl font-headline">
+                        Nuestros Trabajos
+                    </h2>
+                    <p className="text-muted-foreground">
+                        Cada letrero es una historia de éxito. Aquí puedes ver algunos de los proyectos que hemos realizado para nuestros clientes.
+                    </p>
+                    <Button asChild>
+                        <Link href="/crear">Crea tu propio diseño</Link>
+                    </Button>
+                </div>
+                <div className="col-span-12 lg:col-span-9">
+                    <OurJobsCarousel />
                 </div>
             </div>
+          </div>
         </section>
         <Differentiators />
       </main>
