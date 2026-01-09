@@ -109,15 +109,20 @@ export const LedSignPreview = forwardRef<HTMLDivElement, LedSignPreviewProps>(
     const signWidthCm = (textDimensions.width / PIXELS_PER_CM).toFixed(0);
     const signHeightCm = (textDimensions.height / PIXELS_PER_CM).toFixed(0);
 
+    const backgroundStyle: React.CSSProperties = {
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+    };
+
+    if (background?.imageUrl) {
+      backgroundStyle.backgroundImage = `url('${background.imageUrl}')`;
+    }
+
     return (
         <div 
             ref={ref}
             className="relative w-full aspect-[4/3] bg-slate-800 rounded-lg overflow-hidden flex items-center justify-center shadow-2xl border-4 border-slate-700 p-8 transition-all"
-            style={{ 
-                backgroundImage: `url('${background.imageUrl}')`, 
-                backgroundSize: 'cover', 
-                backgroundPosition: 'center' 
-            }}
+            style={backgroundStyle}
             onMouseMove={handleDragMove}
             onMouseUp={handleDragEnd}
             onMouseLeave={handleDragEnd}
