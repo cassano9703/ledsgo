@@ -34,7 +34,7 @@ export function Logo(props: SVGProps<SVGSVGElement>) {
         fill="hsl(var(--accent))"
         style={{ filter: 'url(#neon-glow-accent)', textShadow: '0 0 10px hsl(var(--accent))' }}
       >
-        LUX
+        LEDS
       </text>
       <text
         x="50%"
@@ -46,7 +46,7 @@ export function Logo(props: SVGProps<SVGSVGElement>) {
         fill="hsl(var(--primary))"
         style={{ filter: 'url(#neon-glow-primary)', textShadow: '0 0 10px hsl(var(--primary))' }}
       >
-        NEON
+        GO
       </text>
     </svg>
   );
