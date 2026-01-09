@@ -88,7 +88,7 @@ export const LedSignPreview = forwardRef<HTMLDivElement, LedSignPreviewProps>(
       fontSize: dynamicFontSize,
       lineHeight: `${baseFontSize * size.multiplier * 1.2}rem`,
       color: isRgb ? 'transparent' : color.value,
-      textShadow: isRgb 
+      textShadow: isRgb
         ? `
             0 0 5px hsl(var(--accent)),
             0 0 10px hsl(var(--accent)),
@@ -113,7 +113,7 @@ export const LedSignPreview = forwardRef<HTMLDivElement, LedSignPreviewProps>(
       backgroundSize: 'cover',
       backgroundPosition: 'center',
     };
-
+    
     if (background?.imageUrl) {
       backgroundStyle.backgroundImage = `url('${background.imageUrl}')`;
     }
