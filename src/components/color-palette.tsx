@@ -9,18 +9,12 @@ export function ColorPalette() {
       {colors.map((color) => (
         <div key={color.name} className="flex flex-col items-center gap-4 group">
           {color.name === "RGB" ? (
-            <div className="relative w-24 h-24">
-              <div
-                className={cn(
-                  "absolute inset-0 rounded-full bg-gradient-to-r from-red-500 via-green-500 to-blue-500 animate-spin",
-                )}
-              />
-               <div
-                className={cn(
-                  "absolute inset-2 rounded-full",
-                  color.twClass
-                )}
-              />
+            <div
+              className={cn(
+                "relative w-24 h-24 rounded-full p-1 bg-gradient-to-r from-red-500 via-green-500 to-blue-500 animate-spin"
+              )}
+            >
+              <div className="bg-secondary w-full h-full rounded-full"></div>
             </div>
           ) : (
             <div
