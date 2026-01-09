@@ -7,6 +7,7 @@ import { Differentiators } from "@/components/differentiators";
 import { OurJobsCarousel } from "@/components/our-jobs-carousel";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { ColorPalette } from "@/components/color-palette";
 
 export default function Home() {
   return (
@@ -15,6 +16,21 @@ export default function Home() {
       <main className="flex-1">
         <HeroCarousel />
         <MovingTextBar />
+        <section id="colors" className="py-12 md:py-20 lg:py-24 bg-background">
+          <div className="container">
+            <div className="flex flex-col items-center space-y-4 text-center">
+              <div className="space-y-2">
+                <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl font-headline">
+                  Nuestra Paleta de Colores
+                </h2>
+                <p className="mx-auto max-w-[700px] text-muted-foreground md:text-xl">
+                  Elige entre nuestra vibrante selección para crear un letrero único.
+                </p>
+              </div>
+            </div>
+            <ColorPalette />
+          </div>
+        </section>
         <section id="catalog" className="py-12 md:py-20 lg:py-24 bg-secondary">
           <div className="container">
             <div className="flex flex-col items-center space-y-4 text-center">

@@ -22,7 +22,7 @@ const categories = [
 export function ProductCategories() {
   return (
     <section className="py-12 md:py-20 lg:py-24 bg-secondary">
-      <div className="container">
+      <div className="w-full">
         <div className="flex flex-col items-center space-y-4 text-center mb-12">
           <div className="space-y-2">
             <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl font-headline">
@@ -30,7 +30,7 @@ export function ProductCategories() {
             </h2>
           </div>
         </div>
-        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 max-w-5xl mx-auto">
           {categories.map((category) => (
             <Card
               key={category.name}
