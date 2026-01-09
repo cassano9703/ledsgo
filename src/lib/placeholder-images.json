@@ -53,31 +53,31 @@
     {
       "id": "job-1",
       "alt": "Cliente con un letrero de neón 'Skandaloso'.",
-      "imageUrl": "https://i.imgur.com/rGByb1L.png",
+      "imageUrl": "https://picsum.photos/seed/job1/600/600",
       "imageHint": "client neon"
     },
     {
       "id": "job-2",
       "alt": "Cliente con un letrero de neón de alas y 'Lucas Art'.",
-      "imageUrl": "https://i.imgur.com/bXf43xQ.png",
+      "imageUrl": "https://picsum.photos/seed/job2/600/600",
       "imageHint": "wings neon"
     },
     {
       "id": "job-3",
       "alt": "Letrero de neón 'Fall in love with your smile' en una silla elegante.",
-      "imageUrl": "https://i.imgur.com/2s4oTfX.png",
+      "imageUrl": "https://picsum.photos/seed/job3/600/600",
       "imageHint": "chair neon"
     },
     {
       "id": "job-4",
       "alt": "Cliente con un letrero de neón 'Box Brand Box'.",
-      "imageUrl": "https://i.imgur.com/5l3aCj8.png",
+      "imageUrl": "https://picsum.photos/seed/job4/600/600",
       "imageHint": "box neon"
     },
     {
       "id": "job-5",
       "alt": "Cliente con un letrero de neón de los Rolling Stones.",
-      "imageUrl": "https://i.imgur.com/3Z3Z3yP.png",
+      "imageUrl": "https://picsum.photos/seed/job5/600/600",
       "imageHint": "stones neon"
     }
   ],
