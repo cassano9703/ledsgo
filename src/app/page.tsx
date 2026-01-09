@@ -17,7 +17,7 @@ export default function Home() {
         <HeroCarousel />
         <MovingTextBar />
         <section id="colors" className="py-12 md:py-20 lg:py-24 bg-secondary">
-          <div className="w-full">
+          <div className="container">
             <div className="flex flex-col items-center space-y-4 text-center">
               <div className="space-y-2">
                 <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl font-headline">
@@ -51,6 +51,7 @@ export default function Home() {
             </div>
           </div>
         </section>
+        <Differentiators />
         <section id="catalog" className="py-12 md:py-20 lg:py-24 bg-background">
           <div className="container">
             <div className="flex flex-col items-center space-y-4 text-center">
@@ -67,7 +68,6 @@ export default function Home() {
           </div>
         </section>
         <ProductCategories />
-        <Differentiators />
       </main>
       <footer className="flex flex-col gap-2 sm:flex-row py-6 w-full shrink-0 items-center px-4 md:px-6 border-t">
         <p className="text-xs text-muted-foreground">&copy; {new Date().getFullYear()} Leds Go. Todos los derechos reservados.</p>
