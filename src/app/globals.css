@@ -99,9 +99,9 @@
 }
 
 .animate-rgb-text {
-  background-image: linear-gradient(to right, #ff0000, #ff00ff, #0000ff, #00ff00, #ffff00, #ff0000);
-  background-size: 200% auto;
-  animation: rgb-text-flow 4s linear infinite;
+  background-image: linear-gradient(to right, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #8b00ff, #ff00ff, #ff0000);
+  background-size: 400% auto;
+  animation: rgb-text-flow 8s linear infinite;
 }
 
 .animate-glow {

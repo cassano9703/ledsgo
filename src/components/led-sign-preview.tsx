@@ -90,8 +90,9 @@ export const LedSignPreview = forwardRef<HTMLDivElement, LedSignPreviewProps>(
       color: isRgb ? 'transparent' : color.value,
       textShadow: isRgb 
         ? `
-            0 0 5px rgba(255, 255, 255, 0.7),
-            0 0 10px rgba(255, 255, 255, 0.7)
+            0 0 5px hsl(var(--accent)),
+            0 0 10px hsl(var(--accent)),
+            0 0 15px hsl(var(--accent))
           `
         : `
             0 0 5px #fff,
