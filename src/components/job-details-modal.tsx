@@ -29,7 +29,9 @@ export function JobDetailsModal({ isOpen, onClose, job }: JobDetailsModalProps) 
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="sm:max-w-3xl">
+      <DialogContent 
+        className="sm:max-w-3xl border-accent shadow-[0_0_20px_hsl(var(--accent))]"
+      >
         <DialogHeader>
           <DialogTitle>{job.nombre}</DialogTitle>
           <DialogDescription>
