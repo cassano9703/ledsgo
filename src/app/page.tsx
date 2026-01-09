@@ -32,6 +32,21 @@ export default function Home() {
           </div>
         </section>
         <Differentiators />
+        <section id="catalog" className="py-12 md:py-20 lg:py-24">
+          <div className="w-full px-6 md:px-10 lg:px-16">
+            <div className="flex flex-col items-center space-y-4 text-center">
+              <div className="space-y-2">
+                <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl font-headline">
+                  Explora Nuestro Catálogo
+                </h2>
+                <p className="mx-auto max-w-[700px] text-muted-foreground md:text-xl">
+                  Inspírate con nuestros diseños predefinidos o crea el tuyo desde cero.
+                </p>
+              </div>
+            </div>
+            <PremadeDesigns />
+          </div>
+        </section>
         <section id="about-us" className="py-12 md:py-20 lg:py-24 bg-secondary">
           <div className="w-full px-6 md:px-10 lg:px-16">
             <div className="grid grid-cols-12 gap-8 items-center">
@@ -50,21 +65,6 @@ export default function Home() {
                     <OurJobsCarousel />
                 </div>
             </div>
-          </div>
-        </section>
-        <section id="catalog" className="py-12 md:py-20 lg:py-24 bg-background">
-          <div className="w-full px-6 md:px-10 lg:px-16">
-            <div className="flex flex-col items-center space-y-4 text-center">
-              <div className="space-y-2">
-                <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl font-headline">
-                  Explora Nuestro Catálogo
-                </h2>
-                <p className="mx-auto max-w-[700px] text-muted-foreground md:text-xl">
-                  Inspírate con nuestros diseños predefinidos o crea el tuyo desde cero.
-                </p>
-              </div>
-            </div>
-            <PremadeDesigns />
           </div>
         </section>
         <ProductCategories />
