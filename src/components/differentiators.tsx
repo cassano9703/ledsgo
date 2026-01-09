@@ -34,17 +34,8 @@ export function Differentiators() {
     >
       <div className="absolute inset-0 bg-black/50" aria-hidden="true" />
       <div className="relative w-full px-4 md:px-6">
-        <div className="flex flex-col items-center space-y-4 text-center">
-          <div className="space-y-2">
-            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl font-headline text-white">
-              El Diferencial
-            </h2>
-            <p className="mx-auto max-w-[700px] text-neutral-300 md:text-xl">
-              Por qué nuestros letreros de neón son la mejor elección.
-            </p>
-          </div>
-        </div>
-        <div className="mt-12 grid gap-8 sm:grid-cols-3">
+        
+        <div className="mt-2 grid gap-8 sm:grid-cols-3">
           {differentiators.map((item) => (
             <div key={item.name} className="flex flex-col items-center gap-4 text-center">
               <div

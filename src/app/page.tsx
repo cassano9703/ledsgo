@@ -31,6 +31,7 @@ export default function Home() {
             <ColorPalette />
           </div>
         </section>
+        <Differentiators />
         <section id="about-us" className="py-12 md:py-20 lg:py-24 bg-secondary">
           <div className="w-full px-6 md:px-10 lg:px-16">
             <div className="grid grid-cols-12 gap-8 items-center">
@@ -51,7 +52,6 @@ export default function Home() {
             </div>
           </div>
         </section>
-        <Differentiators />
         <section id="catalog" className="py-12 md:py-20 lg:py-24 bg-background">
           <div className="w-full px-6 md:px-10 lg:px-16">
             <div className="flex flex-col items-center space-y-4 text-center">
