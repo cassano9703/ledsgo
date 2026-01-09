@@ -15,7 +15,7 @@ export function PremadeDesigns() {
   return (
     <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-4 justify-items-center">
       {PlaceHolderImages.map((design) => (
-        <Card key={design.id} className="overflow-hidden group">
+        <Card key={design.id} className="overflow-hidden group w-full max-w-sm flex flex-col">
           <CardHeader className="p-0">
             <div className="aspect-video overflow-hidden">
               <Image
@@ -28,9 +28,9 @@ export function PremadeDesigns() {
               />
             </div>
           </CardHeader>
-          <CardContent className="p-4 space-y-2">
-            <CardTitle className="text-lg flex items-center gap-2">
-              {design.title}
+          <CardContent className="p-4 space-y-2 flex-grow">
+            <CardTitle className="text-lg flex items-center justify-between">
+              <span>{design.title}</span>
               {design.id === 'premade-1' && <SimpleCrown className="w-5 h-5 text-amber-400" />}
             </CardTitle>
             <p className="text-sm text-muted-foreground line-clamp-2 min-h-[40px]">
