@@ -5,8 +5,9 @@ import Autoplay from "embla-carousel-autoplay"
 import useEmblaCarousel, { type EmblaCarouselType, type EmblaOptionsType } from 'embla-carousel-react'
 import Image from "next/image"
 
-import { OurJobsImages } from "@/lib/placeholder-images"
+import { OurJobsImages, type OurJobsImage } from "@/lib/placeholder-images"
 import { cn } from "@/lib/utils"
+import { JobDetailsModal } from "./job-details-modal"
 
 const OPTIONS: EmblaOptionsType = {
   loop: true,
@@ -28,6 +29,7 @@ export const OurJobsCarousel: React.FC<PropType> = (props) => {
   const [scrollSnaps, setScrollSnaps] = React.useState<number[]>([])
   const [selectedIndex, setSelectedIndex] = React.useState(0)
   const [scale, setScale] = React.useState<number[]>([])
+  const [selectedJob, setSelectedJob] = React.useState<OurJobsImage | null>(null);
 
   const TWEEN_FACTOR = 4.2
 
@@ -91,50 +93,58 @@ export const OurJobsCarousel: React.FC<PropType> = (props) => {
   }, [emblaApi, onSelect, tweenScale])
 
   return (
-    <div className="w-full mt-12">
-        <div className="embla" ref={emblaRef}>
-            <div className="embla__container">
-            {OurJobsImages.map((image, index) => (
-                <div 
-                    className="embla__slide embla__slide--our-jobs" 
-                    key={image.id}
-                >
+    <>
+      <div className="w-full mt-12">
+          <div className="embla" ref={emblaRef}>
+              <div className="embla__container">
+              {OurJobsImages.map((image, index) => (
                   <div 
-                    className="embla__slide__inner p-2"
-                    style={{
-                      ...(scale[index] !== undefined && {
-                        transform: `scale(${scale[index]})`,
-                        opacity: scale[index] < 0.8 ? 0.3 : 1
-                      }),
-                      transition: `transform ${TRANSITION_DURATION}, opacity ${TRANSITION_DURATION}`,
-                    }}
+                      className="embla__slide embla__slide--our-jobs" 
+                      key={image.id}
+                      onClick={() => setSelectedJob(image)}
                   >
-                    <Image
-                        src={image.imageUrl}
-                        alt={image.alt}
-                        width={600}
-                        height={600}
-                        className="rounded-lg object-contain"
-                        data-ai-hint={image.imageHint}
-                    />
+                    <div 
+                      className="embla__slide__inner p-2 cursor-pointer"
+                      style={{
+                        ...(scale[index] !== undefined && {
+                          transform: `scale(${scale[index]})`,
+                          opacity: scale[index] < 0.8 ? 0.3 : 1
+                        }),
+                        transition: `transform ${TRANSITION_DURATION}, opacity ${TRANSITION_DURATION}`,
+                      }}
+                    >
+                      <Image
+                          src={image.imageUrl}
+                          alt={image.alt}
+                          width={600}
+                          height={600}
+                          className="rounded-lg object-contain"
+                          data-ai-hint={image.imageHint}
+                      />
+                    </div>
                   </div>
-                </div>
-            ))}
-            </div>
-        </div>
-        <div className="flex justify-center gap-2 mt-8">
-            {scrollSnaps.map((_, index) => (
-            <button
-                key={index}
-                onClick={() => scrollTo(index)}
-                className={cn(
-                "w-2 h-2 rounded-full transition-all",
-                index === selectedIndex ? "bg-primary scale-125" : "bg-muted"
-                )}
-                aria-label={`Ir al trabajo ${index + 1}`}
-            />
-            ))}
-        </div>
-    </div>
+              ))}
+              </div>
+          </div>
+          <div className="flex justify-center gap-2 mt-8">
+              {scrollSnaps.map((_, index) => (
+              <button
+                  key={index}
+                  onClick={() => scrollTo(index)}
+                  className={cn(
+                  "w-2 h-2 rounded-full transition-all",
+                  index === selectedIndex ? "bg-primary scale-125" : "bg-muted"
+                  )}
+                  aria-label={`Ir al trabajo ${index + 1}`}
+              />
+              ))}
+          </div>
+      </div>
+      <JobDetailsModal 
+        isOpen={!!selectedJob}
+        onClose={() => setSelectedJob(null)}
+        job={selectedJob}
+      />
+    </>
   )
 }

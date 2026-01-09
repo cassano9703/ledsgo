@@ -20,6 +20,10 @@ export type OurJobsImage = {
   alt: string;
   imageUrl: string;
   imageHint: string;
+  nombre: string;
+  medidas: string;
+  colores: string;
+  ciudad: string;
 }
 
 export type AboutUsImage = {
