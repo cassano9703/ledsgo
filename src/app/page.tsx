@@ -33,7 +33,7 @@ export default function Home() {
           </div>
         </section>
         <ProductCategories />
-        <section id="about-us" className="py-12 md:py-20 lg:py-24">
+        <section id="about-us" className="py-12 md:py-20 lg:py-24 bg-secondary">
             <div className="container px-4 md:px-6">
                 <div className="grid grid-cols-12 gap-8 items-center">
                     <div className="col-span-12 lg:col-span-3 space-y-4 text-center lg:text-left">
