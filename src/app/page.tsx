@@ -21,8 +21,10 @@ export default function Home() {
               </p>
             </div>
           </div>
-          <div className="container px-4 md:px-6">
-            <PremadeDesigns />
+          <div className="w-full">
+            <div className="container px-4 md:px-6">
+                <PremadeDesigns />
+            </div>
           </div>
         </section>
       </main>
