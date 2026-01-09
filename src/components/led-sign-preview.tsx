@@ -113,9 +113,11 @@ export const LedSignPreview = forwardRef<HTMLDivElement, LedSignPreviewProps>(
         <div 
             ref={ref}
             className={cn(
-                'relative w-full aspect-[4/3] bg-slate-800 rounded-lg overflow-hidden flex items-center justify-center shadow-2xl border-4 border-slate-700 p-8 transition-all bg-cover bg-center',
-                background?.imageUrl && `bg-[url('${background.imageUrl}')]`
+                'relative w-full aspect-[4/3] bg-slate-800 rounded-lg overflow-hidden flex items-center justify-center shadow-2xl border-4 border-slate-700 p-8 transition-all bg-cover bg-center'
             )}
+            style={{
+                backgroundImage: `url('${background.imageUrl}')`,
+            }}
             onMouseMove={handleDragMove}
             onMouseUp={handleDragEnd}
             onMouseLeave={handleDragEnd}
