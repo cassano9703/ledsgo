@@ -11,7 +11,7 @@ export function Header() {
         prefetch={false}
       >
         <Logo className="h-10 w-20" />
-        <span className="sr-only">LUX NEON</span>
+        <span className="sr-only">LEDS GO</span>
       </Link>
       <nav className="ml-auto flex gap-4 sm:gap-6 items-center">
         <Link
@@ -41,7 +41,7 @@ export function Header() {
           className="text-sm font-medium text-foreground/80 hover:text-accent transition-colors"
           prefetch={false}
         >
-          Proyectos
+          Nuestros Trabajos
         </Link>
         <Button asChild variant="outline" className="rounded-full border-primary/80 hover:border-primary hover:bg-primary/10 text-primary hover:text-primary animate-glow" style={{ "--glow-color": "hsl(var(--primary))" } as React.CSSProperties}>
           <Link href="/crear">Cotiza tu Diseño</Link>

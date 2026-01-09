@@ -4,6 +4,9 @@ import { MovingTextBar } from "@/components/moving-text-bar";
 import { PremadeDesigns } from "@/components/premade-designs";
 import { ProductCategories } from "@/components/product-categories";
 import { Differentiators } from "@/components/differentiators";
+import { OurJobsCarousel } from "@/components/our-jobs-carousel";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -30,6 +33,26 @@ export default function Home() {
           </div>
         </section>
         <ProductCategories />
+        <section id="about-us" className="py-12 md:py-20 lg:py-24">
+            <div className="container px-4 md:px-6">
+                <div className="grid grid-cols-12 gap-8 items-center">
+                    <div className="col-span-12 lg:col-span-3 space-y-4 text-center lg:text-left">
+                        <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl font-headline">
+                            Nuestros Trabajos
+                        </h2>
+                        <p className="text-muted-foreground">
+                            Cada letrero es una historia de éxito. Aquí puedes ver algunos de los proyectos que hemos realizado para nuestros clientes.
+                        </p>
+                        <Button asChild>
+                            <Link href="/crear">Crea tu propio diseño</Link>
+                        </Button>
+                    </div>
+                    <div className="col-span-12 lg:col-span-9">
+                        <OurJobsCarousel />
+                    </div>
+                </div>
+            </div>
+        </section>
         <Differentiators />
       </main>
       <footer className="flex flex-col gap-2 sm:flex-row py-6 w-full shrink-0 items-center px-4 md:px-6 border-t">
