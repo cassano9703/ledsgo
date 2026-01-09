@@ -15,7 +15,7 @@ export function PremadeDesigns() {
   return (
     <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-4 justify-items-center">
       {PlaceHolderImages.map((design) => (
-        <Card key={design.id} className="overflow-hidden group w-full max-w-sm flex flex-col">
+        <Card key={design.id} className="overflow-hidden group w-full max-w-sm flex flex-col shadow-[0_0_20px_hsl(var(--accent))]">
           <CardHeader className="p-0">
             <div className="aspect-video overflow-hidden">
               <Image
