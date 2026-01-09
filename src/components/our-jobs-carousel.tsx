@@ -12,7 +12,7 @@ const OPTIONS: EmblaOptionsType = {
   loop: true,
   align: 'center',
   containScroll: false,
-  slidesToScroll: 3,
+  slidesToScroll: 1,
 }
 
 const SCALE_FACTOR = 4;
@@ -24,7 +24,7 @@ type PropType = {
 
 export const OurJobsCarousel: React.FC<PropType> = (props) => {
   const { options } = props
-  const [emblaRef, emblaApi] = useEmblaCarousel(options, [Autoplay({ delay: 3000 })])
+  const [emblaRef, emblaApi] = useEmblaCarousel(OPTIONS, [Autoplay({ delay: 3000 })])
   const [scrollSnaps, setScrollSnaps] = React.useState<number[]>([])
   const [selectedIndex, setSelectedIndex] = React.useState(0)
   const [scale, setScale] = React.useState<number[]>([])
@@ -100,7 +100,7 @@ export const OurJobsCarousel: React.FC<PropType> = (props) => {
                     key={image.id}
                 >
                   <div 
-                    className="embla__slide__inner"
+                    className="embla__slide__inner p-2"
                     style={{
                       ...(scale[index] !== undefined && {
                         transform: `scale(${scale[index]})`,
