@@ -32,7 +32,7 @@ export const colors: ColorConfig[] = [
   { name: "Purple", value: "#BF00FF", twClass: "bg-purple-500" },
   { name: "Orange", value: "#FFA500", twClass: "bg-orange-400" },
   { name: "Amber", value: "#FFBF00", twClass: "bg-amber-400" },
-  { name: "RGB", value: "#FFFFFF", twClass: "bg-white" },
+  { name: "RGB", value: "rgb", twClass: "" },
 ];
 
 export type SizeConfig = {

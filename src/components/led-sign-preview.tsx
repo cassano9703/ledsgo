@@ -2,13 +2,13 @@
 
 import React, { useRef, useState, MouseEvent, TouchEvent, useLayoutEffect, forwardRef } from 'react';
 import { cn } from '@/lib/utils';
-import type { FontConfig, SizeConfig, BackgroundConfig } from '@/lib/config';
+import type { FontConfig, SizeConfig, BackgroundConfig, ColorConfig } from '@/lib/config';
 
 interface LedSignPreviewProps {
   text: string;
   text2?: string;
   font: FontConfig;
-  color: string;
+  color: ColorConfig;
   size: SizeConfig;
   background: BackgroundConfig;
 }
@@ -17,6 +17,7 @@ export const LedSignPreview = forwardRef<HTMLDivElement, LedSignPreviewProps>(
   ({ text, text2, font, color, size, background }, ref) => {
     const previewText = text || 'Tu Texto Aquí';
     const hasSecondLine = text2 && text2.trim() !== '';
+    const isRgb = color.name === "RGB";
 
     const textRef = useRef<HTMLDivElement>(null);
     const signContainerRef = useRef<HTMLDivElement>(null);
@@ -86,16 +87,21 @@ export const LedSignPreview = forwardRef<HTMLDivElement, LedSignPreviewProps>(
       fontFamily: font.style.fontFamily,
       fontSize: dynamicFontSize,
       lineHeight: `${baseFontSize * size.multiplier * 1.2}rem`,
-      color: color,
-      textShadow: `
-        0 0 5px #fff,
-        0 0 10px #fff,
-        0 0 15px ${color},
-        0 0 20px ${color},
-        0 0 25px ${color},
-        0 0 30px ${color},
-        0 0 35px ${color}
-      `,
+      color: isRgb ? 'transparent' : color.value,
+      textShadow: isRgb 
+        ? `
+            0 0 5px rgba(255, 255, 255, 0.7),
+            0 0 10px rgba(255, 255, 255, 0.7)
+          `
+        : `
+            0 0 5px #fff,
+            0 0 10px #fff,
+            0 0 15px ${color.value},
+            0 0 20px ${color.value},
+            0 0 25px ${color.value},
+            0 0 30px ${color.value},
+            0 0 35px ${color.value}
+          `,
       ...font.style,
     } as React.CSSProperties;
 
@@ -132,6 +138,7 @@ export const LedSignPreview = forwardRef<HTMLDivElement, LedSignPreviewProps>(
                 ref={textRef}
                 className={cn(
                     'relative text-center font-bold break-words transition-all duration-300 ease-in-out select-none',
+                    isRgb && 'animate-rgb-text bg-clip-text'
                 )}
                 style={textStyle}
                 >

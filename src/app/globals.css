@@ -92,6 +92,18 @@
   }
 }
 
+@keyframes rgb-text-flow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.animate-rgb-text {
+  background-image: linear-gradient(to right, #ff0000, #ff00ff, #0000ff, #00ff00, #ffff00, #ff0000);
+  background-size: 200% auto;
+  animation: rgb-text-flow 4s linear infinite;
+}
+
 .animate-glow {
   animation: neon-glow 1.5s ease-in-out infinite alternate;
 }

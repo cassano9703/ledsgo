@@ -95,7 +95,7 @@ export function LedSignConfigurator() {
   };
 
 
-  const currentConfig = { text, text2, font, color: color.value, size, capturedImage };
+  const currentConfig = { text, text2, font, color: color.name, size, capturedImage };
 
   return (
     <>
@@ -130,7 +130,7 @@ export function LedSignConfigurator() {
             text={text} 
             text2={text2}
             font={font} 
-            color={color.value} 
+            color={color} 
             size={size}
             background={background}
           />
@@ -179,7 +179,11 @@ export function LedSignConfigurator() {
                   {colors.map((c) => (
                     <Label key={c.name} htmlFor={c.name} className={`relative flex items-center justify-center rounded-full w-8 h-8 cursor-pointer transition-all border-2 ${color.name === c.name ? 'border-primary ring-2 ring-primary ring-offset-2' : 'border-border'}`}>
                         <RadioGroupItem value={c.name} id={c.name} className="sr-only" />
-                        <span className={cn("w-full h-full rounded-full", c.twClass)} />
+                        {c.name === 'RGB' ? (
+                          <span className="w-full h-full rounded-full bg-gradient-to-r from-red-500 via-green-500 to-blue-500 animate-spin" />
+                        ) : (
+                           <span className={cn("w-full h-full rounded-full", c.twClass)} />
+                        )}
                     </Label>
                   ))}
               </RadioGroup>

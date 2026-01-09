@@ -21,7 +21,7 @@ const differentiators = [
 ];
 
 export function Differentiators() {
-  const backgroundImageUrl = "https://i.imgur.com/sI68Yek.jpeg";
+  const backgroundImageUrl = "https://i.imgur.com/y6jKTXv.jpeg";
 
   return (
     <section 
