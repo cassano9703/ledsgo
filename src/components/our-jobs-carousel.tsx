@@ -12,6 +12,7 @@ const OPTIONS: EmblaOptionsType = {
   loop: true,
   align: 'center',
   containScroll: false,
+  slidesToScroll: 3,
 }
 
 const SCALE_FACTOR = 4;
@@ -95,7 +96,7 @@ export const OurJobsCarousel: React.FC<PropType> = (props) => {
             <div className="embla__container">
             {OurJobsImages.map((image, index) => (
                 <div 
-                    className="embla__slide" 
+                    className="embla__slide embla__slide--our-jobs" 
                     key={image.id}
                 >
                   <div 
