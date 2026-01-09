@@ -125,7 +125,6 @@
 }
 
 .embla__slide--vertical {
-  flex: 0 0 33.3333%;
+  flex: 0 0 100%;
   min-height: 0;
-  padding-bottom: 1rem;
 }
