@@ -15,7 +15,7 @@ export function MovingTextBar() {
         ))}
       </div>
 
-      <div className="flex animate-marquee2 whitespace-nowrap">
+      <div className="absolute flex animate-marquee2 whitespace-nowrap">
          {items.map((item, index) => (
           <span key={index} className="flex items-center text-xl font-bold mx-4 tracking-wider">
             {item}
