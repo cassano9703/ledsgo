@@ -21,7 +21,7 @@ const categories = [
 
 export function ProductCategories() {
   return (
-    <section className="py-12 md:py-20 lg:py-24">
+    <section className="py-12 md:py-20 lg:py-24 bg-secondary">
       <div className="container px-4 md:px-6">
         <div className="flex flex-col items-center space-y-4 text-center">
           <div className="space-y-2">
@@ -34,7 +34,7 @@ export function ProductCategories() {
           {categories.map((category) => (
             <Card
               key={category.name}
-              className="p-8 flex flex-col items-center justify-center gap-4 bg-secondary/50 border-border/50 hover:bg-secondary transition-colors"
+              className="p-8 flex flex-col items-center justify-center gap-4 bg-background/50 border-border/50 hover:bg-background transition-colors"
             >
               <category.icon
                 className="w-20 h-20"
