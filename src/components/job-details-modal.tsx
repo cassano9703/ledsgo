@@ -12,6 +12,8 @@ import {
 } from "@/components/ui/dialog";
 import type { OurJobsImage } from "@/lib/placeholder-images";
 import { Separator } from "./ui/separator";
+import { colors } from "@/lib/config";
+import { cn } from "@/lib/utils";
 
 interface JobDetailsModalProps {
   isOpen: boolean;
@@ -21,6 +23,9 @@ interface JobDetailsModalProps {
 
 export function JobDetailsModal({ isOpen, onClose, job }: JobDetailsModalProps) {
   if (!job) return null;
+
+  const jobColors = job.colores.split(',').map(c => c.trim().toLowerCase());
+  const colorDetails = colors.filter(c => jobColors.includes(c.name.toLowerCase()));
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
@@ -51,8 +56,15 @@ export function JobDetailsModal({ isOpen, onClose, job }: JobDetailsModalProps) 
                     <p className="font-semibold text-muted-foreground">Medidas:</p>
                     <p>{job.medidas}</p>
 
-                    <p className="font-semibold text-muted-foreground">Colores:</p>
-                    <p>{job.colores}</p>
+                    <p className="font-semibold text-muted-foreground flex items-center">Colores:</p>
+                    <div className="flex items-center gap-2 flex-wrap">
+                      {colorDetails.map(color => (
+                        <div key={color.name} className="flex items-center gap-1.5">
+                           <div className={cn("w-4 h-4 rounded-full border", color.twClass)} style={{backgroundColor: color.value}}></div>
+                           <span className="text-xs">{color.name}</span>
+                        </div>
+                      ))}
+                    </div>
 
                     <p className="font-semibold text-muted-foreground">Ciudad:</p>
                     <p>{job.ciudad}</p>

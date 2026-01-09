@@ -55,7 +55,7 @@
       "alt": "Cliente con un letrero de neón 'Skandaloso'.",
       "nombre": "Skandaloso",
       "medidas": "100cm x 40cm",
-      "colores": "Fucsia",
+      "colores": "Fuchsia",
       "ciudad": "Lima",
       "imageUrl": "https://picsum.photos/seed/job1/600/600",
       "imageHint": "client neon"
@@ -65,7 +65,7 @@
       "alt": "Cliente con un letrero de neón de alas y 'Lucas Art'.",
       "nombre": "Lucas Art",
       "medidas": "120cm x 80cm",
-      "colores": "Blanco, Amarillo",
+      "colores": "Cyan, Yellow",
       "ciudad": "Arequipa",
       "imageUrl": "https://picsum.photos/seed/job2/600/600",
       "imageHint": "wings neon"
@@ -75,7 +75,7 @@
       "alt": "Letrero de neón 'Fall in love with your smile' en una silla elegante.",
       "nombre": "Love Your Smile",
       "medidas": "80cm x 60cm",
-      "colores": "Rosa",
+      "colores": "Red",
       "ciudad": "Cusco",
       "imageUrl": "https://picsum.photos/seed/job3/600/600",
       "imageHint": "chair neon"
@@ -85,7 +85,7 @@
       "alt": "Cliente con un letrero de neón 'Box Brand Box'.",
       "nombre": "Box Brand Box",
       "medidas": "90cm x 90cm",
-      "colores": "Azul, Rojo",
+      "colores": "Blue, Red",
       "ciudad": "Trujillo",
       "imageUrl": "https://picsum.photos/seed/job4/600/600",
       "imageHint": "box neon"
@@ -95,7 +95,7 @@
       "alt": "Cliente con un letrero de neón de los Rolling Stones.",
       "nombre": "Rolling Stones",
       "medidas": "70cm x 70cm",
-      "colores": "Rojo",
+      "colores": "Red",
       "ciudad": "Lima",
       "imageUrl": "https://picsum.photos/seed/job5/600/600",
       "imageHint": "stones neon"
