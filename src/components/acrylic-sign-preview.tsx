@@ -105,7 +105,7 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
               className={cn(
                 "relative w-full h-full flex items-center justify-center p-8 backdrop-blur-sm transition-all duration-300 overflow-hidden",
                 mirrorColor.value,
-                shapeClasses[shape]
+                shape === 'circle' ? 'rounded-full' : 'rounded-2xl'
               )}
               style={{
                 boxShadow: 'inset 0 0 40px rgba(255,255,255,0.1), 0 0 20px rgba(0,0,0,0.5)',
@@ -137,12 +137,13 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
               <div
                 className={cn(
                   'absolute pointer-events-none',
-                  shapeClasses[shape],
-                  frameInsetClass
+                  frameInsetClass,
+                   shape === 'circle' ? 'rounded-full' : 'rounded-2xl',
+                  'w-full h-full'
                 )}
                 style={{
                   border: `4px solid ${frame.value}`,
-                  boxShadow: `0 0 10px ${frame.value}, 0 0 20px ${frame.value}`,
+                  boxShadow: `0 0 10px ${frame.value}, inset 0 0 10px ${frame.value}`,
                 }}
               />
             )}
