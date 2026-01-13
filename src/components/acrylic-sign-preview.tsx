@@ -136,12 +136,12 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
             {hasFrame && (
               <div
                 className={cn(
-                  'absolute border-4 pointer-events-none',
+                  'absolute pointer-events-none',
                   shapeClasses[shape],
                   frameInsetClass
                 )}
                 style={{
-                  borderColor: frame.value,
+                  border: `4px solid ${frame.value}`,
                   boxShadow: `0 0 10px ${frame.value}, 0 0 20px ${frame.value}`,
                 }}
               />
