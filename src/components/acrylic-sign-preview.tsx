@@ -77,7 +77,7 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
 
     const SilhouetteIcon = silhouette?.Icon;
     const hasFrame = frame.name !== "Sin Marco";
-    const frameInsetClass = frameStyle === 'edge' ? 'inset-0' : 'inset-4';
+    const frameInsetClass = frameStyle === 'edge' ? 'inset-0' : 'inset-2';
 
     return (
       <div 
@@ -113,7 +113,7 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
               }}
             >
               {/* Reflejo sutil */}
-              <div className="absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-white/10 to-transparent "/>
+              <div className={cn("absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-white/10 to-transparent", shape === 'circle' && 'rounded-full')} />
 
               <div className="relative text-center flex flex-col items-center gap-2">
                 {SilhouetteIcon && (
