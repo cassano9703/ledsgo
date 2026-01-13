@@ -102,8 +102,8 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
           <div className={cn("relative flex items-center justify-center", shapeClasses[shape])}>
             <div 
               className={cn(
-                "relative w-full h-full p-2 transition-all duration-300",
-                hasFrame ? frame.twClass : mirrorColor.value,
+                "relative w-full h-full transition-all duration-300",
+                hasFrame ? `${frame.twClass} ${framePaddingClass}` : mirrorColor.value,
                 shapeClasses[shape]
               )}
             >
