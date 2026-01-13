@@ -77,7 +77,7 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
 
     const SilhouetteIcon = silhouette?.Icon;
     const hasFrame = frame.name !== "Sin Marco";
-    const frameInsetClass = frameStyle === 'edge' ? 'inset-0' : 'inset-2';
+    const framePaddingClass = frameStyle === 'edge' ? 'p-0.5' : 'p-2';
 
     return (
       <div 
@@ -100,52 +100,46 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
           onTouchStart={handleDragStart}
         >
           <div className={cn("relative flex items-center justify-center", shapeClasses[shape])}>
-            
             <div 
               className={cn(
-                "relative w-full h-full flex items-center justify-center p-8 backdrop-blur-sm transition-all duration-300 overflow-hidden",
-                shapeClasses[shape],
-                mirrorColor.value,
+                "relative w-full h-full p-2 transition-all duration-300",
+                hasFrame ? frame.twClass : mirrorColor.value,
+                shapeClasses[shape]
               )}
-              // Simula el efecto espejo
-              style={{
-                boxShadow: 'inset 0 0 40px rgba(255,255,255,0.1), 0 0 20px rgba(0,0,0,0.5)',
-              }}
             >
-              {/* Reflejo sutil */}
-              <div className={cn("absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-white/10 to-transparent", shape === 'circle' && 'rounded-full')} />
-
-              <div className="relative text-center flex flex-col items-center gap-2">
-                {SilhouetteIcon && (
-                  <SilhouetteIcon 
-                    className="transition-all duration-300 ease-in-out"
-                    style={{ 
-                      color: color.value,
-                      width: `${baseFontSize * size.multiplier * 0.8}rem`,
-                      height: `${baseFontSize * size.multiplier * 0.8}rem`,
-                      filter: `drop-shadow(0 0 5px ${color.value})`,
-                    }} 
-                  />
-                )}
-                <p
-                  className='font-bold break-words transition-all duration-300 ease-in-out select-none'
-                  style={textStyle}
-                >
-                  {previewText}
-                </p>
-              </div>
-
-            </div>
-             {hasFrame && (
               <div 
                 className={cn(
-                  "absolute border-4 bg-transparent transition-all duration-300",
-                  frameInsetClass,
-                  frame.twClass,
-                  shape === 'circle' ? 'rounded-full' : 'rounded-2xl'
+                  "relative w-full h-full flex items-center justify-center p-8 backdrop-blur-sm transition-all duration-300 overflow-hidden",
+                  mirrorColor.value,
+                   shape === 'circle' ? 'rounded-full' : 'rounded-xl'
                 )}
-              />
-            )}
+                style={{
+                  boxShadow: 'inset 0 0 40px rgba(255,255,255,0.1), 0 0 20px rgba(0,0,0,0.5)',
+                }}
+              >
+                <div className={cn("absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-white/10 to-transparent", shape === 'circle' ? 'rounded-full' : 'rounded-xl')} />
+
+                <div className="relative text-center flex flex-col items-center gap-2">
+                  {SilhouetteIcon && (
+                    <SilhouetteIcon 
+                      className="transition-all duration-300 ease-in-out"
+                      style={{ 
+                        color: color.value,
+                        width: `${baseFontSize * size.multiplier * 0.8}rem`,
+                        height: `${baseFontSize * size.multiplier * 0.8}rem`,
+                        filter: `drop-shadow(0 0 5px ${color.value})`,
+                      }} 
+                    />
+                  )}
+                  <p
+                    className='font-bold break-words transition-all duration-300 ease-in-out select-none'
+                    style={textStyle}
+                  >
+                    {previewText}
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

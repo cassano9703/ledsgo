@@ -64,10 +64,10 @@ export type FrameConfig = {
 };
 
 export const frameOptions: FrameConfig[] = [
-    { name: "Sin Marco", twClass: "border-transparent" },
-    { name: "Dorado", twClass: "border-yellow-400" },
-    { name: "Plateado", twClass: "border-slate-400" },
-    { name: "Negro", twClass: "border-black" },
+    { name: "Sin Marco", twClass: "" },
+    { name: "Dorado", twClass: "bg-gradient-to-br from-yellow-200 via-yellow-400 to-yellow-600" },
+    { name: "Plateado", twClass: "bg-gradient-to-br from-slate-200 via-slate-400 to-slate-600" },
+    { name: "Negro", twClass: "bg-gradient-to-br from-gray-700 via-gray-900 to-black" },
 ];
 
 
