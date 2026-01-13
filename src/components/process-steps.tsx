@@ -29,7 +29,7 @@ const steps = [
 export function ProcessSteps() {
   return (
     <div className="space-y-4 w-full">
-      <div className="mb-8 space-y-2 text-left">
+      <div className="mb-8 space-y-2 text-center lg:text-left">
         <h3 className="text-2xl font-bold tracking-tighter text-primary sm:text-3xl font-headline">
           Proceso de Atención
         </h3>
@@ -40,31 +40,42 @@ export function ProcessSteps() {
         <div className="absolute left-1/2 top-0 h-full w-[2px] -translate-x-1/2 bg-primary/30" style={{boxShadow: '0 0 10px hsl(var(--primary))'}}></div>
         
         {steps.map((step, index) => (
-          <div key={index} className={cn(
-            "relative mb-12 flex w-full items-center",
-            index % 2 === 0 ? "justify-start" : "justify-end"
-          )}>
-            <div className={cn(
-                "w-1/2",
-                index % 2 === 0 ? "pr-8" : "pl-8"
-            )}>
-              <div className={cn(
-                  "relative",
-                  index % 2 === 0 ? "text-right" : "text-left"
-              )}>
-                <div className="absolute top-1/2 -translate-y-1/2 flex items-center"
-                  style={index % 2 === 0 ? { right: '-2.25rem' } : { left: '-2.25rem' }}
-                >
-                    <div className={cn("absolute w-8 h-[2px] bg-primary/50", index % 2 === 0 ? "right-full" : "left-full")} style={{boxShadow: '0 0 10px hsl(var(--primary))'}}></div>
-                    <div className="z-10 flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-secondary border-2 border-primary" style={{boxShadow: '0 0 15px hsl(var(--primary))'}}>
-                        <step.icon className="h-7 w-7 text-primary" />
+          <div key={index} className="relative mb-12 flex w-full items-center">
+            {index % 2 === 0 ? (
+              // Step on the left, text on the right
+              <>
+                <div className="w-1/2"></div>
+                <div className="w-1/2 pl-8">
+                   <div className="relative">
+                    <div className="absolute top-1/2 -translate-y-1/2 -left-8 flex items-center">
+                        <div className="z-10 flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-secondary border-2 border-primary" style={{boxShadow: '0 0 15px hsl(var(--primary))'}}>
+                            <step.icon className="h-7 w-7 text-primary" />
+                        </div>
+                        <div className="absolute left-full w-8 h-[2px] bg-primary/50" style={{boxShadow: '0 0 10px hsl(var(--primary))'}}></div>
                     </div>
+                    <h4 className="text-lg font-bold text-primary text-left">{step.title}</h4>
+                    <p className="mt-1 text-sm text-muted-foreground text-left">{step.description}</p>
+                  </div>
                 </div>
-
-                <h4 className="text-lg font-bold text-primary">{step.title}</h4>
-                <p className="mt-1 text-sm text-muted-foreground">{step.description}</p>
-              </div>
-            </div>
+              </>
+            ) : (
+              // Step on the right, text on the left
+              <>
+                <div className="w-1/2 pr-8">
+                  <div className="relative">
+                    <div className="absolute top-1/2 -translate-y-1/2 -right-8 flex items-center">
+                        <div className="absolute right-full w-8 h-[2px] bg-primary/50" style={{boxShadow: '0 0 10px hsl(var(--primary))'}}></div>
+                        <div className="z-10 flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-secondary border-2 border-primary" style={{boxShadow: '0 0 15px hsl(var(--primary))'}}>
+                            <step.icon className="h-7 w-7 text-primary" />
+                        </div>
+                    </div>
+                    <h4 className="text-lg font-bold text-primary text-right">{step.title}</h4>
+                    <p className="mt-1 text-sm text-muted-foreground text-right">{step.description}</p>
+                  </div>
+                </div>
+                <div className="w-1/2"></div>
+              </>
+            )}
           </div>
         ))}
       </div>
