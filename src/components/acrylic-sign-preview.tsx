@@ -142,8 +142,7 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
                   "absolute border-4 bg-transparent transition-all duration-300",
                   frameInsetClass,
                   frame.twClass,
-                  shape === 'circle' && 'rounded-full',
-                  shape !== 'circle' && 'rounded-2xl'
+                  shape === 'circle' ? 'rounded-full' : 'rounded-2xl'
                 )}
               />
             )}
