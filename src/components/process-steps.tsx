@@ -44,8 +44,8 @@ export function ProcessSteps() {
             <div key={index} className={`relative flex items-center w-full ${isOdd ? 'justify-start' : 'justify-end'}`}>
                {/* Contenido */}
               <div className={`w-1/2 px-8 ${isOdd ? 'text-left' : 'text-right'}`}>
-                  <h4 className="text-xl font-bold text-primary font-display tracking-wider">{step.title}</h4>
-                  <p className="mt-2 text-base text-muted-foreground">{step.description}</p>
+                  <h4 className="text-2xl font-bold text-primary font-display tracking-wider">{step.title}</h4>
+                  <p className="mt-2 text-lg text-muted-foreground">{step.description}</p>
               </div>
               
                {/* Icono */}
