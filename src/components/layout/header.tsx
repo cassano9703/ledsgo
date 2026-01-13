@@ -1,6 +1,13 @@
 import Link from "next/link";
 import { Logo } from "@/components/icons";
 import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { ChevronDown } from "lucide-react";
 
 export function Header() {
   return (
@@ -29,13 +36,24 @@ export function Header() {
         >
           Galería
         </Link>
-        <Link
-          href="/crear"
-          className="text-sm font-medium text-foreground/80 hover:text-accent transition-colors"
-          prefetch={false}
-        >
-          Diseña tu Neón
-        </Link>
+        
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="ghost" className="flex items-center gap-1 text-sm font-medium text-foreground/80 hover:text-accent transition-colors">
+              Diseña tu Letrero
+              <ChevronDown className="w-4 h-4" />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent>
+            <DropdownMenuItem asChild>
+              <Link href="/crear">Letreros Neón</Link>
+            </DropdownMenuItem>
+            <DropdownMenuItem asChild>
+              <Link href="/crear/acrilico-espejo">Acrílicos Espejo</Link>
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+
         <Link
           href="/#about-us"
           className="text-sm font-medium text-foreground/80 hover:text-accent transition-colors"

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef, useCallback } from "react";
-import { fonts, colors, sizes, backgrounds } from "@/lib/config";
+import { fonts, acrylicColors, sizes, backgrounds } from "@/lib/config";
 import type { FontConfig, ColorConfig, SizeConfig, BackgroundConfig } from "@/lib/config";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
@@ -9,24 +9,24 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { LedSignPreview } from "./led-sign-preview";
+import { AcrylicSignPreview } from "./acrylic-sign-preview";
 import { OrderModal } from "./order-modal";
 import { cn } from "@/lib/utils";
-import { Heart, Star } from "lucide-react";
 import { toPng } from 'html-to-image';
 import { useToast } from "@/hooks/use-toast";
+import { Circle, Square, RectangleHorizontal } from "lucide-react";
 import Image from "next/image";
 
-const EMOJIS = ["♡", "☆"];
+type Shape = "circle" | "square" | "rectangle";
 
-export function LedSignConfigurator() {
-  const [text, setText] = useState("Leds Go!");
-  const [text2, setText2] = useState("");
-  const [font, setFont] = useState<FontConfig>(fonts[4]);
-  const [color, setColor] = useState<ColorConfig>(colors[0]);
+export function AcrylicSignConfigurator() {
+  const [text, setText] = useState("Dra. Sophia");
+  const [font, setFont] = useState<FontConfig>(fonts[2]);
+  const [color, setColor] = useState<ColorConfig>(acrylicColors[0]);
   const [size, setSize] = useState<SizeConfig>(sizes[1]);
-  const [background, setBackground] = useState<BackgroundConfig>(backgrounds[0]);
-  
+  const [shape, setShape] = useState<Shape>('circle');
+  const [background, setBackground] = useState<BackgroundConfig>(backgrounds[2]);
+
   const [isOrderModalOpen, setOrderModalOpen] = useState(false);
   const [capturedImage, setCapturedImage] = useState<string | null>(null);
   
@@ -37,29 +37,6 @@ export function LedSignConfigurator() {
     const newFont = fonts.find((f) => f.name === fontName);
     if (newFont) setFont(newFont);
   };
-
-  const removeEmojis = (str: string) => {
-    let newStr = str;
-    for (const e of EMOJIS) {
-      newStr = newStr.replaceAll(e, "");
-    }
-    return newStr.trim();
-  }
-
-  const addEmoji = (emoji: string) => {
-    const textWithoutEmojis = removeEmojis(text);
-    setText(textWithoutEmojis + " " + emoji);
-  };
-  
-  const handleTextChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newText = e.target.value;
-    
-    if (EMOJIS.some(emoji => text.includes(emoji)) && !EMOJIS.some(emoji => newText.includes(emoji))) {
-      setText(removeEmojis(newText));
-    } else {
-      setText(newText);
-    }
-  }
 
   const captureImage = useCallback((callback: (dataUrl: string) => void) => {
     if (previewRef.current === null) {
@@ -85,44 +62,43 @@ export function LedSignConfigurator() {
     });
   };
 
-
-  const currentConfig = { text, text2, font, color: color.name, size, capturedImage };
+  const currentConfig = { text, font, color: color.name, size, capturedImage };
 
   return (
     <>
       <div className="mt-12 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
         
         <div className="lg:col-span-1">
-            <div className="flex lg:flex-col gap-2">
-                {backgrounds.map(bg => (
-                    <div 
-                        key={bg.name}
-                        className={cn(
-                            "rounded-md border-2 overflow-hidden cursor-pointer transition-all w-20 h-16",
-                            background.name === bg.name ? "border-primary ring-2 ring-primary" : "border-transparent"
-                        )}
-                        onClick={() => setBackground(bg)}
-                    >
-                        <Image 
-                            src={bg.imageUrl}
-                            alt={bg.name}
-                            width={80}
-                            height={60}
-                            className="object-cover w-full h-full"
-                        />
-                    </div>
-                ))}
-            </div>
+          <div className="flex lg:flex-col gap-2">
+              {backgrounds.map(bg => (
+                  <div 
+                      key={bg.name}
+                      className={cn(
+                          "rounded-md border-2 overflow-hidden cursor-pointer transition-all w-20 h-16",
+                          background.name === bg.name ? "border-primary ring-2 ring-primary" : "border-transparent"
+                      )}
+                      onClick={() => setBackground(bg)}
+                  >
+                      <Image 
+                          src={bg.imageUrl}
+                          alt={bg.name}
+                          width={80}
+                          height={60}
+                          className="object-cover w-full h-full"
+                      />
+                  </div>
+              ))}
+          </div>
         </div>
         
         <div className="lg:col-span-8">
-           <LedSignPreview 
+           <AcrylicSignPreview
             ref={previewRef}
-            text={text} 
-            text2={text2}
-            font={font} 
-            color={color} 
+            text={text}
+            font={font}
+            color={color}
             size={size}
+            shape={shape}
             background={background}
           />
         </div>
@@ -131,50 +107,41 @@ export function LedSignConfigurator() {
           <CardHeader>
             <CardTitle>Detalles del Letrero</CardTitle>
             <CardDescription>
-                Ingresa el texto y elige tus opciones a continuación.
+                Personaliza tu acrílico espejo.
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-6">
             <div className="space-y-3">
-              <Label htmlFor="sign-text">Texto</Label>
-              <div className="flex items-center gap-2">
-                <Input
-                  id="sign-text"
-                  placeholder="Tu texto aquí"
-                  value={text}
-                  onChange={handleTextChange}
-                  className="flex-1"
-                />
-                <Button variant="outline" size="icon" onClick={() => addEmoji('♡')}>
-                    <Heart className="w-4 h-4" />
-                </Button>
-                <Button variant="outline" size="icon" onClick={() => addEmoji('☆')}>
-                    <Star className="w-4 h-4 fill-transparent" />
-                </Button>
-              </div>
+              <Label htmlFor="sign-text">Texto Grabado</Label>
               <Input
-                id="sign-text-2"
-                placeholder="Segunda línea (opcional)"
-                value={text2}
-                onChange={(e) => setText2(e.target.value)}
+                id="sign-text"
+                placeholder="Tu texto aquí"
+                value={text}
+                onChange={(e) => setText(e.target.value)}
+                className="flex-1"
               />
             </div>
             
             <div className="space-y-2">
-              <Label>Color</Label>
+              <Label>Forma del Acrílico</Label>
+              <div className="flex gap-2">
+                <Button variant={shape === 'circle' ? 'default' : 'outline'} onClick={() => setShape('circle')} size="icon"><Circle/></Button>
+                <Button variant={shape === 'square' ? 'default' : 'outline'} onClick={() => setShape('square')} size="icon"><Square/></Button>
+                <Button variant={shape === 'rectangle' ? 'default' : 'outline'} onClick={() => setShape('rectangle')} size="icon"><RectangleHorizontal/></Button>
+              </div>
+            </div>
+
+            <div className="space-y-2">
+              <Label>Color del Grabado</Label>
               <RadioGroup
                   value={color.name}
-                  onValueChange={(val) => setColor(colors.find(c => c.name === val)!)}
+                  onValueChange={(val) => setColor(acrylicColors.find(c => c.name === val)!)}
                   className="flex flex-wrap gap-2"
               >
-                  {colors.map((c) => (
-                    <Label key={c.name} htmlFor={c.name} className={`relative flex items-center justify-center rounded-full w-8 h-8 cursor-pointer transition-all border-2 ${color.name === c.name ? 'border-primary ring-2 ring-primary ring-offset-2' : 'border-border'}`}>
-                        <RadioGroupItem value={c.name} id={c.name} className="sr-only" />
-                        {c.name === 'RGB' ? (
-                          <span className="w-full h-full rounded-full bg-gradient-to-r from-red-500 via-green-500 to-blue-500 animate-spin" />
-                        ) : (
-                           <span className={cn("w-full h-full rounded-full", c.twClass)} />
-                        )}
+                  {acrylicColors.map((c) => (
+                    <Label key={c.name} htmlFor={`acrylic-${c.name}`} className={`relative flex items-center justify-center rounded-full w-8 h-8 cursor-pointer transition-all border-2 ${color.name === c.name ? 'border-primary ring-2 ring-primary ring-offset-2' : 'border-border'}`}>
+                        <RadioGroupItem value={c.name} id={`acrylic-${c.name}`} className="sr-only" />
+                        <span className={cn("w-full h-full rounded-full", c.twClass)} />
                     </Label>
                   ))}
               </RadioGroup>

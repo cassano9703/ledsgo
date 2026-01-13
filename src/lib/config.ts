@@ -35,6 +35,14 @@ export const colors: ColorConfig[] = [
   { name: "RGB", value: "rgb", twClass: "" },
 ];
 
+export const acrylicColors: ColorConfig[] = [
+  { name: "Dorado", value: "#D4AF37", twClass: "bg-yellow-600" },
+  { name: "Plata", value: "#C0C0C0", twClass: "bg-slate-400" },
+  { name: "Oro Rosa", value: "#B76E79", twClass: "bg-rose-400" },
+  { name: "Negro", value: "#000000", twClass: "bg-black" },
+  { name: "Blanco", value: "#FFFFFF", twClass: "bg-white" },
+];
+
 export type SizeConfig = {
   name: string;
   multiplier: number;
