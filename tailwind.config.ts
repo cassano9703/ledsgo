@@ -13,6 +13,7 @@ export default {
       fontFamily: {
         body: ['Poppins', 'sans-serif'],
         headline: ['Poppins', 'sans-serif'],
+        display: ['Bebas Neue', 'sans-serif'],
         code: ['monospace'],
       },
       colors: {

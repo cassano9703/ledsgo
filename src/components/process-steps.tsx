@@ -42,22 +42,13 @@ export function ProcessSteps() {
           const isOdd = index % 2 !== 0;
           return (
             <div key={index} className={`relative flex items-center w-full ${isOdd ? 'justify-start' : 'justify-end'}`}>
-              <div className="w-1/2 px-8">
-                {isOdd ? (
-                  // Content on the right for odd items
-                  <div className="text-left">
-                    <h4 className="text-lg font-bold text-primary">{step.title}</h4>
-                    <p className="mt-1 text-sm text-muted-foreground">{step.description}</p>
-                  </div>
-                ) : (
-                  // Content on the left for even items
-                  <div className="text-right">
-                    <h4 className="text-lg font-bold text-primary">{step.title}</h4>
-                    <p className="mt-1 text-sm text-muted-foreground">{step.description}</p>
-                  </div>
-                )}
+               {/* Contenido */}
+              <div className={`w-1/2 px-8 ${isOdd ? 'text-left' : 'text-right'}`}>
+                  <h4 className="text-xl font-bold text-primary font-display tracking-wider">{step.title}</h4>
+                  <p className="mt-2 text-base text-muted-foreground">{step.description}</p>
               </div>
               
+               {/* Icono */}
               <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
                 <div 
                   className="flex h-16 w-16 items-center justify-center rounded-full bg-secondary border-2 border-primary"
