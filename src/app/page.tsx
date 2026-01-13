@@ -2,7 +2,6 @@ import { Header } from "@/components/layout/header";
 import { HeroCarousel } from "@/components/hero-carousel";
 import { MovingTextBar } from "@/components/moving-text-bar";
 import { PremadeDesigns } from "@/components/premade-designs";
-import { ProductCategories } from "@/components/product-categories";
 import { Differentiators } from "@/components/differentiators";
 import { OurJobsCarousel } from "@/components/our-jobs-carousel";
 import { ColorPalette } from "@/components/color-palette";
@@ -73,7 +72,6 @@ export default function Home() {
             </div>
           </div>
         </section>
-        <ProductCategories />
       </main>
       <footer className="flex flex-col gap-2 sm:flex-row py-6 w-full shrink-0 items-center px-4 md:px-6 border-t">
         <p className="text-xs text-muted-foreground">&copy; {new Date().getFullYear()} Leds Go. Todos los derechos reservados.</p>
