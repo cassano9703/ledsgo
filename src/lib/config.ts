@@ -60,14 +60,15 @@ export const mirrorColors: ColorConfig[] = [
 
 export type FrameConfig = {
   name: string;
+  value: string;
   twClass: string;
 };
 
 export const frameOptions: FrameConfig[] = [
-    { name: "Sin Marco", twClass: "" },
-    { name: "Dorado", twClass: "bg-gradient-to-br from-yellow-200 via-yellow-400 to-yellow-600" },
-    { name: "Plateado", twClass: "bg-gradient-to-br from-slate-200 via-slate-400 to-slate-600" },
-    { name: "Negro", twClass: "bg-gradient-to-br from-gray-700 via-gray-900 to-black" },
+    { name: "Sin Marco", value: "", twClass: "" },
+    { name: "Dorado", value: "#FFD700", twClass: "border-yellow-400" },
+    { name: "Plateado", value: "#C0C0C0", twClass: "border-slate-300" },
+    { name: "Negro", value: "#000000", twClass: "border-black" },
 ];
 
 

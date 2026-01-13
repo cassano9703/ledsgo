@@ -79,7 +79,6 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
     const hasFrame = frame.name !== "Sin Marco";
     
     const frameInsetClass = frameStyle === 'edge' ? 'inset-0' : 'inset-2';
-    const frameBorderClass = frameStyle === 'edge' ? 'border-2' : 'border-4';
 
     return (
       <div 
@@ -112,7 +111,7 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
                 boxShadow: 'inset 0 0 40px rgba(255,255,255,0.1), 0 0 20px rgba(0,0,0,0.5)',
               }}
             >
-              <div className={cn("absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-white/10 to-transparent", shape === 'circle' ? 'rounded-full' : 'rounded-xl')} />
+              <div className={cn("absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-white/10 to-transparent", shape === 'circle' ? 'rounded-full' : '')} />
 
               <div className="relative text-center flex flex-col items-center gap-2">
                 {SilhouetteIcon && (
@@ -135,14 +134,16 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
               </div>
             </div>
             {hasFrame && (
-              <div 
+              <div
                 className={cn(
-                  'absolute bg-transparent border-transparent bg-clip-padding',
+                  'absolute border-2 pointer-events-none',
                   frame.twClass,
                   shapeClasses[shape],
-                  frameInsetClass,
-                  frameBorderClass
-                )} 
+                  frameInsetClass
+                )}
+                style={{
+                  boxShadow: `0 0 10px ${frame.value}, 0 0 20px ${frame.value}`,
+                }}
               />
             )}
           </div>
