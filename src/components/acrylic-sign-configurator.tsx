@@ -27,11 +27,11 @@ export function AcrylicSignConfigurator() {
   const [engravingColor, setEngravingColor] = useState<ColorConfig>(acrylicColors[0]);
   const [mirrorColor, setMirrorColor] = useState<ColorConfig>(mirrorColors[0]);
   const [size, setSize] = useState<SizeConfig>(sizes[1]);
-  const [shape, setShape] = useState<Shape>('circle');
+  const [shape, setShape] = useState<Shape>('rectangle');
   const [background, setBackground] = useState<BackgroundConfig>(backgrounds[2]);
   const [silhouette, setSilhouette] = useState<SilhouetteConfig | null>(null);
-  const [frame, setFrame] = useState<FrameConfig>(frameOptions[0]);
-  const [frameStyle, setFrameStyle] = useState<FrameStyle>('edge');
+  const [frame, setFrame] = useState<FrameConfig>(frameOptions[1]);
+  const [frameStyle, setFrameStyle] = useState<FrameStyle>('margin');
 
 
   const [isOrderModalOpen, setOrderModalOpen] = useState(false);
@@ -141,28 +141,29 @@ export function AcrylicSignConfigurator() {
               />
             </div>
             
-            <div className="space-y-2">
-              <Label>Forma del Acrílico</Label>
-              <div className="flex gap-2">
-                <Button variant={shape === 'circle' ? 'default' : 'outline'} onClick={() => setShape('circle')} size="icon"><Circle/></Button>
-                <Button variant={shape === 'square' ? 'default' : 'outline'} onClick={() => setShape('square')} size="icon"><Square/></Button>
-                <Button variant={shape === 'rectangle' ? 'default' : 'outline'} onClick={() => setShape('rectangle')} size="icon"><RectangleHorizontal/></Button>
+            <div className="grid grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <Label>Forma del Acrílico</Label>
+                <div className="flex gap-2">
+                  <Button variant={shape === 'circle' ? 'default' : 'outline'} onClick={() => setShape('circle')} size="icon"><Circle/></Button>
+                  <Button variant={shape === 'square' ? 'default' : 'outline'} onClick={() => setShape('square')} size="icon"><Square/></Button>
+                  <Button variant={shape === 'rectangle' ? 'default' : 'outline'} onClick={() => setShape('rectangle')} size="icon"><RectangleHorizontal/></Button>
+                </div>
               </div>
-            </div>
-
-            <div className="space-y-3">
-              <Label>Silueta (Opcional)</Label>
-              <div className="flex gap-2">
-                {silhouettes.map((s) => (
-                  <Button 
-                    key={s.name}
-                    variant={silhouette?.name === s.name ? 'default' : 'outline'}
-                    onClick={() => handleSilhouetteClick(s)}
-                    size="icon"
-                  >
-                    <s.Icon className="w-5 h-5"/>
-                  </Button>
-                ))}
+              <div className="space-y-3">
+                <Label>Silueta (Opcional)</Label>
+                <div className="flex gap-2">
+                  {silhouettes.map((s) => (
+                    <Button 
+                      key={s.name}
+                      variant={silhouette?.name === s.name ? 'default' : 'outline'}
+                      onClick={() => handleSilhouetteClick(s)}
+                      size="icon"
+                    >
+                      <s.Icon className="w-5 h-5"/>
+                    </Button>
+                  ))}
+                </div>
               </div>
             </div>
 
