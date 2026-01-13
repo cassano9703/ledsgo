@@ -1,4 +1,4 @@
-import { Briefcase, Calendar, Home } from "lucide-react";
+import { Briefcase, Home } from "lucide-react";
 import { Card } from "./ui/card";
 
 const categories = [
@@ -6,11 +6,6 @@ const categories = [
     name: "Negocios",
     icon: Briefcase,
     color: "cyan",
-  },
-  {
-    name: "Eventos",
-    icon: Calendar,
-    color: "fuchsia",
   },
   {
     name: "Home Decor",
@@ -30,7 +25,7 @@ export function ProductCategories() {
             </h2>
           </div>
         </div>
-        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 max-w-5xl mx-auto">
+        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-2 max-w-3xl mx-auto">
           {categories.map((category) => (
             <Card
               key={category.name}
