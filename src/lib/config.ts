@@ -1,5 +1,6 @@
 import type { SVGProps } from "react";
-import { Scissors, Sparkles, Tooth } from "lucide-react";
+import { Sparkles, Scissors } from "lucide-react";
+import { BarberKnife } from "@/components/icons";
 
 export type FontConfig = {
   name: string;
@@ -78,7 +79,7 @@ export type SilhouetteConfig = {
 };
 
 export const silhouettes: SilhouetteConfig[] = [
-  { name: "Belleza", Icon: Sparkles },
-  { name: "Barbería", Icon: Scissors },
-  { name: "Dental", Icon: Tooth },
+  { name: "Belleza", Icon: Scissors },
+  { name: "Barbería", Icon: BarberKnife },
+  { name: "Dental", Icon: Sparkles },
 ];
