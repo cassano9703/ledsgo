@@ -22,7 +22,7 @@ type Shape = "circle" | "square" | "rectangle";
 export function AcrylicSignConfigurator() {
   const [text, setText] = useState("Dra. Sophia");
   const [font, setFont] = useState<FontConfig>(fonts[2]);
-  const [color, setColor] = useState<ColorConfig>(acrylicColors[0]);
+  const [color, setColor] = useState<ColorConfig>(acrylicColors[2]);
   const [size, setSize] = useState<SizeConfig>(sizes[1]);
   const [shape, setShape] = useState<Shape>('circle');
   const [background, setBackground] = useState<BackgroundConfig>(backgrounds[2]);
@@ -165,7 +165,7 @@ export function AcrylicSignConfigurator() {
                   className="flex flex-wrap gap-2"
               >
                   {acrylicColors.map((c) => (
-                    <Label key={c.name} htmlFor={`acrylic-${c.name}`} className={`relative flex items-center justify-center rounded-full w-8 h-8 cursor-pointer transition-all border-2 ${color.name === c.name ? 'border-primary ring-2 ring-primary ring-offset-2' : 'border-border'}`}>
+                    <Label key={c.name} htmlFor={`acrylic-${c.name}`} className={`relative flex items-center justify-center rounded-full w-8 h-8 cursor-pointer transition-all border-2 ${color.name === c.name ? 'border-primary ring-2 ring-primary' : 'border-border'}`}>
                         <RadioGroupItem value={c.name} id={`acrylic-${c.name}`} className="sr-only" />
                         <span className={cn("w-full h-full rounded-full", c.twClass)} />
                     </Label>
