@@ -77,7 +77,9 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
 
     const SilhouetteIcon = silhouette?.Icon;
     const hasFrame = frame.name !== "Sin Marco";
-    const framePaddingClass = frameStyle === 'edge' ? 'p-0.5' : 'p-2';
+    
+    const frameInsetClass = frameStyle === 'edge' ? 'inset-0' : 'inset-2';
+    const frameBorderClass = frameStyle === 'edge' ? 'border-2' : 'border-4';
 
     return (
       <div 
@@ -102,44 +104,47 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
           <div className={cn("relative flex items-center justify-center", shapeClasses[shape])}>
             <div 
               className={cn(
-                "relative w-full h-full transition-all duration-300",
-                hasFrame ? `${frame.twClass} ${framePaddingClass}` : mirrorColor.value,
+                "relative w-full h-full flex items-center justify-center p-8 backdrop-blur-sm transition-all duration-300 overflow-hidden",
+                mirrorColor.value,
                 shapeClasses[shape]
               )}
+              style={{
+                boxShadow: 'inset 0 0 40px rgba(255,255,255,0.1), 0 0 20px rgba(0,0,0,0.5)',
+              }}
             >
-              <div 
-                className={cn(
-                  "relative w-full h-full flex items-center justify-center p-8 backdrop-blur-sm transition-all duration-300 overflow-hidden",
-                  mirrorColor.value,
-                   shape === 'circle' ? 'rounded-full' : 'rounded-xl'
-                )}
-                style={{
-                  boxShadow: 'inset 0 0 40px rgba(255,255,255,0.1), 0 0 20px rgba(0,0,0,0.5)',
-                }}
-              >
-                <div className={cn("absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-white/10 to-transparent", shape === 'circle' ? 'rounded-full' : 'rounded-xl')} />
+              <div className={cn("absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-white/10 to-transparent", shape === 'circle' ? 'rounded-full' : 'rounded-xl')} />
 
-                <div className="relative text-center flex flex-col items-center gap-2">
-                  {SilhouetteIcon && (
-                    <SilhouetteIcon 
-                      className="transition-all duration-300 ease-in-out"
-                      style={{ 
-                        color: color.value,
-                        width: `${baseFontSize * size.multiplier * 0.8}rem`,
-                        height: `${baseFontSize * size.multiplier * 0.8}rem`,
-                        filter: `drop-shadow(0 0 5px ${color.value})`,
-                      }} 
-                    />
-                  )}
-                  <p
-                    className='font-bold break-words transition-all duration-300 ease-in-out select-none'
-                    style={textStyle}
-                  >
-                    {previewText}
-                  </p>
-                </div>
+              <div className="relative text-center flex flex-col items-center gap-2">
+                {SilhouetteIcon && (
+                  <SilhouetteIcon 
+                    className="transition-all duration-300 ease-in-out"
+                    style={{ 
+                      color: color.value,
+                      width: `${baseFontSize * size.multiplier * 0.8}rem`,
+                      height: `${baseFontSize * size.multiplier * 0.8}rem`,
+                      filter: `drop-shadow(0 0 5px ${color.value})`,
+                    }} 
+                  />
+                )}
+                <p
+                  className='font-bold break-words transition-all duration-300 ease-in-out select-none'
+                  style={textStyle}
+                >
+                  {previewText}
+                </p>
               </div>
             </div>
+            {hasFrame && (
+              <div 
+                className={cn(
+                  'absolute bg-transparent border-transparent bg-clip-padding',
+                  frame.twClass,
+                  shapeClasses[shape],
+                  frameInsetClass,
+                  frameBorderClass
+                )} 
+              />
+            )}
           </div>
         </div>
       </div>
