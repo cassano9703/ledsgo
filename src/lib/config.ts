@@ -50,10 +50,12 @@ export const acrylicColors: ColorConfig[] = [
 
 // Colores del material acrílico espejo
 export const mirrorColors: ColorConfig[] = [
-  { name: "Plata", value: "bg-slate-300/10", twClass: "bg-slate-300" },
+  { name: "Transparente", value: "bg-transparent/10", twClass: "bg-white/30 border border-slate-400" },
+  { name: "Blanco Lechoso", value: "bg-white/10", twClass: "bg-white" },
+  { name: "Negro", value: "bg-black/20", twClass: "bg-black" },
   { name: "Dorado", value: "bg-yellow-500/10", twClass: "bg-yellow-500" },
-  { name: "Oro Rosa", value: "bg-rose-400/10", twClass: "bg-rose-400" },
-  { name: "Bronce", value: "bg-orange-600/10", twClass: "bg-orange-600" },
+  { name: "Plateado", value: "bg-slate-300/10", twClass: "bg-slate-300" },
+  { name: "Rosa", value: "bg-rose-400/10", twClass: "bg-rose-400" },
 ];
 
 export type SizeConfig = {
