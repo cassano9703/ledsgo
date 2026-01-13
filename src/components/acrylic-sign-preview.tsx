@@ -62,6 +62,7 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
       fontFamily: font.style.fontFamily,
       fontSize: dynamicFontSize,
       color: color.value,
+      textShadow: `0 0 8px ${color.value}`,
       ...font.style,
     } as React.CSSProperties;
     
@@ -115,6 +116,7 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
                     color: color.value,
                     width: `${baseFontSize * size.multiplier * 0.8}rem`,
                     height: `${baseFontSize * size.multiplier * 0.8}rem`,
+                    filter: `drop-shadow(0 0 5px ${color.value})`,
                   }} 
                 />
               )}
