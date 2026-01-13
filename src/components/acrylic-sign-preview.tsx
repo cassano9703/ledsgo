@@ -97,19 +97,7 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
           onTouchStart={handleDragStart}
         >
           <div className={cn("relative flex items-center justify-center", shapeClasses[shape])}>
-            {hasFrame && (
-              <div 
-                className={cn(
-                  "absolute -inset-1.5",
-                  frame.twClass,
-                  shape === 'circle' && 'rounded-full',
-                  shape !== 'circle' && 'rounded-[1.25rem]'
-                )}
-                style={{
-                  boxShadow: '0 0 40px 5px #fef08a'
-                }}
-              />
-            )}
+            
             <div 
               className={cn(
                 "relative w-full h-full flex items-center justify-center p-8 backdrop-blur-sm transition-all duration-300 overflow-hidden",
@@ -145,6 +133,16 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
               </div>
 
             </div>
+             {hasFrame && (
+              <div 
+                className={cn(
+                  "absolute inset-0 border-4 bg-transparent",
+                  frame.twClass,
+                  shape === 'circle' && 'rounded-full',
+                  shape !== 'circle' && 'rounded-2xl'
+                )}
+              />
+            )}
           </div>
         </div>
       </div>
