@@ -40,6 +40,7 @@ interface OrderModalProps {
     color: string;
     size: SizeConfig;
     capturedImage: string | null;
+    silhouette?: string;
   };
 }
 
@@ -67,6 +68,7 @@ export function OrderModal({ isOpen, onClose, config }: OrderModalProps) {
       `\n*Detalles del Letrero:*`,
       `- Texto 1: "${config.text}"`,
       config.text2 ? `- Texto 2: "${config.text2}"` : null,
+      config.silhouette ? `- Silueta: ${config.silhouette}` : null,
       `- Tipografía: ${config.font.name}`,
       `- Color: ${config.color}`,
       `- Tamaño: ${config.size.name}`,

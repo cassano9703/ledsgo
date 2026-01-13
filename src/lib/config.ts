@@ -1,3 +1,6 @@
+import type { SVGProps } from "react";
+import { Scissors, Sparkles } from "lucide-react";
+
 export type FontConfig = {
   name: string;
   style: React.CSSProperties;
@@ -68,3 +71,13 @@ export const backgrounds: BackgroundConfig[] = [
     { name: "Madera Negra", imageUrl: "https://i.imgur.com/YLmP78J.jpeg" },
     { name: "Pared Negra", imageUrl: "https://i.imgur.com/x8649Os.jpeg" }, 
   ];
+
+export type SilhouetteConfig = {
+  name: string;
+  Icon: React.ComponentType<SVGProps<SVGSVGElement>>;
+};
+
+export const silhouettes: SilhouetteConfig[] = [
+  { name: "Belleza", Icon: Sparkles },
+  { name: "Barbería", Icon: Scissors },
+];

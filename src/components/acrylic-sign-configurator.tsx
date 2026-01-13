@@ -1,8 +1,8 @@
 "use client";
 
 import { useState, useRef, useCallback } from "react";
-import { fonts, acrylicColors, sizes, backgrounds } from "@/lib/config";
-import type { FontConfig, ColorConfig, SizeConfig, BackgroundConfig } from "@/lib/config";
+import { fonts, acrylicColors, sizes, backgrounds, silhouettes } from "@/lib/config";
+import type { FontConfig, ColorConfig, SizeConfig, BackgroundConfig, SilhouetteConfig } from "@/lib/config";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -14,7 +14,7 @@ import { OrderModal } from "./order-modal";
 import { cn } from "@/lib/utils";
 import { toPng } from 'html-to-image';
 import { useToast } from "@/hooks/use-toast";
-import { Circle, Square, RectangleHorizontal } from "lucide-react";
+import { Circle, Square, RectangleHorizontal, X } from "lucide-react";
 import Image from "next/image";
 
 type Shape = "circle" | "square" | "rectangle";
@@ -26,6 +26,7 @@ export function AcrylicSignConfigurator() {
   const [size, setSize] = useState<SizeConfig>(sizes[1]);
   const [shape, setShape] = useState<Shape>('circle');
   const [background, setBackground] = useState<BackgroundConfig>(backgrounds[2]);
+  const [silhouette, setSilhouette] = useState<SilhouetteConfig | null>(null);
 
   const [isOrderModalOpen, setOrderModalOpen] = useState(false);
   const [capturedImage, setCapturedImage] = useState<string | null>(null);
@@ -62,7 +63,15 @@ export function AcrylicSignConfigurator() {
     });
   };
 
-  const currentConfig = { text, font, color: color.name, size, capturedImage };
+  const handleSilhouetteClick = (s: SilhouetteConfig) => {
+    if (silhouette?.name === s.name) {
+      setSilhouette(null);
+    } else {
+      setSilhouette(s);
+    }
+  }
+
+  const currentConfig = { text, font, color: color.name, size, capturedImage, silhouette: silhouette?.name };
 
   return (
     <>
@@ -100,6 +109,7 @@ export function AcrylicSignConfigurator() {
             size={size}
             shape={shape}
             background={background}
+            silhouette={silhouette}
           />
         </div>
         
@@ -128,6 +138,22 @@ export function AcrylicSignConfigurator() {
                 <Button variant={shape === 'circle' ? 'default' : 'outline'} onClick={() => setShape('circle')} size="icon"><Circle/></Button>
                 <Button variant={shape === 'square' ? 'default' : 'outline'} onClick={() => setShape('square')} size="icon"><Square/></Button>
                 <Button variant={shape === 'rectangle' ? 'default' : 'outline'} onClick={() => setShape('rectangle')} size="icon"><RectangleHorizontal/></Button>
+              </div>
+            </div>
+
+            <div className="space-y-3">
+              <Label>Silueta (Opcional)</Label>
+              <div className="flex gap-2">
+                {silhouettes.map((s) => (
+                  <Button 
+                    key={s.name}
+                    variant={silhouette?.name === s.name ? 'default' : 'outline'}
+                    onClick={() => handleSilhouetteClick(s)}
+                    size="icon"
+                  >
+                    <s.Icon className="w-5 h-5"/>
+                  </Button>
+                ))}
               </div>
             </div>
 

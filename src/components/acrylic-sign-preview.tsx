@@ -2,7 +2,7 @@
 
 import React, { forwardRef, useState, useRef, MouseEvent, TouchEvent } from 'react';
 import { cn } from '@/lib/utils';
-import type { FontConfig, SizeConfig, BackgroundConfig, ColorConfig } from '@/lib/config';
+import type { FontConfig, SizeConfig, BackgroundConfig, ColorConfig, SilhouetteConfig } from '@/lib/config';
 
 interface AcrylicSignPreviewProps {
   text: string;
@@ -11,10 +11,11 @@ interface AcrylicSignPreviewProps {
   size: SizeConfig;
   shape: 'circle' | 'square' | 'rectangle';
   background: BackgroundConfig;
+  silhouette: SilhouetteConfig | null;
 }
 
 export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewProps>(
-  ({ text, font, color, size, shape, background }, ref) => {
+  ({ text, font, color, size, shape, background, silhouette }, ref) => {
     const previewText = text || 'Tu Texto Aquí';
     const baseFontSize = 2.5;
     const dynamicFontSize = `${baseFontSize * size.multiplier}rem`;
@@ -69,6 +70,8 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
       rectangle: 'rounded-2xl aspect-[16/9] w-full',
     };
 
+    const SilhouetteIcon = silhouette?.Icon;
+
     return (
       <div 
         ref={ref}
@@ -102,12 +105,25 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
             {/* Reflejo sutil */}
             <div className="absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-white/10 to-transparent "/>
 
-            <p
-              className='relative text-center font-bold break-words transition-all duration-300 ease-in-out select-none'
-              style={textStyle}
-            >
-              {previewText}
-            </p>
+            <div className="relative text-center flex flex-col items-center gap-2">
+              {SilhouetteIcon && (
+                <SilhouetteIcon 
+                  className="transition-all duration-300 ease-in-out"
+                  style={{ 
+                    color: color.value,
+                    width: `${baseFontSize * size.multiplier * 0.8}rem`,
+                    height: `${baseFontSize * size.multiplier * 0.8}rem`,
+                  }} 
+                />
+              )}
+              <p
+                className='font-bold break-words transition-all duration-300 ease-in-out select-none'
+                style={textStyle}
+              >
+                {previewText}
+              </p>
+            </div>
+
           </div>
         </div>
       </div>
