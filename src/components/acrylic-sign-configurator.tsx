@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState, useRef, useCallback } from "react";
@@ -18,6 +19,7 @@ import { Circle, Square, RectangleHorizontal } from "lucide-react";
 import Image from "next/image";
 
 type Shape = "circle" | "square" | "rectangle";
+type FrameStyle = "edge" | "margin";
 
 export function AcrylicSignConfigurator() {
   const [text, setText] = useState("Dra. Sophia");
@@ -29,6 +31,8 @@ export function AcrylicSignConfigurator() {
   const [background, setBackground] = useState<BackgroundConfig>(backgrounds[2]);
   const [silhouette, setSilhouette] = useState<SilhouetteConfig | null>(null);
   const [frame, setFrame] = useState<FrameConfig>(frameOptions[0]);
+  const [frameStyle, setFrameStyle] = useState<FrameStyle>('edge');
+
 
   const [isOrderModalOpen, setOrderModalOpen] = useState(false);
   const [capturedImage, setCapturedImage] = useState<string | null>(null);
@@ -73,7 +77,7 @@ export function AcrylicSignConfigurator() {
     }
   }
 
-  const currentConfig = { text, font, color: engravingColor.name, size, capturedImage, silhouette: silhouette?.name, mirrorColor: mirrorColor.name, frame: frame.name };
+  const currentConfig = { text, font, color: engravingColor.name, size, capturedImage, silhouette: silhouette?.name, mirrorColor: mirrorColor.name, frame: frame.name, frameStyle };
 
   return (
     <>
@@ -114,6 +118,7 @@ export function AcrylicSignConfigurator() {
             background={background}
             silhouette={silhouette}
             frame={frame}
+            frameStyle={frameStyle}
           />
         </div>
         
@@ -209,6 +214,26 @@ export function AcrylicSignConfigurator() {
               </RadioGroup>
             </div>
 
+            {frame.name !== 'Sin Marco' && (
+              <div className="space-y-2">
+                <Label>Estilo de Marco</Label>
+                <RadioGroup
+                    value={frameStyle}
+                    onValueChange={(val) => setFrameStyle(val as FrameStyle)}
+                    className="flex flex-wrap gap-2"
+                >
+                    <Label htmlFor="frame-edge" className={cn(`relative flex items-center justify-center p-2 h-8 cursor-pointer transition-all border-2 rounded-md text-xs`, frameStyle === 'edge' ? 'border-primary ring-2 ring-primary' : 'border-border')}>
+                        <RadioGroupItem value="edge" id="frame-edge" className="sr-only" />
+                        <span>Al Borde</span>
+                    </Label>
+                    <Label htmlFor="frame-margin" className={cn(`relative flex items-center justify-center p-2 h-8 cursor-pointer transition-all border-2 rounded-md text-xs`, frameStyle === 'margin' ? 'border-primary ring-2 ring-primary' : 'border-border')}>
+                        <RadioGroupItem value="margin" id="frame-margin" className="sr-only" />
+                        <span>Con Margen</span>
+                    </Label>
+                </RadioGroup>
+              </div>
+            )}
+
             <div className="space-y-2">
                 <Label htmlFor="font-select">Tipografía</Label>
                 <Select value={font.name} onValueChange={handleFontChange}>
@@ -255,3 +280,4 @@ export function AcrylicSignConfigurator() {
     </>
   );
 }
+

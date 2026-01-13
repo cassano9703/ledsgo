@@ -1,3 +1,4 @@
+
 'use client';
 
 import React, { forwardRef, useState, useRef, MouseEvent, TouchEvent } from 'react';
@@ -14,10 +15,11 @@ interface AcrylicSignPreviewProps {
   background: BackgroundConfig;
   silhouette: SilhouetteConfig | null;
   frame: FrameConfig;
+  frameStyle: 'edge' | 'margin';
 }
 
 export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewProps>(
-  ({ text, font, color, mirrorColor, size, shape, background, silhouette, frame }, ref) => {
+  ({ text, font, color, mirrorColor, size, shape, background, silhouette, frame, frameStyle }, ref) => {
     const previewText = text || 'Tu Texto Aquí';
     const baseFontSize = 2.5;
     const dynamicFontSize = `${baseFontSize * size.multiplier}rem`;
@@ -75,6 +77,7 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
 
     const SilhouetteIcon = silhouette?.Icon;
     const hasFrame = frame.name !== "Sin Marco";
+    const frameInsetClass = frameStyle === 'edge' ? 'inset-0' : 'inset-4';
 
     return (
       <div 
@@ -136,7 +139,8 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
              {hasFrame && (
               <div 
                 className={cn(
-                  "absolute inset-0 border-4 bg-transparent",
+                  "absolute border-4 bg-transparent transition-all duration-300",
+                  frameInsetClass,
                   frame.twClass,
                   shape === 'circle' && 'rounded-full',
                   shape !== 'circle' && 'rounded-2xl'

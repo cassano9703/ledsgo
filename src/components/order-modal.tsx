@@ -1,3 +1,4 @@
+
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -43,6 +44,7 @@ interface OrderModalProps {
     silhouette?: string;
     mirrorColor?: string;
     frame?: string;
+    frameStyle?: 'edge' | 'margin';
   };
 }
 
@@ -75,6 +77,7 @@ export function OrderModal({ isOpen, onClose, config }: OrderModalProps) {
       `- Tipografía: ${config.font.name}`,
       config.silhouette ? `- Silueta: ${config.silhouette}` : null,
       config.frame && config.frame !== "Sin Marco" ? `- Marco: ${config.frame}` : null,
+      config.frame && config.frame !== "Sin Marco" && config.frameStyle ? `- Estilo de Marco: ${config.frameStyle === 'edge' ? 'Al Borde' : 'Con Margen'}` : null,
       `- Tamaño: ${config.size.name}`,
       `\n_(Se adjuntará una vista previa del diseño)_`
     ];
