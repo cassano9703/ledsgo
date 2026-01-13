@@ -91,7 +91,7 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
         >
           <div 
             className={cn(
-              "relative flex items-center justify-center p-8 bg-black/10 backdrop-blur-sm transition-all duration-300",
+              "relative flex items-center justify-center p-8 bg-black/10 backdrop-blur-sm transition-all duration-300 overflow-hidden",
               shapeClasses[shape]
             )}
             // Simula el efecto espejo
