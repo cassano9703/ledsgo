@@ -70,7 +70,7 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
     } as React.CSSProperties;
     
     const shapeClasses = {
-      circle: 'rounded-full aspect-[9/16] w-1/2',
+      circle: 'rounded-full aspect-square w-3/4',
       square: 'rounded-2xl aspect-square w-3/4',
       rectangle: 'rounded-2xl aspect-[16/9] w-full',
     };
@@ -137,11 +137,11 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
               <div
                 className={cn(
                   'absolute border-4 pointer-events-none',
-                  frame.twClass,
                   shapeClasses[shape],
                   frameInsetClass
                 )}
                 style={{
+                  borderColor: frame.value,
                   boxShadow: `0 0 10px ${frame.value}, 0 0 20px ${frame.value}`,
                 }}
               />

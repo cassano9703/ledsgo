@@ -15,7 +15,8 @@ import { OrderModal } from "./order-modal";
 import { cn } from "@/lib/utils";
 import { toPng } from 'html-to-image';
 import { useToast } from "@/hooks/use-toast";
-import { RectangleVertical, Square, RectangleHorizontal } from "lucide-react";
+import { Square, RectangleHorizontal } from "lucide-react";
+import { CircleIcon } from "@/components/icons";
 import Image from "next/image";
 
 type Shape = "circle" | "square" | "rectangle";
@@ -145,7 +146,7 @@ export function AcrylicSignConfigurator() {
               <div className="space-y-2">
                 <Label>Forma del Acrílico</Label>
                 <div className="flex gap-2">
-                  <Button variant={shape === 'circle' ? 'default' : 'outline'} onClick={() => setShape('circle')} size="icon"><RectangleVertical/></Button>
+                  <Button variant={shape === 'circle' ? 'default' : 'outline'} onClick={() => setShape('circle')} size="icon"><CircleIcon/></Button>
                   <Button variant={shape === 'square' ? 'default' : 'outline'} onClick={() => setShape('square')} size="icon"><Square/></Button>
                   <Button variant={shape === 'rectangle' ? 'default' : 'outline'} onClick={() => setShape('rectangle')} size="icon"><RectangleHorizontal/></Button>
                 </div>
