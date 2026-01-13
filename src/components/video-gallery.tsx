@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
 import { VideoDataItems } from "@/lib/placeholder-images";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Volume2, PlayCircle, Heart } from "lucide-react";
@@ -17,15 +16,17 @@ export function VideoGallery() {
         {VideoDataItems.map((video) => (
           <div
             key={video.id}
-            className="relative group aspect-w-9 aspect-h-16 rounded-lg overflow-hidden border-2 border-card shadow-lg"
+            className="relative group aspect-[9/16] rounded-lg overflow-hidden border-2 border-card shadow-lg"
             onMouseEnter={() => setHoveredVideo(video.id)}
             onMouseLeave={() => setHoveredVideo(null)}
           >
-            <Image
+            <video
               src={video.thumbnailUrl}
-              alt={video.title}
-              fill
-              className="object-cover transition-transform duration-300 group-hover:scale-105"
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="object-cover w-full h-full transition-transform duration-300 group-hover:scale-105"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/10" />
 

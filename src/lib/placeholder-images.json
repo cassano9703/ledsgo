@@ -113,17 +113,17 @@
     {
       "id": "vid-1",
       "title": "Neón para Bares ¡Increíble!",
-      "thumbnailUrl": "https://picsum.photos/seed/vid1/540/960",
+      "thumbnailUrl": "https://i.imgur.com/T3P9IPP.mp4",
       "creator": {
         "name": "Alex Neon",
-        "avatarUrl": "https://picsum.photos/seed/avatar1/100/100",
+        "avatarUrl": "https://i.imgur.com/T3P9IPP.mp4",
         "subscribers": "1.2M Suscriptores"
       }
     },
     {
       "id": "vid-2",
       "title": "Decorando mi Habitación",
-      "thumbnailUrl": "https://picsum.photos/seed/vid2/540/960",
+      "thumbnailUrl": "https://i.imgur.com/T3P9IPP.mp4",
       "creator": {
         "name": "Diseño Interior",
         "avatarUrl": "https://picsum.photos/seed/avatar2/100/100",
