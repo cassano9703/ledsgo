@@ -33,7 +33,19 @@ export type AboutUsImage = {
   imageHint: string;
 }
 
+export type VideoData = {
+  id: string;
+  title: string;
+  thumbnailUrl: string;
+  creator: {
+    name: string;
+    avatarUrl: string;
+    subscribers: string;
+  }
+}
+
 export const HeroImages: HeroImage[] = data.heroImages;
 export const PlaceHolderImages: ImagePlaceholder[] = data.placeholderImages;
 export const OurJobsImages: OurJobsImage[] = data.ourJobsImages;
 export const AboutUsImages: AboutUsImage[] = data.aboutUsImages;
+export const VideoDataItems: VideoData[] = data.videoGallery;

@@ -108,5 +108,57 @@
       "imageUrl": "https://picsum.photos/seed/workshop/600/400",
       "imageHint": "neon workshop"
     }
+  ],
+  "videoGallery": [
+    {
+      "id": "vid-1",
+      "title": "Neón para Bares ¡Increíble!",
+      "thumbnailUrl": "https://picsum.photos/seed/vid1/540/960",
+      "creator": {
+        "name": "Alex Neon",
+        "avatarUrl": "https://picsum.photos/seed/avatar1/100/100",
+        "subscribers": "1.2M Suscriptores"
+      }
+    },
+    {
+      "id": "vid-2",
+      "title": "Decorando mi Habitación",
+      "thumbnailUrl": "https://picsum.photos/seed/vid2/540/960",
+      "creator": {
+        "name": "Diseño Interior",
+        "avatarUrl": "https://picsum.photos/seed/avatar2/100/100",
+        "subscribers": "850K Suscriptores"
+      }
+    },
+    {
+      "id": "vid-3",
+      "title": "El Logo de mi Negocio en Neón",
+      "thumbnailUrl": "https://picsum.photos/seed/vid3/540/960",
+      "creator": {
+        "name": "Emprendedor PRO",
+        "avatarUrl": "https://picsum.photos/seed/avatar3/100/100",
+        "subscribers": "45K Suscriptores"
+      }
+    },
+    {
+      "id": "vid-4",
+      "title": "Fiesta Neón Inolvidable",
+      "thumbnailUrl": "https://picsum.photos/seed/vid4/540/960",
+      "creator": {
+        "name": "Party Planners",
+        "avatarUrl": "https://picsum.photos/seed/avatar4/100/100",
+        "subscribers": "2.5M Suscriptores"
+      }
+    },
+    {
+      "id": "vid-5",
+      "title": "Instalación Fácil y Rápida",
+      "thumbnailUrl": "https://picsum.photos/seed/vid5/540/960",
+      "creator": {
+        "name": "Leds Go",
+        "avatarUrl": "https://picsum.photos/seed/avatar5/100/100",
+        "subscribers": "15K Suscriptores"
+      }
+    }
   ]
 }
