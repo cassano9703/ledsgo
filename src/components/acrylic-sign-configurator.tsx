@@ -15,7 +15,7 @@ import { OrderModal } from "./order-modal";
 import { cn } from "@/lib/utils";
 import { toPng } from 'html-to-image';
 import { useToast } from "@/hooks/use-toast";
-import { Circle, Square, RectangleHorizontal } from "lucide-react";
+import { RectangleVertical, Square, RectangleHorizontal } from "lucide-react";
 import Image from "next/image";
 
 type Shape = "circle" | "square" | "rectangle";
@@ -27,7 +27,7 @@ export function AcrylicSignConfigurator() {
   const [engravingColor, setEngravingColor] = useState<ColorConfig>(acrylicColors[0]);
   const [mirrorColor, setMirrorColor] = useState<ColorConfig>(mirrorColors[0]);
   const [size, setSize] = useState<SizeConfig>(sizes[1]);
-  const [shape, setShape] = useState<Shape>('rectangle');
+  const [shape, setShape] = useState<Shape>('circle');
   const [background, setBackground] = useState<BackgroundConfig>(backgrounds[2]);
   const [silhouette, setSilhouette] = useState<SilhouetteConfig | null>(null);
   const [frame, setFrame] = useState<FrameConfig>(frameOptions[1]);
@@ -145,12 +145,12 @@ export function AcrylicSignConfigurator() {
               <div className="space-y-2">
                 <Label>Forma del Acrílico</Label>
                 <div className="flex gap-2">
-                  <Button variant={shape === 'circle' ? 'default' : 'outline'} onClick={() => setShape('circle')} size="icon"><Circle/></Button>
+                  <Button variant={shape === 'circle' ? 'default' : 'outline'} onClick={() => setShape('circle')} size="icon"><RectangleVertical/></Button>
                   <Button variant={shape === 'square' ? 'default' : 'outline'} onClick={() => setShape('square')} size="icon"><Square/></Button>
                   <Button variant={shape === 'rectangle' ? 'default' : 'outline'} onClick={() => setShape('rectangle')} size="icon"><RectangleHorizontal/></Button>
                 </div>
               </div>
-              <div className="space-y-3">
+              <div className="space-y-2">
                 <Label>Silueta (Opcional)</Label>
                 <div className="flex gap-2">
                   {silhouettes.map((s) => (
@@ -281,4 +281,3 @@ export function AcrylicSignConfigurator() {
     </>
   );
 }
-

@@ -70,7 +70,7 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
     } as React.CSSProperties;
     
     const shapeClasses = {
-      circle: 'rounded-full aspect-square w-3/4',
+      circle: 'rounded-full aspect-[9/16] w-1/2',
       square: 'rounded-2xl aspect-square w-3/4',
       rectangle: 'rounded-2xl aspect-[16/9] w-full',
     };
@@ -111,7 +111,7 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
                 boxShadow: 'inset 0 0 40px rgba(255,255,255,0.1), 0 0 20px rgba(0,0,0,0.5)',
               }}
             >
-              <div className={cn("absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-white/10 to-transparent", shape === 'circle' ? 'rounded-full' : '')} />
+              <div className={cn("absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-white/10 to-transparent", shape === 'circle' ? 'rounded-full' : 'rounded-t-2xl')} />
 
               <div className="relative text-center flex flex-col items-center gap-2">
                 {SilhouetteIcon && (
@@ -136,7 +136,7 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
             {hasFrame && (
               <div
                 className={cn(
-                  'absolute border-2 pointer-events-none',
+                  'absolute border-4 pointer-events-none',
                   frame.twClass,
                   shapeClasses[shape],
                   frameInsetClass
