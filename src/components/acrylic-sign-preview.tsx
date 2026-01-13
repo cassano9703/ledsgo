@@ -8,6 +8,7 @@ interface AcrylicSignPreviewProps {
   text: string;
   font: FontConfig;
   color: ColorConfig;
+  mirrorColor: ColorConfig;
   size: SizeConfig;
   shape: 'circle' | 'square' | 'rectangle';
   background: BackgroundConfig;
@@ -15,7 +16,7 @@ interface AcrylicSignPreviewProps {
 }
 
 export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewProps>(
-  ({ text, font, color, size, shape, background, silhouette }, ref) => {
+  ({ text, font, color, mirrorColor, size, shape, background, silhouette }, ref) => {
     const previewText = text || 'Tu Texto Aquí';
     const baseFontSize = 2.5;
     const dynamicFontSize = `${baseFontSize * size.multiplier}rem`;
@@ -94,8 +95,9 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
         >
           <div 
             className={cn(
-              "relative flex items-center justify-center p-8 bg-black/10 backdrop-blur-sm transition-all duration-300 overflow-hidden",
-              shapeClasses[shape]
+              "relative flex items-center justify-center p-8 backdrop-blur-sm transition-all duration-300 overflow-hidden",
+              shapeClasses[shape],
+              mirrorColor.value,
             )}
             // Simula el efecto espejo
             style={{

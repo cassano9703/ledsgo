@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef, useCallback } from "react";
-import { fonts, acrylicColors, sizes, backgrounds, silhouettes } from "@/lib/config";
+import { fonts, acrylicColors, sizes, backgrounds, silhouettes, mirrorColors } from "@/lib/config";
 import type { FontConfig, ColorConfig, SizeConfig, BackgroundConfig, SilhouetteConfig } from "@/lib/config";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
@@ -22,7 +22,8 @@ type Shape = "circle" | "square" | "rectangle";
 export function AcrylicSignConfigurator() {
   const [text, setText] = useState("Dra. Sophia");
   const [font, setFont] = useState<FontConfig>(fonts[2]);
-  const [color, setColor] = useState<ColorConfig>(acrylicColors[2]);
+  const [engravingColor, setEngravingColor] = useState<ColorConfig>(acrylicColors[0]);
+  const [mirrorColor, setMirrorColor] = useState<ColorConfig>(mirrorColors[0]);
   const [size, setSize] = useState<SizeConfig>(sizes[1]);
   const [shape, setShape] = useState<Shape>('circle');
   const [background, setBackground] = useState<BackgroundConfig>(backgrounds[2]);
@@ -71,7 +72,7 @@ export function AcrylicSignConfigurator() {
     }
   }
 
-  const currentConfig = { text, font, color: color.name, size, capturedImage, silhouette: silhouette?.name };
+  const currentConfig = { text, font, color: engravingColor.name, size, capturedImage, silhouette: silhouette?.name, mirrorColor: mirrorColor.name };
 
   return (
     <>
@@ -105,7 +106,8 @@ export function AcrylicSignConfigurator() {
             ref={previewRef}
             text={text}
             font={font}
-            color={color}
+            color={engravingColor}
+            mirrorColor={mirrorColor}
             size={size}
             shape={shape}
             background={background}
@@ -157,15 +159,31 @@ export function AcrylicSignConfigurator() {
               </div>
             </div>
 
+             <div className="space-y-2">
+              <Label>Color del Acrílico</Label>
+              <RadioGroup
+                  value={mirrorColor.name}
+                  onValueChange={(val) => setMirrorColor(mirrorColors.find(c => c.name === val)!)}
+                  className="flex flex-wrap gap-2"
+              >
+                  {mirrorColors.map((c) => (
+                    <Label key={c.name} htmlFor={`mirror-${c.name}`} className={`relative flex items-center justify-center rounded-full w-8 h-8 cursor-pointer transition-all border-2 ${mirrorColor.name === c.name ? 'border-primary ring-2 ring-primary' : 'border-border'}`}>
+                        <RadioGroupItem value={c.name} id={`mirror-${c.name}`} className="sr-only" />
+                        <span className={cn("w-full h-full rounded-full", c.twClass)} />
+                    </Label>
+                  ))}
+              </RadioGroup>
+            </div>
+
             <div className="space-y-2">
               <Label>Color del Grabado</Label>
               <RadioGroup
-                  value={color.name}
-                  onValueChange={(val) => setColor(acrylicColors.find(c => c.name === val)!)}
+                  value={engravingColor.name}
+                  onValueChange={(val) => setEngravingColor(acrylicColors.find(c => c.name === val)!)}
                   className="flex flex-wrap gap-2"
               >
                   {acrylicColors.map((c) => (
-                    <Label key={c.name} htmlFor={`acrylic-${c.name}`} className={`relative flex items-center justify-center rounded-full w-8 h-8 cursor-pointer transition-all border-2 ${color.name === c.name ? 'border-primary ring-2 ring-primary' : 'border-border'}`}>
+                    <Label key={c.name} htmlFor={`acrylic-${c.name}`} className={`relative flex items-center justify-center rounded-full w-8 h-8 cursor-pointer transition-all border-2 ${engravingColor.name === c.name ? 'border-primary ring-2 ring-primary' : 'border-border'}`}>
                         <RadioGroupItem value={c.name} id={`acrylic-${c.name}`} className="sr-only" />
                         <span className={cn("w-full h-full rounded-full", c.twClass)} />
                     </Label>

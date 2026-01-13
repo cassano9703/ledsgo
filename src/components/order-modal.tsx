@@ -41,6 +41,7 @@ interface OrderModalProps {
     size: SizeConfig;
     capturedImage: string | null;
     silhouette?: string;
+    mirrorColor?: string;
   };
 }
 
@@ -68,9 +69,10 @@ export function OrderModal({ isOpen, onClose, config }: OrderModalProps) {
       `\n*Detalles del Letrero:*`,
       `- Texto 1: "${config.text}"`,
       config.text2 ? `- Texto 2: "${config.text2}"` : null,
-      config.silhouette ? `- Silueta: ${config.silhouette}` : null,
+      config.mirrorColor ? `- Color de Acrílico: ${config.mirrorColor}` : null,
+      `- Color de Grabado/Neón: ${config.color}`,
       `- Tipografía: ${config.font.name}`,
-      `- Color: ${config.color}`,
+      config.silhouette ? `- Silueta: ${config.silhouette}` : null,
       `- Tamaño: ${config.size.name}`,
       `\n_(Se adjuntará una vista previa del diseño)_`
     ];

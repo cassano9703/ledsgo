@@ -39,12 +39,21 @@ export const colors: ColorConfig[] = [
   { name: "RGB", value: "rgb", twClass: "" },
 ];
 
+// Colores para el texto grabado en el acrílico espejo
 export const acrylicColors: ColorConfig[] = [
+  { name: "Blanco", value: "#FFFFFF", twClass: "bg-white" },
+  { name: "Negro", value: "#000000", twClass: "bg-black" },
   { name: "Dorado", value: "#D4AF37", twClass: "bg-yellow-600" },
   { name: "Plata", value: "#C0C0C0", twClass: "bg-slate-400" },
   { name: "Oro Rosa", value: "#B76E79", twClass: "bg-rose-400" },
-  { name: "Negro", value: "#000000", twClass: "bg-black" },
-  { name: "Blanco", value: "#FFFFFF", twClass: "bg-white" },
+];
+
+// Colores del material acrílico espejo
+export const mirrorColors: ColorConfig[] = [
+  { name: "Plata", value: "bg-slate-300/10", twClass: "bg-slate-300" },
+  { name: "Dorado", value: "bg-yellow-500/10", twClass: "bg-yellow-500" },
+  { name: "Oro Rosa", value: "bg-rose-400/10", twClass: "bg-rose-400" },
+  { name: "Bronce", value: "bg-orange-600/10", twClass: "bg-orange-600" },
 ];
 
 export type SizeConfig = {
