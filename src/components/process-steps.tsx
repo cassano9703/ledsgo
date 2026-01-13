@@ -1,7 +1,6 @@
 "use client";
 
-import { Lightbulb, MessageSquareQuote, Truck, Wrench, PackageCheck } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { Lightbulb, Wrench, PackageCheck, Truck } from "lucide-react";
 
 const steps = [
   {
@@ -36,48 +35,52 @@ export function ProcessSteps() {
         <p className="text-muted-foreground">Iluminamos tu marca en 4 simples pasos.</p>
       </div>
       
-      <div className="relative">
-        <div className="absolute left-1/2 top-0 h-full w-[2px] -translate-x-1/2 bg-primary/30" style={{boxShadow: '0 0 10px hsl(var(--primary))'}}></div>
+      <div className="relative pt-4">
+        {/* Vertical Line */}
+        <div 
+          className="absolute left-1/2 top-0 h-full w-0.5 -translate-x-1/2 bg-primary/30"
+          style={{boxShadow: '0 0 10px hsl(var(--primary))'}}
+        />
         
-        {steps.map((step, index) => (
-          <div key={index} className="relative mb-12 flex w-full items-center">
-            {index % 2 === 0 ? (
-              // Step on the left, text on the right
-              <>
-                <div className="w-1/2"></div>
-                <div className="w-1/2 pl-8">
-                   <div className="relative">
-                    <div className="absolute top-1/2 -translate-y-1/2 -left-8 flex items-center">
-                        <div className="z-10 flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-secondary border-2 border-primary" style={{boxShadow: '0 0 15px hsl(var(--primary))'}}>
-                            <step.icon className="h-7 w-7 text-primary" />
-                        </div>
-                        <div className="absolute left-full w-8 h-[2px] bg-primary/50" style={{boxShadow: '0 0 10px hsl(var(--primary))'}}></div>
-                    </div>
-                    <h4 className="text-lg font-bold text-primary text-left">{step.title}</h4>
-                    <p className="mt-1 text-sm text-muted-foreground text-left">{step.description}</p>
+        <div className="space-y-16">
+          {steps.map((step, index) => (
+            <div key={index} className="relative flex items-center">
+              {index % 2 === 0 ? (
+                // Text on the left, Icon on the right of the line
+                <>
+                  <div className="w-1/2 pr-12 text-right">
+                    <h4 className="text-lg font-bold text-primary">{step.title}</h4>
+                    <p className="mt-1 text-sm text-muted-foreground">{step.description}</p>
                   </div>
-                </div>
-              </>
-            ) : (
-              // Step on the right, text on the left
-              <>
-                <div className="w-1/2 pr-8">
-                  <div className="relative">
-                    <div className="absolute top-1/2 -translate-y-1/2 -right-8 flex items-center">
-                        <div className="absolute right-full w-8 h-[2px] bg-primary/50" style={{boxShadow: '0 0 10px hsl(var(--primary))'}}></div>
-                        <div className="z-10 flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-secondary border-2 border-primary" style={{boxShadow: '0 0 15px hsl(var(--primary))'}}>
-                            <step.icon className="h-7 w-7 text-primary" />
-                        </div>
+                  <div className="w-1/2 pl-12">
+                    <div 
+                      className="absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 z-10 flex h-14 w-14 items-center justify-center rounded-full bg-secondary border-2 border-primary"
+                      style={{boxShadow: '0 0 15px hsl(var(--primary))'}}
+                    >
+                      <step.icon className="h-7 w-7 text-primary" />
                     </div>
-                    <h4 className="text-lg font-bold text-primary text-right">{step.title}</h4>
-                    <p className="mt-1 text-sm text-muted-foreground text-right">{step.description}</p>
                   </div>
-                </div>
-                <div className="w-1/2"></div>
-              </>
-            )}
-          </div>
-        ))}
+                </>
+              ) : (
+                // Icon on the left, Text on the right of the line
+                <>
+                  <div className="w-1/2 pr-12">
+                     <div 
+                      className="absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 z-10 flex h-14 w-14 items-center justify-center rounded-full bg-secondary border-2 border-primary"
+                      style={{boxShadow: '0 0 15px hsl(var(--primary))'}}
+                    >
+                      <step.icon className="h-7 w-7 text-primary" />
+                    </div>
+                  </div>
+                  <div className="w-1/2 pl-12 text-left">
+                    <h4 className="text-lg font-bold text-primary">{step.title}</h4>
+                    <p className="mt-1 text-sm text-muted-foreground">{step.description}</p>
+                  </div>
+                </>
+              )}
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
