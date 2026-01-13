@@ -58,6 +58,19 @@ export const mirrorColors: ColorConfig[] = [
   { name: "Rosa", value: "bg-rose-400/10", twClass: "bg-rose-400" },
 ];
 
+export type FrameConfig = {
+  name: string;
+  twClass: string;
+};
+
+export const frameOptions: FrameConfig[] = [
+    { name: "Sin Marco", twClass: "bg-transparent" },
+    { name: "Dorado", twClass: "bg-gradient-to-br from-yellow-300 to-amber-600" },
+    { name: "Plateado", twClass: "bg-gradient-to-br from-slate-200 to-slate-500" },
+    { name: "Negro", twClass: "bg-black" },
+];
+
+
 export type SizeConfig = {
   name: string;
   multiplier: number;

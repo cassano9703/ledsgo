@@ -2,7 +2,7 @@
 
 import React, { forwardRef, useState, useRef, MouseEvent, TouchEvent } from 'react';
 import { cn } from '@/lib/utils';
-import type { FontConfig, SizeConfig, BackgroundConfig, ColorConfig, SilhouetteConfig } from '@/lib/config';
+import type { FontConfig, SizeConfig, BackgroundConfig, ColorConfig, SilhouetteConfig, FrameConfig } from '@/lib/config';
 
 interface AcrylicSignPreviewProps {
   text: string;
@@ -13,10 +13,11 @@ interface AcrylicSignPreviewProps {
   shape: 'circle' | 'square' | 'rectangle';
   background: BackgroundConfig;
   silhouette: SilhouetteConfig | null;
+  frame: FrameConfig;
 }
 
 export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewProps>(
-  ({ text, font, color, mirrorColor, size, shape, background, silhouette }, ref) => {
+  ({ text, font, color, mirrorColor, size, shape, background, silhouette, frame }, ref) => {
     const previewText = text || 'Tu Texto Aquí';
     const baseFontSize = 2.5;
     const dynamicFontSize = `${baseFontSize * size.multiplier}rem`;
@@ -73,6 +74,7 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
     };
 
     const SilhouetteIcon = silhouette?.Icon;
+    const hasFrame = frame.name !== "Sin Marco";
 
     return (
       <div 
@@ -94,40 +96,55 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
           onMouseDown={handleDragStart}
           onTouchStart={handleDragStart}
         >
-          <div 
-            className={cn(
-              "relative flex items-center justify-center p-8 backdrop-blur-sm transition-all duration-300 overflow-hidden",
-              shapeClasses[shape],
-              mirrorColor.value,
+          <div className={cn("relative flex items-center justify-center", shapeClasses[shape])}>
+            {hasFrame && (
+              <div 
+                className={cn(
+                  "absolute -inset-1.5",
+                  frame.twClass,
+                  shape === 'circle' && 'rounded-full',
+                  shape !== 'circle' && 'rounded-[1.25rem]'
+                )}
+                style={{
+                  boxShadow: '0 0 40px 5px #fef08a'
+                }}
+              />
             )}
-            // Simula el efecto espejo
-            style={{
-              boxShadow: 'inset 0 0 40px rgba(255,255,255,0.1), 0 0 20px rgba(0,0,0,0.5)',
-            }}
-          >
-            {/* Reflejo sutil */}
-            <div className="absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-white/10 to-transparent "/>
-
-            <div className="relative text-center flex flex-col items-center gap-2">
-              {SilhouetteIcon && (
-                <SilhouetteIcon 
-                  className="transition-all duration-300 ease-in-out"
-                  style={{ 
-                    color: color.value,
-                    width: `${baseFontSize * size.multiplier * 0.8}rem`,
-                    height: `${baseFontSize * size.multiplier * 0.8}rem`,
-                    filter: `drop-shadow(0 0 5px ${color.value})`,
-                  }} 
-                />
+            <div 
+              className={cn(
+                "relative w-full h-full flex items-center justify-center p-8 backdrop-blur-sm transition-all duration-300 overflow-hidden",
+                shapeClasses[shape],
+                mirrorColor.value,
               )}
-              <p
-                className='font-bold break-words transition-all duration-300 ease-in-out select-none'
-                style={textStyle}
-              >
-                {previewText}
-              </p>
-            </div>
+              // Simula el efecto espejo
+              style={{
+                boxShadow: 'inset 0 0 40px rgba(255,255,255,0.1), 0 0 20px rgba(0,0,0,0.5)',
+              }}
+            >
+              {/* Reflejo sutil */}
+              <div className="absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-white/10 to-transparent "/>
 
+              <div className="relative text-center flex flex-col items-center gap-2">
+                {SilhouetteIcon && (
+                  <SilhouetteIcon 
+                    className="transition-all duration-300 ease-in-out"
+                    style={{ 
+                      color: color.value,
+                      width: `${baseFontSize * size.multiplier * 0.8}rem`,
+                      height: `${baseFontSize * size.multiplier * 0.8}rem`,
+                      filter: `drop-shadow(0 0 5px ${color.value})`,
+                    }} 
+                  />
+                )}
+                <p
+                  className='font-bold break-words transition-all duration-300 ease-in-out select-none'
+                  style={textStyle}
+                >
+                  {previewText}
+                </p>
+              </div>
+
+            </div>
           </div>
         </div>
       </div>

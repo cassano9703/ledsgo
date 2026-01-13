@@ -1,8 +1,8 @@
 "use client";
 
 import { useState, useRef, useCallback } from "react";
-import { fonts, acrylicColors, sizes, backgrounds, silhouettes, mirrorColors } from "@/lib/config";
-import type { FontConfig, ColorConfig, SizeConfig, BackgroundConfig, SilhouetteConfig } from "@/lib/config";
+import { fonts, acrylicColors, sizes, backgrounds, silhouettes, mirrorColors, frameOptions } from "@/lib/config";
+import type { FontConfig, ColorConfig, SizeConfig, BackgroundConfig, SilhouetteConfig, FrameConfig } from "@/lib/config";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -14,7 +14,7 @@ import { OrderModal } from "./order-modal";
 import { cn } from "@/lib/utils";
 import { toPng } from 'html-to-image';
 import { useToast } from "@/hooks/use-toast";
-import { Circle, Square, RectangleHorizontal, X } from "lucide-react";
+import { Circle, Square, RectangleHorizontal } from "lucide-react";
 import Image from "next/image";
 
 type Shape = "circle" | "square" | "rectangle";
@@ -28,6 +28,7 @@ export function AcrylicSignConfigurator() {
   const [shape, setShape] = useState<Shape>('circle');
   const [background, setBackground] = useState<BackgroundConfig>(backgrounds[2]);
   const [silhouette, setSilhouette] = useState<SilhouetteConfig | null>(null);
+  const [frame, setFrame] = useState<FrameConfig>(frameOptions[0]);
 
   const [isOrderModalOpen, setOrderModalOpen] = useState(false);
   const [capturedImage, setCapturedImage] = useState<string | null>(null);
@@ -72,7 +73,7 @@ export function AcrylicSignConfigurator() {
     }
   }
 
-  const currentConfig = { text, font, color: engravingColor.name, size, capturedImage, silhouette: silhouette?.name, mirrorColor: mirrorColor.name };
+  const currentConfig = { text, font, color: engravingColor.name, size, capturedImage, silhouette: silhouette?.name, mirrorColor: mirrorColor.name, frame: frame.name };
 
   return (
     <>
@@ -112,6 +113,7 @@ export function AcrylicSignConfigurator() {
             shape={shape}
             background={background}
             silhouette={silhouette}
+            frame={frame}
           />
         </div>
         
@@ -186,6 +188,22 @@ export function AcrylicSignConfigurator() {
                     <Label key={c.name} htmlFor={`acrylic-${c.name}`} className={`relative flex items-center justify-center rounded-full w-8 h-8 cursor-pointer transition-all border-2 ${engravingColor.name === c.name ? 'border-primary ring-2 ring-primary' : 'border-border'}`}>
                         <RadioGroupItem value={c.name} id={`acrylic-${c.name}`} className="sr-only" />
                         <span className={cn("w-full h-full rounded-full", c.twClass)} />
+                    </Label>
+                  ))}
+              </RadioGroup>
+            </div>
+            
+            <div className="space-y-2">
+              <Label>Marco (Opcional)</Label>
+              <RadioGroup
+                  value={frame.name}
+                  onValueChange={(val) => setFrame(frameOptions.find(f => f.name === val)!)}
+                  className="flex flex-wrap gap-2"
+              >
+                  {frameOptions.map((f) => (
+                    <Label key={f.name} htmlFor={`frame-${f.name}`} className={cn(`relative flex items-center justify-center p-2 h-8 cursor-pointer transition-all border-2 rounded-md text-xs`, frame.name === f.name ? 'border-primary ring-2 ring-primary' : 'border-border')}>
+                        <RadioGroupItem value={f.name} id={`frame-${f.name}`} className="sr-only" />
+                        <span>{f.name}</span>
                     </Label>
                   ))}
               </RadioGroup>

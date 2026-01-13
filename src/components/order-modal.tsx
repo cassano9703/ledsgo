@@ -42,6 +42,7 @@ interface OrderModalProps {
     capturedImage: string | null;
     silhouette?: string;
     mirrorColor?: string;
+    frame?: string;
   };
 }
 
@@ -73,6 +74,7 @@ export function OrderModal({ isOpen, onClose, config }: OrderModalProps) {
       `- Color de Grabado/Neón: ${config.color}`,
       `- Tipografía: ${config.font.name}`,
       config.silhouette ? `- Silueta: ${config.silhouette}` : null,
+      config.frame && config.frame !== "Sin Marco" ? `- Marco: ${config.frame}` : null,
       `- Tamaño: ${config.size.name}`,
       `\n_(Se adjuntará una vista previa del diseño)_`
     ];
