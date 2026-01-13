@@ -12,11 +12,11 @@ export function VideoGallery() {
 
   return (
     <div className="mt-12">
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
         {VideoDataItems.map((video) => (
           <div
             key={video.id}
-            className="relative group aspect-[9/16] rounded-lg overflow-hidden border-2 border-card shadow-lg"
+            className="relative group aspect-[9/16] rounded-lg overflow-hidden border-2 border-primary/50 shadow-[0_0_15px_hsl(var(--primary))]"
             onMouseEnter={() => setHoveredVideo(video.id)}
             onMouseLeave={() => setHoveredVideo(null)}
           >
