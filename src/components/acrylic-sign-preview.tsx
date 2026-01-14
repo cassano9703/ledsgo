@@ -70,9 +70,9 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
     } as React.CSSProperties;
     
     const shapeClasses = {
-      circle: 'rounded-full aspect-square w-3/4',
-      square: 'rounded-2xl aspect-square w-3/4',
-      rectangle: 'rounded-2xl aspect-[16/9] w-full',
+      circle: 'rounded-full aspect-square',
+      square: 'rounded-2xl aspect-square',
+      rectangle: 'rounded-2xl aspect-[16/9]',
     };
 
     const SilhouetteIcon = silhouette?.Icon;
@@ -95,7 +95,7 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
         
         <div
           ref={signContainerRef}
-          className="absolute cursor-grab"
+          className="absolute cursor-grab w-3/4"
           style={{ transform: `translate(${position.x}px, ${position.y}px)` }}
           onMouseDown={handleDragStart}
           onTouchStart={handleDragStart}
@@ -113,7 +113,10 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
             >
               <div className={cn("absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-white/10 to-transparent", shape === 'circle' ? 'rounded-full' : 'rounded-t-2xl')} />
 
-              <div className="relative text-center flex flex-col items-center justify-center h-full w-full gap-2 p-8 overflow-hidden">
+              <div className={cn(
+                "absolute text-center flex flex-col items-center justify-center gap-2 p-8 overflow-hidden",
+                hasFrame ? frameInsetClass : 'inset-0'
+              )}>
                 {SilhouetteIcon && (
                   <SilhouetteIcon 
                     className="transition-all duration-300 ease-in-out"
@@ -138,12 +141,11 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
                 className={cn(
                   'absolute pointer-events-none',
                   frameInsetClass,
-                   shape === 'circle' ? 'rounded-full' : 'rounded-2xl',
-                  'w-full h-full'
+                   shape === 'circle' ? 'rounded-full' : 'rounded-2xl'
                 )}
                 style={{
                   border: `4px solid ${frame.value}`,
-                  boxShadow: `0 0 10px ${frame.value}, inset 0 0 10px ${frame.value}`,
+                  boxShadow: `0 0 10px ${frame.value}, inset 0 0 5px ${frame.value}`,
                 }}
               />
             )}
