@@ -103,7 +103,7 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
           <div className={cn("relative flex items-center justify-center", shapeClasses[shape])}>
             <div 
               className={cn(
-                "relative w-full h-full flex items-center justify-center p-8 backdrop-blur-sm transition-all duration-300 overflow-hidden",
+                "relative w-full h-full flex items-center justify-center backdrop-blur-sm transition-all duration-300 overflow-hidden",
                 mirrorColor.value,
                 shape === 'circle' ? 'rounded-full' : 'rounded-2xl'
               )}
@@ -113,7 +113,7 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
             >
               <div className={cn("absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-white/10 to-transparent", shape === 'circle' ? 'rounded-full' : 'rounded-t-2xl')} />
 
-              <div className="relative text-center flex flex-col items-center gap-2">
+              <div className="relative text-center flex flex-col items-center gap-2 p-8 overflow-hidden">
                 {SilhouetteIcon && (
                   <SilhouetteIcon 
                     className="transition-all duration-300 ease-in-out"
