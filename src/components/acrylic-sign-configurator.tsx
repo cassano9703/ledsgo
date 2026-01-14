@@ -28,7 +28,7 @@ export function AcrylicSignConfigurator() {
   const [engravingColor, setEngravingColor] = useState<ColorConfig>(acrylicColors[0]);
   const [mirrorColor, setMirrorColor] = useState<ColorConfig>(mirrorColors[0]);
   const [size, setSize] = useState<SizeConfig>(sizes[1]);
-  const [shape, setShape] = useState<Shape>('circle');
+  const [shape, setShape] = useState<Shape>('rectangle');
   const [background, setBackground] = useState<BackgroundConfig>(backgrounds[2]);
   const [silhouette, setSilhouette] = useState<SilhouetteConfig | null>(null);
   const [frame, setFrame] = useState<FrameConfig>(frameOptions[1]);
@@ -252,22 +252,20 @@ export function AcrylicSignConfigurator() {
                 </Select>
             </div>
             
-            <div className="grid grid-cols-1 gap-4">
-              <div className="space-y-2">
-                 <Label htmlFor="size-select" className="flex items-center gap-2">Tamaño</Label>
-                <Select value={size.name} onValueChange={(val) => setSize(sizes.find(s => s.name === val)!)}>
-                  <SelectTrigger id="size-select">
-                    <SelectValue placeholder="Selecciona un tamaño" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {sizes.map((s) => (
-                      <SelectItem key={s.name} value={s.name}>
-                        {s.name} ({s.multiplier}x)
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
+            <div className="space-y-2">
+               <Label htmlFor="size-select" className="flex items-center gap-2">Tamaño</Label>
+              <Select value={size.name} onValueChange={(val) => setSize(sizes.find(s => s.name === val)!)}>
+                <SelectTrigger id="size-select">
+                  <SelectValue placeholder="Selecciona un tamaño" />
+                </SelectTrigger>
+                <SelectContent>
+                  {sizes.map((s) => (
+                    <SelectItem key={s.name} value={s.name}>
+                      {s.name} ({s.multiplier}x)
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
             </div>
 
             <div className="mt-4 flex flex-col gap-2">
