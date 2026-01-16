@@ -85,7 +85,7 @@ export function AcrylicSignConfigurator() {
     <>
       <div className="mt-12 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
         
-        <div className="lg:col-span-12 flex justify-center gap-4 flex-wrap">
+        <div className="lg:col-span-12 flex justify-start gap-4 flex-wrap">
               {backgrounds.map(bg => (
                   <div 
                       key={bg.name}
