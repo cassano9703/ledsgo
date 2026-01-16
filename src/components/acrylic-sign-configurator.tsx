@@ -85,13 +85,12 @@ export function AcrylicSignConfigurator() {
     <>
       <div className="mt-12 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
         
-        <div className="lg:col-span-1">
-          <div className="flex lg:flex-col gap-2">
+        <div className="lg:col-span-12 flex justify-center gap-4 flex-wrap">
               {backgrounds.map(bg => (
                   <div 
                       key={bg.name}
                       className={cn(
-                          "rounded-md border-2 overflow-hidden cursor-pointer transition-all w-20 h-16",
+                          "rounded-md border-2 overflow-hidden cursor-pointer transition-all w-24 h-20",
                           background.name === bg.name ? "border-primary ring-2 ring-primary" : "border-transparent"
                       )}
                       onClick={() => setBackground(bg)}
@@ -99,16 +98,15 @@ export function AcrylicSignConfigurator() {
                       <Image 
                           src={bg.imageUrl}
                           alt={bg.name}
-                          width={80}
-                          height={60}
+                          width={96}
+                          height={80}
                           className="object-cover w-full h-full"
                       />
                   </div>
               ))}
-          </div>
         </div>
         
-        <div className="lg:col-span-8">
+        <div className="lg:col-span-9">
            <AcrylicSignPreview
             ref={previewRef}
             text={text}
@@ -142,7 +140,7 @@ export function AcrylicSignConfigurator() {
                 className="flex-1"
               />
             </div>
-
+            
             <div className="space-y-2">
               <Label>Color del Grabado</Label>
               <RadioGroup
@@ -158,7 +156,7 @@ export function AcrylicSignConfigurator() {
                   ))}
               </RadioGroup>
             </div>
-            
+
             <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <Label>Forma del Acrílico</Label>
