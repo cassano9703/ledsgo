@@ -233,10 +233,10 @@ export function AcrylicSignConfigurator() {
                     <Label
                       htmlFor="frame-edge"
                       className={cn(
-                        "flex h-10 flex-1 cursor-pointer items-center justify-center rounded-md border-2 p-2 text-center text-sm font-medium transition-colors",
+                        "flex h-10 flex-1 cursor-pointer items-center justify-center rounded-md border p-2 text-center text-sm font-medium transition-colors",
                         frameStyle === "edge"
-                          ? "border-primary"
-                          : "border-transparent"
+                          ? "border-primary bg-primary/10"
+                          : "border-input"
                       )}
                     >
                       <RadioGroupItem
@@ -249,10 +249,10 @@ export function AcrylicSignConfigurator() {
                     <Label
                       htmlFor="frame-margin"
                       className={cn(
-                        "flex h-10 flex-1 cursor-pointer items-center justify-center rounded-md border-2 p-2 text-center text-sm font-medium transition-colors",
+                        "flex h-10 flex-1 cursor-pointer items-center justify-center rounded-md border p-2 text-center text-sm font-medium transition-colors",
                         frameStyle === "margin"
-                          ? "border-primary"
-                          : "border-transparent"
+                          ? "border-primary bg-primary/10"
+                          : "border-input"
                       )}
                     >
                       <RadioGroupItem
