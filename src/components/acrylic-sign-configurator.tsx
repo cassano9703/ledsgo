@@ -225,45 +225,19 @@ export function AcrylicSignConfigurator() {
 
               {frame.name !== "Sin Marco" && (
                 <div className="space-y-2">
-                  <Label>Estilo de Marco</Label>
-                  <RadioGroup
-                    value={frameStyle}
-                    onValueChange={(val) => setFrameStyle(val as FrameStyle)}
-                    className="flex items-center gap-2"
+                  <Label htmlFor="frame-style-select">Estilo de Marco</Label>
+                  <Select
+                      value={frameStyle}
+                      onValueChange={(val) => setFrameStyle(val as FrameStyle)}
                   >
-                    <Label
-                      htmlFor="frame-edge"
-                      className={cn(
-                        "flex h-10 flex-1 cursor-pointer items-center justify-center rounded-md border p-2 text-center text-sm font-medium transition-colors",
-                        frameStyle === "edge"
-                          ? "border-primary"
-                          : "border-transparent"
-                      )}
-                    >
-                      <RadioGroupItem
-                        value="edge"
-                        id="frame-edge"
-                        className="sr-only"
-                      />
-                      Al Borde
-                    </Label>
-                    <Label
-                      htmlFor="frame-margin"
-                      className={cn(
-                        "flex h-10 flex-1 cursor-pointer items-center justify-center rounded-md border p-2 text-center text-sm font-medium transition-colors",
-                        frameStyle === "margin"
-                          ? "border-primary"
-                          : "border-transparent"
-                      )}
-                    >
-                      <RadioGroupItem
-                        value="margin"
-                        id="frame-margin"
-                        className="sr-only"
-                      />
-                      Con Margen
-                    </Label>
-                  </RadioGroup>
+                      <SelectTrigger id="frame-style-select">
+                          <SelectValue placeholder="Selecciona un estilo" />
+                      </SelectTrigger>
+                      <SelectContent>
+                          <SelectItem value="edge">Al Borde</SelectItem>
+                          <SelectItem value="margin">Con Margen</SelectItem>
+                      </SelectContent>
+                  </Select>
                 </div>
               )}
             </div>
