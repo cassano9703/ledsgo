@@ -26,7 +26,7 @@ export function AcrylicSignConfigurator() {
   const [text, setText] = useState("Dra. Sophia");
   const [font, setFont] = useState<FontConfig>(fonts[2]);
   const [engravingColor, setEngravingColor] = useState<ColorConfig>(acrylicColors[0]);
-  const [mirrorColor, setMirrorColor] = useState<ColorConfig>(mirrorColors[0]);
+  const [mirrorColor, setMirrorColor] = useState<ColorConfig>(mirrorColors[1]);
   const [size, setSize] = useState<SizeConfig>(sizes[1]);
   const [shape, setShape] = useState<Shape>('rectangle');
   const [background, setBackground] = useState<BackgroundConfig>(backgrounds[2]);
