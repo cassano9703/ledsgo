@@ -228,15 +228,15 @@ export function AcrylicSignConfigurator() {
                   <RadioGroup
                     value={frameStyle}
                     onValueChange={(val) => setFrameStyle(val as FrameStyle)}
-                    className="flex gap-2"
+                    className="flex items-center gap-2"
                   >
                     <Label
                       htmlFor="frame-edge"
                       className={cn(
-                        `flex-1 flex items-center justify-center h-10 cursor-pointer transition-all border-2 rounded-md text-sm`,
+                        "flex h-10 flex-1 cursor-pointer items-center justify-center rounded-md border-2 p-2 text-center text-sm font-medium transition-colors",
                         frameStyle === "edge"
-                          ? "border-primary ring-2 ring-primary"
-                          : "border-border"
+                          ? "border-primary"
+                          : "border-transparent"
                       )}
                     >
                       <RadioGroupItem
@@ -244,15 +244,15 @@ export function AcrylicSignConfigurator() {
                         id="frame-edge"
                         className="sr-only"
                       />
-                      <span>Al Borde</span>
+                      Al Borde
                     </Label>
                     <Label
                       htmlFor="frame-margin"
                       className={cn(
-                        `flex-1 flex items-center justify-center h-10 cursor-pointer transition-all border-2 rounded-md text-sm`,
+                        "flex h-10 flex-1 cursor-pointer items-center justify-center rounded-md border-2 p-2 text-center text-sm font-medium transition-colors",
                         frameStyle === "margin"
-                          ? "border-primary ring-2 ring-primary"
-                          : "border-border"
+                          ? "border-primary"
+                          : "border-transparent"
                       )}
                     >
                       <RadioGroupItem
@@ -260,7 +260,7 @@ export function AcrylicSignConfigurator() {
                         id="frame-margin"
                         className="sr-only"
                       />
-                      <span>Con Margen</span>
+                      Con Margen
                     </Label>
                   </RadioGroup>
                 </div>
