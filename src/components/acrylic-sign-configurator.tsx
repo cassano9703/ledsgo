@@ -153,7 +153,7 @@ export function AcrylicSignConfigurator() {
                   </div>
                 </div>
                 <div className="space-y-2">
-                  <Label>Silueta (Opcional)</Label>
+                  <Label>Silueta</Label>
                   <div className="flex gap-2">
                     {silhouettes.map((s) => (
                       <Button 
@@ -203,7 +203,7 @@ export function AcrylicSignConfigurator() {
             
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label htmlFor="frame-select">Marco (Opcional)</Label>
+                <Label htmlFor="frame-select">Marco</Label>
                 <Select
                   value={frame.name}
                   onValueChange={(val) =>
