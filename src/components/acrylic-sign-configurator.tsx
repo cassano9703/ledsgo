@@ -142,6 +142,22 @@ export function AcrylicSignConfigurator() {
                 className="flex-1"
               />
             </div>
+
+            <div className="space-y-2">
+              <Label>Color del Grabado</Label>
+              <RadioGroup
+                  value={engravingColor.name}
+                  onValueChange={(val) => setEngravingColor(acrylicColors.find(c => c.name === val)!)}
+                  className="flex flex-wrap gap-2"
+              >
+                  {acrylicColors.map((c) => (
+                    <Label key={c.name} htmlFor={`acrylic-${c.name}`} className={`relative flex items-center justify-center rounded-full w-8 h-8 cursor-pointer transition-all border-2 ${engravingColor.name === c.name ? 'border-primary ring-2 ring-primary' : 'border-border'}`}>
+                        <RadioGroupItem value={c.name} id={`acrylic-${c.name}`} className="sr-only" />
+                        <span className={cn("w-full h-full rounded-full", c.twClass)} />
+                    </Label>
+                  ))}
+              </RadioGroup>
+            </div>
             
             <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
@@ -185,22 +201,6 @@ export function AcrylicSignConfigurator() {
               </RadioGroup>
             </div>
 
-            <div className="space-y-2">
-              <Label>Color del Grabado</Label>
-              <RadioGroup
-                  value={engravingColor.name}
-                  onValueChange={(val) => setEngravingColor(acrylicColors.find(c => c.name === val)!)}
-                  className="flex flex-wrap gap-2"
-              >
-                  {acrylicColors.map((c) => (
-                    <Label key={c.name} htmlFor={`acrylic-${c.name}`} className={`relative flex items-center justify-center rounded-full w-8 h-8 cursor-pointer transition-all border-2 ${engravingColor.name === c.name ? 'border-primary ring-2 ring-primary' : 'border-border'}`}>
-                        <RadioGroupItem value={c.name} id={`acrylic-${c.name}`} className="sr-only" />
-                        <span className={cn("w-full h-full rounded-full", c.twClass)} />
-                    </Label>
-                  ))}
-              </RadioGroup>
-            </div>
-            
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label htmlFor="frame-select">Marco</Label>
