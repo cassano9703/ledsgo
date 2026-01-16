@@ -15,7 +15,7 @@ import { OrderModal } from "./order-modal";
 import { cn } from "@/lib/utils";
 import { toPng } from 'html-to-image';
 import { useToast } from "@/hooks/use-toast";
-import { Square, RectangleHorizontal, RectangleVertical } from "lucide-react";
+import { Square, RectangleHorizontal } from "lucide-react";
 import { CircleIcon } from "@/components/icons";
 import Image from "next/image";
 
@@ -200,44 +200,72 @@ export function AcrylicSignConfigurator() {
               </RadioGroup>
             </div>
             
-            <div className="space-y-2">
-              <Label htmlFor="frame-select">Marco (Opcional)</Label>
-              <Select 
-                value={frame.name} 
-                onValueChange={(val) => setFrame(frameOptions.find(f => f.name === val)!)}
-              >
-                <SelectTrigger id="frame-select">
-                  <SelectValue placeholder="Selecciona un marco" />
-                </SelectTrigger>
-                <SelectContent>
-                  {frameOptions.map((f) => (
-                    <SelectItem key={f.name} value={f.name}>
-                      {f.name}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
-
-            {frame.name !== 'Sin Marco' && (
+            <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label>Estilo de Marco</Label>
-                <RadioGroup
+                <Label htmlFor="frame-select">Marco (Opcional)</Label>
+                <Select
+                  value={frame.name}
+                  onValueChange={(val) =>
+                    setFrame(frameOptions.find((f) => f.name === val)!)
+                  }
+                >
+                  <SelectTrigger id="frame-select">
+                    <SelectValue placeholder="Selecciona un marco" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {frameOptions.map((f) => (
+                      <SelectItem key={f.name} value={f.name}>
+                        {f.name}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+
+              {frame.name !== "Sin Marco" && (
+                <div className="space-y-2">
+                  <Label>Estilo de Marco</Label>
+                  <RadioGroup
                     value={frameStyle}
                     onValueChange={(val) => setFrameStyle(val as FrameStyle)}
-                    className="flex flex-wrap gap-2"
-                >
-                    <Label htmlFor="frame-edge" className={cn(`relative flex items-center justify-center p-2 h-8 cursor-pointer transition-all border-2 rounded-md text-xs`, frameStyle === 'edge' ? 'border-primary ring-2 ring-primary' : 'border-border')}>
-                        <RadioGroupItem value="edge" id="frame-edge" className="sr-only" />
-                        <span>Al Borde</span>
+                    className="flex gap-2"
+                  >
+                    <Label
+                      htmlFor="frame-edge"
+                      className={cn(
+                        `flex-1 flex items-center justify-center h-10 cursor-pointer transition-all border-2 rounded-md text-sm`,
+                        frameStyle === "edge"
+                          ? "border-primary ring-2 ring-primary"
+                          : "border-border"
+                      )}
+                    >
+                      <RadioGroupItem
+                        value="edge"
+                        id="frame-edge"
+                        className="sr-only"
+                      />
+                      <span>Al Borde</span>
                     </Label>
-                    <Label htmlFor="frame-margin" className={cn(`relative flex items-center justify-center p-2 h-8 cursor-pointer transition-all border-2 rounded-md text-xs`, frameStyle === 'margin' ? 'border-primary ring-2 ring-primary' : 'border-border')}>
-                        <RadioGroupItem value="margin" id="frame-margin" className="sr-only" />
-                        <span>Con Margen</span>
+                    <Label
+                      htmlFor="frame-margin"
+                      className={cn(
+                        `flex-1 flex items-center justify-center h-10 cursor-pointer transition-all border-2 rounded-md text-sm`,
+                        frameStyle === "margin"
+                          ? "border-primary ring-2 ring-primary"
+                          : "border-border"
+                      )}
+                    >
+                      <RadioGroupItem
+                        value="margin"
+                        id="frame-margin"
+                        className="sr-only"
+                      />
+                      <span>Con Margen</span>
                     </Label>
-                </RadioGroup>
-              </div>
-            )}
+                  </RadioGroup>
+                </div>
+              )}
+            </div>
 
             <div className="space-y-2">
                 <Label htmlFor="font-select">Tipografía</Label>
