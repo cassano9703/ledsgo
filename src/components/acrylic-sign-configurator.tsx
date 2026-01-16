@@ -153,7 +153,7 @@ export function AcrylicSignConfigurator() {
                   </div>
                 </div>
                 <div className="space-y-2">
-                  <Label>Agregar Silueta</Label>
+                  <Label>Agregar Silueta (Opcional)</Label>
                   <div className="flex gap-2">
                     {silhouettes.map((s) => (
                       <Button 
