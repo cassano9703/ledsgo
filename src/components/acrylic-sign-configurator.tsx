@@ -2,7 +2,7 @@
 "use client";
 
 import { useState, useRef, useCallback } from "react";
-import { fonts, acrylicColors, sizes, backgrounds, silhouettes, mirrorColors, frameOptions } from "@/lib/config";
+import { fonts, acrylicColors, sizes, backgrounds, silhouettes, frameOptions, mirrorColors } from "@/lib/config";
 import type { FontConfig, ColorConfig, SizeConfig, BackgroundConfig, SilhouetteConfig, FrameConfig } from "@/lib/config";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
@@ -15,7 +15,7 @@ import { OrderModal } from "./order-modal";
 import { cn } from "@/lib/utils";
 import { toPng } from 'html-to-image';
 import { useToast } from "@/hooks/use-toast";
-import { Square, RectangleHorizontal } from "lucide-react";
+import { Square, RectangleHorizontal, RectangleVertical } from "lucide-react";
 import { CircleIcon } from "@/components/icons";
 import Image from "next/image";
 
@@ -143,29 +143,29 @@ export function AcrylicSignConfigurator() {
             </div>
             
             <div className="grid grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <Label>Forma del Acrílico</Label>
-                <div className="flex gap-2">
-                  <Button variant={shape === 'circle' ? 'default' : 'outline'} onClick={() => setShape('circle')} size="icon"><CircleIcon/></Button>
-                  <Button variant={shape === 'square' ? 'default' : 'outline'} onClick={() => setShape('square')} size="icon"><Square/></Button>
-                  <Button variant={shape === 'rectangle' ? 'default' : 'outline'} onClick={() => setShape('rectangle')} size="icon"><RectangleHorizontal/></Button>
+                <div className="space-y-2">
+                  <Label>Forma del Acrílico</Label>
+                  <div className="flex gap-2">
+                    <Button variant={shape === 'circle' ? 'default' : 'outline'} onClick={() => setShape('circle')} size="icon"><CircleIcon className="w-5 h-5"/></Button>
+                    <Button variant={shape === 'square' ? 'default' : 'outline'} onClick={() => setShape('square')} size="icon"><Square/></Button>
+                    <Button variant={shape === 'rectangle' ? 'default' : 'outline'} onClick={() => setShape('rectangle')} size="icon"><RectangleHorizontal/></Button>
+                  </div>
                 </div>
-              </div>
-              <div className="space-y-2">
-                <Label>Silueta (Opcional)</Label>
-                <div className="flex gap-2">
-                  {silhouettes.map((s) => (
-                    <Button 
-                      key={s.name}
-                      variant={silhouette?.name === s.name ? 'default' : 'outline'}
-                      onClick={() => handleSilhouetteClick(s)}
-                      size="icon"
-                    >
-                      <s.Icon className="w-5 h-5"/>
-                    </Button>
-                  ))}
+                <div className="space-y-2">
+                  <Label>Silueta (Opcional)</Label>
+                  <div className="flex gap-2">
+                    {silhouettes.map((s) => (
+                      <Button 
+                        key={s.name}
+                        variant={silhouette?.name === s.name ? 'default' : 'outline'}
+                        onClick={() => handleSilhouetteClick(s)}
+                        size="icon"
+                      >
+                        <s.Icon className="w-5 h-5"/>
+                      </Button>
+                    ))}
+                  </div>
                 </div>
-              </div>
             </div>
 
              <div className="space-y-2">
@@ -201,19 +201,22 @@ export function AcrylicSignConfigurator() {
             </div>
             
             <div className="space-y-2">
-              <Label>Marco (Opcional)</Label>
-              <RadioGroup
-                  value={frame.name}
-                  onValueChange={(val) => setFrame(frameOptions.find(f => f.name === val)!)}
-                  className="flex flex-wrap gap-2"
+              <Label htmlFor="frame-select">Marco (Opcional)</Label>
+              <Select 
+                value={frame.name} 
+                onValueChange={(val) => setFrame(frameOptions.find(f => f.name === val)!)}
               >
+                <SelectTrigger id="frame-select">
+                  <SelectValue placeholder="Selecciona un marco" />
+                </SelectTrigger>
+                <SelectContent>
                   {frameOptions.map((f) => (
-                    <Label key={f.name} htmlFor={`frame-${f.name}`} className={cn(`relative flex items-center justify-center p-2 h-8 cursor-pointer transition-all border-2 rounded-md text-xs`, frame.name === f.name ? 'border-primary ring-2 ring-primary' : 'border-border')}>
-                        <RadioGroupItem value={f.name} id={`frame-${f.name}`} className="sr-only" />
-                        <span>{f.name}</span>
-                    </Label>
+                    <SelectItem key={f.name} value={f.name}>
+                      {f.name}
+                    </SelectItem>
                   ))}
-              </RadioGroup>
+                </SelectContent>
+              </Select>
             </div>
 
             {frame.name !== 'Sin Marco' && (
