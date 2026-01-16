@@ -236,7 +236,7 @@ export function AcrylicSignConfigurator() {
                       className={cn(
                         "flex h-10 flex-1 cursor-pointer items-center justify-center rounded-md border p-2 text-center text-sm font-medium transition-colors",
                         frameStyle === "edge"
-                          ? "border-primary bg-muted"
+                          ? "border-primary"
                           : "border-transparent"
                       )}
                     >
@@ -252,7 +252,7 @@ export function AcrylicSignConfigurator() {
                       className={cn(
                         "flex h-10 flex-1 cursor-pointer items-center justify-center rounded-md border p-2 text-center text-sm font-medium transition-colors",
                         frameStyle === "margin"
-                          ? "border-primary bg-muted"
+                          ? "border-primary"
                           : "border-transparent"
                       )}
                     >
