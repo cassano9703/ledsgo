@@ -95,7 +95,7 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
         
         <div
           ref={signContainerRef}
-          className="absolute cursor-grab w-3/4"
+          className="absolute cursor-grab w-2/3"
           style={{ transform: `translate(${position.x}px, ${position.y}px)` }}
           onMouseDown={handleDragStart}
           onTouchStart={handleDragStart}
