@@ -119,7 +119,7 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
           style={{ 
             transform: `translate(${position.x}px, ${position.y}px)`,
             filter: withBacklight && !isTransparentSign
-              ? `drop-shadow(0 0 15px ${backlightColor.value}) drop-shadow(0 0 45px ${backlightColor.value})`
+              ? `drop-shadow(0 0 10px ${backlightColor.value}) drop-shadow(0 0 30px ${backlightColor.value}) drop-shadow(0 0 60px ${backlightColor.value})`
               : 'none',
             transition: 'filter 0.3s ease-in-out',
           }}
