@@ -155,41 +155,10 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
                   frameInsetClass,
                   shape === 'circle' ? 'rounded-full' : 'rounded-2xl'
                 )}
-              >
-                {/* Each div creates one corner of the frame. By setting width/height to 48%, we create a gap in the middle. */}
-                {/* Top-left corner */}
-                <div
-                  className="absolute top-0 left-0 h-[48%] w-[48%] rounded-tl-2xl"
-                  style={{
-                    borderTop: `4px solid ${frame.value}`,
-                    borderLeft: `4px solid ${frame.value}`,
-                  }}
-                />
-                {/* Top-right corner */}
-                <div
-                  className="absolute top-0 right-0 h-[48%] w-[48%] rounded-tr-2xl"
-                  style={{
-                    borderTop: `4px solid ${frame.value}`,
-                    borderRight: `4px solid ${frame.value}`,
-                  }}
-                />
-                {/* Bottom-left corner */}
-                <div
-                  className="absolute bottom-0 left-0 h-[48%] w-[48%] rounded-bl-2xl"
-                  style={{
-                    borderBottom: `4px solid ${frame.value}`,
-                    borderLeft: `4px solid ${frame.value}`,
-                  }}
-                />
-                {/* Bottom-right corner */}
-                <div
-                  className="absolute bottom-0 right-0 h-[48%] w-[48%] rounded-br-2xl"
-                  style={{
-                    borderBottom: `4px solid ${frame.value}`,
-                    borderRight: `4px solid ${frame.value}`,
-                  }}
-                />
-              </div>
+                 style={{
+                  border: `4px solid ${frame.value}`,
+                }}
+              />
             )}
           </div>
         </div>
