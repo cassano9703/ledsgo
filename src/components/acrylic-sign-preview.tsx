@@ -67,6 +67,8 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
     };
 
     const isMirrorFinish = mirrorFinishColors.some(c => c.name === color.name);
+    const isTransparentSign = mirrorColor.name === 'Plateado';
+    const isSolidWhite = mirrorColor.name === 'Blanco Lechoso';
 
     const getTextStyle = (baseFont: FontConfig, fontSize: string): React.CSSProperties => {
         const style: React.CSSProperties = {
@@ -76,11 +78,18 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
         };
 
         if (isMirrorFinish) {
+          if (isSolidWhite) {
+            // On white background, the reflection is less visible and can affect readability.
+            // We use the solid color with a more subtle glow.
+            style.color = color.value;
+            style.textShadow = `0 0 8px ${color.value}`;
+          } else {
             style.backgroundImage = `linear-gradient(145deg, hsla(0,0%,100%,.9) 15%, ${color.value} 50%, hsla(0,0%,100%,.9) 85%)`;
             style.backgroundClip = 'text';
             style.WebkitBackgroundClip = 'text';
             style.color = 'transparent';
             style.filter = `drop-shadow(0 0 5px ${color.value})`;
+          }
         } else {
             style.color = color.value;
             style.textShadow = `0 0 8px ${color.value}`;
@@ -110,8 +119,6 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
       <div className={cn("absolute w-4 h-4 rounded-full bg-slate-300 shadow-md border border-slate-400 z-10", className)} />
     );
 
-    const isTransparentSign = mirrorColor.name === 'Plateado';
-    const isSolidWhite = mirrorColor.name === 'Blanco Lechoso';
 
     return (
       <div 
@@ -132,7 +139,7 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
           style={{ 
             transform: `translate(${position.x}px, ${position.y}px)`,
             filter: withBacklight && !isTransparentSign
-              ? `drop-shadow(0 0 10px ${backlightColor.value}) drop-shadow(0 0 60px ${backlightColor.value})`
+              ? `drop-shadow(0 0 40px ${backlightColor.value}) drop-shadow(0 0 150px ${backlightColor.value})`
               : 'none',
             transition: 'filter 0.3s ease-in-out',
           }}
@@ -149,7 +156,7 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
               )}
                style={{
                 boxShadow: [
-                  withBacklight && isTransparentSign ? `inset 0 0 120px ${backlightColor.value}` : null,
+                  withBacklight && isTransparentSign ? `inset 0 0 150px ${backlightColor.value}` : null,
                   !isSolidWhite ? 'inset 0 0 60px rgba(255,255,255,0.1)' : null, 
                   '0 0 20px rgba(0,0,0,0.5)'
                 ].filter(Boolean).join(', '),
