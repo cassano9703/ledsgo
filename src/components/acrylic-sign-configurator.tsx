@@ -36,6 +36,7 @@ export function AcrylicSignConfigurator() {
   const [frame, setFrame] = useState<FrameConfig>(frameOptions[1]);
   const [frameStyle, setFrameStyle] = useState<FrameStyle>('corners');
   const [withStandoffs, setWithStandoffs] = useState(true);
+  const [withBacklight, setWithBacklight] = useState(true);
 
 
   const [isOrderModalOpen, setOrderModalOpen] = useState(false);
@@ -90,7 +91,7 @@ export function AcrylicSignConfigurator() {
     setShape(newShape);
   };
 
-  const currentConfig = { text, text2, font, font2, color: engravingColor.name, size, capturedImage, silhouette: silhouette?.name, mirrorColor: mirrorColor.name, frame: frame.name, frameStyle, withStandoffs };
+  const currentConfig = { text, text2, font, font2, color: engravingColor.name, size, capturedImage, silhouette: silhouette?.name, mirrorColor: mirrorColor.name, frame: frame.name, frameStyle, withStandoffs, withBacklight };
 
   return (
     <>
@@ -133,6 +134,7 @@ export function AcrylicSignConfigurator() {
             frame={frame}
             frameStyle={frameStyle}
             withStandoffs={withStandoffs}
+            withBacklight={withBacklight}
           />
         </div>
         
@@ -275,14 +277,24 @@ export function AcrylicSignConfigurator() {
                       </SelectContent>
                     </Select>
                   </div>
-                <div className="flex items-center justify-between space-y-2 pt-6">
-                    <Label htmlFor="standoffs-switch" className="text-sm font-medium">Agregar Distanciadores</Label>
-                    <Switch
-                        id="standoffs-switch"
-                        checked={withStandoffs}
-                        onCheckedChange={setWithStandoffs}
-                    />
-                </div>
+                  <div className="space-y-4 pt-2">
+                    <div className="flex items-center justify-between">
+                      <Label htmlFor="standoffs-switch" className="text-sm font-medium">Agregar Distanciadores</Label>
+                      <Switch
+                          id="standoffs-switch"
+                          checked={withStandoffs}
+                          onCheckedChange={setWithStandoffs}
+                      />
+                    </div>
+                    <div className="flex items-center justify-between">
+                        <Label htmlFor="backlight-switch" className="text-sm font-medium">Luz de Fondo</Label>
+                        <Switch
+                            id="backlight-switch"
+                            checked={withBacklight}
+                            onCheckedChange={setWithBacklight}
+                        />
+                    </div>
+                  </div>
               </div>
 
             <div className="grid grid-cols-2 gap-4">
@@ -313,7 +325,6 @@ export function AcrylicSignConfigurator() {
                   <Select
                       value={frameStyle}
                       onValueChange={(val) => setFrameStyle(val as FrameStyle)}
-                      disabled={shape === 'circle'}
                   >
                       <SelectTrigger id="frame-style-select">
                           <SelectValue placeholder="Selecciona un estilo" />

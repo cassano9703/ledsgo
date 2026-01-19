@@ -18,10 +18,11 @@ interface AcrylicSignPreviewProps {
   frame: FrameConfig;
   frameStyle: 'edge' | 'margin' | 'corners';
   withStandoffs: boolean;
+  withBacklight: boolean;
 }
 
 export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewProps>(
-  ({ text, text2, font, font2, color, mirrorColor, size, shape, background, silhouette, frame, frameStyle, withStandoffs }, ref) => {
+  ({ text, text2, font, font2, color, mirrorColor, size, shape, background, silhouette, frame, frameStyle, withStandoffs, withBacklight }, ref) => {
     const previewText = text || 'Tu Texto Aquí';
     const baseFontSize = 2.5;
     const dynamicFontSize = `${baseFontSize * size.multiplier}rem`;
@@ -112,7 +113,13 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
         <div
           ref={signContainerRef}
           className="absolute cursor-grab w-1/2"
-          style={{ transform: `translate(${position.x}px, ${position.y}px)` }}
+          style={{ 
+            transform: `translate(${position.x}px, ${position.y}px)`,
+            filter: withBacklight
+              ? `drop-shadow(0 0 15px ${color.value}) drop-shadow(0 0 30px ${color.value})`
+              : 'none',
+            transition: 'filter 0.3s ease-in-out',
+          }}
           onMouseDown={handleDragStart}
           onTouchStart={handleDragStart}
         >
@@ -216,6 +223,7 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
                     style={{
                       borderTop: `4px solid ${frame.value}`,
                       borderBottom: `4px solid ${frame.value}`,
+                      clipPath: 'polygon(0 0, 45% 0, 45% 100%, 0 100%, 0 0) , polygon(55% 0, 100% 0, 100% 100%, 55% 100%, 55% 0)',
                     }}
                   />
                   {/* Left side with cut */}
