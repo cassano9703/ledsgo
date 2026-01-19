@@ -2,7 +2,7 @@
 
 import React, { forwardRef, useState, useRef, MouseEvent, TouchEvent } from 'react';
 import { cn } from '@/lib/utils';
-import type { FontConfig, SizeConfig, BackgroundConfig, ColorConfig, SilhouetteConfig, FrameConfig } from '@/lib/config';
+import { mirrorFinishColors, type FontConfig, type SizeConfig, type BackgroundConfig, type ColorConfig, type SilhouetteConfig, type FrameConfig } from '@/lib/config';
 
 interface AcrylicSignPreviewProps {
   text: string;
@@ -66,22 +66,34 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
       }
     };
 
-    const textStyle = {
-      fontFamily: font.style.fontFamily,
-      fontSize: dynamicFontSize,
-      color: color.value,
-      textShadow: `0 0 8px ${color.value}`,
-      ...font.style,
-    } as React.CSSProperties;
+    const isMirrorFinish = mirrorFinishColors.some(c => c.name === color.name);
+
+    const getTextStyle = (baseFont: FontConfig, fontSize: string): React.CSSProperties => {
+        const style: React.CSSProperties = {
+            fontFamily: baseFont.style.fontFamily,
+            fontSize: fontSize,
+            ...baseFont.style,
+        };
+
+        if (isMirrorFinish) {
+            style.backgroundImage = `linear-gradient(145deg, hsla(0,0%,100%,.9) 15%, ${color.value} 50%, hsla(0,0%,100%,.9) 85%)`;
+            style.backgroundClip = 'text';
+            style.webkitBackgroundClip = 'text';
+            style.color = 'transparent';
+            style.filter = `drop-shadow(0 0 5px ${color.value})`;
+        } else {
+            style.color = color.value;
+            style.textShadow = `0 0 8px ${color.value}`;
+        }
+        return style;
+    };
+    
+    const textStyle = getTextStyle(font, dynamicFontSize);
     
     const subtitleTextStyle = {
-      fontFamily: font2.style.fontFamily,
-      fontSize: subtitleFontSize,
-      color: color.value,
-      textShadow: `0 0 8px ${color.value}`,
-      ...font2.style,
+      ...getTextStyle(font2, subtitleFontSize),
       fontWeight: '400',
-    } as React.CSSProperties;
+    };
 
     const shapeClasses = {
       circle: 'rounded-full aspect-square',
@@ -119,7 +131,7 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
           style={{ 
             transform: `translate(${position.x}px, ${position.y}px)`,
             filter: withBacklight && !isTransparentSign
-              ? `drop-shadow(0 0 10px ${backlightColor.value}) drop-shadow(0 0 30px ${backlightColor.value}) drop-shadow(0 0 60px ${backlightColor.value})`
+              ? `drop-shadow(0 0 10px ${backlightColor.value}) drop-shadow(0 0 60px ${backlightColor.value})`
               : 'none',
             transition: 'filter 0.3s ease-in-out',
           }}
@@ -130,7 +142,7 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
             <div 
               className={cn(
                 "relative w-full h-full flex items-center justify-center backdrop-blur-sm transition-all duration-300 overflow-hidden",
-                mirrorColor.value,
+                mirrorColor.twClass,
                 shape === 'circle' ? 'rounded-full' : 'rounded-2xl'
               )}
                style={{
