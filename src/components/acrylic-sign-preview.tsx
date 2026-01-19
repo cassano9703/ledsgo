@@ -148,19 +148,42 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
                 }}
               />
             )}
-             {hasFrame && frameStyle === 'corners' && (
-              <div
-                className={cn(
-                  'absolute pointer-events-none',
-                  frameInsetClass,
-                  shape === 'circle' ? 'rounded-full' : 'rounded-2xl'
-                )}
-                 style={{
-                  borderTop: `4px solid ${frame.value}`,
-                  borderBottom: `4px solid ${frame.value}`,
-                  borderLeft: `4px solid ${frame.value}`,
-                }}
-              />
+             {hasFrame && frameStyle === 'corners' && shape !== 'circle' && (
+              <>
+                <div
+                  className={cn(
+                    'absolute pointer-events-none',
+                    frameInsetClass,
+                    'rounded-2xl'
+                  )}
+                  style={{
+                    borderTop: `4px solid ${frame.value}`,
+                    borderBottom: `4px solid ${frame.value}`,
+                  }}
+                />
+                <div
+                  className={cn(
+                    'absolute pointer-events-none',
+                    frameInsetClass,
+                    'rounded-2xl'
+                  )}
+                  style={{
+                    borderLeft: `4px solid ${frame.value}`,
+                    clipPath: 'polygon(0 0, 100% 0, 100% 45%, 0 45%)',
+                  }}
+                />
+                <div
+                  className={cn(
+                    'absolute pointer-events-none',
+                    frameInsetClass,
+                    'rounded-2xl'
+                  )}
+                  style={{
+                    borderLeft: `4px solid ${frame.value}`,
+                    clipPath: 'polygon(0 100%, 100% 100%, 100% 55%, 0 55%)',
+                  }}
+                />
+              </>
             )}
           </div>
         </div>
