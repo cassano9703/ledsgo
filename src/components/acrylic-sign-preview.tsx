@@ -158,6 +158,7 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
                  style={{
                   borderTop: `4px solid ${frame.value}`,
                   borderBottom: `4px solid ${frame.value}`,
+                  borderLeft: `4px solid ${frame.value}`,
                 }}
               />
             )}
