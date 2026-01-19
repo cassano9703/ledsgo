@@ -17,6 +17,7 @@ import { useToast } from "@/hooks/use-toast";
 import { Square, RectangleHorizontal } from "lucide-react";
 import { CircleIcon } from "@/components/icons";
 import Image from "next/image";
+import { Switch } from "@/components/ui/switch";
 
 type Shape = "circle" | "square" | "rectangle";
 type FrameStyle = "edge" | "margin" | "corners";
@@ -34,6 +35,7 @@ export function AcrylicSignConfigurator() {
   const [silhouette, setSilhouette] = useState<SilhouetteConfig | null>(null);
   const [frame, setFrame] = useState<FrameConfig>(frameOptions[1]);
   const [frameStyle, setFrameStyle] = useState<FrameStyle>('corners');
+  const [withStandoffs, setWithStandoffs] = useState(true);
 
 
   const [isOrderModalOpen, setOrderModalOpen] = useState(false);
@@ -88,7 +90,7 @@ export function AcrylicSignConfigurator() {
     setShape(newShape);
   };
 
-  const currentConfig = { text, text2, font, font2, color: engravingColor.name, size, capturedImage, silhouette: silhouette?.name, mirrorColor: mirrorColor.name, frame: frame.name, frameStyle };
+  const currentConfig = { text, text2, font, font2, color: engravingColor.name, size, capturedImage, silhouette: silhouette?.name, mirrorColor: mirrorColor.name, frame: frame.name, frameStyle, withStandoffs };
 
   return (
     <>
@@ -130,6 +132,7 @@ export function AcrylicSignConfigurator() {
             silhouette={silhouette}
             frame={frame}
             frameStyle={frameStyle}
+            withStandoffs={withStandoffs}
           />
         </div>
         
@@ -256,20 +259,30 @@ export function AcrylicSignConfigurator() {
                 </div>
             </div>
 
-             <div className="space-y-2">
-                <Label htmlFor="size-select" className="flex items-center gap-2">Tamaño</Label>
-                <Select value={size.name} onValueChange={(val) => setSize(sizes.find(s => s.name === val)!)}>
-                  <SelectTrigger id="size-select">
-                    <SelectValue placeholder="Selecciona un tamaño" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {sizes.map((s) => (
-                      <SelectItem key={s.name} value={s.name}>
-                        {s.name} ({s.multiplier}x)
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
+             <div className="grid grid-cols-2 gap-4 items-center">
+                 <div className="space-y-2">
+                    <Label htmlFor="size-select" className="flex items-center gap-2">Tamaño</Label>
+                    <Select value={size.name} onValueChange={(val) => setSize(sizes.find(s => s.name === val)!)}>
+                      <SelectTrigger id="size-select">
+                        <SelectValue placeholder="Selecciona un tamaño" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {sizes.map((s) => (
+                          <SelectItem key={s.name} value={s.name}>
+                            {s.name} ({s.multiplier}x)
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+                <div className="flex items-center justify-between space-y-2 pt-6">
+                    <Label htmlFor="standoffs-switch" className="text-sm font-medium">Agregar Distanciadores</Label>
+                    <Switch
+                        id="standoffs-switch"
+                        checked={withStandoffs}
+                        onCheckedChange={setWithStandoffs}
+                    />
+                </div>
               </div>
 
             <div className="grid grid-cols-2 gap-4">
@@ -300,6 +313,7 @@ export function AcrylicSignConfigurator() {
                   <Select
                       value={frameStyle}
                       onValueChange={(val) => setFrameStyle(val as FrameStyle)}
+                      disabled={shape === 'circle'}
                   >
                       <SelectTrigger id="frame-style-select">
                           <SelectValue placeholder="Selecciona un estilo" />

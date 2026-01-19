@@ -46,6 +46,7 @@ interface OrderModalProps {
     mirrorColor?: string;
     frame?: string;
     frameStyle?: 'edge' | 'margin' | 'corners';
+    withStandoffs?: boolean;
   };
 }
 
@@ -87,6 +88,7 @@ export function OrderModal({ isOpen, onClose, config }: OrderModalProps) {
       config.silhouette ? `- Silueta: ${config.silhouette}` : null,
       config.frame && config.frame !== "Sin Marco" ? `- Marco: ${config.frame}` : null,
       config.frame && config.frame !== "Sin Marco" && frameStyleText ? `- Estilo de Marco: ${frameStyleText}` : null,
+      config.withStandoffs ? `- Incluye Distanciadores: Sí` : null,
       `- Tamaño: ${config.size.name}`,
       `\n_(Se adjuntará una vista previa del diseño)_`
     ];

@@ -17,10 +17,11 @@ interface AcrylicSignPreviewProps {
   silhouette: SilhouetteConfig | null;
   frame: FrameConfig;
   frameStyle: 'edge' | 'margin' | 'corners';
+  withStandoffs: boolean;
 }
 
 export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewProps>(
-  ({ text, text2, font, font2, color, mirrorColor, size, shape, background, silhouette, frame, frameStyle }, ref) => {
+  ({ text, text2, font, font2, color, mirrorColor, size, shape, background, silhouette, frame, frameStyle, withStandoffs }, ref) => {
     const previewText = text || 'Tu Texto Aquí';
     const baseFontSize = 2.5;
     const dynamicFontSize = `${baseFontSize * size.multiplier}rem`;
@@ -91,6 +92,10 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
     
     const frameInsetClass = frameStyle === 'edge' ? 'inset-0' : 'inset-2';
 
+    const Standoff = ({ className }: { className?: string }) => (
+      <div className={cn("absolute w-4 h-4 rounded-full bg-slate-300 shadow-md border border-slate-400 z-10", className)} />
+    );
+
     return (
       <div 
         ref={ref}
@@ -123,6 +128,24 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
               }}
             >
               <div className={cn("absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-white/10 to-transparent", shape === 'circle' ? 'rounded-full' : 'rounded-t-2xl')} />
+              
+              {withStandoffs && (
+                shape === 'circle' ? (
+                  <>
+                    <Standoff className="top-[15%] left-[15%]" />
+                    <Standoff className="top-[15%] right-[15%]" />
+                    <Standoff className="bottom-[15%] left-[15%]" />
+                    <Standoff className="bottom-[15%] right-[15%]" />
+                  </>
+                ) : (
+                  <>
+                    <Standoff className="top-4 left-4" />
+                    <Standoff className="top-4 right-4" />
+                    <Standoff className="bottom-4 left-4" />
+                    <Standoff className="bottom-4 right-4" />
+                  </>
+                )
+              )}
 
               <div className={cn(
                 "absolute text-center flex flex-col items-center justify-center gap-2 p-8 overflow-hidden",
@@ -176,7 +199,7 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
                   )}
                   style={{
                     border: '4px solid transparent',
-                    background: `conic-gradient(from 0deg, ${frame.value} 0deg, ${frame.value} 80deg, transparent 80deg, transparent 100deg, ${frame.value} 100deg, ${frame.value} 260deg, transparent 260deg, transparent 280deg, ${frame.value} 280deg, ${frame.value} 360deg) border-box`,
+                    background: `conic-gradient(from 0deg, transparent 0deg, transparent 10deg, ${frame.value} 10deg, ${frame.value} 170deg, transparent 170deg, transparent 190deg, ${frame.value} 190deg, ${frame.value} 350deg, transparent 350deg, transparent 360deg) border-box`,
                     mask: 'linear-gradient(white 0 0) content-box, linear-gradient(white 0 0)',
                     WebkitMask: 'linear-gradient(white 0 0) content-box, linear-gradient(white 0 0)',
                     maskComposite: 'exclude',
