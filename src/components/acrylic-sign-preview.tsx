@@ -135,8 +135,8 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
               )}
                style={{
                 boxShadow: [
-                  withBacklight && isTransparentSign ? `inset 0 0 40px ${backlightColor.value}` : null,
-                  'inset 0 0 40px rgba(255,255,255,0.1)', 
+                  withBacklight && isTransparentSign ? `inset 0 0 80px ${backlightColor.value}` : null,
+                  'inset 0 0 60px rgba(255,255,255,0.1)', 
                   '0 0 20px rgba(0,0,0,0.5)'
                 ].filter(Boolean).join(', '),
               }}
