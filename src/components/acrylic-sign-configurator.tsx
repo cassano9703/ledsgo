@@ -223,7 +223,7 @@ export function AcrylicSignConfigurator() {
               </div>
             </div>
 
-            <div className="grid grid-cols-2 gap-4 items-end">
+            <div className="grid grid-cols-2 gap-4 items-start">
               <div className="space-y-2">
                 <Label>Color del Grabado</Label>
                 <RadioGroup
@@ -326,5 +326,3 @@ export function AcrylicSignConfigurator() {
     </>
   );
 }
-
-    
