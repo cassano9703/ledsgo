@@ -132,10 +132,8 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
               {withStandoffs && (
                 shape === 'circle' ? (
                   <>
-                    <Standoff className="top-[15%] left-[15%]" />
-                    <Standoff className="top-[15%] right-[15%]" />
-                    <Standoff className="bottom-[15%] left-[15%]" />
-                    <Standoff className="bottom-[15%] right-[15%]" />
+                    <Standoff className="top-1/2 left-4 -translate-y-1/2" />
+                    <Standoff className="top-1/2 right-4 -translate-y-1/2" />
                   </>
                 ) : (
                   <>
@@ -208,6 +206,7 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
                 />
               ) : (
                 <>
+                  {/* Top & Bottom borders */}
                   <div
                     className={cn(
                       'absolute pointer-events-none',
