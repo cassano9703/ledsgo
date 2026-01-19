@@ -21,7 +21,7 @@ import { CircleIcon } from "@/components/icons";
 import Image from "next/image";
 
 type Shape = "circle" | "square" | "rectangle";
-type FrameStyle = "edge" | "margin";
+type FrameStyle = "edge" | "margin" | "corners";
 
 export function AcrylicSignConfigurator() {
   const [text, setText] = useState("Dra. Sophia");
@@ -78,6 +78,13 @@ export function AcrylicSignConfigurator() {
       setSilhouette(s);
     }
   }
+
+  const handleShapeChange = (newShape: Shape) => {
+    setShape(newShape);
+    if (newShape === 'circle' && frameStyle === 'corners') {
+      setFrameStyle('margin');
+    }
+  };
 
   const currentConfig = { text, font, color: engravingColor.name, size, capturedImage, silhouette: silhouette?.name, mirrorColor: mirrorColor.name, frame: frame.name, frameStyle };
 
@@ -161,9 +168,9 @@ export function AcrylicSignConfigurator() {
                 <div className="space-y-2">
                   <Label>Forma del Acrílico</Label>
                   <div className="flex gap-2">
-                    <Button variant={shape === 'circle' ? 'default' : 'outline'} onClick={() => setShape('circle')} size="icon"><CircleIcon className="w-5 h-5"/></Button>
-                    <Button variant={shape === 'square' ? 'default' : 'outline'} onClick={() => setShape('square')} size="icon"><Square/></Button>
-                    <Button variant={shape === 'rectangle' ? 'default' : 'outline'} onClick={() => setShape('rectangle')} size="icon"><RectangleHorizontal/></Button>
+                    <Button variant={shape === 'circle' ? 'default' : 'outline'} onClick={() => handleShapeChange('circle')} size="icon"><CircleIcon className="w-5 h-5"/></Button>
+                    <Button variant={shape === 'square' ? 'default' : 'outline'} onClick={() => handleShapeChange('square')} size="icon"><Square/></Button>
+                    <Button variant={shape === 'rectangle' ? 'default' : 'outline'} onClick={() => handleShapeChange('rectangle')} size="icon"><RectangleHorizontal/></Button>
                   </div>
                 </div>
                 <div className="space-y-2">
@@ -234,6 +241,7 @@ export function AcrylicSignConfigurator() {
                       <SelectContent>
                           <SelectItem value="edge">Al Borde</SelectItem>
                           <SelectItem value="margin">Con Margen</SelectItem>
+                          <SelectItem value="corners" disabled={shape === 'circle'}>Esquinas</SelectItem>
                       </SelectContent>
                   </Select>
                 </div>

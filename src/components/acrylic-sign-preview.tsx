@@ -1,4 +1,5 @@
 
+
 'use client';
 
 import React, { forwardRef, useState, useRef, MouseEvent, TouchEvent } from 'react';
@@ -15,7 +16,7 @@ interface AcrylicSignPreviewProps {
   background: BackgroundConfig;
   silhouette: SilhouetteConfig | null;
   frame: FrameConfig;
-  frameStyle: 'edge' | 'margin';
+  frameStyle: 'edge' | 'margin' | 'corners';
 }
 
 export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewProps>(
@@ -136,7 +137,7 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
                 </p>
               </div>
             </div>
-            {hasFrame && (
+            {hasFrame && frameStyle !== 'corners' && (
               <div
                 className={cn(
                   'absolute pointer-events-none',
@@ -148,6 +149,52 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
                   boxShadow: `0 0 10px ${frame.value}, inset 0 0 5px ${frame.value}`,
                 }}
               />
+            )}
+             {hasFrame && frameStyle === 'corners' && (
+              <div
+                className={cn(
+                  'absolute pointer-events-none',
+                  frameInsetClass,
+                  shape === 'circle' ? 'rounded-full' : 'rounded-2xl'
+                )}
+              >
+                {/* Top-left corner */}
+                <div
+                  className="absolute top-0 left-0 h-1/4 w-1/4 rounded-tl-2xl"
+                  style={{
+                    borderTop: `4px solid ${frame.value}`,
+                    borderLeft: `4px solid ${frame.value}`,
+                    boxShadow: `0 0 10px ${frame.value}`,
+                  }}
+                />
+                {/* Top-right corner */}
+                <div
+                  className="absolute top-0 right-0 h-1/4 w-1/4 rounded-tr-2xl"
+                  style={{
+                    borderTop: `4px solid ${frame.value}`,
+                    borderRight: `4px solid ${frame.value}`,
+                    boxShadow: `0 0 10px ${frame.value}`,
+                  }}
+                />
+                {/* Bottom-left corner */}
+                <div
+                  className="absolute bottom-0 left-0 h-1/4 w-1/4 rounded-bl-2xl"
+                  style={{
+                    borderBottom: `4px solid ${frame.value}`,
+                    borderLeft: `4px solid ${frame.value}`,
+                    boxShadow: `0 0 10px ${frame.value}`,
+                  }}
+                />
+                {/* Bottom-right corner */}
+                <div
+                  className="absolute bottom-0 right-0 h-1/4 w-1/4 rounded-br-2xl"
+                  style={{
+                    borderBottom: `4px solid ${frame.value}`,
+                    borderRight: `4px solid ${frame.value}`,
+                    boxShadow: `0 0 10px ${frame.value}`,
+                  }}
+                />
+              </div>
             )}
           </div>
         </div>

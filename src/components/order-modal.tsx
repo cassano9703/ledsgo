@@ -44,7 +44,7 @@ interface OrderModalProps {
     silhouette?: string;
     mirrorColor?: string;
     frame?: string;
-    frameStyle?: 'edge' | 'margin';
+    frameStyle?: 'edge' | 'margin' | 'corners';
   };
 }
 
@@ -62,6 +62,13 @@ export function OrderModal({ isOpen, onClose, config }: OrderModalProps) {
     // IMPORTANTE: Reemplaza este número con tu número de WhatsApp real, incluyendo el código de país.
     const yourWhatsAppNumber = "907390992"; 
 
+    const frameStyleMap = {
+      edge: 'Al Borde',
+      margin: 'Con Margen',
+      corners: 'Esquinas',
+    };
+    const frameStyleText = config.frameStyle ? frameStyleMap[config.frameStyle] : null;
+
     const messageParts = [
       `Hola Leds Go! 👋`,
       `\n\nQuisiera hacer un pedido con los siguientes detalles:`,
@@ -77,7 +84,7 @@ export function OrderModal({ isOpen, onClose, config }: OrderModalProps) {
       `- Tipografía: ${config.font.name}`,
       config.silhouette ? `- Silueta: ${config.silhouette}` : null,
       config.frame && config.frame !== "Sin Marco" ? `- Marco: ${config.frame}` : null,
-      config.frame && config.frame !== "Sin Marco" && config.frameStyle ? `- Estilo de Marco: ${config.frameStyle === 'edge' ? 'Al Borde' : 'Con Margen'}` : null,
+      config.frame && config.frame !== "Sin Marco" && frameStyleText ? `- Estilo de Marco: ${frameStyleText}` : null,
       `- Tamaño: ${config.size.name}`,
       `\n_(Se adjuntará una vista previa del diseño)_`
     ];
