@@ -78,7 +78,7 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
         if (isMirrorFinish) {
             style.backgroundImage = `linear-gradient(145deg, hsla(0,0%,100%,.9) 15%, ${color.value} 50%, hsla(0,0%,100%,.9) 85%)`;
             style.backgroundClip = 'text';
-            style.webkitBackgroundClip = 'text';
+            style.WebkitBackgroundClip = 'text';
             style.color = 'transparent';
             style.filter = `drop-shadow(0 0 5px ${color.value})`;
         } else {
@@ -111,6 +111,7 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
     );
 
     const isTransparentSign = mirrorColor.name === 'Plateado';
+    const isSolidWhite = mirrorColor.name === 'Blanco Lechoso';
 
     return (
       <div 
@@ -142,13 +143,13 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
             <div 
               className={cn(
                 "relative w-full h-full flex items-center justify-center backdrop-blur-sm transition-all duration-300 overflow-hidden",
-                mirrorColor.twClass,
+                !isSolidWhite && !isTransparentSign && mirrorColor.twClass,
                 shape === 'circle' ? 'rounded-full' : 'rounded-2xl'
               )}
                style={{
                 boxShadow: [
                   withBacklight && isTransparentSign ? `inset 0 0 80px ${backlightColor.value}` : null,
-                  'inset 0 0 60px rgba(255,255,255,0.1)', 
+                  !isSolidWhite ? 'inset 0 0 60px rgba(255,255,255,0.1)' : null, 
                   '0 0 20px rgba(0,0,0,0.5)'
                 ].filter(Boolean).join(', '),
               }}
