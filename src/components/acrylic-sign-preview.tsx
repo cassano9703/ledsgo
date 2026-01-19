@@ -156,9 +156,10 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
                   shape === 'circle' ? 'rounded-full' : 'rounded-2xl'
                 )}
               >
+                {/* Each div creates one corner of the frame. By setting width/height to 48%, we create a gap in the middle. */}
                 {/* Top-left corner */}
                 <div
-                  className="absolute top-0 left-0 h-1/3 w-1/3 rounded-tl-2xl"
+                  className="absolute top-0 left-0 h-[48%] w-[48%] rounded-tl-2xl"
                   style={{
                     borderTop: `4px solid ${frame.value}`,
                     borderLeft: `4px solid ${frame.value}`,
@@ -167,7 +168,7 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
                 />
                 {/* Top-right corner */}
                 <div
-                  className="absolute top-0 right-0 h-1/3 w-1/3 rounded-tr-2xl"
+                  className="absolute top-0 right-0 h-[48%] w-[48%] rounded-tr-2xl"
                   style={{
                     borderTop: `4px solid ${frame.value}`,
                     borderRight: `4px solid ${frame.value}`,
@@ -176,7 +177,7 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
                 />
                 {/* Bottom-left corner */}
                 <div
-                  className="absolute bottom-0 left-0 h-1/3 w-1/3 rounded-bl-2xl"
+                  className="absolute bottom-0 left-0 h-[48%] w-[48%] rounded-bl-2xl"
                   style={{
                     borderBottom: `4px solid ${frame.value}`,
                     borderLeft: `4px solid ${frame.value}`,
@@ -185,7 +186,7 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
                 />
                 {/* Bottom-right corner */}
                 <div
-                  className="absolute bottom-0 right-0 h-1/3 w-1/3 rounded-br-2xl"
+                  className="absolute bottom-0 right-0 h-[48%] w-[48%] rounded-br-2xl"
                   style={{
                     borderBottom: `4px solid ${frame.value}`,
                     borderRight: `4px solid ${frame.value}`,
