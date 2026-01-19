@@ -52,7 +52,7 @@ export const acrylicColors: ColorConfig[] = [
 export const mirrorColors: ColorConfig[] = [
   { name: "Plateado", value: "bg-slate-300/10", twClass: "bg-slate-300" },
   { name: "Blanco Lechoso", value: "bg-white/30", twClass: "bg-white" },
-  { name: "Negro", value: "bg-black/60", twClass: "bg-black" },
+  { name: "Negro", value: "bg-black", twClass: "bg-black" },
 ];
 
 export const lightColors: ColorConfig[] = [
