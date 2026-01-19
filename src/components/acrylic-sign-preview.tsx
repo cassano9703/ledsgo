@@ -163,7 +163,6 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
                   style={{
                     borderTop: `4px solid ${frame.value}`,
                     borderLeft: `4px solid ${frame.value}`,
-                    boxShadow: `0 0 10px ${frame.value}`,
                   }}
                 />
                 {/* Top-right corner */}
@@ -172,7 +171,6 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
                   style={{
                     borderTop: `4px solid ${frame.value}`,
                     borderRight: `4px solid ${frame.value}`,
-                    boxShadow: `0 0 10px ${frame.value}`,
                   }}
                 />
                 {/* Bottom-left corner */}
@@ -181,7 +179,6 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
                   style={{
                     borderBottom: `4px solid ${frame.value}`,
                     borderLeft: `4px solid ${frame.value}`,
-                    boxShadow: `0 0 10px ${frame.value}`,
                   }}
                 />
                 {/* Bottom-right corner */}
@@ -190,7 +187,6 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
                   style={{
                     borderBottom: `4px solid ${frame.value}`,
                     borderRight: `4px solid ${frame.value}`,
-                    boxShadow: `0 0 10px ${frame.value}`,
                   }}
                 />
               </div>
