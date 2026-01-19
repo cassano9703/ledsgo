@@ -38,6 +38,7 @@ interface OrderModalProps {
     text: string;
     text2?: string;
     font: FontConfig;
+    font2: FontConfig;
     color: string;
     size: SizeConfig;
     capturedImage: string | null;
@@ -81,7 +82,8 @@ export function OrderModal({ isOpen, onClose, config }: OrderModalProps) {
       config.text2 ? `- Texto 2: "${config.text2}"` : null,
       config.mirrorColor ? `- Color de Acrílico: ${config.mirrorColor}` : null,
       `- Color de Grabado/Neón: ${config.color}`,
-      `- Tipografía: ${config.font.name}`,
+      `- Tipografía Texto 1: ${config.font.name}`,
+      config.text2 ? `- Tipografía Texto 2: ${config.font2.name}` : null,
       config.silhouette ? `- Silueta: ${config.silhouette}` : null,
       config.frame && config.frame !== "Sin Marco" ? `- Marco: ${config.frame}` : null,
       config.frame && config.frame !== "Sin Marco" && frameStyleText ? `- Estilo de Marco: ${frameStyleText}` : null,

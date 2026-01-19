@@ -8,6 +8,7 @@ interface AcrylicSignPreviewProps {
   text: string;
   text2?: string;
   font: FontConfig;
+  font2: FontConfig;
   color: ColorConfig;
   mirrorColor: ColorConfig;
   size: SizeConfig;
@@ -19,7 +20,7 @@ interface AcrylicSignPreviewProps {
 }
 
 export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewProps>(
-  ({ text, text2, font, color, mirrorColor, size, shape, background, silhouette, frame, frameStyle }, ref) => {
+  ({ text, text2, font, font2, color, mirrorColor, size, shape, background, silhouette, frame, frameStyle }, ref) => {
     const previewText = text || 'Tu Texto Aquí';
     const baseFontSize = 2.5;
     const dynamicFontSize = `${baseFontSize * size.multiplier}rem`;
@@ -70,6 +71,15 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
       ...font.style,
     } as React.CSSProperties;
     
+    const subtitleTextStyle = {
+      fontFamily: font2.style.fontFamily,
+      fontSize: subtitleFontSize,
+      color: color.value,
+      textShadow: `0 0 8px ${color.value}`,
+      ...font2.style,
+      fontWeight: '400',
+    } as React.CSSProperties;
+
     const shapeClasses = {
       circle: 'rounded-full aspect-square',
       square: 'rounded-2xl aspect-square',
@@ -138,11 +148,7 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
                 {text2 && (
                   <p
                     className='break-words transition-all duration-300 ease-in-out select-none'
-                    style={{
-                      ...textStyle,
-                      fontSize: subtitleFontSize,
-                      fontWeight: '400',
-                    }}
+                    style={subtitleTextStyle}
                   >
                     {text2}
                   </p>
@@ -161,7 +167,7 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
                 }}
               />
             )}
-            {hasFrame && frameStyle === 'corners' && (
+             {hasFrame && frameStyle === 'corners' && (
               shape === 'circle' ? (
                 <div
                   className={cn(
@@ -170,7 +176,7 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
                   )}
                   style={{
                     border: '4px solid transparent',
-                    background: `conic-gradient(from 0deg, transparent 0deg, transparent 80deg, ${frame.value} 80deg, ${frame.value} 100deg, transparent 100deg, transparent 260deg, ${frame.value} 260deg, ${frame.value} 280deg, transparent 280deg) border-box`,
+                    background: `conic-gradient(from 0deg, ${frame.value} 0deg, ${frame.value} 80deg, transparent 80deg, transparent 100deg, ${frame.value} 100deg, ${frame.value} 260deg, transparent 260deg, transparent 280deg, ${frame.value} 280deg, ${frame.value} 360deg) border-box`,
                     mask: 'linear-gradient(white 0 0) content-box, linear-gradient(white 0 0)',
                     WebkitMask: 'linear-gradient(white 0 0) content-box, linear-gradient(white 0 0)',
                     maskComposite: 'exclude',
