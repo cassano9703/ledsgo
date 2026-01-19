@@ -99,46 +99,45 @@ export function AcrylicSignConfigurator() {
     <>
       <div className="mt-12 grid grid-cols-1 lg:grid-cols-12 gap-y-4 lg:gap-x-12 gap-x-8 items-start">
         
-        <div className="lg:col-span-12 flex justify-start gap-4 flex-wrap">
-              {backgrounds.map(bg => (
-                  <div 
-                      key={bg.name}
-                      className={cn(
-                          "rounded-md border-2 overflow-hidden cursor-pointer transition-all w-24 h-20",
-                          background.name === bg.name ? "border-primary ring-2 ring-primary" : "border-transparent"
-                      )}
-                      onClick={() => setBackground(bg)}
-                  >
-                      <Image 
-                          src={bg.imageUrl}
-                          alt={bg.name}
-                          width={96}
-                          height={80}
-                          className="object-cover w-full h-full"
-                      />
-                  </div>
-              ))}
-        </div>
-        
-        <div className="lg:col-span-8">
-           <AcrylicSignPreview
-            ref={previewRef}
-            text={text}
-            text2={text2}
-            font={font}
-            font2={font2}
-            color={engravingColor}
-            mirrorColor={mirrorColor}
-            size={size}
-            shape={shape}
-            background={background}
-            silhouette={silhouette}
-            frame={frame}
-            frameStyle={frameStyle}
-            withStandoffs={withStandoffs}
-            withBacklight={withBacklight}
-            backlightColor={backlightColor}
-          />
+        <div className="lg:col-span-8 space-y-4">
+            <div className="flex justify-start gap-4 flex-wrap">
+                {backgrounds.map(bg => (
+                    <div 
+                        key={bg.name}
+                        className={cn(
+                            "rounded-md border-2 overflow-hidden cursor-pointer transition-all w-24 h-20",
+                            background.name === bg.name ? "border-primary ring-2 ring-primary" : "border-transparent"
+                        )}
+                        onClick={() => setBackground(bg)}
+                    >
+                        <Image 
+                            src={bg.imageUrl}
+                            alt={bg.name}
+                            width={96}
+                            height={80}
+                            className="object-cover w-full h-full"
+                        />
+                    </div>
+                ))}
+            </div>
+            <AcrylicSignPreview
+                ref={previewRef}
+                text={text}
+                text2={text2}
+                font={font}
+                font2={font2}
+                color={engravingColor}
+                mirrorColor={mirrorColor}
+                size={size}
+                shape={shape}
+                background={background}
+                silhouette={silhouette}
+                frame={frame}
+                frameStyle={frameStyle}
+                withStandoffs={withStandoffs}
+                withBacklight={withBacklight}
+                backlightColor={backlightColor}
+            />
         </div>
         
         <Card className="lg:col-span-4 sticky top-24">
@@ -277,42 +276,44 @@ export function AcrylicSignConfigurator() {
               </RadioGroup>
             </div>
             
-            <div className="grid grid-cols-2 gap-4 items-end">
-              <div className="space-y-2">
-                <Label>Agregar Silueta</Label>
-                <div className="flex gap-2">
-                  {silhouettes.map((s) => (
-                    <Button
-                      key={s.name}
-                      variant={silhouette?.name === s.name ? "default" : "outline"}
-                      onClick={() => handleSilhouetteClick(s)}
-                      size="icon"
-                    >
-                      <s.Icon className="w-5 h-5" />
-                    </Button>
-                  ))}
+            <div className="space-y-4">
+                <div className="grid grid-cols-2 gap-4 items-end">
+                    <div className="space-y-2">
+                        <Label>Agregar Silueta</Label>
+                        <div className="flex gap-2">
+                        {silhouettes.map((s) => (
+                            <Button
+                            key={s.name}
+                            variant={silhouette?.name === s.name ? "default" : "outline"}
+                            onClick={() => handleSilhouetteClick(s)}
+                            size="icon"
+                            >
+                            <s.Icon className="w-5 h-5" />
+                            </Button>
+                        ))}
+                        </div>
+                    </div>
+                    <div className="space-y-2">
+                        <Label htmlFor="size-select" className="flex items-center gap-2">
+                        Tamaño
+                        </Label>
+                        <Select
+                        value={size.name}
+                        onValueChange={(val) => setSize(sizes.find((s) => s.name === val)!)}
+                        >
+                        <SelectTrigger id="size-select">
+                            <SelectValue placeholder="Selecciona un tamaño" />
+                        </SelectTrigger>
+                        <SelectContent>
+                            {sizes.map((s) => (
+                            <SelectItem key={s.name} value={s.name}>
+                                {s.name} ({s.multiplier}x)
+                            </SelectItem>
+                            ))}
+                        </SelectContent>
+                        </Select>
+                    </div>
                 </div>
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="size-select" className="flex items-center gap-2">
-                  Tamaño
-                </Label>
-                <Select
-                  value={size.name}
-                  onValueChange={(val) => setSize(sizes.find((s) => s.name === val)!)}
-                >
-                  <SelectTrigger id="size-select">
-                    <SelectValue placeholder="Selecciona un tamaño" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {sizes.map((s) => (
-                      <SelectItem key={s.name} value={s.name}>
-                        {s.name} ({s.multiplier}x)
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
             </div>
 
             <div className="space-y-4 pt-2">
@@ -416,5 +417,3 @@ export function AcrylicSignConfigurator() {
     </>
   );
 }
-
-    
