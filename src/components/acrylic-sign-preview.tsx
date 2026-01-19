@@ -6,6 +6,7 @@ import type { FontConfig, SizeConfig, BackgroundConfig, ColorConfig, SilhouetteC
 
 interface AcrylicSignPreviewProps {
   text: string;
+  text2?: string;
   font: FontConfig;
   color: ColorConfig;
   mirrorColor: ColorConfig;
@@ -18,10 +19,11 @@ interface AcrylicSignPreviewProps {
 }
 
 export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewProps>(
-  ({ text, font, color, mirrorColor, size, shape, background, silhouette, frame, frameStyle }, ref) => {
+  ({ text, text2, font, color, mirrorColor, size, shape, background, silhouette, frame, frameStyle }, ref) => {
     const previewText = text || 'Tu Texto Aquí';
     const baseFontSize = 2.5;
     const dynamicFontSize = `${baseFontSize * size.multiplier}rem`;
+    const subtitleFontSize = `${baseFontSize * size.multiplier * 0.6}rem`;
 
     const signContainerRef = useRef<HTMLDivElement>(null);
     const [position, setPosition] = useState({ x: 0, y: 0 });
@@ -133,6 +135,18 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
                 >
                   {previewText}
                 </p>
+                {text2 && (
+                  <p
+                    className='break-words transition-all duration-300 ease-in-out select-none'
+                    style={{
+                      ...textStyle,
+                      fontSize: subtitleFontSize,
+                      fontWeight: '400',
+                    }}
+                  >
+                    {text2}
+                  </p>
+                )}
               </div>
             </div>
             {hasFrame && frameStyle !== 'corners' && (
@@ -144,7 +158,6 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
                 )}
                 style={{
                   border: `4px solid ${frame.value}`,
-                  boxShadow: `0 0 10px ${frame.value}, inset 0 0 5px ${frame.value}`,
                 }}
               />
             )}
@@ -157,7 +170,7 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
                   )}
                   style={{
                     border: '4px solid transparent',
-                    background: `conic-gradient(from 0deg, ${frame.value} 0deg, ${frame.value} 80deg, transparent 80deg, transparent 100deg, ${frame.value} 100deg, ${frame.value} 260deg, transparent 260deg, transparent 280deg, ${frame.value} 280deg) border-box`,
+                    background: `conic-gradient(from 0deg, transparent 0deg, transparent 80deg, ${frame.value} 80deg, ${frame.value} 100deg, transparent 100deg, transparent 260deg, ${frame.value} 260deg, ${frame.value} 280deg, transparent 280deg) border-box`,
                     mask: 'linear-gradient(white 0 0) content-box, linear-gradient(white 0 0)',
                     WebkitMask: 'linear-gradient(white 0 0) content-box, linear-gradient(white 0 0)',
                     maskComposite: 'exclude',

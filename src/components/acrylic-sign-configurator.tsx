@@ -23,6 +23,7 @@ type FrameStyle = "edge" | "margin" | "corners";
 
 export function AcrylicSignConfigurator() {
   const [text, setText] = useState("Dra. Sophia");
+  const [text2, setText2] = useState("Clínica Dental");
   const [font, setFont] = useState<FontConfig>(fonts[2]);
   const [engravingColor, setEngravingColor] = useState<ColorConfig>(acrylicColors[0]);
   const [mirrorColor, setMirrorColor] = useState<ColorConfig>(mirrorColors[1]);
@@ -79,9 +80,12 @@ export function AcrylicSignConfigurator() {
 
   const handleShapeChange = (newShape: Shape) => {
     setShape(newShape);
+     if (newShape === 'circle' && frameStyle === 'corners') {
+      setFrameStyle('margin');
+    }
   };
 
-  const currentConfig = { text, font, color: engravingColor.name, size, capturedImage, silhouette: silhouette?.name, mirrorColor: mirrorColor.name, frame: frame.name, frameStyle };
+  const currentConfig = { text, text2, font, color: engravingColor.name, size, capturedImage, silhouette: silhouette?.name, mirrorColor: mirrorColor.name, frame: frame.name, frameStyle };
 
   return (
     <>
@@ -112,6 +116,7 @@ export function AcrylicSignConfigurator() {
            <AcrylicSignPreview
             ref={previewRef}
             text={text}
+            text2={text2}
             font={font}
             color={engravingColor}
             mirrorColor={mirrorColor}
@@ -160,19 +165,46 @@ export function AcrylicSignConfigurator() {
               </div>
             </div>
 
-            {/* Row 2: Texto del Grabado, Agregar Silueta */}
+            {/* Row 2: Texto del Grabado */}
+            <div className="space-y-3">
+              <Label htmlFor="sign-text">Texto Grabado</Label>
+              <Input
+                id="sign-text"
+                placeholder="Tu texto aquí"
+                value={text}
+                onChange={(e) => setText(e.target.value)}
+              />
+            </div>
+            
+            {/* Row 3: Subtitulo */}
+            <div className="space-y-3">
+              <Label htmlFor="sign-subtitle">Subtitulo</Label>
+              <Input
+                id="sign-subtitle"
+                placeholder="Texto secundario (opcional)"
+                value={text2}
+                onChange={(e) => setText2(e.target.value)}
+              />
+            </div>
+
+            {/* Row 4: Color del Grabado y Silueta */}
             <div className="grid grid-cols-2 gap-4 items-end">
-                <div className="space-y-3">
-                  <Label htmlFor="sign-text">Texto Grabado</Label>
-                  <Input
-                    id="sign-text"
-                    placeholder="Tu texto aquí"
-                    value={text}
-                    onChange={(e) => setText(e.target.value)}
-                    className="flex-1"
-                  />
-                </div>
-                <div className="space-y-2">
+              <div className="space-y-2">
+                <Label>Color del Grabado</Label>
+                <RadioGroup
+                    value={engravingColor.name}
+                    onValueChange={(val) => setEngravingColor(acrylicColors.find(c => c.name === val)!)}
+                    className="flex flex-wrap gap-2"
+                >
+                    {acrylicColors.map((c) => (
+                      <Label key={c.name} htmlFor={`acrylic-${c.name}`} className={`relative flex items-center justify-center rounded-full w-8 h-8 cursor-pointer transition-all border-2 ${engravingColor.name === c.name ? 'border-primary ring-2 ring-primary' : 'border-border'}`}>
+                          <RadioGroupItem value={c.name} id={`acrylic-${c.name}`} className="sr-only" />
+                          <span className={cn("w-full h-full rounded-full", c.twClass)} />
+                      </Label>
+                    ))}
+                </RadioGroup>
+              </div>
+              <div className="space-y-2">
                   <Label>Agregar Silueta</Label>
                   <div className="flex gap-2">
                     {silhouettes.map((s) => (
@@ -188,25 +220,8 @@ export function AcrylicSignConfigurator() {
                   </div>
                 </div>
             </div>
-            
-            {/* Row 3: Color del Grabado */}
-            <div className="space-y-2">
-              <Label>Color del Grabado</Label>
-              <RadioGroup
-                  value={engravingColor.name}
-                  onValueChange={(val) => setEngravingColor(acrylicColors.find(c => c.name === val)!)}
-                  className="flex flex-wrap gap-2"
-              >
-                  {acrylicColors.map((c) => (
-                    <Label key={c.name} htmlFor={`acrylic-${c.name}`} className={`relative flex items-center justify-center rounded-full w-8 h-8 cursor-pointer transition-all border-2 ${engravingColor.name === c.name ? 'border-primary ring-2 ring-primary' : 'border-border'}`}>
-                        <RadioGroupItem value={c.name} id={`acrylic-${c.name}`} className="sr-only" />
-                        <span className={cn("w-full h-full rounded-full", c.twClass)} />
-                    </Label>
-                  ))}
-              </RadioGroup>
-            </div>
-            
-            {/* Row 4: Tipografia, Tamaño */}
+
+            {/* Row 5: Tipografia, Tamaño */}
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
                   <Label htmlFor="font-select">Tipografía</Label>
@@ -240,7 +255,7 @@ export function AcrylicSignConfigurator() {
               </div>
             </div>
 
-            {/* Row 5: Marco, Estilo de Marco */}
+            {/* Row 6: Marco, Estilo de Marco */}
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label htmlFor="frame-select">Marco</Label>
