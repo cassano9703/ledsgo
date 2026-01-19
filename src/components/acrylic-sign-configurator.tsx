@@ -230,58 +230,68 @@ export function AcrylicSignConfigurator() {
               </div>
             </div>
 
-            <div className="space-y-6">
-              <div className="space-y-4">
-                <Label>Color de Grabado</Label>
-                <RadioGroup
-                  value={engravingColor.name}
-                  onValueChange={(val) => {
-                    const allColors = [...vinylColors, ...mirrorFinishColors];
-                    const selected = allColors.find(c => c.name === val);
-                    if (selected) setEngravingColor(selected);
-                  }}
-                  className="flex gap-4"
-                >
-                  <div className="space-y-2">
-                    <Label className="text-sm font-normal text-muted-foreground">Vinil</Label>
-                    <div className="flex flex-wrap gap-2">
-                      {vinylColors.map((c) => (
-                        <Label key={`vinyl-${c.name}`} htmlFor={`vinyl-${c.name}`} className={`relative flex items-center justify-center rounded-full w-8 h-8 cursor-pointer transition-all border-2 ${engravingColor.name === c.name ? 'border-primary ring-2 ring-primary' : 'border-border'}`}>
-                          <RadioGroupItem value={c.name} id={`vinyl-${c.name}`} className="sr-only" />
-                          <span className={cn("w-full h-full rounded-full", c.twClass)} />
-                        </Label>
-                      ))}
-                    </div>
-                  </div>
-                  <div className="space-y-2">
-                    <Label className="text-sm font-normal text-muted-foreground">Acrílico Espejo</Label>
-                    <div className="flex flex-wrap gap-2">
-                      {mirrorFinishColors.map((c) => (
-                        <Label key={`mirror-finish-${c.name}`} htmlFor={`mirror-finish-${c.name}`} className={`relative flex items-center justify-center rounded-full w-8 h-8 cursor-pointer transition-all border-2 ${engravingColor.name === c.name ? 'border-primary ring-2 ring-primary' : 'border-border'}`}>
-                          <RadioGroupItem value={c.name} id={`mirror-finish-${c.name}`} className="sr-only" />
-                          <span className={cn("w-full h-full rounded-full", c.twClass)} />
-                        </Label>
-                      ))}
-                    </div>
-                  </div>
-                </RadioGroup>
-              </div>
-              <div className="space-y-2">
-                  <Label>Agregar Silueta</Label>
-                  <div className="flex gap-2">
-                    {silhouettes.map((s) => (
-                      <Button 
-                        key={s.name}
-                        variant={silhouette?.name === s.name ? 'default' : 'outline'}
-                        onClick={() => handleSilhouetteClick(s)}
-                        size="icon"
-                      >
-                        <s.Icon className="w-5 h-5"/>
-                      </Button>
+            <div className="space-y-4">
+              <Label>Color de Grabado</Label>
+              <RadioGroup
+                value={engravingColor.name}
+                onValueChange={(val) => {
+                  const allColors = [...vinylColors, ...mirrorFinishColors];
+                  const selected = allColors.find(c => c.name === val);
+                  if (selected) setEngravingColor(selected);
+                }}
+                className="flex gap-4"
+              >
+                <div className="space-y-2">
+                  <Label className="text-sm font-normal text-muted-foreground">Vinil</Label>
+                  <div className="flex flex-wrap gap-2">
+                    {vinylColors.map((c) => (
+                      <Label key={`vinyl-${c.name}`} htmlFor={`vinyl-${c.name}`} className={`relative flex items-center justify-center rounded-full w-8 h-8 cursor-pointer transition-all border-2 ${engravingColor.name === c.name ? 'border-primary ring-2 ring-primary' : 'border-border'}`}>
+                        <RadioGroupItem value={c.name} id={`vinyl-${c.name}`} className="sr-only" />
+                        <span className={cn("w-full h-full rounded-full", c.twClass)} />
+                      </Label>
                     ))}
                   </div>
                 </div>
+                <div className="space-y-2">
+                  <Label className="text-sm font-normal text-muted-foreground">Acrílico Espejo</Label>
+                  <div className="flex flex-wrap gap-2">
+                    {mirrorFinishColors.map((c) => (
+                      <Label 
+                        key={`mirror-finish-${c.name}`} 
+                        htmlFor={`mirror-finish-${c.name}`} 
+                        className={`relative flex items-center justify-center rounded-full w-8 h-8 cursor-pointer transition-all border-2 overflow-hidden ${engravingColor.name === c.name ? 'border-primary ring-2 ring-primary' : 'border-border'}`}
+                      >
+                        <RadioGroupItem value={c.name} id={`mirror-finish-${c.name}`} className="sr-only" />
+                        <span className={cn("w-full h-full rounded-full", c.twClass)} />
+                        <span 
+                          className="absolute top-0 left-0 w-full h-full rounded-full"
+                          style={{
+                            background: 'linear-gradient(135deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.1) 40%, transparent 60%)'
+                          }}
+                        />
+                      </Label>
+                    ))}
+                  </div>
+                </div>
+              </RadioGroup>
             </div>
+            
+            <div className="space-y-2">
+                <Label>Agregar Silueta</Label>
+                <div className="flex gap-2">
+                  {silhouettes.map((s) => (
+                    <Button 
+                      key={s.name}
+                      variant={silhouette?.name === s.name ? 'default' : 'outline'}
+                      onClick={() => handleSilhouetteClick(s)}
+                      size="icon"
+                    >
+                      <s.Icon className="w-5 h-5"/>
+                    </Button>
+                  ))}
+                </div>
+              </div>
+
 
              <div className="grid grid-cols-2 gap-4 items-center">
                  <div className="space-y-2">
