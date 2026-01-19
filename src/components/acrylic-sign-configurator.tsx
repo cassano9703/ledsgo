@@ -277,58 +277,72 @@ export function AcrylicSignConfigurator() {
               </RadioGroup>
             </div>
             
-            <div className="space-y-2">
+            <div className="grid grid-cols-2 gap-4 items-end">
+              <div className="space-y-2">
                 <Label>Agregar Silueta</Label>
                 <div className="flex gap-2">
                   {silhouettes.map((s) => (
-                    <Button 
+                    <Button
                       key={s.name}
-                      variant={silhouette?.name === s.name ? 'default' : 'outline'}
+                      variant={silhouette?.name === s.name ? "default" : "outline"}
                       onClick={() => handleSilhouetteClick(s)}
                       size="icon"
                     >
-                      <s.Icon className="w-5 h-5"/>
+                      <s.Icon className="w-5 h-5" />
                     </Button>
                   ))}
                 </div>
               </div>
-
-
-             <div className="grid grid-cols-2 gap-4 items-center">
-                 <div className="space-y-2">
-                    <Label htmlFor="size-select" className="flex items-center gap-2">Tamaño</Label>
-                    <Select value={size.name} onValueChange={(val) => setSize(sizes.find(s => s.name === val)!)}>
-                      <SelectTrigger id="size-select">
-                        <SelectValue placeholder="Selecciona un tamaño" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {sizes.map((s) => (
-                          <SelectItem key={s.name} value={s.name}>
-                            {s.name} ({s.multiplier}x)
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  </div>
-                  <div className="space-y-4 pt-2">
-                    <div className="flex items-center justify-between">
-                      <Label htmlFor="standoffs-switch" className="text-sm font-medium">Agregar Distanciadores</Label>
-                      <Switch
-                          id="standoffs-switch"
-                          checked={withStandoffs}
-                          onCheckedChange={setWithStandoffs}
-                      />
-                    </div>
-                    <div className="flex items-center justify-between">
-                        <Label htmlFor="backlight-switch" className="text-sm font-medium">Luz de Fondo</Label>
-                        <Switch
-                            id="backlight-switch"
-                            checked={withBacklight}
-                            onCheckedChange={setWithBacklight}
-                        />
-                    </div>
-                  </div>
+              <div className="space-y-2">
+                <Label htmlFor="size-select" className="flex items-center gap-2">
+                  Tamaño
+                </Label>
+                <Select
+                  value={size.name}
+                  onValueChange={(val) => setSize(sizes.find((s) => s.name === val)!)}
+                >
+                  <SelectTrigger id="size-select">
+                    <SelectValue placeholder="Selecciona un tamaño" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {sizes.map((s) => (
+                      <SelectItem key={s.name} value={s.name}>
+                        {s.name} ({s.multiplier}x)
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
               </div>
+            </div>
+
+            <div className="space-y-4 pt-2">
+              <div className="flex items-center justify-between">
+                <Label
+                  htmlFor="standoffs-switch"
+                  className="text-sm font-medium"
+                >
+                  Agregar Distanciadores
+                </Label>
+                <Switch
+                  id="standoffs-switch"
+                  checked={withStandoffs}
+                  onCheckedChange={setWithStandoffs}
+                />
+              </div>
+              <div className="flex items-center justify-between">
+                <Label
+                  htmlFor="backlight-switch"
+                  className="text-sm font-medium"
+                >
+                  Luz de Fondo
+                </Label>
+                <Switch
+                  id="backlight-switch"
+                  checked={withBacklight}
+                  onCheckedChange={setWithBacklight}
+                />
+              </div>
+            </div>
             
             {withBacklight && (
               <div className="space-y-2">
