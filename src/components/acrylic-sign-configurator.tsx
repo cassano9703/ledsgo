@@ -231,8 +231,8 @@ export function AcrylicSignConfigurator() {
               </div>
             </div>
 
-            <div className="space-y-2 border p-3 rounded-lg">
-              <Label>Color de Grabado</Label>
+            <div className="space-y-4 rounded-lg border border-accent/30 bg-accent/5 p-4">
+              <Label className="font-semibold text-accent">Color de Grabado</Label>
               <RadioGroup
                 value={engravingColor.name}
                 onValueChange={(val) => {
