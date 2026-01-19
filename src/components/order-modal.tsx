@@ -38,7 +38,7 @@ interface OrderModalProps {
     text: string;
     text2?: string;
     font: FontConfig;
-    font2: FontConfig;
+    font2?: FontConfig;
     color: string;
     size: SizeConfig;
     capturedImage: string | null;
@@ -46,6 +46,7 @@ interface OrderModalProps {
     frame?: string;
     frameStyle?: 'edge' | 'margin' | 'corners';
     withStandoffs?: boolean;
+    standoffColor?: string;
     withBacklight?: boolean;
     backlightColor?: string;
   };
@@ -85,10 +86,11 @@ export function OrderModal({ isOpen, onClose, config }: OrderModalProps) {
       config.mirrorColor ? `- Color de Acrílico: ${config.mirrorColor}` : null,
       `- Color de Grabado/Neón: ${config.color}`,
       `- Tipografía Texto 1: ${config.font.name}`,
-      config.text2 ? `- Tipografía Texto 2: ${config.font2.name}` : null,
+      config.text2 && config.font2 ? `- Tipografía Texto 2: ${config.font2.name}` : null,
       config.frame && config.frame !== "Sin Marco" ? `- Marco: ${config.frame}` : null,
       config.frame && config.frame !== "Sin Marco" && frameStyleText ? `- Estilo de Marco: ${frameStyleText}` : null,
       config.withStandoffs ? `- Incluye Distanciadores: Sí` : null,
+      config.withStandoffs && config.standoffColor ? `- Color Distanciadores: ${config.standoffColor}` : null,
       config.withBacklight ? `- Incluye Luz de Fondo: Sí` : null,
       config.withBacklight ? `- Color Luz de Fondo: ${config.backlightColor}` : null,
       `- Tamaño: ${config.size.name}`,

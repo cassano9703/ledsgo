@@ -1,3 +1,4 @@
+
 'use client';
 
 import React, { forwardRef, useState, useRef, MouseEvent, TouchEvent } from 'react';
@@ -17,12 +18,13 @@ interface AcrylicSignPreviewProps {
   frame: FrameConfig;
   frameStyle: 'edge' | 'margin' | 'corners';
   withStandoffs: boolean;
+  standoffColor: ColorConfig;
   withBacklight: boolean;
   backlightColor: ColorConfig;
 }
 
 export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewProps>(
-  ({ text, text2, font, font2, color, mirrorColor, size, shape, background, frame, frameStyle, withStandoffs, withBacklight, backlightColor }, ref) => {
+  ({ text, text2, font, font2, color, mirrorColor, size, shape, background, frame, frameStyle, withStandoffs, standoffColor, withBacklight, backlightColor }, ref) => {
     const previewText = text || 'Tu Texto Aquí';
     const baseFontSize = 2.5;
     const dynamicFontSize = `${baseFontSize * size.multiplier}rem`;
@@ -114,7 +116,7 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
     const frameInsetClass = frameStyle === 'edge' ? 'inset-0' : 'inset-2';
 
     const Standoff = ({ className }: { className?: string }) => (
-      <div className={cn("absolute w-4 h-4 rounded-full bg-slate-300 shadow-md border border-slate-400 z-10", className)} />
+      <div className={cn("absolute w-4 h-4 rounded-full shadow-md border border-slate-400/50 z-10", standoffColor.twClass, className)} />
     );
 
 

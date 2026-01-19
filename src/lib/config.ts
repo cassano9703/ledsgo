@@ -64,6 +64,11 @@ export const lightColors: ColorConfig[] = [
   { name: "Fucsia", value: "#FF00FF", twClass: "bg-fuchsia-500" },
 ];
 
+export const standoffColors: ColorConfig[] = [
+    { name: "Plateado", value: "#C0C0C0", twClass: "bg-slate-400" },
+    { name: "Dorado", value: "#FFD700", twClass: "bg-yellow-400" },
+];
+
 export type FrameConfig = {
   name: string;
   value: string;

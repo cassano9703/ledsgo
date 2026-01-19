@@ -2,7 +2,7 @@
 "use client";
 
 import { useState, useRef, useCallback } from "react";
-import { fonts, vinylColors, mirrorFinishColors, sizes, backgrounds, frameOptions, mirrorColors, lightColors } from "@/lib/config";
+import { fonts, vinylColors, mirrorFinishColors, sizes, backgrounds, frameOptions, mirrorColors, lightColors, standoffColors } from "@/lib/config";
 import type { FontConfig, ColorConfig, SizeConfig, BackgroundConfig, FrameConfig } from "@/lib/config";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
@@ -36,6 +36,7 @@ export function AcrylicSignConfigurator() {
   const [frame, setFrame] = useState<FrameConfig>(frameOptions[1]);
   const [frameStyle, setFrameStyle] = useState<FrameStyle>('corners');
   const [withStandoffs, setWithStandoffs] = useState(true);
+  const [standoffColor, setStandoffColor] = useState<ColorConfig>(standoffColors[0]);
   const [withBacklight, setWithBacklight] = useState(true);
   const [backlightColor, setBacklightColor] = useState<ColorConfig>(lightColors[1]);
 
@@ -84,7 +85,7 @@ export function AcrylicSignConfigurator() {
     setShape(newShape);
   };
 
-  const currentConfig = { text, text2, font, font2, color: engravingColor.name, size, capturedImage, mirrorColor: mirrorColor.name, frame: frame.name, frameStyle, withStandoffs, withBacklight, backlightColor: backlightColor.name };
+  const currentConfig = { text, text2, font, font2, color: engravingColor.name, size, capturedImage, mirrorColor: mirrorColor.name, frame: frame.name, frameStyle, withStandoffs, standoffColor: standoffColor.name, withBacklight, backlightColor: backlightColor.name };
 
   return (
     <>
@@ -125,6 +126,7 @@ export function AcrylicSignConfigurator() {
                 frame={frame}
                 frameStyle={frameStyle}
                 withStandoffs={withStandoffs}
+                standoffColor={standoffColor}
                 withBacklight={withBacklight}
                 backlightColor={backlightColor}
             />
@@ -148,7 +150,7 @@ export function AcrylicSignConfigurator() {
                     className="flex flex-wrap gap-2"
                 >
                     {mirrorColors.map((c) => (
-                      <Label key={c.name} htmlFor={`mirror-${c.name}`} className={`relative flex items-center justify-center rounded-full w-8 h-8 cursor-pointer transition-all border-2 ${mirrorColor.name === c.name ? 'border-primary ring-2 ring-primary' : 'border-border'}`}>
+                      <Label key={`mirror-${c.name}`} htmlFor={`mirror-${c.name}`} className={`relative flex items-center justify-center rounded-full w-8 h-8 cursor-pointer transition-all border-2 ${mirrorColor.name === c.name ? 'border-primary ring-2 ring-primary' : 'border-border'}`}>
                           <RadioGroupItem value={c.name} id={`mirror-${c.name}`} className="sr-only" />
                           <span className={cn("w-full h-full rounded-full", c.twClass)} />
                       </Label>
@@ -156,7 +158,7 @@ export function AcrylicSignConfigurator() {
                 </RadioGroup>
               </div>
               <div className="space-y-2">
-                <Label>Acrilico</Label>
+                <Label>Forma del Acrílico</Label>
                 <div className="flex gap-2">
                   <Button variant={shape === 'circle' ? 'default' : 'outline'} onClick={() => handleShapeChange('circle')} size="icon"><CircleIcon className="w-5 h-5"/></Button>
                   <Button variant={shape === 'square' ? 'default' : 'outline'} onClick={() => handleShapeChange('square')} size="icon"><Square/></Button>
@@ -330,18 +332,34 @@ export function AcrylicSignConfigurator() {
             </div>
 
             <div className="space-y-4 pt-2">
-              <div className="flex items-center justify-between">
-                <Label
-                  htmlFor="standoffs-switch"
-                  className="text-sm font-medium"
-                >
-                  Agregar Distanciadores
-                </Label>
-                <Switch
-                  id="standoffs-switch"
-                  checked={withStandoffs}
-                  onCheckedChange={setWithStandoffs}
-                />
+              <div className="flex items-center gap-4">
+                <div className="flex items-center gap-2">
+                  <Label
+                    htmlFor="standoffs-switch"
+                    className="text-sm font-medium"
+                  >
+                    Distanciadores
+                  </Label>
+                  <Switch
+                    id="standoffs-switch"
+                    checked={withStandoffs}
+                    onCheckedChange={setWithStandoffs}
+                  />
+                </div>
+                {withStandoffs && (
+                    <RadioGroup
+                        value={standoffColor.name}
+                        onValueChange={(val) => setStandoffColor(standoffColors.find(c => c.name === val)!)}
+                        className="flex flex-wrap gap-2"
+                    >
+                        {standoffColors.map((c) => (
+                          <Label key={`standoff-${c.name}`} htmlFor={`standoff-${c.name}`} className={`relative flex items-center justify-center rounded-full w-8 h-8 cursor-pointer transition-all border-2 ${standoffColor.name === c.name ? 'border-primary ring-2 ring-primary' : 'border-border'}`}>
+                              <RadioGroupItem value={c.name} id={`standoff-${c.name}`} className="sr-only" />
+                              <span className={cn("w-full h-full rounded-full", c.twClass)} />
+                          </Label>
+                        ))}
+                    </RadioGroup>
+                )}
               </div>
               <div className="flex items-center justify-between">
                 <Label
@@ -388,5 +406,3 @@ export function AcrylicSignConfigurator() {
     </>
   );
 }
-
-    
