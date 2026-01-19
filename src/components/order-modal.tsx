@@ -48,6 +48,7 @@ interface OrderModalProps {
     frameStyle?: 'edge' | 'margin' | 'corners';
     withStandoffs?: boolean;
     withBacklight?: boolean;
+    backlightColor?: string;
   };
 }
 
@@ -91,6 +92,7 @@ export function OrderModal({ isOpen, onClose, config }: OrderModalProps) {
       config.frame && config.frame !== "Sin Marco" && frameStyleText ? `- Estilo de Marco: ${frameStyleText}` : null,
       config.withStandoffs ? `- Incluye Distanciadores: Sí` : null,
       config.withBacklight ? `- Incluye Luz de Fondo: Sí` : null,
+      config.withBacklight ? `- Color Luz de Fondo: ${config.backlightColor}` : null,
       `- Tamaño: ${config.size.name}`,
       `\n_(Se adjuntará una vista previa del diseño)_`
     ];

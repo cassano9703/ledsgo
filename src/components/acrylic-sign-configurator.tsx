@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef, useCallback } from "react";
-import { fonts, acrylicColors, sizes, backgrounds, silhouettes, frameOptions, mirrorColors } from "@/lib/config";
+import { fonts, acrylicColors, sizes, backgrounds, silhouettes, frameOptions, mirrorColors, lightColors } from "@/lib/config";
 import type { FontConfig, ColorConfig, SizeConfig, BackgroundConfig, SilhouetteConfig, FrameConfig } from "@/lib/config";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
@@ -37,6 +37,7 @@ export function AcrylicSignConfigurator() {
   const [frameStyle, setFrameStyle] = useState<FrameStyle>('corners');
   const [withStandoffs, setWithStandoffs] = useState(true);
   const [withBacklight, setWithBacklight] = useState(true);
+  const [backlightColor, setBacklightColor] = useState<ColorConfig>(lightColors[1]);
 
 
   const [isOrderModalOpen, setOrderModalOpen] = useState(false);
@@ -91,7 +92,7 @@ export function AcrylicSignConfigurator() {
     setShape(newShape);
   };
 
-  const currentConfig = { text, text2, font, font2, color: engravingColor.name, size, capturedImage, silhouette: silhouette?.name, mirrorColor: mirrorColor.name, frame: frame.name, frameStyle, withStandoffs, withBacklight };
+  const currentConfig = { text, text2, font, font2, color: engravingColor.name, size, capturedImage, silhouette: silhouette?.name, mirrorColor: mirrorColor.name, frame: frame.name, frameStyle, withStandoffs, withBacklight, backlightColor: backlightColor.name };
 
   return (
     <>
@@ -135,6 +136,7 @@ export function AcrylicSignConfigurator() {
             frameStyle={frameStyle}
             withStandoffs={withStandoffs}
             withBacklight={withBacklight}
+            backlightColor={backlightColor}
           />
         </div>
         
@@ -296,6 +298,24 @@ export function AcrylicSignConfigurator() {
                     </div>
                   </div>
               </div>
+            
+            {withBacklight && (
+              <div className="space-y-2">
+                <Label>Color de Luz de Fondo</Label>
+                <RadioGroup
+                    value={backlightColor.name}
+                    onValueChange={(val) => setBacklightColor(lightColors.find(c => c.name === val)!)}
+                    className="flex flex-wrap gap-2"
+                >
+                    {lightColors.map((c) => (
+                      <Label key={`light-${c.name}`} htmlFor={`light-${c.name}`} className={`relative flex items-center justify-center rounded-full w-8 h-8 cursor-pointer transition-all border-2 ${backlightColor.name === c.name ? 'border-primary ring-2 ring-primary' : 'border-border'}`}>
+                          <RadioGroupItem value={c.name} id={`light-${c.name}`} className="sr-only" />
+                          <span className={cn("w-full h-full rounded-full", c.twClass)} />
+                      </Label>
+                    ))}
+                </RadioGroup>
+              </div>
+            )}
 
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">

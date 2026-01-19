@@ -55,6 +55,12 @@ export const mirrorColors: ColorConfig[] = [
   { name: "Negro", value: "bg-black/60", twClass: "bg-black" },
 ];
 
+export const lightColors: ColorConfig[] = [
+  { name: "Ámbar", value: "#FFBF00", twClass: "bg-amber-400" },
+  { name: "Blanco", value: "#FFFFFF", twClass: "bg-white" },
+  { name: "Fucsia", value: "#FF00FF", twClass: "bg-fuchsia-500" },
+];
+
 export type FrameConfig = {
   name: string;
   value: string;
