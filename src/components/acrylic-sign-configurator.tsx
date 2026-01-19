@@ -1,5 +1,3 @@
-
-
 "use client";
 
 import { useState, useRef, useCallback } from "react";
@@ -153,7 +151,7 @@ export function AcrylicSignConfigurator() {
                 </RadioGroup>
               </div>
               <div className="space-y-2">
-                <Label>Forma del Acrílico</Label>
+                <Label>Acrilico</Label>
                 <div className="flex gap-2">
                   <Button variant={shape === 'circle' ? 'default' : 'outline'} onClick={() => handleShapeChange('circle')} size="icon"><CircleIcon className="w-5 h-5"/></Button>
                   <Button variant={shape === 'square' ? 'default' : 'outline'} onClick={() => handleShapeChange('square')} size="icon"><Square/></Button>
