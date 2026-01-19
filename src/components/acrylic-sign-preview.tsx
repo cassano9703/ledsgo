@@ -127,23 +127,18 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
           onTouchStart={handleDragStart}
         >
           <div className={cn("relative flex items-center justify-center", shapeClasses[shape])}>
-             {withBacklight && isTransparentSign && (
-              <div
-                className={cn(
-                  "absolute inset-0 blur-2xl opacity-80",
-                  shape === 'circle' ? 'rounded-full' : 'rounded-2xl'
-                )}
-                style={{ backgroundColor: backlightColor.value }}
-              />
-            )}
             <div 
               className={cn(
                 "relative w-full h-full flex items-center justify-center backdrop-blur-sm transition-all duration-300 overflow-hidden",
                 mirrorColor.value,
                 shape === 'circle' ? 'rounded-full' : 'rounded-2xl'
               )}
-              style={{
-                boxShadow: 'inset 0 0 40px rgba(255,255,255,0.1), 0 0 20px rgba(0,0,0,0.5)',
+               style={{
+                boxShadow: [
+                  withBacklight && isTransparentSign ? `inset 0 0 25px ${backlightColor.value}` : null,
+                  'inset 0 0 40px rgba(255,255,255,0.1)', 
+                  '0 0 20px rgba(0,0,0,0.5)'
+                ].filter(Boolean).join(', '),
               }}
             >
               <div className={cn("absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-white/10 to-transparent", shape === 'circle' ? 'rounded-full' : 'rounded-t-2xl')} />
