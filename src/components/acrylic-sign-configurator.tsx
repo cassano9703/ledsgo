@@ -2,8 +2,8 @@
 "use client";
 
 import { useState, useRef, useCallback } from "react";
-import { fonts, vinylColors, mirrorFinishColors, sizes, backgrounds, silhouettes, frameOptions, mirrorColors, lightColors } from "@/lib/config";
-import type { FontConfig, ColorConfig, SizeConfig, BackgroundConfig, SilhouetteConfig, FrameConfig } from "@/lib/config";
+import { fonts, vinylColors, mirrorFinishColors, sizes, backgrounds, frameOptions, mirrorColors, lightColors } from "@/lib/config";
+import type { FontConfig, ColorConfig, SizeConfig, BackgroundConfig, FrameConfig } from "@/lib/config";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -33,7 +33,6 @@ export function AcrylicSignConfigurator() {
   const [size, setSize] = useState<SizeConfig>(sizes[1]);
   const [shape, setShape] = useState<Shape>('rectangle');
   const [background, setBackground] = useState<BackgroundConfig>(backgrounds[2]);
-  const [silhouette, setSilhouette] = useState<SilhouetteConfig | null>(null);
   const [frame, setFrame] = useState<FrameConfig>(frameOptions[1]);
   const [frameStyle, setFrameStyle] = useState<FrameStyle>('corners');
   const [withStandoffs, setWithStandoffs] = useState(true);
@@ -81,19 +80,11 @@ export function AcrylicSignConfigurator() {
     });
   };
 
-  const handleSilhouetteClick = (s: SilhouetteConfig) => {
-    if (silhouette?.name === s.name) {
-      setSilhouette(null);
-    } else {
-      setSilhouette(s);
-    }
-  }
-
   const handleShapeChange = (newShape: Shape) => {
     setShape(newShape);
   };
 
-  const currentConfig = { text, text2, font, font2, color: engravingColor.name, size, capturedImage, silhouette: silhouette?.name, mirrorColor: mirrorColor.name, frame: frame.name, frameStyle, withStandoffs, withBacklight, backlightColor: backlightColor.name };
+  const currentConfig = { text, text2, font, font2, color: engravingColor.name, size, capturedImage, mirrorColor: mirrorColor.name, frame: frame.name, frameStyle, withStandoffs, withBacklight, backlightColor: backlightColor.name };
 
   return (
     <>
@@ -131,7 +122,6 @@ export function AcrylicSignConfigurator() {
                 size={size}
                 shape={shape}
                 background={background}
-                silhouette={silhouette}
                 frame={frame}
                 frameStyle={frameStyle}
                 withStandoffs={withStandoffs}
@@ -276,44 +266,25 @@ export function AcrylicSignConfigurator() {
               </RadioGroup>
             </div>
             
-            <div className="space-y-4">
-                <div className="grid grid-cols-2 gap-4 items-end">
-                    <div className="space-y-2">
-                        <Label>Agregar Silueta</Label>
-                        <div className="flex gap-2">
-                        {silhouettes.map((s) => (
-                            <Button
-                            key={s.name}
-                            variant={silhouette?.name === s.name ? "default" : "outline"}
-                            onClick={() => handleSilhouetteClick(s)}
-                            size="icon"
-                            >
-                            <s.Icon className="w-5 h-5" />
-                            </Button>
-                        ))}
-                        </div>
-                    </div>
-                    <div className="space-y-2">
-                        <Label htmlFor="size-select" className="flex items-center gap-2">
-                        Tamaño
-                        </Label>
-                        <Select
-                        value={size.name}
-                        onValueChange={(val) => setSize(sizes.find((s) => s.name === val)!)}
-                        >
-                        <SelectTrigger id="size-select">
-                            <SelectValue placeholder="Selecciona un tamaño" />
-                        </SelectTrigger>
-                        <SelectContent>
-                            {sizes.map((s) => (
-                            <SelectItem key={s.name} value={s.name}>
-                                {s.name} ({s.multiplier}x)
-                            </SelectItem>
-                            ))}
-                        </SelectContent>
-                        </Select>
-                    </div>
-                </div>
+            <div className="space-y-2">
+              <Label htmlFor="size-select" className="flex items-center gap-2">
+              Tamaño
+              </Label>
+              <Select
+              value={size.name}
+              onValueChange={(val) => setSize(sizes.find((s) => s.name === val)!)}
+              >
+              <SelectTrigger id="size-select">
+                  <SelectValue placeholder="Selecciona un tamaño" />
+              </SelectTrigger>
+              <SelectContent>
+                  {sizes.map((s) => (
+                  <SelectItem key={s.name} value={s.name}>
+                      {s.name} ({s.multiplier}x)
+                  </SelectItem>
+                  ))}
+              </SelectContent>
+              </Select>
             </div>
 
             <div className="space-y-4 pt-2">

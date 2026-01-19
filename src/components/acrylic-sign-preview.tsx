@@ -2,7 +2,7 @@
 
 import React, { forwardRef, useState, useRef, MouseEvent, TouchEvent } from 'react';
 import { cn } from '@/lib/utils';
-import { mirrorFinishColors, type FontConfig, type SizeConfig, type BackgroundConfig, type ColorConfig, type SilhouetteConfig, type FrameConfig } from '@/lib/config';
+import { mirrorFinishColors, type FontConfig, type SizeConfig, type BackgroundConfig, type ColorConfig, type FrameConfig } from '@/lib/config';
 
 interface AcrylicSignPreviewProps {
   text: string;
@@ -14,7 +14,6 @@ interface AcrylicSignPreviewProps {
   size: SizeConfig;
   shape: 'circle' | 'square' | 'rectangle';
   background: BackgroundConfig;
-  silhouette: SilhouetteConfig | null;
   frame: FrameConfig;
   frameStyle: 'edge' | 'margin' | 'corners';
   withStandoffs: boolean;
@@ -23,7 +22,7 @@ interface AcrylicSignPreviewProps {
 }
 
 export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewProps>(
-  ({ text, text2, font, font2, color, mirrorColor, size, shape, background, silhouette, frame, frameStyle, withStandoffs, withBacklight, backlightColor }, ref) => {
+  ({ text, text2, font, font2, color, mirrorColor, size, shape, background, frame, frameStyle, withStandoffs, withBacklight, backlightColor }, ref) => {
     const previewText = text || 'Tu Texto Aquí';
     const baseFontSize = 2.5;
     const dynamicFontSize = `${baseFontSize * size.multiplier}rem`;
@@ -110,7 +109,6 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
       rectangle: 'rounded-2xl aspect-[16/9]',
     };
 
-    const SilhouetteIcon = silhouette?.Icon;
     const hasFrame = frame.name !== "Sin Marco";
     
     const frameInsetClass = frameStyle === 'edge' ? 'inset-0' : 'inset-2';
@@ -184,17 +182,6 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
                 "absolute text-center flex flex-col items-center justify-center gap-2 p-8 overflow-hidden",
                 hasFrame ? frameInsetClass : 'inset-0'
               )}>
-                {SilhouetteIcon && (
-                  <SilhouetteIcon 
-                    className="transition-all duration-300 ease-in-out"
-                    style={{ 
-                      color: color.value,
-                      width: `${baseFontSize * size.multiplier * 0.8}rem`,
-                      height: `${baseFontSize * size.multiplier * 0.8}rem`,
-                      filter: `drop-shadow(0 0 5px ${color.value})`,
-                    }} 
-                  />
-                )}
                 <p
                   className='font-bold break-words transition-all duration-300 ease-in-out select-none'
                   style={textStyle}
