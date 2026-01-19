@@ -156,7 +156,8 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
                   shape === 'circle' ? 'rounded-full' : 'rounded-2xl'
                 )}
                  style={{
-                  border: `4px solid ${frame.value}`,
+                  borderTop: `4px solid ${frame.value}`,
+                  borderBottom: `4px solid ${frame.value}`,
                 }}
               />
             )}
