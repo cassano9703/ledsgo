@@ -81,9 +81,6 @@ export function AcrylicSignConfigurator() {
 
   const handleShapeChange = (newShape: Shape) => {
     setShape(newShape);
-    if (newShape === 'circle' && frameStyle === 'corners') {
-      setFrameStyle('margin');
-    }
   };
 
   const currentConfig = { text, font, color: engravingColor.name, size, capturedImage, silhouette: silhouette?.name, mirrorColor: mirrorColor.name, frame: frame.name, frameStyle };
@@ -241,7 +238,7 @@ export function AcrylicSignConfigurator() {
                       <SelectContent>
                           <SelectItem value="edge">Al Borde</SelectItem>
                           <SelectItem value="margin">Con Margen</SelectItem>
-                          <SelectItem value="corners" disabled={shape === 'circle'}>Esquinas</SelectItem>
+                          <SelectItem value="corners">Esquinas</SelectItem>
                       </SelectContent>
                   </Select>
                 </div>

@@ -148,64 +148,83 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
                 }}
               />
             )}
-             {hasFrame && frameStyle === 'corners' && shape !== 'circle' && (
-              <>
+            {hasFrame && frameStyle === 'corners' && (
+              shape === 'circle' ? (
                 <div
                   className={cn(
-                    'absolute pointer-events-none',
-                    frameInsetClass,
-                    'rounded-2xl'
+                    'absolute pointer-events-none rounded-full',
+                    frameInsetClass
                   )}
                   style={{
-                    borderTop: `4px solid ${frame.value}`,
-                    borderBottom: `4px solid ${frame.value}`,
-                  }}
+                    border: '4px solid transparent',
+                    background: `conic-gradient(from 90deg, ${frame.value} 0deg, ${frame.value} 80deg, transparent 80deg, transparent 100deg, ${frame.value} 100deg, ${frame.value} 260deg, transparent 260deg, transparent 280deg, ${frame.value} 280deg) border-box`,
+                    mask: 'linear-gradient(white 0 0) content-box, linear-gradient(white 0 0)',
+                    WebkitMask: 'linear-gradient(white 0 0) content-box, linear-gradient(white 0 0)',
+                    maskComposite: 'exclude',
+                    WebkitMaskComposite: 'xor',
+                  } as React.CSSProperties}
                 />
-                <div
-                  className={cn(
-                    'absolute pointer-events-none',
-                    frameInsetClass,
-                    'rounded-2xl'
-                  )}
-                  style={{
-                    borderLeft: `4px solid ${frame.value}`,
-                    clipPath: 'polygon(0 0, 100% 0, 100% 45%, 0 45%)',
-                  }}
-                />
-                <div
-                  className={cn(
-                    'absolute pointer-events-none',
-                    frameInsetClass,
-                    'rounded-2xl'
-                  )}
-                  style={{
-                    borderLeft: `4px solid ${frame.value}`,
-                    clipPath: 'polygon(0 100%, 100% 100%, 100% 55%, 0 55%)',
-                  }}
-                />
-                 <div
-                  className={cn(
-                    'absolute pointer-events-none',
-                    frameInsetClass,
-                    'rounded-2xl'
-                  )}
-                  style={{
-                    borderRight: `4px solid ${frame.value}`,
-                    clipPath: 'polygon(0 0, 100% 0, 100% 45%, 0 45%)',
-                  }}
-                />
-                <div
-                  className={cn(
-                    'absolute pointer-events-none',
-                    frameInsetClass,
-                    'rounded-2xl'
-                  )}
-                  style={{
-                    borderRight: `4px solid ${frame.value}`,
-                    clipPath: 'polygon(0 100%, 100% 100%, 100% 55%, 0 55%)',
-                  }}
-                />
-              </>
+              ) : (
+                <>
+                  <div
+                    className={cn(
+                      'absolute pointer-events-none',
+                      frameInsetClass,
+                      'rounded-2xl'
+                    )}
+                    style={{
+                      borderTop: `4px solid ${frame.value}`,
+                      borderBottom: `4px solid ${frame.value}`,
+                    }}
+                  />
+                  {/* Left side with cut */}
+                  <div
+                    className={cn(
+                      'absolute pointer-events-none',
+                      frameInsetClass,
+                      'rounded-2xl'
+                    )}
+                    style={{
+                      borderLeft: `4px solid ${frame.value}`,
+                      clipPath: 'polygon(0 0, 100% 0, 100% 45%, 0 45%)',
+                    }}
+                  />
+                  <div
+                    className={cn(
+                      'absolute pointer-events-none',
+                      frameInsetClass,
+                      'rounded-2xl'
+                    )}
+                    style={{
+                      borderLeft: `4px solid ${frame.value}`,
+                      clipPath: 'polygon(0 100%, 100% 100%, 100% 55%, 0 55%)',
+                    }}
+                  />
+                  {/* Right side with cut */}
+                  <div
+                    className={cn(
+                      'absolute pointer-events-none',
+                      frameInsetClass,
+                      'rounded-2xl'
+                    )}
+                    style={{
+                      borderRight: `4px solid ${frame.value}`,
+                      clipPath: 'polygon(0 0, 100% 0, 100% 45%, 0 45%)',
+                    }}
+                  />
+                  <div
+                    className={cn(
+                      'absolute pointer-events-none',
+                      frameInsetClass,
+                      'rounded-2xl'
+                    )}
+                    style={{
+                      borderRight: `4px solid ${frame.value}`,
+                      clipPath: 'polygon(0 100%, 100% 100%, 100% 55%, 0 55%)',
+                    }}
+                  />
+                </>
+              )
             )}
           </div>
         </div>
