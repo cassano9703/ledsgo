@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef, useCallback } from "react";
-import { fonts, acrylicColors, sizes, backgrounds, silhouettes, frameOptions, mirrorColors, lightColors } from "@/lib/config";
+import { fonts, vinylColors, mirrorFinishColors, sizes, backgrounds, silhouettes, frameOptions, mirrorColors, lightColors } from "@/lib/config";
 import type { FontConfig, ColorConfig, SizeConfig, BackgroundConfig, SilhouetteConfig, FrameConfig } from "@/lib/config";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
@@ -27,7 +27,7 @@ export function AcrylicSignConfigurator() {
   const [text2, setText2] = useState("Clínica Dental");
   const [font, setFont] = useState<FontConfig>(fonts[2]);
   const [font2, setFont2] = useState<FontConfig>(fonts[0]);
-  const [engravingColor, setEngravingColor] = useState<ColorConfig>(acrylicColors[0]);
+  const [engravingColor, setEngravingColor] = useState<ColorConfig>(vinylColors[0]);
   const [mirrorColor, setMirrorColor] = useState<ColorConfig>(mirrorColors[1]);
   const [size, setSize] = useState<SizeConfig>(sizes[1]);
   const [shape, setShape] = useState<Shape>('rectangle');
@@ -231,19 +231,37 @@ export function AcrylicSignConfigurator() {
             </div>
 
             <div className="grid grid-cols-2 gap-4 items-start">
-              <div className="space-y-2">
-                <Label>Color del Grabado</Label>
+               <div className="space-y-4">
                 <RadioGroup
-                    value={engravingColor.name}
-                    onValueChange={(val) => setEngravingColor(acrylicColors.find(c => c.name === val)!)}
-                    className="flex flex-wrap gap-2"
+                  value={engravingColor.name}
+                  onValueChange={(val) => {
+                    const allColors = [...vinylColors, ...mirrorFinishColors];
+                    const selected = allColors.find(c => c.name === val);
+                    if (selected) setEngravingColor(selected);
+                  }}
                 >
-                    {acrylicColors.map((c) => (
-                      <Label key={c.name} htmlFor={`acrylic-${c.name}`} className={`relative flex items-center justify-center rounded-full w-8 h-8 cursor-pointer transition-all border-2 ${engravingColor.name === c.name ? 'border-primary ring-2 ring-primary' : 'border-border'}`}>
-                          <RadioGroupItem value={c.name} id={`acrylic-${c.name}`} className="sr-only" />
+                  <div className="space-y-2">
+                    <Label>Colores de Vinil</Label>
+                    <div className="flex flex-wrap gap-2">
+                      {vinylColors.map((c) => (
+                        <Label key={`vinyl-${c.name}`} htmlFor={`vinyl-${c.name}`} className={`relative flex items-center justify-center rounded-full w-8 h-8 cursor-pointer transition-all border-2 ${engravingColor.name === c.name ? 'border-primary ring-2 ring-primary' : 'border-border'}`}>
+                          <RadioGroupItem value={c.name} id={`vinyl-${c.name}`} className="sr-only" />
                           <span className={cn("w-full h-full rounded-full", c.twClass)} />
-                      </Label>
-                    ))}
+                        </Label>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="space-y-2 pt-2">
+                    <Label>Color Acrílicos Espejo</Label>
+                    <div className="flex flex-wrap gap-2">
+                      {mirrorFinishColors.map((c) => (
+                        <Label key={`mirror-finish-${c.name}`} htmlFor={`mirror-finish-${c.name}`} className={`relative flex items-center justify-center rounded-full w-8 h-8 cursor-pointer transition-all border-2 ${engravingColor.name === c.name ? 'border-primary ring-2 ring-primary' : 'border-border'}`}>
+                          <RadioGroupItem value={c.name} id={`mirror-finish-${c.name}`} className="sr-only" />
+                          <span className={cn("w-full h-full rounded-full", c.twClass)} />
+                        </Label>
+                      ))}
+                    </div>
+                  </div>
                 </RadioGroup>
               </div>
               <div className="space-y-2">

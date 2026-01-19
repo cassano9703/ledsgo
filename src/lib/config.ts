@@ -39,13 +39,18 @@ export const colors: ColorConfig[] = [
   { name: "RGB", value: "rgb", twClass: "" },
 ];
 
-// Colores para el texto grabado en el acrílico espejo
-export const acrylicColors: ColorConfig[] = [
+// Colores de vinilo para el grabado
+export const vinylColors: ColorConfig[] = [
   { name: "Blanco", value: "#FFFFFF", twClass: "bg-white" },
   { name: "Negro", value: "#000000", twClass: "bg-black" },
-  { name: "Dorado", value: "#D4AF37", twClass: "bg-yellow-600" },
-  { name: "Plata", value: "#C0C0C0", twClass: "bg-slate-400" },
   { name: "Oro Rosa", value: "#B76E79", twClass: "bg-rose-400" },
+];
+
+// Colores con acabado espejo para el grabado
+export const mirrorFinishColors: ColorConfig[] = [
+  { name: "Dorado", value: "#D4AF37", twClass: "bg-yellow-600" },
+  { name: "Plateado", value: "#C0C0C0", twClass: "bg-slate-400" },
+  { name: "Fucsia Brilloso", value: "#FF00FF", twClass: "bg-fuchsia-500" },
 ];
 
 // Colores del material acrílico espejo
