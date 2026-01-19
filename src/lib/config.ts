@@ -51,7 +51,7 @@ export const acrylicColors: ColorConfig[] = [
 // Colores del material acrílico espejo
 export const mirrorColors: ColorConfig[] = [
   { name: "Plateado", value: "bg-slate-300/10", twClass: "bg-slate-300" },
-  { name: "Blanco Lechoso", value: "bg-white/30", twClass: "bg-white" },
+  { name: "Blanco Lechoso", value: "bg-white", twClass: "bg-white" },
   { name: "Negro", value: "bg-black", twClass: "bg-black" },
 ];
 
