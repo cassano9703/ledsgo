@@ -287,6 +287,48 @@ export function AcrylicSignConfigurator() {
               </Select>
             </div>
 
+            <div className="grid grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <Label htmlFor="frame-select">Marco</Label>
+                <Select
+                  value={frame.name}
+                  onValueChange={(val) =>
+                    setFrame(frameOptions.find((f) => f.name === val)!)
+                  }
+                >
+                  <SelectTrigger id="frame-select">
+                    <SelectValue placeholder="Selecciona un marco" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {frameOptions.map((f) => (
+                      <SelectItem key={f.name} value={f.name}>
+                        {f.name}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+
+              {frame.name !== "Sin Marco" && (
+                <div className="space-y-2">
+                  <Label htmlFor="frame-style-select">Estilo de Marco</Label>
+                  <Select
+                      value={frameStyle}
+                      onValueChange={(val) => setFrameStyle(val as FrameStyle)}
+                  >
+                      <SelectTrigger id="frame-style-select">
+                          <SelectValue placeholder="Selecciona un estilo" />
+                      </SelectTrigger>
+                      <SelectContent>
+                          <SelectItem value="edge">Al Borde</SelectItem>
+                          <SelectItem value="margin">Con Margen</SelectItem>
+                          <SelectItem value="corners">Esquinas</SelectItem>
+                      </SelectContent>
+                  </Select>
+                </div>
+              )}
+            </div>
+
             <div className="space-y-4 pt-2">
               <div className="flex items-center justify-between">
                 <Label
@@ -334,48 +376,6 @@ export function AcrylicSignConfigurator() {
               </div>
             )}
 
-            <div className="grid grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <Label htmlFor="frame-select">Marco</Label>
-                <Select
-                  value={frame.name}
-                  onValueChange={(val) =>
-                    setFrame(frameOptions.find((f) => f.name === val)!)
-                  }
-                >
-                  <SelectTrigger id="frame-select">
-                    <SelectValue placeholder="Selecciona un marco" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {frameOptions.map((f) => (
-                      <SelectItem key={f.name} value={f.name}>
-                        {f.name}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
-
-              {frame.name !== "Sin Marco" && (
-                <div className="space-y-2">
-                  <Label htmlFor="frame-style-select">Estilo de Marco</Label>
-                  <Select
-                      value={frameStyle}
-                      onValueChange={(val) => setFrameStyle(val as FrameStyle)}
-                  >
-                      <SelectTrigger id="frame-style-select">
-                          <SelectValue placeholder="Selecciona un estilo" />
-                      </SelectTrigger>
-                      <SelectContent>
-                          <SelectItem value="edge">Al Borde</SelectItem>
-                          <SelectItem value="margin">Con Margen</SelectItem>
-                          <SelectItem value="corners">Esquinas</SelectItem>
-                      </SelectContent>
-                  </Select>
-                </div>
-              )}
-            </div>
-
             <div className="mt-4 flex flex-col gap-2">
                 <Button size="lg" onClick={handleOpenOrderModal}>
                     Ordenar Tu Letrero
@@ -388,3 +388,5 @@ export function AcrylicSignConfigurator() {
     </>
   );
 }
+
+    
