@@ -115,7 +115,7 @@ export function AcrylicSignConfigurator() {
               ))}
         </div>
         
-        <div className="lg:col-span-9">
+        <div className="lg:col-span-8">
            <AcrylicSignPreview
             ref={previewRef}
             text={text}
@@ -133,7 +133,7 @@ export function AcrylicSignConfigurator() {
           />
         </div>
         
-        <Card className="lg:col-span-3 sticky top-24">
+        <Card className="lg:col-span-4 sticky top-24">
           <CardHeader>
             <CardTitle>Detalles del Letrero</CardTitle>
             <CardDescription>
@@ -142,7 +142,6 @@ export function AcrylicSignConfigurator() {
           </CardHeader>
           <CardContent className="space-y-6">
             
-            {/* Fila 1 */}
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label>Color del Acrílico</Label>
@@ -169,7 +168,6 @@ export function AcrylicSignConfigurator() {
               </div>
             </div>
 
-            {/* Fila 2: Texto y Tipografia */}
             <div className="space-y-4">
               <div className="grid grid-cols-2 gap-4 items-end">
                 <div className="space-y-2">
@@ -225,7 +223,6 @@ export function AcrylicSignConfigurator() {
               </div>
             </div>
 
-            {/* Fila 3: Color y Silueta */}
             <div className="grid grid-cols-2 gap-4 items-end">
               <div className="space-y-2">
                 <Label>Color del Grabado</Label>
@@ -259,7 +256,6 @@ export function AcrylicSignConfigurator() {
                 </div>
             </div>
 
-            {/* Fila 4: Tamaño */}
              <div className="space-y-2">
                 <Label htmlFor="size-select" className="flex items-center gap-2">Tamaño</Label>
                 <Select value={size.name} onValueChange={(val) => setSize(sizes.find(s => s.name === val)!)}>
@@ -276,8 +272,6 @@ export function AcrylicSignConfigurator() {
                 </Select>
               </div>
 
-
-            {/* Fila 5: Marco, Estilo de Marco */}
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label htmlFor="frame-select">Marco</Label>
@@ -332,3 +326,5 @@ export function AcrylicSignConfigurator() {
     </>
   );
 }
+
+    
