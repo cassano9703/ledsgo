@@ -134,17 +134,64 @@ export function AcrylicSignConfigurator() {
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-6">
-            <div className="space-y-3">
-              <Label htmlFor="sign-text">Texto Grabado</Label>
-              <Input
-                id="sign-text"
-                placeholder="Tu texto aquí"
-                value={text}
-                onChange={(e) => setText(e.target.value)}
-                className="flex-1"
-              />
+            
+            {/* Row 1: Color del Acrilico, Forma del Acrilico */}
+            <div className="grid grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <Label>Color del Acrílico</Label>
+                <RadioGroup
+                    value={mirrorColor.name}
+                    onValueChange={(val) => setMirrorColor(mirrorColors.find(c => c.name === val)!)}
+                    className="flex flex-wrap gap-2"
+                >
+                    {mirrorColors.map((c) => (
+                      <Label key={c.name} htmlFor={`mirror-${c.name}`} className={`relative flex items-center justify-center rounded-full w-8 h-8 cursor-pointer transition-all border-2 ${mirrorColor.name === c.name ? 'border-primary ring-2 ring-primary' : 'border-border'}`}>
+                          <RadioGroupItem value={c.name} id={`mirror-${c.name}`} className="sr-only" />
+                          <span className={cn("w-full h-full rounded-full", c.twClass)} />
+                      </Label>
+                    ))}
+                </RadioGroup>
+              </div>
+              <div className="space-y-2">
+                <Label>Forma del Acrílico</Label>
+                <div className="flex gap-2">
+                  <Button variant={shape === 'circle' ? 'default' : 'outline'} onClick={() => handleShapeChange('circle')} size="icon"><CircleIcon className="w-5 h-5"/></Button>
+                  <Button variant={shape === 'square' ? 'default' : 'outline'} onClick={() => handleShapeChange('square')} size="icon"><Square/></Button>
+                  <Button variant={shape === 'rectangle' ? 'default' : 'outline'} onClick={() => handleShapeChange('rectangle')} size="icon"><RectangleHorizontal/></Button>
+                </div>
+              </div>
+            </div>
+
+            {/* Row 2: Texto del Grabado, Agregar Silueta */}
+            <div className="grid grid-cols-2 gap-4 items-end">
+                <div className="space-y-3">
+                  <Label htmlFor="sign-text">Texto Grabado</Label>
+                  <Input
+                    id="sign-text"
+                    placeholder="Tu texto aquí"
+                    value={text}
+                    onChange={(e) => setText(e.target.value)}
+                    className="flex-1"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label>Agregar Silueta</Label>
+                  <div className="flex gap-2">
+                    {silhouettes.map((s) => (
+                      <Button 
+                        key={s.name}
+                        variant={silhouette?.name === s.name ? 'default' : 'outline'}
+                        onClick={() => handleSilhouetteClick(s)}
+                        size="icon"
+                      >
+                        <s.Icon className="w-5 h-5"/>
+                      </Button>
+                    ))}
+                  </div>
+                </div>
             </div>
             
+            {/* Row 3: Color del Grabado */}
             <div className="space-y-2">
               <Label>Color del Grabado</Label>
               <RadioGroup
@@ -160,49 +207,42 @@ export function AcrylicSignConfigurator() {
                   ))}
               </RadioGroup>
             </div>
-
+            
+            {/* Row 4: Tipografia, Tamaño */}
             <div className="grid grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <Label>Forma del Acrílico</Label>
-                  <div className="flex gap-2">
-                    <Button variant={shape === 'circle' ? 'default' : 'outline'} onClick={() => handleShapeChange('circle')} size="icon"><CircleIcon className="w-5 h-5"/></Button>
-                    <Button variant={shape === 'square' ? 'default' : 'outline'} onClick={() => handleShapeChange('square')} size="icon"><Square/></Button>
-                    <Button variant={shape === 'rectangle' ? 'default' : 'outline'} onClick={() => handleShapeChange('rectangle')} size="icon"><RectangleHorizontal/></Button>
-                  </div>
-                </div>
-                <div className="space-y-2">
-                  <Label>Agregar Silueta (Opcional)</Label>
-                  <div className="flex gap-2">
-                    {silhouettes.map((s) => (
-                      <Button 
-                        key={s.name}
-                        variant={silhouette?.name === s.name ? 'default' : 'outline'}
-                        onClick={() => handleSilhouetteClick(s)}
-                        size="icon"
-                      >
-                        <s.Icon className="w-5 h-5"/>
-                      </Button>
+              <div className="space-y-2">
+                  <Label htmlFor="font-select">Tipografía</Label>
+                  <Select value={font.name} onValueChange={handleFontChange}>
+                    <SelectTrigger id="font-select">
+                      <SelectValue placeholder="Selecciona una tipografía" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {fonts.map((f) => (
+                        <SelectItem key={f.name} value={f.name} style={f.style}>
+                          {f.name}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="size-select" className="flex items-center gap-2">Tamaño</Label>
+                <Select value={size.name} onValueChange={(val) => setSize(sizes.find(s => s.name === val)!)}>
+                  <SelectTrigger id="size-select">
+                    <SelectValue placeholder="Selecciona un tamaño" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {sizes.map((s) => (
+                      <SelectItem key={s.name} value={s.name}>
+                        {s.name} ({s.multiplier}x)
+                      </SelectItem>
                     ))}
-                  </div>
-                </div>
+                  </SelectContent>
+                </Select>
+              </div>
             </div>
 
-             <div className="space-y-2">
-              <Label>Color del Acrílico</Label>
-              <RadioGroup
-                  value={mirrorColor.name}
-                  onValueChange={(val) => setMirrorColor(mirrorColors.find(c => c.name === val)!)}
-                  className="flex flex-wrap gap-2"
-              >
-                  {mirrorColors.map((c) => (
-                    <Label key={c.name} htmlFor={`mirror-${c.name}`} className={`relative flex items-center justify-center rounded-full w-8 h-8 cursor-pointer transition-all border-2 ${mirrorColor.name === c.name ? 'border-primary ring-2 ring-primary' : 'border-border'}`}>
-                        <RadioGroupItem value={c.name} id={`mirror-${c.name}`} className="sr-only" />
-                        <span className={cn("w-full h-full rounded-full", c.twClass)} />
-                    </Label>
-                  ))}
-              </RadioGroup>
-            </div>
-
+            {/* Row 5: Marco, Estilo de Marco */}
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label htmlFor="frame-select">Marco</Label>
@@ -243,38 +283,6 @@ export function AcrylicSignConfigurator() {
                   </Select>
                 </div>
               )}
-            </div>
-
-            <div className="space-y-2">
-                <Label htmlFor="font-select">Tipografía</Label>
-                <Select value={font.name} onValueChange={handleFontChange}>
-                  <SelectTrigger id="font-select">
-                    <SelectValue placeholder="Selecciona una tipografía" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {fonts.map((f) => (
-                      <SelectItem key={f.name} value={f.name} style={f.style}>
-                        {f.name}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-            </div>
-            
-            <div className="space-y-2">
-               <Label htmlFor="size-select" className="flex items-center gap-2">Tamaño</Label>
-              <Select value={size.name} onValueChange={(val) => setSize(sizes.find(s => s.name === val)!)}>
-                <SelectTrigger id="size-select">
-                  <SelectValue placeholder="Selecciona un tamaño" />
-                </SelectTrigger>
-                <SelectContent>
-                  {sizes.map((s) => (
-                    <SelectItem key={s.name} value={s.name}>
-                      {s.name} ({s.multiplier}x)
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
             </div>
 
             <div className="mt-4 flex flex-col gap-2">
