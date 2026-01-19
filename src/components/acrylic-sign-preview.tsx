@@ -157,7 +157,7 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
                   )}
                   style={{
                     border: '4px solid transparent',
-                    background: `conic-gradient(from 90deg, ${frame.value} 0deg, ${frame.value} 80deg, transparent 80deg, transparent 100deg, ${frame.value} 100deg, ${frame.value} 260deg, transparent 260deg, transparent 280deg, ${frame.value} 280deg) border-box`,
+                    background: `conic-gradient(from 0deg, ${frame.value} 0deg, ${frame.value} 80deg, transparent 80deg, transparent 100deg, ${frame.value} 100deg, ${frame.value} 260deg, transparent 260deg, transparent 280deg, ${frame.value} 280deg) border-box`,
                     mask: 'linear-gradient(white 0 0) content-box, linear-gradient(white 0 0)',
                     WebkitMask: 'linear-gradient(white 0 0) content-box, linear-gradient(white 0 0)',
                     maskComposite: 'exclude',
