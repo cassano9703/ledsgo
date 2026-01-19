@@ -33,7 +33,7 @@ export function AcrylicSignConfigurator() {
   const [background, setBackground] = useState<BackgroundConfig>(backgrounds[2]);
   const [silhouette, setSilhouette] = useState<SilhouetteConfig | null>(null);
   const [frame, setFrame] = useState<FrameConfig>(frameOptions[1]);
-  const [frameStyle, setFrameStyle] = useState<FrameStyle>('margin');
+  const [frameStyle, setFrameStyle] = useState<FrameStyle>('corners');
 
 
   const [isOrderModalOpen, setOrderModalOpen] = useState(false);
@@ -208,7 +208,7 @@ export function AcrylicSignConfigurator() {
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="font-2-select">Tipografía Subtitulo</Label>
+                  <Label htmlFor="font-2-select">Tipografia Sub</Label>
                   <Select value={font2.name} onValueChange={handleFont2Change}>
                     <SelectTrigger id="font-2-select">
                       <SelectValue placeholder="Selecciona una tipografía" />
