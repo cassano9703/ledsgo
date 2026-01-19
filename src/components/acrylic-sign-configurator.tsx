@@ -80,9 +80,6 @@ export function AcrylicSignConfigurator() {
 
   const handleShapeChange = (newShape: Shape) => {
     setShape(newShape);
-     if (newShape === 'circle' && frameStyle === 'corners') {
-      setFrameStyle('margin');
-    }
   };
 
   const currentConfig = { text, text2, font, color: engravingColor.name, size, capturedImage, silhouette: silhouette?.name, mirrorColor: mirrorColor.name, frame: frame.name, frameStyle };
@@ -138,7 +135,7 @@ export function AcrylicSignConfigurator() {
           </CardHeader>
           <CardContent className="space-y-6">
             
-            {/* Row 1: Color del Acrilico, Forma del Acrilico */}
+            {/* Fila 1 */}
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label>Color del Acrílico</Label>
@@ -165,29 +162,46 @@ export function AcrylicSignConfigurator() {
               </div>
             </div>
 
-            {/* Row 2: Texto del Grabado */}
-            <div className="space-y-3">
-              <Label htmlFor="sign-text">Texto Grabado</Label>
-              <Input
-                id="sign-text"
-                placeholder="Tu texto aquí"
-                value={text}
-                onChange={(e) => setText(e.target.value)}
-              />
-            </div>
-            
-            {/* Row 3: Subtitulo */}
-            <div className="space-y-3">
-              <Label htmlFor="sign-subtitle">Subtitulo</Label>
-              <Input
-                id="sign-subtitle"
-                placeholder="Texto secundario (opcional)"
-                value={text2}
-                onChange={(e) => setText2(e.target.value)}
-              />
+            {/* Fila 2: Texto y Tipografia */}
+            <div className="grid grid-cols-2 gap-4 items-start">
+              <div className="space-y-3">
+                <div>
+                  <Label htmlFor="sign-text">Texto Grabado</Label>
+                  <Input
+                    id="sign-text"
+                    placeholder="Tu texto aquí"
+                    value={text}
+                    onChange={(e) => setText(e.target.value)}
+                  />
+                </div>
+                <div>
+                  <Label htmlFor="sign-subtitle">Subtitulo</Label>
+                  <Input
+                    id="sign-subtitle"
+                    placeholder="Texto secundario (opcional)"
+                    value={text2}
+                    onChange={(e) => setText2(e.target.value)}
+                  />
+                </div>
+              </div>
+              <div className="space-y-2">
+                  <Label htmlFor="font-select">Tipografía</Label>
+                  <Select value={font.name} onValueChange={handleFontChange}>
+                    <SelectTrigger id="font-select">
+                      <SelectValue placeholder="Selecciona una tipografía" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {fonts.map((f) => (
+                        <SelectItem key={f.name} value={f.name} style={f.style}>
+                          {f.name}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+              </div>
             </div>
 
-            {/* Row 4: Color del Grabado y Silueta */}
+            {/* Fila 3: Color y Silueta */}
             <div className="grid grid-cols-2 gap-4 items-end">
               <div className="space-y-2">
                 <Label>Color del Grabado</Label>
@@ -221,24 +235,8 @@ export function AcrylicSignConfigurator() {
                 </div>
             </div>
 
-            {/* Row 5: Tipografia, Tamaño */}
-            <div className="grid grid-cols-2 gap-4">
-              <div className="space-y-2">
-                  <Label htmlFor="font-select">Tipografía</Label>
-                  <Select value={font.name} onValueChange={handleFontChange}>
-                    <SelectTrigger id="font-select">
-                      <SelectValue placeholder="Selecciona una tipografía" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {fonts.map((f) => (
-                        <SelectItem key={f.name} value={f.name} style={f.style}>
-                          {f.name}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-              </div>
-              <div className="space-y-2">
+            {/* Fila 4: Tamaño */}
+             <div className="space-y-2">
                 <Label htmlFor="size-select" className="flex items-center gap-2">Tamaño</Label>
                 <Select value={size.name} onValueChange={(val) => setSize(sizes.find(s => s.name === val)!)}>
                   <SelectTrigger id="size-select">
@@ -253,9 +251,9 @@ export function AcrylicSignConfigurator() {
                   </SelectContent>
                 </Select>
               </div>
-            </div>
 
-            {/* Row 6: Marco, Estilo de Marco */}
+
+            {/* Fila 5: Marco, Estilo de Marco */}
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label htmlFor="frame-select">Marco</Label>
