@@ -183,6 +183,28 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
                     clipPath: 'polygon(0 100%, 100% 100%, 100% 55%, 0 55%)',
                   }}
                 />
+                 <div
+                  className={cn(
+                    'absolute pointer-events-none',
+                    frameInsetClass,
+                    'rounded-2xl'
+                  )}
+                  style={{
+                    borderRight: `4px solid ${frame.value}`,
+                    clipPath: 'polygon(0 0, 100% 0, 100% 45%, 0 45%)',
+                  }}
+                />
+                <div
+                  className={cn(
+                    'absolute pointer-events-none',
+                    frameInsetClass,
+                    'rounded-2xl'
+                  )}
+                  style={{
+                    borderRight: `4px solid ${frame.value}`,
+                    clipPath: 'polygon(0 100%, 100% 100%, 100% 55%, 0 55%)',
+                  }}
+                />
               </>
             )}
           </div>
