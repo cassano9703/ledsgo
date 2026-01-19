@@ -268,29 +268,26 @@ export function AcrylicSignConfigurator() {
               </RadioGroup>
             </div>
             
-            <div className="space-y-2">
-              <Label htmlFor="size-select" className="flex items-center gap-2">
-              Tamaño
-              </Label>
-              <Select
-              value={size.name}
-              onValueChange={(val) => setSize(sizes.find((s) => s.name === val)!)}
-              >
-              <SelectTrigger id="size-select">
-                  <SelectValue placeholder="Selecciona un tamaño" />
-              </SelectTrigger>
-              <SelectContent>
-                  {sizes.map((s) => (
-                  <SelectItem key={s.name} value={s.name}>
-                      {s.name} ({s.multiplier}x)
-                  </SelectItem>
-                  ))}
-              </SelectContent>
-              </Select>
-            </div>
-
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-3 gap-4">
               <div className="space-y-2">
+                <Label htmlFor="size-select">Tamaño</Label>
+                <Select
+                  value={size.name}
+                  onValueChange={(val) => setSize(sizes.find((s) => s.name === val)!)}
+                >
+                  <SelectTrigger id="size-select">
+                      <SelectValue placeholder="Selecciona un tamaño" />
+                  </SelectTrigger>
+                  <SelectContent>
+                      {sizes.map((s) => (
+                      <SelectItem key={s.name} value={s.name}>
+                          {s.name} ({s.multiplier}x)
+                      </SelectItem>
+                      ))}
+                  </SelectContent>
+                </Select>
+              </div>
+              <div className={cn("space-y-2", frame.name === "Sin Marco" ? "col-span-2" : "col-span-1")}>
                 <Label htmlFor="frame-select">Marco</Label>
                 <Select
                   value={frame.name}
@@ -405,4 +402,5 @@ export function AcrylicSignConfigurator() {
   );
 }
 
+    
     
