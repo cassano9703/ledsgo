@@ -142,13 +142,14 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
           <div className={cn("relative flex items-center justify-center", shapeClasses[shape])}>
             <div 
               className={cn(
-                "relative w-full h-full flex items-center justify-center backdrop-blur-sm transition-all duration-300 overflow-hidden",
-                !isSolidWhite && !isTransparentSign && mirrorColor.twClass,
+                "relative w-full h-full flex items-center justify-center transition-all duration-300 overflow-hidden",
+                !isSolidWhite && "backdrop-blur-sm",
+                !isTransparentSign && mirrorColor.twClass,
                 shape === 'circle' ? 'rounded-full' : 'rounded-2xl'
               )}
                style={{
                 boxShadow: [
-                  withBacklight && isTransparentSign ? `inset 0 0 80px ${backlightColor.value}` : null,
+                  withBacklight && isTransparentSign ? `inset 0 0 120px ${backlightColor.value}` : null,
                   !isSolidWhite ? 'inset 0 0 60px rgba(255,255,255,0.1)' : null, 
                   '0 0 20px rgba(0,0,0,0.5)'
                 ].filter(Boolean).join(', '),
