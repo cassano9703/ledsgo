@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState, useRef, useCallback } from "react";
@@ -230,7 +231,7 @@ export function AcrylicSignConfigurator() {
               </div>
             </div>
 
-            <div className="space-y-4">
+            <div className="space-y-2 border p-3 rounded-lg">
               <Label>Color de Grabado</Label>
               <RadioGroup
                 value={engravingColor.name}
@@ -239,7 +240,7 @@ export function AcrylicSignConfigurator() {
                   const selected = allColors.find(c => c.name === val);
                   if (selected) setEngravingColor(selected);
                 }}
-                className="flex gap-4"
+                className="grid grid-cols-2 gap-4"
               >
                 <div className="space-y-2">
                   <Label className="text-sm font-normal text-muted-foreground">Vinil</Label>
@@ -401,3 +402,5 @@ export function AcrylicSignConfigurator() {
     </>
   );
 }
+
+    
