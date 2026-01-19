@@ -232,6 +232,7 @@ export function AcrylicSignConfigurator() {
 
             <div className="grid grid-cols-2 gap-4 items-start">
                <div className="space-y-4">
+                <Label>Color de Grabado</Label>
                 <RadioGroup
                   value={engravingColor.name}
                   onValueChange={(val) => {
@@ -239,9 +240,10 @@ export function AcrylicSignConfigurator() {
                     const selected = allColors.find(c => c.name === val);
                     if (selected) setEngravingColor(selected);
                   }}
+                  className="flex gap-4"
                 >
                   <div className="space-y-2">
-                    <Label>Colores de Vinil</Label>
+                    <Label className="text-sm font-normal text-muted-foreground">Vinil</Label>
                     <div className="flex flex-wrap gap-2">
                       {vinylColors.map((c) => (
                         <Label key={`vinyl-${c.name}`} htmlFor={`vinyl-${c.name}`} className={`relative flex items-center justify-center rounded-full w-8 h-8 cursor-pointer transition-all border-2 ${engravingColor.name === c.name ? 'border-primary ring-2 ring-primary' : 'border-border'}`}>
@@ -251,8 +253,8 @@ export function AcrylicSignConfigurator() {
                       ))}
                     </div>
                   </div>
-                  <div className="space-y-2 pt-2">
-                    <Label>Color Acrílicos Espejo</Label>
+                  <div className="space-y-2">
+                    <Label className="text-sm font-normal text-muted-foreground">Acrílico Espejo</Label>
                     <div className="flex flex-wrap gap-2">
                       {mirrorFinishColors.map((c) => (
                         <Label key={`mirror-finish-${c.name}`} htmlFor={`mirror-finish-${c.name}`} className={`relative flex items-center justify-center rounded-full w-8 h-8 cursor-pointer transition-all border-2 ${engravingColor.name === c.name ? 'border-primary ring-2 ring-primary' : 'border-border'}`}>
