@@ -43,14 +43,15 @@ export const colors: ColorConfig[] = [
 export const vinylColors: ColorConfig[] = [
   { name: "Blanco", value: "#FFFFFF", twClass: "bg-white" },
   { name: "Negro", value: "#000000", twClass: "bg-black" },
-  { name: "Oro Rosa", value: "#B76E79", twClass: "bg-rose-400" },
+  { name: "Azul Marino", value: "#000080", twClass: "bg-blue-900" },
+  { name: "Naranja", value: "#FFA500", twClass: "bg-orange-500" },
 ];
 
 // Colores con acabado espejo para el grabado
 export const mirrorFinishColors: ColorConfig[] = [
-  { name: "Dorado", value: "#D4AF37", twClass: "bg-yellow-600" },
-  { name: "Plateado", value: "#C0C0C0", twClass: "bg-slate-400" },
-  { name: "Fucsia Brilloso", value: "#FF00FF", twClass: "bg-fuchsia-500" },
+  { name: "Dorado Brilloso", value: "#D4AF37", twClass: "bg-yellow-600" },
+  { name: "Rosado Brilloso", value: "#B76E79", twClass: "bg-rose-400" },
+  { name: "Plateado Brilloso", value: "#C0C0C0", twClass: "bg-slate-400" },
 ];
 
 // Colores del material acrílico espejo
