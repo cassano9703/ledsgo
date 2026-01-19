@@ -98,6 +98,8 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
       <div className={cn("absolute w-4 h-4 rounded-full bg-slate-300 shadow-md border border-slate-400 z-10", className)} />
     );
 
+    const isTransparentSign = mirrorColor.name === 'Plateado';
+
     return (
       <div 
         ref={ref}
@@ -116,7 +118,7 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
           className="absolute cursor-grab w-1/2"
           style={{ 
             transform: `translate(${position.x}px, ${position.y}px)`,
-            filter: withBacklight
+            filter: withBacklight && !isTransparentSign
               ? `drop-shadow(0 0 15px ${backlightColor.value}) drop-shadow(0 0 30px ${backlightColor.value})`
               : 'none',
             transition: 'filter 0.3s ease-in-out',
@@ -125,6 +127,15 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
           onTouchStart={handleDragStart}
         >
           <div className={cn("relative flex items-center justify-center", shapeClasses[shape])}>
+             {withBacklight && isTransparentSign && (
+              <div
+                className={cn(
+                  "absolute inset-0 blur-2xl opacity-80",
+                  shape === 'circle' ? 'rounded-full' : 'rounded-2xl'
+                )}
+                style={{ backgroundColor: backlightColor.value }}
+              />
+            )}
             <div 
               className={cn(
                 "relative w-full h-full flex items-center justify-center backdrop-blur-sm transition-all duration-300 overflow-hidden",
