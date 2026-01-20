@@ -120,7 +120,7 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
     );
 
     const isDorado = frame.name === 'Dorado';
-    const doradoFilter = isDorado ? `drop-shadow(0 0 3px ${frame.value})` : 'none';
+    const doradoFilter = isDorado ? `drop-shadow(0 0 5px ${frame.value})` : 'none';
 
     return (
       <div 
@@ -212,8 +212,8 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
                 style={
                   isDorado ? {
                     border: '4px solid transparent',
-                    borderImage: `linear-gradient(145deg, hsl(51, 100%, 80%), ${frame.value} 50%, hsl(51, 100%, 80%)) 1`,
-                    boxShadow: `0 0 5px ${frame.value}`
+                    borderImage: `linear-gradient(145deg, hsla(0,0%,100%,.9) 15%, ${frame.value} 50%, hsla(0,0%,100%,.9) 85%) 1`,
+                    filter: `drop-shadow(0 0 5px ${frame.value})`,
                   } : {
                     border: `4px solid ${frame.value}`,
                   }
