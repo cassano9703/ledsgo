@@ -329,25 +329,26 @@ export function AcrylicSignConfigurator() {
             </div>
 
             <div className="space-y-4 pt-2">
-              <div className="flex items-center gap-4">
-                <div className="flex items-center gap-2">
-                  <Label
-                    htmlFor="standoffs-switch"
-                    className="text-sm font-medium"
-                  >
-                    Distanciadores
-                  </Label>
-                  <Switch
-                    id="standoffs-switch"
-                    checked={withStandoffs}
-                    onCheckedChange={setWithStandoffs}
-                  />
-                </div>
-                {withStandoffs && (
+              <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <div className="flex items-center gap-2">
+                    <Label
+                      htmlFor="standoffs-switch"
+                      className="text-sm font-medium"
+                    >
+                      Distanciadores
+                    </Label>
+                    <Switch
+                      id="standoffs-switch"
+                      checked={withStandoffs}
+                      onCheckedChange={setWithStandoffs}
+                    />
+                  </div>
+                  {withStandoffs && (
                     <RadioGroup
                         value={standoffColor.name}
                         onValueChange={(val) => setStandoffColor(standoffColors.find(c => c.name === val)!)}
-                        className="flex flex-wrap gap-2"
+                        className="flex flex-wrap gap-2 pt-2"
                     >
                         {standoffColors.map((c) => (
                           <Label key={`standoff-${c.name}`} htmlFor={`standoff-${c.name}`} className={`relative flex items-center justify-center rounded-full w-8 h-8 cursor-pointer transition-all border-2 ${standoffColor.name === c.name ? 'border-primary ring-2 ring-primary' : 'border-border'}`}>
@@ -356,38 +357,40 @@ export function AcrylicSignConfigurator() {
                           </Label>
                         ))}
                     </RadioGroup>
-                )}
-              </div>
-              <div className="flex items-center gap-4">
-                <div className="flex items-center gap-2">
-                  <Label
-                    htmlFor="backlight-switch"
-                    className="text-sm font-medium"
-                  >
-                    Luz de Fondo
-                  </Label>
-                  <Switch
-                    id="backlight-switch"
-                    checked={withBacklight}
-                    onCheckedChange={setWithBacklight}
-                  />
+                  )}
                 </div>
-                 {withBacklight && (
-                    <RadioGroup
-                        value={backlightColor.name}
-                        onValueChange={(val) => setBacklightColor(lightColors.find(c => c.name === val)!)}
-                        className="flex flex-wrap gap-2"
+                <div className="space-y-2">
+                  <div className="flex items-center gap-2">
+                    <Label
+                      htmlFor="backlight-switch"
+                      className="text-sm font-medium"
                     >
-                        {lightColors.map((c) => (
-                          <Label key={`light-${c.name}`} htmlFor={`light-${c.name}`} className={`relative flex items-center justify-center rounded-full w-8 h-8 cursor-pointer transition-all border-2 ${backlightColor.name === c.name ? 'border-primary ring-2 ring-primary' : 'border-border'}`}>
-                              <RadioGroupItem value={c.name} id={`light-${c.name}`} className="sr-only" />
-                              <span className={cn("w-full h-full rounded-full", c.twClass)} />
-                          </Label>
-                        ))}
-                    </RadioGroup>
-                )}
+                      Luz de Fondo
+                    </Label>
+                    <Switch
+                      id="backlight-switch"
+                      checked={withBacklight}
+                      onCheckedChange={setWithBacklight}
+                    />
+                  </div>
+                  {withBacklight && (
+                      <RadioGroup
+                          value={backlightColor.name}
+                          onValueChange={(val) => setBacklightColor(lightColors.find(c => c.name === val)!)}
+                          className="flex flex-wrap gap-2 pt-2"
+                      >
+                          {lightColors.map((c) => (
+                            <Label key={`light-${c.name}`} htmlFor={`light-${c.name}`} className={`relative flex items-center justify-center rounded-full w-8 h-8 cursor-pointer transition-all border-2 ${backlightColor.name === c.name ? 'border-primary ring-2 ring-primary' : 'border-border'}`}>
+                                <RadioGroupItem value={c.name} id={`light-${c.name}`} className="sr-only" />
+                                <span className={cn("w-full h-full rounded-full", c.twClass)} />
+                            </Label>
+                          ))}
+                      </RadioGroup>
+                  )}
+                </div>
               </div>
             </div>
+
 
             <div className="mt-4 flex flex-col gap-2">
                 <Button size="lg" onClick={handleOpenOrderModal}>
