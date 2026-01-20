@@ -119,6 +119,8 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
       <div className={cn("absolute w-4 h-4 rounded-full shadow-md border border-slate-400/50 z-10", standoffColor.twClass, className)} />
     );
 
+    const isDorado = frame.name === 'Dorado';
+    const doradoFilter = isDorado ? `drop-shadow(0 0 3px ${frame.value})` : 'none';
 
     return (
       <div 
@@ -207,9 +209,15 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
                   frameInsetClass,
                    shape === 'circle' ? 'rounded-full' : 'rounded-2xl'
                 )}
-                style={{
-                  border: `4px solid ${frame.value}`,
-                }}
+                style={
+                  isDorado ? {
+                    border: '4px solid transparent',
+                    borderImage: `linear-gradient(145deg, hsl(51, 100%, 80%), ${frame.value} 50%, hsl(51, 100%, 80%)) 1`,
+                    boxShadow: `0 0 5px ${frame.value}`
+                  } : {
+                    border: `4px solid ${frame.value}`,
+                  }
+                }
               />
             )}
              {hasFrame && frameStyle === 'corners' && (
@@ -226,6 +234,7 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
                     WebkitMask: 'linear-gradient(white 0 0) content-box, linear-gradient(white 0 0)',
                     maskComposite: 'exclude',
                     WebkitMaskComposite: 'xor',
+                    filter: doradoFilter,
                   } as React.CSSProperties}
                 />
               ) : (
@@ -241,6 +250,7 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
                       borderTop: `4px solid ${frame.value}`,
                       borderBottom: `4px solid ${frame.value}`,
                       clipPath: 'polygon(0 0, 45% 0, 45% 100%, 0 100%, 0 0) , polygon(55% 0, 100% 0, 100% 100%, 55% 100%, 55% 0)',
+                      filter: doradoFilter,
                     }}
                   />
                   {/* Left side with cut */}
@@ -253,6 +263,7 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
                     style={{
                       borderLeft: `4px solid ${frame.value}`,
                       clipPath: 'polygon(0 0, 100% 0, 100% 45%, 0 45%)',
+                       filter: doradoFilter,
                     }}
                   />
                   <div
@@ -264,6 +275,7 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
                     style={{
                       borderLeft: `4px solid ${frame.value}`,
                       clipPath: 'polygon(0 100%, 100% 100%, 100% 55%, 0 55%)',
+                       filter: doradoFilter,
                     }}
                   />
                   {/* Right side with cut */}
@@ -276,6 +288,7 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
                     style={{
                       borderRight: `4px solid ${frame.value}`,
                       clipPath: 'polygon(0 0, 100% 0, 100% 45%, 0 45%)',
+                       filter: doradoFilter,
                     }}
                   />
                   <div
@@ -287,6 +300,7 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
                     style={{
                       borderRight: `4px solid ${frame.value}`,
                       clipPath: 'polygon(0 100%, 100% 100%, 100% 55%, 0 55%)',
+                       filter: doradoFilter,
                     }}
                   />
                 </>
