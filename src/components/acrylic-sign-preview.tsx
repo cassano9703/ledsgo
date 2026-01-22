@@ -70,26 +70,29 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
     const isMirrorFinish = mirrorFinishColors.some(c => c.name === color.name);
     const isTransparentSign = mirrorColor.name === 'Plateado';
     const isSolidWhite = mirrorColor.name === 'Blanco Lechoso';
-    const isSolidBlack = mirrorColor.name === 'Negro';
     
     const getFrameStyle = () => {
       const isDorado = frame.name === 'Dorado Brilloso';
       
-      let baseStyle: React.CSSProperties = {
-          border: `4px solid ${frame.value}`,
-      };
-
-      if (isDorado) {
-          if (isSolidWhite) {
-              baseStyle.filter = `drop-shadow(0 0 8px ${frame.value})`;
-          } else {
-              baseStyle.border = '4px solid transparent';
-              baseStyle.borderImage = `linear-gradient(170deg, hsla(0,0%,100%,.9) 15%, ${frame.value} 50%, hsla(0,0%,100%,.9) 85%) 1`;
-              baseStyle.filter = `drop-shadow(0 0 8px ${frame.value})`;
-          }
+      if (!isDorado) {
+          return {
+              border: `4px solid ${frame.value}`,
+          };
       }
       
-      return baseStyle;
+      if (isSolidWhite) {
+          return {
+              border: `4px solid ${frame.value}`,
+              filter: `drop-shadow(0 0 8px ${frame.value})`,
+          }
+      }
+
+      // This style applies for 'edge', 'margin', and now 'corners'
+      return {
+          border: '4px solid transparent',
+          borderImage: `linear-gradient(145deg, hsla(0,0%,100%,.9) 15%, ${frame.value} 50%, hsla(0,0%,100%,.9) 85%) 1`,
+          filter: `drop-shadow(0 0 8px ${frame.value}) drop-shadow(0 0 15px ${frame.value})`,
+      };
     };
 
     const getTextStyle = (baseFont: FontConfig, fontSize: string): React.CSSProperties => {
@@ -171,13 +174,13 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
           <div
             className={cn(
               "absolute inset-0",
-              !isSolidWhite && !isSolidBlack && "backdrop-blur-sm",
+              !isSolidWhite && "backdrop-blur-sm",
               !isTransparentSign && mirrorColor.twClass
             )}
             style={{
               boxShadow: [
                 withBacklight && isTransparentSign ? `inset 0 0 150px ${backlightColor.value}` : null,
-                !isSolidWhite && !isSolidBlack ? 'inset 0 0 60px rgba(255,255,255,0.1)' : null, 
+                !isSolidWhite ? 'inset 0 0 60px rgba(255,255,255,0.1)' : null, 
                 '0 0 20px rgba(0,0,0,0.5)'
               ].filter(Boolean).join(', '),
             }}
@@ -211,6 +214,7 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
               className={cn(
                 'absolute pointer-events-none',
                 frameInsetClass,
+                shapeClasses[shape]
               )}
               style={getFrameStyle()}
             />
