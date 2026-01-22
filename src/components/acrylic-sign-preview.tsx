@@ -70,6 +70,24 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
     const isMirrorFinish = mirrorFinishColors.some(c => c.name === color.name);
     const isTransparentSign = mirrorColor.name === 'Plateado';
     const isSolidWhite = mirrorColor.name === 'Blanco Lechoso';
+    const isDorado = frame.name === 'Dorado Brilloso';
+
+    const getFrameStyle = () => {
+      if (!isDorado) {
+        return { border: `4px solid ${frame.value}` };
+      }
+      if (isSolidWhite) {
+        return {
+          border: `4px solid ${frame.value}`,
+          filter: `drop-shadow(0 0 8px ${frame.value})`,
+        };
+      }
+      return {
+        border: '4px solid transparent',
+        borderImage: `linear-gradient(145deg, hsla(0,0%,100%,.9) 15%, ${frame.value} 50%, hsla(0,0%,100%,.9) 85%) 1`,
+        filter: `drop-shadow(0 0 8px ${frame.value})`,
+      };
+    };
 
     const getTextStyle = (baseFont: FontConfig, fontSize: string): React.CSSProperties => {
         const style: React.CSSProperties = {
@@ -119,9 +137,6 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
       <div className={cn("absolute w-4 h-4 rounded-full shadow-md border border-slate-400/50 z-10", standoffColor.twClass, className)} />
     );
 
-    const isDorado = frame.name === 'Dorado Brilloso';
-    const isCircularWithSquareFrame = shape === 'circle' && hasFrame;
-
     return (
       <div 
         ref={ref}
@@ -150,14 +165,13 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
         >
           <div className={cn(
             "relative flex items-center justify-center",
-            isCircularWithSquareFrame ? shapeClasses.square : shapeClasses[shape],
-            isCircularWithSquareFrame && !isTransparentSign ? mirrorColor.twClass : ''
+            shapeClasses[shape],
             )}>
             <div 
               className={cn(
                 "relative w-full h-full flex items-center justify-center transition-all duration-300 overflow-hidden",
                 !isSolidWhite && "backdrop-blur-sm",
-                isCircularWithSquareFrame ? '' : (!isTransparentSign && mirrorColor.twClass),
+                !isTransparentSign && mirrorColor.twClass,
                 shape === 'circle' ? 'rounded-full' : 'rounded-2xl'
               )}
                style={{
@@ -211,17 +225,9 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
                 className={cn(
                   'absolute pointer-events-none',
                   frameInsetClass,
-                   'rounded-2xl'
+                   shape === 'circle' ? 'rounded-full' : 'rounded-2xl'
                 )}
-                style={
-                  isDorado ? {
-                    border: '4px solid transparent',
-                    borderImage: `linear-gradient(145deg, hsla(0,0%,100%,.9) 15%, ${frame.value} 50%, hsla(0,0%,100%,.9) 85%) 1`,
-                    filter: `drop-shadow(0 0 8px ${frame.value})`,
-                  } : {
-                    border: `4px solid ${frame.value}`,
-                  }
-                }
+                style={getFrameStyle()}
               />
             )}
           </div>
