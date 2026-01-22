@@ -169,7 +169,7 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
             )}>
             <div 
               className={cn(
-                "relative w-full h-full flex items-center justify-center transition-all duration-300 overflow-hidden",
+                "relative w-full h-full flex items-center justify-center transition-all duration-300",
                 !isSolidWhite && "backdrop-blur-sm",
                 !isTransparentSign && mirrorColor.twClass,
                 shape === 'circle' ? 'rounded-full' : 'rounded-2xl'
@@ -201,7 +201,7 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
               )}
 
               <div className={cn(
-                "absolute text-center flex flex-col items-center justify-center gap-2 p-8 overflow-hidden",
+                "absolute text-center flex flex-col items-center justify-center gap-2 p-8",
                 hasFrame ? frameInsetClass : 'inset-0'
               )}>
                 <p
