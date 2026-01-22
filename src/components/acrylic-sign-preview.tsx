@@ -152,7 +152,7 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
         
         <div
           ref={signContainerRef}
-          className="absolute cursor-grab w-1/2"
+          className={cn("absolute cursor-grab w-1/2", shapeClasses[shape])}
           style={{ 
             transform: `translate(${position.x}px, ${position.y}px)`,
             filter: withBacklight && !isTransparentSign
@@ -218,8 +218,10 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
           {withStandoffs && (
             shape === 'circle' ? (
               <>
-                <Standoff className="top-1/2 left-4 -translate-y-1/2" />
-                <Standoff className="top-1/2 right-4 -translate-y-1/2" />
+                <Standoff className="top-[15%] left-[15%] -translate-x-1/2 -translate-y-1/2" />
+                <Standoff className="top-[15%] right-[15%] translate-x-1/2 -translate-y-1/2" />
+                <Standoff className="bottom-[15%] left-[15%] -translate-x-1/2 translate-y-1/2" />
+                <Standoff className="bottom-[15%] right-[15%] translate-x-1/2 translate-y-1/2" />
               </>
             ) : (
               <>
