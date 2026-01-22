@@ -147,8 +147,8 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
           )}
           style={{ 
             transform: `translate(${position.x}px, ${position.y}px)`,
-            filter: withBacklight && !isTransparentSign 
-              ? `drop-shadow(0 0 40px ${backlightColor.value}) drop-shadow(0 0 150px ${backlightColor.value})` 
+            filter: withBacklight
+              ? `drop-shadow(0 0 40px ${backlightColor.value}) drop-shadow(0 0 150px ${backlightColor.value})`
               : (isDorado ? `drop-shadow(0 0 8px ${frame.value})` : 'none')
           }}
           onMouseDown={handleDragStart}
@@ -172,7 +172,6 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
                         width: hasFrame ? 'calc(100% - 6px)' : '100%', // Slightly smaller to reveal the frame
                         height: hasFrame ? 'calc(100% - 6px)' : '100%',
                         boxShadow: [
-                            withBacklight && isTransparentSign ? `inset 0 0 150px ${backlightColor.value}` : null,
                             !isSolidWhite && !isSolidBlack ? 'inset 0 0 60px rgba(255,255,255,0.1)' : null, 
                             '0 0 20px rgba(0,0,0,0.5)'
                         ].filter(Boolean).join(', '),
