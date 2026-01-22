@@ -147,7 +147,10 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
           )}
           style={{ 
             transform: `translate(${position.x}px, ${position.y}px)`,
-            filter: isDorado ? `drop-shadow(0 0 8px ${frame.value})` : 'none'
+            filter: [
+                withBacklight ? `drop-shadow(0 0 20px ${backlightColor.value})` : null,
+                isDorado ? `drop-shadow(0 0 8px ${frame.value})` : null,
+            ].filter(Boolean).join(' ') || 'none',
           }}
           onMouseDown={handleDragStart}
           onTouchStart={handleDragStart}
@@ -164,13 +167,12 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
                         "absolute flex flex-col items-center justify-center gap-2 text-center px-8",
                         shapeClasses[shape],
                         !isSolidWhite && !isSolidBlack && !isTransparentSign && "backdrop-blur-sm",
-                        !isTransparentSign && mirrorColor.twClass
+                        mirrorColor.twClass
                     )}
                     style={{
                         width: hasFrame ? 'calc(100% - 6px)' : '100%', // Slightly smaller to reveal the frame
                         height: hasFrame ? 'calc(100% - 6px)' : '100%',
                         boxShadow: [
-                            isTransparentSign && withBacklight ? `inset 0 0 40px ${backlightColor.value}`: null,
                             !isSolidWhite && !isSolidBlack ? 'inset 0 0 60px rgba(255,255,255,0.1)' : null, 
                             '0 0 20px rgba(0,0,0,0.5)'
                         ].filter(Boolean).join(', '),
