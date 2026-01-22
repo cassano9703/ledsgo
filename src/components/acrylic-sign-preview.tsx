@@ -114,7 +114,9 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
     const isDorado = hasFrame && frame.name === 'Dorado Brilloso';
     
     const frameBackgroundStyle = (): React.CSSProperties => {
-        if (!hasFrame) return {};
+        // For transparent signs, we will use a real border instead of a background to avoid filling the middle.
+        if (!hasFrame || isTransparentSign) return {};
+
         if (isDorado) {
             return { backgroundImage: `linear-gradient(170deg, #FFFFFF, ${frame.value}, #FFFFFF)` };
         }
@@ -170,12 +172,13 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
                         mirrorColor.twClass
                     )}
                     style={{
-                        width: hasFrame ? 'calc(100% - 6px)' : '100%', // Slightly smaller to reveal the frame
-                        height: hasFrame ? 'calc(100% - 6px)' : '100%',
+                        width: (hasFrame && !isTransparentSign) ? 'calc(100% - 6px)' : '100%',
+                        height: (hasFrame && !isTransparentSign) ? 'calc(100% - 6px)' : '100%',
                         boxShadow: [
                             !isSolidWhite && !isSolidBlack ? 'inset 0 0 60px rgba(255,255,255,0.1)' : null, 
                             '0 0 20px rgba(0,0,0,0.5)'
                         ].filter(Boolean).join(', '),
+                        border: (isTransparentSign && hasFrame) ? `3px solid ${frame.value}` : undefined,
                     }}
                 >
                     <div className="absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-white/10 to-transparent" />
