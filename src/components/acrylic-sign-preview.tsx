@@ -163,80 +163,73 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
           onMouseDown={handleDragStart}
           onTouchStart={handleDragStart}
         >
-          <div className={cn(
-            "relative w-full h-full",
-            "overflow-hidden",
-            shapeClasses[shape]
-            )}>
-              
-            {/* Background Layer */}
-            <div 
-              className={cn(
-                "absolute inset-0 transition-all duration-300",
-                !isSolidWhite && "backdrop-blur-sm",
-                !isTransparentSign && mirrorColor.twClass,
-              )}
-               style={{
-                boxShadow: [
-                  withBacklight && isTransparentSign ? `inset 0 0 150px ${backlightColor.value}` : null,
-                  !isSolidWhite ? 'inset 0 0 60px rgba(255,255,255,0.1)' : null, 
-                  '0 0 20px rgba(0,0,0,0.5)'
-                ].filter(Boolean).join(', '),
-              }}
-            >
-              <div className="absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-white/10 to-transparent" />
-            </div>
-
-            {/* Standoffs Layer */}
-            {withStandoffs && (
-              shape === 'circle' ? (
-                <>
-                  <Standoff className="top-1/2 left-4 -translate-y-1/2" />
-                  <Standoff className="top-1/2 right-4 -translate-y-1/2" />
-                </>
-              ) : (
-                <>
-                  <Standoff className="top-4 left-4" />
-                  <Standoff className="top-4 right-4" />
-                  <Standoff className="bottom-4 left-4" />
-                  <Standoff className="bottom-4 right-4" />
-                </>
-              )
+          {/* Base of the sign */}
+          <div
+            className={cn(
+              "absolute inset-0",
+              shapeClasses[shape],
+              !isSolidWhite && "backdrop-blur-sm",
+              !isTransparentSign && mirrorColor.twClass
             )}
-            
-            {/* Text Layer */}
-            <div className={cn(
-                "absolute flex flex-col items-center justify-center gap-2 p-8 text-center",
-                hasFrame ? frameInsetClass : 'inset-0'
-            )}>
-                <p
-                  className='font-bold break-words transition-all duration-300 ease-in-out select-none'
-                  style={textStyle}
-                >
-                  {previewText}
-                </p>
-                {text2 && (
-                  <p
-                    className='break-words transition-all duration-300 ease-in-out select-none'
-                    style={subtitleTextStyle}
-                  >
-                    {text2}
-                  </p>
-                )}
-            </div>
-
-            {/* Frame Layer */}
-            {hasFrame && (
-              <div
-                className={cn(
-                  'absolute pointer-events-none w-full h-full',
-                  frameInsetClass,
-                  shape === 'circle' ? 'rounded-full' : 'rounded-2xl'
-                )}
-                style={getFrameStyle()}
-              />
-            )}
+            style={{
+              boxShadow: [
+                withBacklight && isTransparentSign ? `inset 0 0 150px ${backlightColor.value}` : null,
+                !isSolidWhite ? 'inset 0 0 60px rgba(255,255,255,0.1)' : null, 
+                '0 0 20px rgba(0,0,0,0.5)'
+              ].filter(Boolean).join(', '),
+            }}
+          >
+             <div className="absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-white/10 to-transparent" />
           </div>
+          
+          {/* Text Layer */}
+          <div className={cn(
+              "absolute inset-0 flex flex-col items-center justify-center gap-2 p-8 text-center",
+          )}>
+              <p
+                className='font-bold break-words transition-all duration-300 ease-in-out select-none'
+                style={textStyle}
+              >
+                {previewText}
+              </p>
+              {text2 && (
+                <p
+                  className='break-words transition-all duration-300 ease-in-out select-none'
+                  style={subtitleTextStyle}
+                >
+                  {text2}
+                </p>
+              )}
+          </div>
+
+          {/* Frame Layer */}
+          {hasFrame && (
+            <div
+              className={cn(
+                'absolute pointer-events-none',
+                frameInsetClass,
+                shapeClasses[shape]
+              )}
+              style={getFrameStyle()}
+            />
+          )}
+
+          {/* Standoffs Layer */}
+          {withStandoffs && (
+            shape === 'circle' ? (
+              <>
+                <Standoff className="top-1/2 left-4 -translate-y-1/2" />
+                <Standoff className="top-1/2 right-4 -translate-y-1/2" />
+              </>
+            ) : (
+              <>
+                <Standoff className="top-4 left-4" />
+                <Standoff className="top-4 right-4" />
+                <Standoff className="bottom-4 left-4" />
+                <Standoff className="bottom-4 right-4" />
+              </>
+            )
+          )}
         </div>
       </div>
     );
