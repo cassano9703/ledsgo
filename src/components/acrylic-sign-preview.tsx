@@ -150,69 +150,74 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
         <div
           ref={signContainerRef}
           className={cn(
-            "absolute cursor-grab w-1/2 overflow-hidden",
-            shapeClasses[shape],
+            "absolute cursor-grab w-1/2",
             aspectRatios[shape]
           )}
           style={{ 
             transform: `translate(${position.x}px, ${position.y}px)`,
             filter: withBacklight && !isTransparentSign
               ? `drop-shadow(0 0 40px ${backlightColor.value}) drop-shadow(0 0 150px ${backlightColor.value})`
-              : (isDorado ? `drop-shadow(0 0 8px ${frame.value})` : 'none'),
+              : (isDorado && hasFrame ? `drop-shadow(0 0 8px ${frame.value})` : 'none'),
             transition: 'filter 0.3s ease-in-out',
           }}
           onMouseDown={handleDragStart}
           onTouchStart={handleDragStart}
         >
-          {/* Base of the sign */}
           <div
             className={cn(
-              "absolute inset-0",
-              !isSolidWhite && !isSolidBlack && "backdrop-blur-sm",
-              !isTransparentSign && mirrorColor.twClass
+              "relative w-full h-full overflow-hidden",
+              shapeClasses[shape]
             )}
-            style={{
-              boxShadow: [
-                withBacklight && isTransparentSign ? `inset 0 0 150px ${backlightColor.value}` : null,
-                !isSolidWhite && !isSolidBlack ? 'inset 0 0 60px rgba(255,255,255,0.1)' : null, 
-                '0 0 20px rgba(0,0,0,0.5)'
-              ].filter(Boolean).join(', '),
-            }}
           >
-             <div className="absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-white/10 to-transparent" />
-          </div>
-          
-          {/* Text Layer */}
-          <div className={cn(
-              "absolute inset-0 flex flex-col items-center justify-center gap-2 px-8 text-center",
-          )}>
-              <p
-                className='font-bold break-words transition-all duration-300 ease-in-out select-none'
-                style={textStyle}
-              >
-                {previewText}
-              </p>
-              {text2 && (
-                <p
-                  className='break-words transition-all duration-300 ease-in-out select-none'
-                  style={subtitleTextStyle}
-                >
-                  {text2}
-                </p>
-              )}
-          </div>
-
-          {/* Frame Layer */}
-          {hasFrame && (
+            {/* Base of the sign */}
             <div
               className={cn(
-                'absolute pointer-events-none',
-                frameInsetClass,
-                shapeClasses[shape]
+                "absolute inset-0",
+                !isSolidWhite && !isSolidBlack && "backdrop-blur-sm",
+                !isTransparentSign && mirrorColor.twClass
               )}
-              style={getFrameStyle()}
-            />
-          )}
+              style={{
+                boxShadow: [
+                  withBacklight && isTransparentSign ? `inset 0 0 150px ${backlightColor.value}` : null,
+                  !isSolidWhite && !isSolidBlack ? 'inset 0 0 60px rgba(255,255,255,0.1)' : null, 
+                  '0 0 20px rgba(0,0,0,0.5)'
+                ].filter(Boolean).join(', '),
+              }}
+            >
+              <div className="absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-white/10 to-transparent" />
+            </div>
+            
+            {/* Text Layer */}
+            <div className={cn(
+                "absolute inset-0 flex flex-col items-center justify-center gap-2 px-8 text-center",
+            )}>
+                <p
+                  className='font-bold break-words transition-all duration-300 ease-in-out select-none'
+                  style={textStyle}
+                >
+                  {previewText}
+                </p>
+                {text2 && (
+                  <p
+                    className='break-words transition-all duration-300 ease-in-out select-none'
+                    style={subtitleTextStyle}
+                  >
+                    {text2}
+                  </p>
+                )}
+            </div>
+
+            {/* Frame Layer */}
+            {hasFrame && (
+              <div
+                className={cn(
+                  'absolute pointer-events-none',
+                  frameInsetClass,
+                )}
+                style={getFrameStyle()}
+              />
+            )}
+          </div>
 
           {/* Standoffs Layer */}
           {withStandoffs && (
