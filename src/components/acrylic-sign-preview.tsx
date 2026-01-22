@@ -70,6 +70,7 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
     const isMirrorFinish = mirrorFinishColors.some(c => c.name === color.name);
     const isTransparentSign = mirrorColor.name === 'Plateado';
     const isSolidWhite = mirrorColor.name === 'Blanco Lechoso';
+    const isSolidBlack = mirrorColor.name === 'Negro';
     
     const getFrameStyle = () => {
       const isDorado = frame.name === 'Dorado Brilloso';
@@ -170,14 +171,13 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
           <div
             className={cn(
               "absolute inset-0",
-              shapeClasses[shape],
-              !isSolidWhite && "backdrop-blur-sm",
+              !isSolidWhite && !isSolidBlack && "backdrop-blur-sm",
               !isTransparentSign && mirrorColor.twClass
             )}
             style={{
               boxShadow: [
                 withBacklight && isTransparentSign ? `inset 0 0 150px ${backlightColor.value}` : null,
-                !isSolidWhite ? 'inset 0 0 60px rgba(255,255,255,0.1)' : null, 
+                !isSolidWhite && !isSolidBlack ? 'inset 0 0 60px rgba(255,255,255,0.1)' : null, 
                 '0 0 20px rgba(0,0,0,0.5)'
               ].filter(Boolean).join(', '),
             }}
@@ -211,7 +211,6 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
               className={cn(
                 'absolute pointer-events-none',
                 frameInsetClass,
-                shapeClasses[shape]
               )}
               style={getFrameStyle()}
             />
