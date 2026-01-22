@@ -78,7 +78,6 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
       if (isDorado) {
           return {
               border: `3px solid ${frame.value}`,
-              boxShadow: 'inset 0px 0px 0px 1px white',
               filter: `drop-shadow(0 0 8px ${frame.value})`,
           };
       }
