@@ -119,8 +119,7 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
       <div className={cn("absolute w-4 h-4 rounded-full shadow-md border border-slate-400/50 z-10", standoffColor.twClass, className)} />
     );
 
-    const isDorado = frame.name === 'Dorado';
-    const doradoFilter = isDorado ? `drop-shadow(0 0 5px ${frame.value})` : 'none';
+    const isDorado = frame.name === 'Dorado Brilloso';
 
     return (
       <div 
@@ -202,7 +201,7 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
                 )}
               </div>
             </div>
-            {hasFrame && frameStyle !== 'corners' && (
+            {hasFrame && (
               <div
                 className={cn(
                   'absolute pointer-events-none',
@@ -213,98 +212,12 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
                   isDorado ? {
                     border: '4px solid transparent',
                     borderImage: `linear-gradient(145deg, hsla(0,0%,100%,.9) 15%, ${frame.value} 50%, hsla(0,0%,100%,.9) 85%) 1`,
-                    filter: `drop-shadow(0 0 5px ${frame.value})`,
+                    filter: `drop-shadow(0 0 8px ${frame.value})`,
                   } : {
                     border: `4px solid ${frame.value}`,
                   }
                 }
               />
-            )}
-             {hasFrame && frameStyle === 'corners' && (
-              shape === 'circle' ? (
-                <div
-                  className={cn(
-                    'absolute pointer-events-none rounded-full',
-                    frameInsetClass
-                  )}
-                  style={{
-                    border: '4px solid transparent',
-                    background: `conic-gradient(from 90deg, transparent 0deg, transparent 10deg, ${frame.value} 10deg, ${frame.value} 170deg, transparent 170deg, transparent 190deg, ${frame.value} 190deg, ${frame.value} 350deg, transparent 350deg, transparent 360deg) border-box`,
-                    mask: 'linear-gradient(white 0 0) content-box, linear-gradient(white 0 0)',
-                    WebkitMask: 'linear-gradient(white 0 0) content-box, linear-gradient(white 0 0)',
-                    maskComposite: 'exclude',
-                    WebkitMaskComposite: 'xor',
-                    filter: doradoFilter,
-                  } as React.CSSProperties}
-                />
-              ) : (
-                <>
-                  {/* Top & Bottom borders */}
-                  <div
-                    className={cn(
-                      'absolute pointer-events-none',
-                      frameInsetClass,
-                      'rounded-2xl'
-                    )}
-                    style={{
-                      borderTop: `4px solid ${frame.value}`,
-                      borderBottom: `4px solid ${frame.value}`,
-                      clipPath: 'polygon(0 0, 45% 0, 45% 100%, 0 100%, 0 0) , polygon(55% 0, 100% 0, 100% 100%, 55% 100%, 55% 0)',
-                      filter: doradoFilter,
-                    }}
-                  />
-                  {/* Left side with cut */}
-                  <div
-                    className={cn(
-                      'absolute pointer-events-none',
-                      frameInsetClass,
-                      'rounded-2xl'
-                    )}
-                    style={{
-                      borderLeft: `4px solid ${frame.value}`,
-                      clipPath: 'polygon(0 0, 100% 0, 100% 45%, 0 45%)',
-                       filter: doradoFilter,
-                    }}
-                  />
-                  <div
-                    className={cn(
-                      'absolute pointer-events-none',
-                      frameInsetClass,
-                      'rounded-2xl'
-                    )}
-                    style={{
-                      borderLeft: `4px solid ${frame.value}`,
-                      clipPath: 'polygon(0 100%, 100% 100%, 100% 55%, 0 55%)',
-                       filter: doradoFilter,
-                    }}
-                  />
-                  {/* Right side with cut */}
-                  <div
-                    className={cn(
-                      'absolute pointer-events-none',
-                      frameInsetClass,
-                      'rounded-2xl'
-                    )}
-                    style={{
-                      borderRight: `4px solid ${frame.value}`,
-                      clipPath: 'polygon(0 0, 100% 0, 100% 45%, 0 45%)',
-                       filter: doradoFilter,
-                    }}
-                  />
-                  <div
-                    className={cn(
-                      'absolute pointer-events-none',
-                      frameInsetClass,
-                      'rounded-2xl'
-                    )}
-                    style={{
-                      borderRight: `4px solid ${frame.value}`,
-                      clipPath: 'polygon(0 100%, 100% 100%, 100% 55%, 0 55%)',
-                       filter: doradoFilter,
-                    }}
-                  />
-                </>
-              )
             )}
           </div>
         </div>
