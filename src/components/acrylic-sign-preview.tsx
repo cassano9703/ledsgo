@@ -72,14 +72,14 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
     const isSolidWhite = mirrorColor.name === 'Blanco Lechoso';
     const isSolidBlack = mirrorColor.name === 'Negro';
     
+    const hasFrame = frame.name !== "Sin Marco";
+    const isDorado = hasFrame && frame.name === 'Dorado Brilloso';
+
     const getFrameStyle = () => {
-      const isDorado = frame.name === 'Dorado Brilloso';
-      
       if (isDorado) {
         return {
           border: `3px solid transparent`,
           borderImage: `linear-gradient(170deg, #FFFFFF, ${frame.value}, #FFFFFF) 1`,
-          filter: `drop-shadow(0 0 8px ${frame.value})`,
         };
       }
       
@@ -127,7 +127,6 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
       rectangle: 'aspect-[16/9]',
     }
 
-    const hasFrame = frame.name !== "Sin Marco";
     
     const frameInsetClass = frameStyle === 'edge' ? 'inset-0' : 'inset-2';
 
@@ -159,7 +158,7 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
             transform: `translate(${position.x}px, ${position.y}px)`,
             filter: withBacklight && !isTransparentSign
               ? `drop-shadow(0 0 40px ${backlightColor.value}) drop-shadow(0 0 150px ${backlightColor.value})`
-              : 'none',
+              : (isDorado ? `drop-shadow(0 0 8px ${frame.value})` : 'none'),
             transition: 'filter 0.3s ease-in-out',
           }}
           onMouseDown={handleDragStart}
