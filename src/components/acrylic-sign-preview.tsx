@@ -114,6 +114,20 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
     const hasFrame = frame.name !== "Sin Marco";
     const isDorado = hasFrame && frame.name === 'Dorado Brilloso';
     
+    const getFrameStyle = (): React.CSSProperties => {
+        if (!hasFrame) return {};
+
+        const style: React.CSSProperties = {
+            border: `3px solid ${isDorado ? 'transparent' : frame.value}`,
+        };
+
+        if (isDorado) {
+            style.borderImage = `linear-gradient(170deg, #FFFFFF, ${frame.value}, #FFFFFF) 1`;
+        }
+
+        return style;
+    };
+
     const Standoff = ({ className }: { className?: string }) => (
       <div className={cn("absolute w-4 h-4 rounded-full shadow-md border border-slate-400/50 z-20", standoffColor.twClass, className)} />
     );
@@ -136,62 +150,57 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
           className={cn(
             "absolute cursor-grab",
             aspectRatios[shape],
-            "w-1/2"
+            "w-1/2",
           )}
           style={{ 
             transform: `translate(${position.x}px, ${position.y}px)`,
-            filter: withBacklight && !isTransparentSign
-              ? `drop-shadow(0 0 40px ${backlightColor.value}) drop-shadow(0 0 150px ${backlightColor.value})`
-              : (isDorado ? `drop-shadow(0 0 8px ${frame.value})` : 'none'),
-            transition: 'filter 0.3s ease-in-out',
+            filter: withBacklight && !isTransparentSign 
+              ? `drop-shadow(0 0 40px ${backlightColor.value}) drop-shadow(0 0 150px ${backlightColor.value})` 
+              : (isDorado ? `drop-shadow(0 0 8px ${frame.value})` : 'none')
           }}
           onMouseDown={handleDragStart}
           onTouchStart={handleDragStart}
         >
-          <div
-            className={cn(
-              "relative w-full h-full p-[3px]",
-              shapeClasses[shape],
-            )}
-            style={{
-              background: hasFrame 
-                ? (isDorado ? `linear-gradient(145deg, #FFFFFF, ${frame.value}, #FFFFFF)` : frame.value)
-                : 'transparent',
-            }}
-          >
             <div
-              className={cn(
-                "relative w-full h-full flex flex-col items-center justify-center gap-2 text-center px-8",
-                shapeClasses[shape],
-                !isSolidWhite && !isSolidBlack && "backdrop-blur-sm",
-                !isTransparentSign && mirrorColor.twClass
-              )}
-              style={{
-                boxShadow: [
-                  withBacklight && isTransparentSign ? `inset 0 0 150px ${backlightColor.value}` : null,
-                  !isSolidWhite && !isSolidBlack ? 'inset 0 0 60px rgba(255,255,255,0.1)' : null, 
-                  '0 0 20px rgba(0,0,0,0.5)'
-                ].filter(Boolean).join(', '),
-              }}
+                className={cn(
+                    "relative w-full h-full",
+                    shapeClasses[shape],
+                )}
+                style={getFrameStyle()}
             >
-              <div className="absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-white/10 to-transparent" />
-
-              <p
-                className='font-bold break-words transition-all duration-300 ease-in-out select-none'
-                style={textStyle}
-              >
-                {previewText}
-              </p>
-              {text2 && (
-                <p
-                  className='break-words transition-all duration-300 ease-in-out select-none'
-                  style={subtitleTextStyle}
+                <div
+                    className={cn(
+                        "relative w-full h-full flex flex-col items-center justify-center gap-2 text-center px-8",
+                        shapeClasses[shape],
+                        !isSolidWhite && !isSolidBlack && "backdrop-blur-sm",
+                        !isTransparentSign && mirrorColor.twClass
+                    )}
+                    style={{
+                        boxShadow: [
+                        withBacklight && isTransparentSign ? `inset 0 0 150px ${backlightColor.value}` : null,
+                        !isSolidWhite && !isSolidBlack ? 'inset 0 0 60px rgba(255,255,255,0.1)' : null, 
+                        '0 0 20px rgba(0,0,0,0.5)'
+                        ].filter(Boolean).join(', '),
+                    }}
                 >
-                  {text2}
-                </p>
-              )}
+                    <div className="absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-white/10 to-transparent" />
+
+                    <p
+                        className='font-bold break-words transition-all duration-300 ease-in-out select-none'
+                        style={textStyle}
+                    >
+                        {previewText}
+                    </p>
+                    {text2 && (
+                        <p
+                        className='break-words transition-all duration-300 ease-in-out select-none'
+                        style={subtitleTextStyle}
+                        >
+                        {text2}
+                        </p>
+                    )}
+                </div>
             </div>
-          </div>
           
           {withStandoffs && (
             shape === 'circle' ? (
