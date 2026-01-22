@@ -74,24 +74,8 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
     
     const getFrameStyle = () => {
       const isDorado = frame.name === 'Dorado Brilloso';
-      const isWhiteBG = mirrorColor.name === 'Blanco Lechoso';
-
+      
       if (isDorado) {
-        if(isWhiteBG) {
-          return {
-            border: `3px solid ${frame.value}`,
-            boxShadow: `0 0 8px ${frame.value}`,
-          };
-        }
-        
-        if (frameStyle === 'corners') {
-          return {
-            border: `3px solid transparent`,
-            borderImage: `linear-gradient(170deg, #FFFFFF, ${frame.value}, #FFFFFF) 1`,
-            boxShadow: `0 0 8px ${frame.value}`,
-          };
-        }
-
         return {
           border: `3px solid transparent`,
           borderImage: `linear-gradient(170deg, #FFFFFF, ${frame.value}, #FFFFFF) 1`,
@@ -112,16 +96,11 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
         };
 
         if (isMirrorFinish) {
-          if (isSolidWhite || isSolidBlack) {
-            style.color = color.value;
-            style.textShadow = `0 0 8px ${color.value}`;
-          } else {
             style.backgroundImage = `linear-gradient(145deg, hsla(0,0%,100%,.9) 15%, ${color.value} 50%, hsla(0,0%,100%,.9) 85%)`;
             style.backgroundClip = 'text';
             style.WebkitBackgroundClip = 'text';
             style.color = 'transparent';
             style.filter = `drop-shadow(0 0 5px ${color.value})`;
-          }
         } else {
             style.color = color.value;
             style.textShadow = `0 0 8px ${color.value}`;
@@ -137,10 +116,16 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
     };
 
     const shapeClasses = {
-      circle: 'rounded-full aspect-square',
-      square: 'rounded-2xl aspect-square',
-      rectangle: 'rounded-2xl aspect-[16/9]',
+      circle: 'rounded-full',
+      square: 'rounded-2xl',
+      rectangle: 'rounded-2xl',
     };
+
+    const aspectRatios = {
+      circle: 'aspect-square',
+      square: 'aspect-square',
+      rectangle: 'aspect-[16/9]',
+    }
 
     const hasFrame = frame.name !== "Sin Marco";
     
@@ -168,6 +153,7 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
           className={cn(
             "absolute cursor-grab w-1/2 overflow-hidden",
             shapeClasses[shape],
+            aspectRatios[shape]
           )}
           style={{ 
             transform: `translate(${position.x}px, ${position.y}px)`,
