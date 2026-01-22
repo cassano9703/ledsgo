@@ -71,9 +71,6 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
     const isTransparentSign = mirrorColor.name === 'Plateado';
     const isSolidWhite = mirrorColor.name === 'Blanco Lechoso';
     const isSolidBlack = mirrorColor.name === 'Negro';
-    
-    const hasFrame = frame.name !== "Sin Marco";
-    const isDorado = hasFrame && frame.name === 'Dorado Brilloso';
 
     const getTextStyle = (baseFont: FontConfig, fontSize: string): React.CSSProperties => {
         const style: React.CSSProperties = {
@@ -114,6 +111,27 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
       rectangle: 'aspect-[16/9]',
     }
 
+    const hasFrame = frame.name !== "Sin Marco";
+    const isDorado = hasFrame && frame.name === 'Dorado Brilloso';
+    
+    const getFrameStyle = (): React.CSSProperties => {
+        if (!hasFrame) return {};
+
+        if (isDorado) {
+            return {
+                borderWidth: '3px',
+                borderStyle: 'solid',
+                borderImage: `linear-gradient(170deg, #FFFFFF, ${frame.value}, #FFFFFF) 1`,
+            };
+        }
+        
+        return {
+            borderWidth: '3px',
+            borderStyle: 'solid',
+            borderColor: frame.value,
+        };
+    };
+
     const Standoff = ({ className }: { className?: string }) => (
       <div className={cn("absolute w-4 h-4 rounded-full shadow-md border border-slate-400/50 z-20", standoffColor.twClass, className)} />
     );
@@ -134,61 +152,41 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
         <div
           ref={signContainerRef}
           className={cn(
-            "absolute cursor-grab w-1/2",
-            aspectRatios[shape]
+            "absolute cursor-grab overflow-hidden",
+            shapeClasses[shape],
+            aspectRatios[shape],
+            "w-1/2"
           )}
           style={{ 
             transform: `translate(${position.x}px, ${position.y}px)`,
+            ...getFrameStyle(),
             filter: withBacklight && !isTransparentSign
               ? `drop-shadow(0 0 40px ${backlightColor.value}) drop-shadow(0 0 150px ${backlightColor.value})`
-              : (isDorado && hasFrame ? `drop-shadow(0 0 8px ${frame.value})` : 'none'),
+              : (isDorado ? `drop-shadow(0 0 8px ${frame.value})` : 'none'),
             transition: 'filter 0.3s ease-in-out',
           }}
           onMouseDown={handleDragStart}
           onTouchStart={handleDragStart}
         >
-          {/* This is the clipping container. It has the shape and overflow hidden. */}
           <div
             className={cn(
-              "relative w-full h-full overflow-hidden",
-              shapeClasses[shape]
+              "relative w-full h-full",
+              !isSolidWhite && !isSolidBlack && "backdrop-blur-sm",
+              !isTransparentSign && mirrorColor.twClass
             )}
+            style={{
+              boxShadow: [
+                withBacklight && isTransparentSign ? `inset 0 0 150px ${backlightColor.value}` : null,
+                !isSolidWhite && !isSolidBlack ? 'inset 0 0 60px rgba(255,255,255,0.1)' : null, 
+                '0 0 20px rgba(0,0,0,0.5)'
+              ].filter(Boolean).join(', '),
+            }}
           >
-            {/* Frame Layer (behind everything else) */}
-            {hasFrame && (
-                <div
-                    className='absolute inset-0'
-                    style={{
-                        backgroundImage: isDorado ? `linear-gradient(170deg, #FFFFFF, ${frame.value}, #FFFFFF)` : 'none',
-                        backgroundColor: !isDorado ? frame.value : 'transparent',
-                    }}
-                />
-            )}
+            <div className="absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-white/10 to-transparent" />
 
-            {/* Base of the sign (on top of the frame) */}
-            <div
-              className={cn(
-                "absolute",
-                // The inset creates the border thickness by making this layer smaller than the frame layer
-                hasFrame ? "inset-1" : "inset-0",
-                shapeClasses[shape], // Apply shape here again for safety
-                !isSolidWhite && !isSolidBlack && "backdrop-blur-sm",
-                !isTransparentSign && mirrorColor.twClass
-              )}
-              style={{
-                boxShadow: [
-                  withBacklight && isTransparentSign ? `inset 0 0 150px ${backlightColor.value}` : null,
-                  !isSolidWhite && !isSolidBlack ? 'inset 0 0 60px rgba(255,255,255,0.1)' : null, 
-                  '0 0 20px rgba(0,0,0,0.5)'
-                ].filter(Boolean).join(', '),
-              }}
-            >
-              <div className="absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-white/10 to-transparent" />
-            </div>
-            
-            {/* Text Layer (on top of the base) */}
             <div className={cn(
-                "absolute inset-0 flex flex-col items-center justify-center gap-2 px-8 text-center",
+                "absolute inset-0 flex flex-col items-center justify-center gap-2 text-center",
+                "px-8"
             )}>
                 <p
                   className='font-bold break-words transition-all duration-300 ease-in-out select-none'
@@ -207,7 +205,6 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
             </div>
           </div>
 
-          {/* Standoffs Layer (on top of everything) */}
           {withStandoffs && (
             shape === 'circle' ? (
               <>
