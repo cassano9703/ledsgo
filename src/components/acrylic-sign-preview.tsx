@@ -165,7 +165,7 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
         >
           <div className={cn(
             "relative flex items-center justify-center overflow-hidden",
-            shapeClasses[shape],
+            shapeClasses[shape]
             )}>
             <div 
               className={cn(
