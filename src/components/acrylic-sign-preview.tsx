@@ -74,12 +74,29 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
     
     const getFrameStyle = () => {
       const isDorado = frame.name === 'Dorado Brilloso';
-      
+      const isWhiteBG = mirrorColor.name === 'Blanco Lechoso';
+
       if (isDorado) {
+        if(isWhiteBG) {
           return {
-              border: `3px solid ${frame.value}`,
-              filter: `drop-shadow(0 0 8px ${frame.value})`,
+            border: `3px solid ${frame.value}`,
+            boxShadow: `0 0 8px ${frame.value}`,
           };
+        }
+        
+        if (frameStyle === 'corners') {
+          return {
+            border: `3px solid transparent`,
+            borderImage: `linear-gradient(170deg, #FFFFFF, ${frame.value}, #FFFFFF) 1`,
+            boxShadow: `0 0 8px ${frame.value}`,
+          };
+        }
+
+        return {
+          border: `3px solid transparent`,
+          borderImage: `linear-gradient(170deg, #FFFFFF, ${frame.value}, #FFFFFF) 1`,
+          filter: `drop-shadow(0 0 8px ${frame.value})`,
+        };
       }
       
       return {
@@ -95,7 +112,7 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
         };
 
         if (isMirrorFinish) {
-          if (isSolidWhite) {
+          if (isSolidWhite || isSolidBlack) {
             style.color = color.value;
             style.textShadow = `0 0 8px ${color.value}`;
           } else {
@@ -182,7 +199,7 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
           
           {/* Text Layer */}
           <div className={cn(
-              "absolute inset-0 flex flex-col items-center justify-center gap-2 p-8 text-center",
+              "absolute inset-0 flex flex-col items-center justify-center gap-2 px-8 pt-6 pb-10 text-center",
           )}>
               <p
                 className='font-bold break-words transition-all duration-300 ease-in-out select-none'
