@@ -134,7 +134,7 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
     const frameInsetClass = frameStyle === 'edge' ? 'inset-0' : 'inset-2';
 
     const Standoff = ({ className }: { className?: string }) => (
-      <div className={cn("absolute w-4 h-4 rounded-full shadow-md border border-slate-400/50 z-10", standoffColor.twClass, className)} />
+      <div className={cn("absolute w-4 h-4 rounded-full shadow-md border border-slate-400/50 z-20", standoffColor.twClass, className)} />
     );
 
     return (
@@ -164,15 +164,17 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
           onTouchStart={handleDragStart}
         >
           <div className={cn(
-            "relative flex items-center justify-center overflow-hidden",
+            "relative w-full h-full",
+            "overflow-hidden",
             shapeClasses[shape]
             )}>
+              
+            {/* Background Layer */}
             <div 
               className={cn(
-                "relative w-full h-full flex items-center justify-center transition-all duration-300",
+                "absolute inset-0 transition-all duration-300",
                 !isSolidWhite && "backdrop-blur-sm",
                 !isTransparentSign && mirrorColor.twClass,
-                shape === 'circle' ? 'rounded-full' : 'rounded-2xl'
               )}
                style={{
                 boxShadow: [
@@ -182,28 +184,31 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
                 ].filter(Boolean).join(', '),
               }}
             >
-              <div className={cn("absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-white/10 to-transparent", shape === 'circle' ? 'rounded-full' : 'rounded-t-2xl')} />
-              
-              {withStandoffs && (
-                shape === 'circle' ? (
-                  <>
-                    <Standoff className="top-1/2 left-4 -translate-y-1/2" />
-                    <Standoff className="top-1/2 right-4 -translate-y-1/2" />
-                  </>
-                ) : (
-                  <>
-                    <Standoff className="top-4 left-4" />
-                    <Standoff className="top-4 right-4" />
-                    <Standoff className="bottom-4 left-4" />
-                    <Standoff className="bottom-4 right-4" />
-                  </>
-                )
-              )}
+              <div className="absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-white/10 to-transparent" />
+            </div>
 
-              <div className={cn(
-                "absolute text-center flex flex-col items-center justify-center gap-2 p-8",
+            {/* Standoffs Layer */}
+            {withStandoffs && (
+              shape === 'circle' ? (
+                <>
+                  <Standoff className="top-1/2 left-4 -translate-y-1/2" />
+                  <Standoff className="top-1/2 right-4 -translate-y-1/2" />
+                </>
+              ) : (
+                <>
+                  <Standoff className="top-4 left-4" />
+                  <Standoff className="top-4 right-4" />
+                  <Standoff className="bottom-4 left-4" />
+                  <Standoff className="bottom-4 right-4" />
+                </>
+              )
+            )}
+            
+            {/* Text Layer */}
+            <div className={cn(
+                "absolute flex flex-col items-center justify-center gap-2 p-8 text-center",
                 hasFrame ? frameInsetClass : 'inset-0'
-              )}>
+            )}>
                 <p
                   className='font-bold break-words transition-all duration-300 ease-in-out select-none'
                   style={textStyle}
@@ -218,14 +223,15 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
                     {text2}
                   </p>
                 )}
-              </div>
             </div>
+
+            {/* Frame Layer */}
             {hasFrame && (
               <div
                 className={cn(
                   'absolute pointer-events-none w-full h-full',
                   frameInsetClass,
-                   shape === 'circle' ? 'rounded-full' : 'rounded-2xl'
+                  shape === 'circle' ? 'rounded-full' : 'rounded-2xl'
                 )}
                 style={getFrameStyle()}
               />
