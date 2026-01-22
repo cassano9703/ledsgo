@@ -1,4 +1,3 @@
-
 'use client';
 
 import React, { forwardRef, useState, useRef, MouseEvent, TouchEvent } from 'react';
@@ -114,18 +113,12 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
     const hasFrame = frame.name !== "Sin Marco";
     const isDorado = hasFrame && frame.name === 'Dorado Brilloso';
     
-    const getFrameStyle = (): React.CSSProperties => {
+    const frameBackgroundStyle = (): React.CSSProperties => {
         if (!hasFrame) return {};
-
-        const style: React.CSSProperties = {
-            border: `3px solid ${isDorado ? 'transparent' : frame.value}`,
-        };
-
         if (isDorado) {
-            style.borderImage = `linear-gradient(170deg, #FFFFFF, ${frame.value}, #FFFFFF) 1`;
+            return { backgroundImage: `linear-gradient(170deg, #FFFFFF, ${frame.value}, #FFFFFF)` };
         }
-
-        return style;
+        return { backgroundColor: frame.value };
     };
 
     const Standoff = ({ className }: { className?: string }) => (
@@ -163,23 +156,25 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
         >
             <div
                 className={cn(
-                    "relative w-full h-full",
+                    "relative w-full h-full flex items-center justify-center overflow-hidden", // The "mold"
                     shapeClasses[shape],
                 )}
-                style={getFrameStyle()}
+                style={frameBackgroundStyle()}
             >
                 <div
                     className={cn(
-                        "relative w-full h-full flex flex-col items-center justify-center gap-2 text-center px-8",
+                        "absolute flex flex-col items-center justify-center gap-2 text-center px-8",
                         shapeClasses[shape],
                         !isSolidWhite && !isSolidBlack && "backdrop-blur-sm",
                         !isTransparentSign && mirrorColor.twClass
                     )}
                     style={{
+                        width: hasFrame ? 'calc(100% - 6px)' : '100%', // Slightly smaller to reveal the frame
+                        height: hasFrame ? 'calc(100% - 6px)' : '100%',
                         boxShadow: [
-                        withBacklight && isTransparentSign ? `inset 0 0 150px ${backlightColor.value}` : null,
-                        !isSolidWhite && !isSolidBlack ? 'inset 0 0 60px rgba(255,255,255,0.1)' : null, 
-                        '0 0 20px rgba(0,0,0,0.5)'
+                            withBacklight && isTransparentSign ? `inset 0 0 150px ${backlightColor.value}` : null,
+                            !isSolidWhite && !isSolidBlack ? 'inset 0 0 60px rgba(255,255,255,0.1)' : null, 
+                            '0 0 20px rgba(0,0,0,0.5)'
                         ].filter(Boolean).join(', '),
                     }}
                 >
