@@ -70,23 +70,25 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
     const isMirrorFinish = mirrorFinishColors.some(c => c.name === color.name);
     const isTransparentSign = mirrorColor.name === 'Plateado';
     const isSolidWhite = mirrorColor.name === 'Blanco Lechoso';
-    const isDorado = frame.name === 'Dorado Brilloso';
-
+    
     const getFrameStyle = () => {
-      if (!isDorado) {
-        return { border: `4px solid ${frame.value}` };
-      }
-      if (isSolidWhite) {
-        return {
-          border: `4px solid ${frame.value}`,
-          filter: `drop-shadow(0 0 8px ${frame.value})`,
-        };
-      }
-      return {
-        border: '4px solid transparent',
-        borderImage: `linear-gradient(145deg, hsla(0,0%,100%,.9) 15%, ${frame.value} 50%, hsla(0,0%,100%,.9) 85%) 1`,
-        filter: `drop-shadow(0 0 8px ${frame.value})`,
+      const isDorado = frame.name === 'Dorado Brilloso';
+      
+      let baseStyle: React.CSSProperties = {
+          border: `4px solid ${frame.value}`
       };
+
+      if (isDorado) {
+          if (isSolidWhite) {
+              baseStyle.filter = `drop-shadow(0 0 8px ${frame.value})`;
+          } else {
+              baseStyle.border = '4px solid transparent';
+              baseStyle.borderImage = `linear-gradient(145deg, hsla(0,0%,100%,.9) 15%, ${frame.value} 50%, hsla(0,0%,100%,.9) 85%) 1`;
+              baseStyle.filter = `drop-shadow(0 0 8px ${frame.value})`;
+          }
+      }
+      
+      return baseStyle;
     };
 
     const getTextStyle = (baseFont: FontConfig, fontSize: string): React.CSSProperties => {
@@ -98,8 +100,6 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
 
         if (isMirrorFinish) {
           if (isSolidWhite) {
-            // On white background, the reflection is less visible and can affect readability.
-            // We use the solid color with a more subtle glow.
             style.color = color.value;
             style.textShadow = `0 0 8px ${color.value}`;
           } else {
@@ -164,7 +164,7 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
           onTouchStart={handleDragStart}
         >
           <div className={cn(
-            "relative flex items-center justify-center",
+            "relative flex items-center justify-center overflow-hidden",
             shapeClasses[shape],
             )}>
             <div 
@@ -223,7 +223,7 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
             {hasFrame && (
               <div
                 className={cn(
-                  'absolute pointer-events-none',
+                  'absolute pointer-events-none w-full h-full',
                   frameInsetClass,
                    shape === 'circle' ? 'rounded-full' : 'rounded-2xl'
                 )}
