@@ -75,19 +75,6 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
     const hasFrame = frame.name !== "Sin Marco";
     const isDorado = hasFrame && frame.name === 'Dorado Brilloso';
 
-    const getFrameStyle = () => {
-      if (isDorado) {
-        return {
-          border: `3px solid transparent`,
-          borderImage: `linear-gradient(170deg, #FFFFFF, ${frame.value}, #FFFFFF) 1`,
-        };
-      }
-      
-      return {
-          border: `4px solid ${frame.value}`,
-      };
-    };
-
     const getTextStyle = (baseFont: FontConfig, fontSize: string): React.CSSProperties => {
         const style: React.CSSProperties = {
             fontFamily: baseFont.style.fontFamily,
@@ -127,9 +114,6 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
       rectangle: 'aspect-[16/9]',
     }
 
-    
-    const frameInsetClass = frameStyle === 'edge' ? 'inset-0' : 'inset-2';
-
     const Standoff = ({ className }: { className?: string }) => (
       <div className={cn("absolute w-4 h-4 rounded-full shadow-md border border-slate-400/50 z-20", standoffColor.twClass, className)} />
     );
@@ -163,16 +147,31 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
           onMouseDown={handleDragStart}
           onTouchStart={handleDragStart}
         >
+          {/* This is the clipping container. It has the shape and overflow hidden. */}
           <div
             className={cn(
               "relative w-full h-full overflow-hidden",
               shapeClasses[shape]
             )}
           >
-            {/* Base of the sign */}
+            {/* Frame Layer (behind everything else) */}
+            {hasFrame && (
+                <div
+                    className='absolute inset-0'
+                    style={{
+                        backgroundImage: isDorado ? `linear-gradient(170deg, #FFFFFF, ${frame.value}, #FFFFFF)` : 'none',
+                        backgroundColor: !isDorado ? frame.value : 'transparent',
+                    }}
+                />
+            )}
+
+            {/* Base of the sign (on top of the frame) */}
             <div
               className={cn(
-                "absolute inset-0",
+                "absolute",
+                // The inset creates the border thickness by making this layer smaller than the frame layer
+                hasFrame ? "inset-1" : "inset-0",
+                shapeClasses[shape], // Apply shape here again for safety
                 !isSolidWhite && !isSolidBlack && "backdrop-blur-sm",
                 !isTransparentSign && mirrorColor.twClass
               )}
@@ -187,7 +186,7 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
               <div className="absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-white/10 to-transparent" />
             </div>
             
-            {/* Text Layer */}
+            {/* Text Layer (on top of the base) */}
             <div className={cn(
                 "absolute inset-0 flex flex-col items-center justify-center gap-2 px-8 text-center",
             )}>
@@ -206,20 +205,9 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
                   </p>
                 )}
             </div>
-
-            {/* Frame Layer */}
-            {hasFrame && (
-              <div
-                className={cn(
-                  'absolute pointer-events-none',
-                  frameInsetClass,
-                )}
-                style={getFrameStyle()}
-              />
-            )}
           </div>
 
-          {/* Standoffs Layer */}
+          {/* Standoffs Layer (on top of everything) */}
           {withStandoffs && (
             shape === 'circle' ? (
               <>
