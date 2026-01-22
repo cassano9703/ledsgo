@@ -120,6 +120,7 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
     );
 
     const isDorado = frame.name === 'Dorado Brilloso';
+    const isCircularWithSquareFrame = shape === 'circle' && hasFrame;
 
     return (
       <div 
@@ -147,12 +148,16 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
           onMouseDown={handleDragStart}
           onTouchStart={handleDragStart}
         >
-          <div className={cn("relative flex items-center justify-center", shapeClasses[shape])}>
+          <div className={cn(
+            "relative flex items-center justify-center",
+            isCircularWithSquareFrame ? shapeClasses.square : shapeClasses[shape],
+            isCircularWithSquareFrame && !isTransparentSign ? mirrorColor.twClass : ''
+            )}>
             <div 
               className={cn(
                 "relative w-full h-full flex items-center justify-center transition-all duration-300 overflow-hidden",
                 !isSolidWhite && "backdrop-blur-sm",
-                !isTransparentSign && mirrorColor.twClass,
+                isCircularWithSquareFrame ? '' : (!isTransparentSign && mirrorColor.twClass),
                 shape === 'circle' ? 'rounded-full' : 'rounded-2xl'
               )}
                style={{
@@ -206,7 +211,7 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
                 className={cn(
                   'absolute pointer-events-none',
                   frameInsetClass,
-                   shape === 'circle' ? 'rounded-full' : 'rounded-2xl'
+                   'rounded-2xl'
                 )}
                 style={
                   isDorado ? {
