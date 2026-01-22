@@ -28,7 +28,7 @@ export function AcrylicSignConfigurator() {
   const [text2, setText2] = useState("Clínica Dental");
   const [font, setFont] = useState<FontConfig>(fonts[2]);
   const [font2, setFont2] = useState<FontConfig>(fonts[0]);
-  const [engravingColor, setEngravingColor] = useState<ColorConfig>(vinylColors[0]);
+  const [engravingColor, setEngravingColor] = useState<ColorConfig>(mirrorFinishColors[0]);
   const [mirrorColor, setMirrorColor] = useState<ColorConfig>(mirrorColors[1]);
   const [size, setSize] = useState<SizeConfig>(sizes[1]);
   const [shape, setShape] = useState<Shape>('rectangle');
@@ -38,7 +38,7 @@ export function AcrylicSignConfigurator() {
   const [withStandoffs, setWithStandoffs] = useState(true);
   const [standoffColor, setStandoffColor] = useState<ColorConfig>(standoffColors[0]);
   const [withBacklight, setWithBacklight] = useState(true);
-  const [backlightColor, setBacklightColor] = useState<ColorConfig>(lightColors[1]);
+  const [backlightColor, setBacklightColor] = useState<ColorConfig>(lightColors[0]);
 
 
   const [isOrderModalOpen, setOrderModalOpen] = useState(false);
@@ -404,6 +404,3 @@ export function AcrylicSignConfigurator() {
     </>
   );
 }
-
-    
-    

@@ -165,7 +165,7 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
                     className={cn(
                         "absolute flex flex-col items-center justify-center gap-2 text-center px-8",
                         shapeClasses[shape],
-                        !isSolidWhite && !isSolidBlack && "backdrop-blur-sm",
+                        !isSolidWhite && !isSolidBlack && !isTransparentSign && "backdrop-blur-sm",
                         !isTransparentSign && mirrorColor.twClass
                     )}
                     style={{
