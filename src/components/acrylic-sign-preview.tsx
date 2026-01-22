@@ -75,7 +75,7 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
       const isDorado = frame.name === 'Dorado Brilloso';
       
       let baseStyle: React.CSSProperties = {
-          border: `4px solid ${frame.value}`
+          border: `4px solid ${frame.value}`,
       };
 
       if (isDorado) {
@@ -83,7 +83,7 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
               baseStyle.filter = `drop-shadow(0 0 8px ${frame.value})`;
           } else {
               baseStyle.border = '4px solid transparent';
-              baseStyle.borderImage = `linear-gradient(145deg, hsla(0,0%,100%,.9) 15%, ${frame.value} 50%, hsla(0,0%,100%,.9) 85%) 1`;
+              baseStyle.borderImage = `linear-gradient(170deg, hsla(0,0%,100%,.9) 15%, ${frame.value} 50%, hsla(0,0%,100%,.9) 85%) 1`;
               baseStyle.filter = `drop-shadow(0 0 8px ${frame.value})`;
           }
       }
@@ -152,7 +152,10 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
         
         <div
           ref={signContainerRef}
-          className={cn("absolute cursor-grab w-1/2", shapeClasses[shape])}
+          className={cn(
+            "absolute cursor-grab w-1/2 overflow-hidden",
+            shapeClasses[shape],
+          )}
           style={{ 
             transform: `translate(${position.x}px, ${position.y}px)`,
             filter: withBacklight && !isTransparentSign
