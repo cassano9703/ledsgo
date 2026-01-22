@@ -199,7 +199,7 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
           
           {/* Text Layer */}
           <div className={cn(
-              "absolute inset-0 flex flex-col items-center justify-center gap-2 px-8 pt-6 pb-10 text-center",
+              "absolute inset-0 flex flex-col items-center justify-center gap-2 px-8 text-center",
           )}>
               <p
                 className='font-bold break-words transition-all duration-300 ease-in-out select-none'
