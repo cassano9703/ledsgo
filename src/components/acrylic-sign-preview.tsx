@@ -114,24 +114,6 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
     const hasFrame = frame.name !== "Sin Marco";
     const isDorado = hasFrame && frame.name === 'Dorado Brilloso';
     
-    const getFrameStyle = (): React.CSSProperties => {
-        if (!hasFrame) return {};
-
-        if (isDorado) {
-            return {
-                borderWidth: '3px',
-                borderStyle: 'solid',
-                borderImage: `linear-gradient(170deg, #FFFFFF, ${frame.value}, #FFFFFF) 1`,
-            };
-        }
-        
-        return {
-            borderWidth: '3px',
-            borderStyle: 'solid',
-            borderColor: frame.value,
-        };
-    };
-
     const Standoff = ({ className }: { className?: string }) => (
       <div className={cn("absolute w-4 h-4 rounded-full shadow-md border border-slate-400/50 z-20", standoffColor.twClass, className)} />
     );
@@ -152,14 +134,12 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
         <div
           ref={signContainerRef}
           className={cn(
-            "absolute cursor-grab overflow-hidden",
-            shapeClasses[shape],
+            "absolute cursor-grab",
             aspectRatios[shape],
             "w-1/2"
           )}
           style={{ 
             transform: `translate(${position.x}px, ${position.y}px)`,
-            ...getFrameStyle(),
             filter: withBacklight && !isTransparentSign
               ? `drop-shadow(0 0 40px ${backlightColor.value}) drop-shadow(0 0 150px ${backlightColor.value})`
               : (isDorado ? `drop-shadow(0 0 8px ${frame.value})` : 'none'),
@@ -170,41 +150,49 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
         >
           <div
             className={cn(
-              "relative w-full h-full",
-              !isSolidWhite && !isSolidBlack && "backdrop-blur-sm",
-              !isTransparentSign && mirrorColor.twClass
+              "relative w-full h-full p-[3px]",
+              shapeClasses[shape],
             )}
             style={{
-              boxShadow: [
-                withBacklight && isTransparentSign ? `inset 0 0 150px ${backlightColor.value}` : null,
-                !isSolidWhite && !isSolidBlack ? 'inset 0 0 60px rgba(255,255,255,0.1)' : null, 
-                '0 0 20px rgba(0,0,0,0.5)'
-              ].filter(Boolean).join(', '),
+              background: hasFrame 
+                ? (isDorado ? `linear-gradient(145deg, #FFFFFF, ${frame.value}, #FFFFFF)` : frame.value)
+                : 'transparent',
             }}
           >
-            <div className="absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-white/10 to-transparent" />
+            <div
+              className={cn(
+                "relative w-full h-full flex flex-col items-center justify-center gap-2 text-center px-8",
+                shapeClasses[shape],
+                !isSolidWhite && !isSolidBlack && "backdrop-blur-sm",
+                !isTransparentSign && mirrorColor.twClass
+              )}
+              style={{
+                boxShadow: [
+                  withBacklight && isTransparentSign ? `inset 0 0 150px ${backlightColor.value}` : null,
+                  !isSolidWhite && !isSolidBlack ? 'inset 0 0 60px rgba(255,255,255,0.1)' : null, 
+                  '0 0 20px rgba(0,0,0,0.5)'
+                ].filter(Boolean).join(', '),
+              }}
+            >
+              <div className="absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-white/10 to-transparent" />
 
-            <div className={cn(
-                "absolute inset-0 flex flex-col items-center justify-center gap-2 text-center",
-                "px-8"
-            )}>
+              <p
+                className='font-bold break-words transition-all duration-300 ease-in-out select-none'
+                style={textStyle}
+              >
+                {previewText}
+              </p>
+              {text2 && (
                 <p
-                  className='font-bold break-words transition-all duration-300 ease-in-out select-none'
-                  style={textStyle}
+                  className='break-words transition-all duration-300 ease-in-out select-none'
+                  style={subtitleTextStyle}
                 >
-                  {previewText}
+                  {text2}
                 </p>
-                {text2 && (
-                  <p
-                    className='break-words transition-all duration-300 ease-in-out select-none'
-                    style={subtitleTextStyle}
-                  >
-                    {text2}
-                  </p>
-                )}
+              )}
             </div>
           </div>
-
+          
           {withStandoffs && (
             shape === 'circle' ? (
               <>
