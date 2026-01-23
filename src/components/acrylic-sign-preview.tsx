@@ -30,14 +30,17 @@ const FrameOverlay = ({ frame, frameStyle, isDorado, shape }: { frame: FrameConf
 
   // Handle circular frames
   if (shape === 'circle') {
-    if (frameStyle === 'edge' || frameStyle === 'margin') {
-      const borderWidthPercent = 1.5;
-      const marginPercent = frameStyle === 'margin' ? 4 : 0;
-      
-      const outerRadius = 50.5 - marginPercent; // Use 50.5 to prevent anti-aliasing gaps at the edge
-      const innerRadius = (50 - marginPercent) - borderWidthPercent;
-
-      const mask = `radial-gradient(circle at center, transparent ${innerRadius}%, black ${innerRadius}%, black ${outerRadius}%, transparent ${outerRadius}%)`;
+    const borderWidthPercent = 1.5;
+    if (frameStyle === 'edge') {
+      const innerRadius = 100 - borderWidthPercent;
+      const mask = `radial-gradient(circle farthest-side, transparent ${innerRadius}%, black ${innerRadius}%)`;
+      return <div className="absolute inset-0" style={{ ...frameBgStyle, WebkitMask: mask, mask: mask }} />;
+    }
+    if (frameStyle === 'margin') {
+      const marginPercent = 4;
+      const outerRadius = 100 - marginPercent;
+      const innerRadius = 100 - marginPercent - borderWidthPercent;
+      const mask = `radial-gradient(circle farthest-side, transparent ${innerRadius}%, black ${innerRadius}%, black ${outerRadius}%, transparent ${outerRadius}%)`;
       return <div className="absolute inset-0" style={{ ...frameBgStyle, WebkitMask: mask, mask: mask }} />;
     }
   }
