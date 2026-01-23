@@ -50,22 +50,54 @@ const FrameOverlay = ({ frame, frameStyle, isDorado, shape }: { frame: FrameConf
       ${inner} ${inner}
     )`;
   } else if (frameStyle === 'corners') {
-    const cornerArm = '35%'; // How far the arm extends along the edge
-    const centerGap = '5%';  // The space from the center
+    const innerMargin = `calc(${marginWidth} + ${borderWidth})`;
+    const armLength = '30%';
+    const gapStart = armLength;
+    const gapEnd = `calc(100% - ${armLength})`;
 
-    clipPath = `polygon(
-      ${cornerArm} 0%, 
-      50% calc(50% - ${centerGap}), 
-      calc(100% - ${cornerArm}) 0%, 
-      100% ${cornerArm},
-      calc(50% + ${centerGap}) 50%,
-      100% calc(100% - ${cornerArm}),
-      calc(100% - ${cornerArm}) 100%,
-      50% calc(50% + ${centerGap}),
-      ${cornerArm} 100%,
-      0% calc(100% - ${cornerArm}),
-      calc(50% - ${centerGap}) 50%,
-      0% ${cornerArm}
+    // This defines a path with multiple holes to create the corner-only effect.
+    clipPath = `polygon(evenodd,
+      /* Outer frame rectangle */
+      ${marginWidth} ${marginWidth},
+      calc(100% - ${marginWidth}) ${marginWidth},
+      calc(100% - ${marginWidth}) calc(100% - ${marginWidth}),
+      ${marginWidth} calc(100% - ${marginWidth}),
+      ${marginWidth} ${marginWidth},
+
+      /* Inner rectangle (the big hole in the middle) */
+      ${innerMargin} ${innerMargin},
+      ${innerMargin} calc(100% - ${innerMargin}),
+      calc(100% - ${innerMargin}) calc(100% - ${innerMargin}),
+      calc(100% - ${innerMargin}) ${innerMargin},
+      ${innerMargin} ${innerMargin},
+
+      /* Top gap (another hole) */
+      ${gapStart} ${marginWidth},
+      ${gapEnd} ${marginWidth},
+      ${gapEnd} ${innerMargin},
+      ${gapStart} ${innerMargin},
+      ${gapStart} ${marginWidth},
+
+      /* Bottom gap (another hole) */
+      ${gapStart} calc(100% - ${innerMargin}),
+      ${gapEnd} calc(100% - ${innerMargin}),
+      ${gapEnd} calc(100% - ${marginWidth}),
+      ${gapStart} calc(100% - ${marginWidth}),
+      ${gapStart} calc(100% - ${innerMargin}),
+
+      /* Left gap (another hole) */
+      ${marginWidth} ${gapStart},
+      ${innerMargin} ${gapStart},
+      ${innerMargin} ${gapEnd},
+      ${marginWidth} ${gapEnd},
+      ${marginWidth} ${gapStart},
+
+      /* Right gap (another hole) */
+      calc(100% - ${innerMargin}) ${gapStart},
+      calc(100% - ${marginWidth}) ${gapStart},
+      calc(100% - ${marginWidth}) ${gapEnd},
+      calc(100% - ${innerMargin}) ${gapEnd},
+      calc(100% - ${innerMargin}) ${gapStart}
     )`;
   }
 
