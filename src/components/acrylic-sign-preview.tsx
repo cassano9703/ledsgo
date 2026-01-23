@@ -28,6 +28,50 @@ const FrameOverlay = ({ frame, frameStyle, isDorado, shape }: { frame: FrameConf
     ? { backgroundImage: `linear-gradient(170deg, #FFFFFF, ${frame.value}, #FFFFFF)` }
     : { backgroundColor: frame.value };
 
+  if (frameStyle === 'corners') {
+    const margin = '8px';
+    const armLength = '30%';
+    const armWidth = '15%'; // As a percentage of the armLength
+
+    const Corner = ({ position }: { position: 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right' }) => {
+      let style: React.CSSProperties = {
+        position: 'absolute',
+        width: armLength,
+        height: armLength,
+        ...frameBgStyle,
+      };
+
+      if (position === 'top-left') {
+        style.top = margin;
+        style.left = margin;
+        style.clipPath = `polygon(0% 0%, 100% 0%, 100% ${armWidth}, ${armWidth} ${armWidth}, ${armWidth} 100%, 0% 100%)`;
+      } else if (position === 'top-right') {
+        style.top = margin;
+        style.right = margin;
+        style.clipPath = `polygon(0% 0%, 100% 0%, 100% 100%, calc(100% - ${armWidth}) 100%, calc(100% - ${armWidth}) ${armWidth}, 0% ${armWidth})`;
+      } else if (position === 'bottom-left') {
+        style.bottom = margin;
+        style.left = margin;
+        style.clipPath = `polygon(0% 0%, ${armWidth} 0%, ${armWidth} calc(100% - ${armWidth}), 100% calc(100% - ${armWidth}), 100% 100%, 0% 100%)`;
+      } else if (position === 'bottom-right') {
+        style.bottom = margin;
+        style.right = margin;
+        style.clipPath = `polygon(calc(100% - ${armWidth}) 0%, 100% 0%, 100% 100%, 0% 100%, 0% calc(100% - ${armWidth}), calc(100% - ${armWidth}) calc(100% - ${armWidth}))`;
+      }
+      
+      return <div style={style} />;
+    };
+
+    return (
+      <>
+        <Corner position="top-left" />
+        <Corner position="top-right" />
+        <Corner position="bottom-left" />
+        <Corner position="bottom-right" />
+      </>
+    );
+  }
+
   let clipPath = '';
   const borderWidth = '3px';
   const marginWidth = '8px';
@@ -49,24 +93,8 @@ const FrameOverlay = ({ frame, frameStyle, isDorado, shape }: { frame: FrameConf
       calc(100% - ${inner}) ${inner}, 
       ${inner} ${inner}
     )`;
-  } else if (frameStyle === 'corners') {
-    const innerMargin = `calc(${marginWidth} + ${borderWidth})`;
-    const armLength = '30%';
-
-    const fullFrameOuter = `${marginWidth} ${marginWidth}, calc(100% - ${marginWidth}) ${marginWidth}, calc(100% - ${marginWidth}) calc(100% - ${marginWidth}), ${marginWidth} calc(100% - ${marginWidth})`;
-    const fullFrameInner = `${innerMargin} ${innerMargin}, calc(100% - ${innerMargin}) ${innerMargin}, calc(100% - ${innerMargin}) calc(100% - ${innerMargin}), ${innerMargin} calc(100% - ${innerMargin})`;
-    
-    const topCutout = `${armLength} ${marginWidth}, calc(100% - ${armLength}) ${marginWidth}, calc(100% - ${armLength}) ${innerMargin}, ${armLength} ${innerMargin}`;
-    
-    const bottomCutout = `${armLength} calc(100% - ${marginWidth}), calc(100% - ${armLength}) calc(100% - ${marginWidth}), calc(100% - ${armLength}) calc(100% - ${innerMargin}), ${armLength} calc(100% - ${innerMargin})`;
-
-    const leftCutout = `${marginWidth} ${armLength}, ${innerMargin} ${armLength}, ${innerMargin} calc(100% - ${armLength}), ${marginWidth} calc(100% - ${armLength})`;
-
-    const rightCutout = `calc(100% - ${marginWidth}) ${armLength}, calc(100% - ${innerMargin}) ${armLength}, calc(100% - ${innerMargin}) calc(100% - ${armLength}), calc(100% - ${marginWidth}) calc(100% - ${armLength})`;
-
-    clipPath = `polygon(evenodd, ${fullFrameOuter}, ${fullFrameInner}, ${topCutout}, ${bottomCutout}, ${leftCutout}, ${rightCutout})`;
   }
-
+  
   return <div className="absolute inset-0" style={{ ...frameBgStyle, clipPath }} />;
 }
 
