@@ -52,41 +52,19 @@ const FrameOverlay = ({ frame, frameStyle, isDorado, shape }: { frame: FrameConf
   } else if (frameStyle === 'corners') {
     const innerMargin = `calc(${marginWidth} + ${borderWidth})`;
     const armLength = '30%';
-    const gapStart = armLength;
-    const gapEnd = `calc(100% - ${armLength})`;
 
-    clipPath = `polygon(evenodd,
-      ${marginWidth} ${marginWidth},
-      calc(100% - ${marginWidth}) ${marginWidth},
-      calc(100% - ${marginWidth}) calc(100% - ${marginWidth}),
-      ${marginWidth} calc(100% - ${marginWidth}),
-      ${marginWidth} ${marginWidth},
-      ${innerMargin} ${innerMargin},
-      ${innerMargin} calc(100% - ${innerMargin}),
-      calc(100% - ${innerMargin}) calc(100% - ${innerMargin}),
-      calc(100% - ${innerMargin}) ${innerMargin},
-      ${innerMargin} ${innerMargin},
-      ${gapStart} ${marginWidth},
-      ${gapEnd} ${marginWidth},
-      ${gapEnd} ${innerMargin},
-      ${gapStart} ${innerMargin},
-      ${gapStart} ${marginWidth},
-      ${gapStart} calc(100% - ${innerMargin}),
-      ${gapEnd} calc(100% - ${innerMargin}),
-      ${gapEnd} calc(100% - ${marginWidth}),
-      ${gapStart} calc(100% - ${marginWidth}),
-      ${gapStart} calc(100% - ${innerMargin}),
-      ${marginWidth} ${gapStart},
-      ${innerMargin} ${gapStart},
-      ${innerMargin} ${gapEnd},
-      ${marginWidth} ${gapEnd},
-      ${marginWidth} ${gapStart},
-      calc(100% - ${innerMargin}) ${gapStart},
-      calc(100% - ${marginWidth}) ${gapStart},
-      calc(100% - ${marginWidth}) ${gapEnd},
-      calc(100% - ${innerMargin}) ${gapEnd},
-      calc(100% - ${innerMargin}) ${gapStart}
-    )`;
+    const fullFrameOuter = `${marginWidth} ${marginWidth}, calc(100% - ${marginWidth}) ${marginWidth}, calc(100% - ${marginWidth}) calc(100% - ${marginWidth}), ${marginWidth} calc(100% - ${marginWidth})`;
+    const fullFrameInner = `${innerMargin} ${innerMargin}, calc(100% - ${innerMargin}) ${innerMargin}, calc(100% - ${innerMargin}) calc(100% - ${innerMargin}), ${innerMargin} calc(100% - ${innerMargin})`;
+    
+    const topCutout = `${armLength} ${marginWidth}, calc(100% - ${armLength}) ${marginWidth}, calc(100% - ${armLength}) ${innerMargin}, ${armLength} ${innerMargin}`;
+    
+    const bottomCutout = `${armLength} calc(100% - ${marginWidth}), calc(100% - ${armLength}) calc(100% - ${marginWidth}), calc(100% - ${armLength}) calc(100% - ${innerMargin}), ${armLength} calc(100% - ${innerMargin})`;
+
+    const leftCutout = `${marginWidth} ${armLength}, ${innerMargin} ${armLength}, ${innerMargin} calc(100% - ${armLength}), ${marginWidth} calc(100% - ${armLength})`;
+
+    const rightCutout = `calc(100% - ${marginWidth}) ${armLength}, calc(100% - ${innerMargin}) ${armLength}, calc(100% - ${innerMargin}) calc(100% - ${armLength}), calc(100% - ${marginWidth}) calc(100% - ${armLength})`;
+
+    clipPath = `polygon(evenodd, ${fullFrameOuter}, ${fullFrameInner}, ${topCutout}, ${bottomCutout}, ${leftCutout}, ${rightCutout})`;
   }
 
   return <div className="absolute inset-0" style={{ ...frameBgStyle, clipPath }} />;
