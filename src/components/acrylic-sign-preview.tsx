@@ -31,7 +31,7 @@ const FrameOverlay = ({ frame, frameStyle, isDorado, shape }: { frame: FrameConf
   if (frameStyle === 'corners') {
     const margin = '8px';
     const armLength = '30%';
-    const armWidth = '15%'; // As a percentage of the armLength
+    const armWidth = '8%'; // As a percentage of the armLength
 
     const Corner = ({ position }: { position: 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right' }) => {
       let style: React.CSSProperties = {
