@@ -152,7 +152,7 @@ export function AcrylicSignConfigurator() {
                     {mirrorColors.map((c) => (
                       <Label key={`mirror-${c.name}`} htmlFor={`mirror-${c.name}`} className={`relative flex items-center justify-center rounded-full w-8 h-8 cursor-pointer transition-all border-2 ${mirrorColor.name === c.name ? 'border-primary ring-2 ring-primary' : 'border-border'}`}>
                           <RadioGroupItem value={c.name} id={`mirror-${c.name}`} className="sr-only" />
-                          <span className={cn("w-full h-full rounded-full", c.twClass)} />
+                          <span className={cn("w-full h-full rounded-full", c.twClass, c.name === 'Plateado' && 'border border-muted-foreground/50')} />
                       </Label>
                     ))}
                 </RadioGroup>
