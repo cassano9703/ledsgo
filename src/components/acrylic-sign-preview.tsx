@@ -28,6 +28,20 @@ const FrameOverlay = ({ frame, frameStyle, isDorado, shape }: { frame: FrameConf
     ? { backgroundImage: `linear-gradient(170deg, #FFFFFF, ${frame.value}, #FFFFFF)` }
     : { backgroundColor: frame.value };
 
+  // Handle circular frames for 'edge' and 'margin' styles
+  if (shape === 'circle' && (frameStyle === 'edge' || frameStyle === 'margin')) {
+    const borderWidthPercent = 1.5; // Corresponds to a thin border
+    const marginPercent = frameStyle === 'margin' ? 4 : 0;
+    
+    const outerRadius = 50 - marginPercent;
+    const innerRadius = outerRadius - borderWidthPercent;
+
+    const mask = `radial-gradient(circle at center, transparent ${innerRadius}%, black ${innerRadius}%, black ${outerRadius}%, transparent ${outerRadius}%)`;
+
+    return <div className="absolute inset-0" style={{ ...frameBgStyle, WebkitMask: mask, mask: mask }} />;
+  }
+
+  // Handle 'corners' style for all shapes (circle will be clipped by parent)
   if (frameStyle === 'corners') {
     const margin = '8px';
     const armLength = '30%';
@@ -72,6 +86,7 @@ const FrameOverlay = ({ frame, frameStyle, isDorado, shape }: { frame: FrameConf
     );
   }
 
+  // Handle rectangular ('square', 'rectangle') frames for 'edge' and 'margin'
   let clipPath = '';
   const borderWidth = '3px';
   const marginWidth = '8px';
