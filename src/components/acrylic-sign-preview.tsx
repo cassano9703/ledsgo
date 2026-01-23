@@ -29,9 +29,8 @@ const FrameOverlay = ({ frame, frameStyle, isDorado, shape }: { frame: FrameConf
     : { backgroundColor: frame.value };
 
   let clipPath = '';
-  const borderWidth = shape === 'circle' ? '4px' : '3px';
+  const borderWidth = '3px';
   const marginWidth = '8px';
-  const cornerSize = '15%';
 
   if (frameStyle === 'edge') {
     clipPath = `polygon(evenodd, 0% 0%, 100% 0%, 100% 100%, 0% 100%, 0% 0%, ${borderWidth} ${borderWidth}, ${borderWidth} calc(100% - ${borderWidth}), calc(100% - ${borderWidth}) calc(100% - ${borderWidth}), calc(100% - ${borderWidth}) ${borderWidth}, ${borderWidth} ${borderWidth})`;
@@ -51,11 +50,22 @@ const FrameOverlay = ({ frame, frameStyle, isDorado, shape }: { frame: FrameConf
       ${inner} ${inner}
     )`;
   } else if (frameStyle === 'corners') {
+    const cornerArm = '35%'; // How far the arm extends along the edge
+    const centerGap = '5%';  // The space from the center
+
     clipPath = `polygon(
-      0 0, ${cornerSize} 0, ${cornerSize} ${borderWidth}, ${borderWidth} ${borderWidth}, ${borderWidth} ${cornerSize}, 0 ${cornerSize}, /* TL */
-      calc(100% - ${cornerSize}) 0, 100% 0, 100% ${cornerSize}, calc(100% - ${borderWidth}) ${cornerSize}, calc(100% - ${borderWidth}) ${borderWidth}, calc(100% - ${cornerSize}) ${borderWidth}, /* TR */
-      0 calc(100% - ${cornerSize}), ${borderWidth} calc(100% - ${cornerSize}), ${borderWidth} calc(100% - ${borderWidth}), ${cornerSize} calc(100% - ${borderWidth}), ${cornerSize} 100%, 0 100%, /* BL */
-      calc(100% - ${cornerSize}) 100%, 100% 100%, 100% calc(100% - ${cornerSize}), calc(100% - ${borderWidth}) calc(100% - ${cornerSize}), calc(100% - ${borderWidth}) calc(100% - ${borderWidth}), calc(100% - ${cornerSize}) calc(100% - ${borderWidth}) /* BR */
+      ${cornerArm} 0%, 
+      50% calc(50% - ${centerGap}), 
+      calc(100% - ${cornerArm}) 0%, 
+      100% ${cornerArm},
+      calc(50% + ${centerGap}) 50%,
+      100% calc(100% - ${cornerArm}),
+      calc(100% - ${cornerArm}) 100%,
+      50% calc(50% + ${centerGap}),
+      ${cornerArm} 100%,
+      0% calc(100% - ${cornerArm}),
+      calc(50% - ${centerGap}) 50%,
+      0% ${cornerArm}
     )`;
   }
 
@@ -108,8 +118,7 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
     };
 
     const isMirrorFinish = mirrorFinishColors.some(c => c.name === color.name);
-    const isSolidWhite = mirrorColor.name === 'Blanco Lechoso';
-    const isSolidBlack = mirrorColor.name === 'Negro';
+    const isTransparent = mirrorColor.name === 'Plateado';
 
     const getTextStyle = (baseFont: FontConfig, fontSize: string): React.CSSProperties => {
         const style: React.CSSProperties = {
@@ -179,6 +188,10 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
           )}
           style={{ 
             transform: `translate(${position.x}px, ${position.y}px)`,
+            filter: [
+              withBacklight ? `drop-shadow(0 0 20px ${backlightColor.value})` : null,
+              isDorado ? `drop-shadow(0 0 8px ${frame.value})` : null,
+            ].filter(Boolean).join(' ') || 'none',
           }}
           onMouseDown={handleDragStart}
           onTouchStart={handleDragStart}
@@ -188,28 +201,19 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
                     "relative w-full h-full flex items-center justify-center overflow-hidden",
                     shapeClasses[shape],
                 )}
-                style={{
-                  filter: [
-                    withBacklight ? `drop-shadow(0 0 20px ${backlightColor.value})` : null,
-                    isDorado ? `drop-shadow(0 0 8px ${frame.value})` : null,
-                  ].filter(Boolean).join(' ') || 'none',
-                }}
             >
                 {/* Acrylic Base */}
                 <div
                     className={cn(
                         "absolute inset-0 flex flex-col items-center justify-center gap-2 text-center px-8",
-                        !isSolidWhite && !isSolidBlack && "backdrop-blur-sm",
-                        mirrorColor.twClass
+                         mirrorColor.twClass
                     )}
                     style={{
-                        boxShadow: [
-                            !isSolidWhite && !isSolidBlack ? 'inset 0 0 60px rgba(255,255,255,0.1)' : null, 
-                            '0 0 20px rgba(0,0,0,0.5)'
-                        ].filter(Boolean).join(', '),
+                      border: isTransparent && hasFrame ? `3px solid ${frame.value}` : 'none',
+                      boxShadow: !isTransparent ? 'inset 0 0 60px rgba(255,255,255,0.1), 0 0 20px rgba(0,0,0,0.5)' : '0 0 20px rgba(0,0,0,0.5)',
                     }}
                 >
-                    <div className="absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-white/10 to-transparent" />
+                    {!isTransparent && <div className="absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-white/10 to-transparent" />}
 
                     <p
                         className='font-bold break-words transition-all duration-300 ease-in-out select-none'
@@ -228,7 +232,7 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
                 </div>
 
                 {/* Frame Overlay */}
-                {hasFrame && <FrameOverlay frame={frame} frameStyle={frameStyle} isDorado={isDorado} shape={shape} />}
+                {hasFrame && !isTransparent && <FrameOverlay frame={frame} frameStyle={frameStyle} isDorado={isDorado} shape={shape} />}
             </div>
           
           {withStandoffs && (
