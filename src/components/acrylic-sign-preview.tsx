@@ -22,6 +22,47 @@ interface AcrylicSignPreviewProps {
   backlightColor: ColorConfig;
 }
 
+
+const FrameOverlay = ({ frame, frameStyle, isDorado, shape }: { frame: FrameConfig, frameStyle: string, isDorado: boolean, shape: string }) => {
+  const frameBgStyle: React.CSSProperties = isDorado
+    ? { backgroundImage: `linear-gradient(170deg, #FFFFFF, ${frame.value}, #FFFFFF)` }
+    : { backgroundColor: frame.value };
+
+  let clipPath = '';
+  const borderWidth = shape === 'circle' ? '4px' : '3px';
+  const marginWidth = '8px';
+  const cornerSize = '15%';
+
+  if (frameStyle === 'edge') {
+    clipPath = `polygon(evenodd, 0% 0%, 100% 0%, 100% 100%, 0% 100%, 0% 0%, ${borderWidth} ${borderWidth}, ${borderWidth} calc(100% - ${borderWidth}), calc(100% - ${borderWidth}) calc(100% - ${borderWidth}), calc(100% - ${borderWidth}) ${borderWidth}, ${borderWidth} ${borderWidth})`;
+  } else if (frameStyle === 'margin') {
+    const inner = `calc(${marginWidth} + ${borderWidth})`;
+    clipPath = `polygon(evenodd, 
+      ${marginWidth} ${marginWidth}, 
+      calc(100% - ${marginWidth}) ${marginWidth}, 
+      calc(100% - ${marginWidth}) calc(100% - ${marginWidth}), 
+      ${marginWidth} calc(100% - ${marginWidth}), 
+      ${marginWidth} ${marginWidth},
+      ${inner} ${inner}, 
+      ${inner} calc(100% - ${inner}), 
+      calc(100% - ${inner}) calc(100% - ${inner}), 
+      calc(100% - ${inner}) calc(100% - ${inner}), 
+      calc(100% - ${inner}) ${inner}, 
+      ${inner} ${inner}
+    )`;
+  } else if (frameStyle === 'corners') {
+    clipPath = `polygon(
+      0 0, ${cornerSize} 0, ${cornerSize} ${borderWidth}, ${borderWidth} ${borderWidth}, ${borderWidth} ${cornerSize}, 0 ${cornerSize}, /* TL */
+      calc(100% - ${cornerSize}) 0, 100% 0, 100% ${cornerSize}, calc(100% - ${borderWidth}) ${cornerSize}, calc(100% - ${borderWidth}) ${borderWidth}, calc(100% - ${cornerSize}) ${borderWidth}, /* TR */
+      0 calc(100% - ${cornerSize}), ${borderWidth} calc(100% - ${cornerSize}), ${borderWidth} calc(100% - ${borderWidth}), ${cornerSize} calc(100% - ${borderWidth}), ${cornerSize} 100%, 0 100%, /* BL */
+      calc(100% - ${cornerSize}) 100%, 100% 100%, 100% calc(100% - ${cornerSize}), calc(100% - ${borderWidth}) calc(100% - ${cornerSize}), calc(100% - ${borderWidth}) calc(100% - ${borderWidth}), calc(100% - ${cornerSize}) calc(100% - ${borderWidth}) /* BR */
+    )`;
+  }
+
+  return <div className="absolute inset-0" style={{ ...frameBgStyle, clipPath }} />;
+}
+
+
 export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewProps>(
   ({ text, text2, font, font2, color, mirrorColor, size, shape, background, frame, frameStyle, withStandoffs, standoffColor, withBacklight, backlightColor }, ref) => {
     const previewText = text || 'Tu Texto Aquí';
@@ -67,7 +108,6 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
     };
 
     const isMirrorFinish = mirrorFinishColors.some(c => c.name === color.name);
-    const isTransparentSign = mirrorColor.name === 'Plateado';
     const isSolidWhite = mirrorColor.name === 'Blanco Lechoso';
     const isSolidBlack = mirrorColor.name === 'Negro';
 
@@ -113,16 +153,6 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
     const hasFrame = frame.name !== "Sin Marco";
     const isDorado = hasFrame && frame.name === 'Dorado Brilloso';
     
-    const frameBackgroundStyle = (): React.CSSProperties => {
-        // For transparent signs, we will use a real border instead of a background to avoid filling the middle.
-        if (!hasFrame || isTransparentSign) return {};
-
-        if (isDorado) {
-            return { backgroundImage: `linear-gradient(170deg, #FFFFFF, ${frame.value}, #FFFFFF)` };
-        }
-        return { backgroundColor: frame.value };
-    };
-
     const Standoff = ({ className }: { className?: string }) => (
       <div className={cn("absolute w-4 h-4 rounded-full shadow-md border border-slate-400/50 z-20", standoffColor.twClass, className)} />
     );
@@ -149,36 +179,34 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
           )}
           style={{ 
             transform: `translate(${position.x}px, ${position.y}px)`,
-            filter: [
-                withBacklight ? `drop-shadow(0 0 20px ${backlightColor.value})` : null,
-                isDorado ? `drop-shadow(0 0 8px ${frame.value})` : null,
-            ].filter(Boolean).join(' ') || 'none',
           }}
           onMouseDown={handleDragStart}
           onTouchStart={handleDragStart}
         >
             <div
                 className={cn(
-                    "relative w-full h-full flex items-center justify-center overflow-hidden", // The "mold"
+                    "relative w-full h-full flex items-center justify-center overflow-hidden",
                     shapeClasses[shape],
                 )}
-                style={frameBackgroundStyle()}
+                style={{
+                  filter: [
+                    withBacklight ? `drop-shadow(0 0 20px ${backlightColor.value})` : null,
+                    isDorado ? `drop-shadow(0 0 8px ${frame.value})` : null,
+                  ].filter(Boolean).join(' ') || 'none',
+                }}
             >
+                {/* Acrylic Base */}
                 <div
                     className={cn(
-                        "absolute flex flex-col items-center justify-center gap-2 text-center px-8",
-                        shapeClasses[shape],
-                        !isSolidWhite && !isSolidBlack && !isTransparentSign && "backdrop-blur-sm",
+                        "absolute inset-0 flex flex-col items-center justify-center gap-2 text-center px-8",
+                        !isSolidWhite && !isSolidBlack && "backdrop-blur-sm",
                         mirrorColor.twClass
                     )}
                     style={{
-                        width: (hasFrame && !isTransparentSign) ? 'calc(100% - 6px)' : '100%',
-                        height: (hasFrame && !isTransparentSign) ? 'calc(100% - 6px)' : '100%',
                         boxShadow: [
                             !isSolidWhite && !isSolidBlack ? 'inset 0 0 60px rgba(255,255,255,0.1)' : null, 
                             '0 0 20px rgba(0,0,0,0.5)'
                         ].filter(Boolean).join(', '),
-                        border: (isTransparentSign && hasFrame) ? `3px solid ${frame.value}` : undefined,
                     }}
                 >
                     <div className="absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-white/10 to-transparent" />
@@ -198,6 +226,9 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
                         </p>
                     )}
                 </div>
+
+                {/* Frame Overlay */}
+                {hasFrame && <FrameOverlay frame={frame} frameStyle={frameStyle} isDorado={isDorado} shape={shape} />}
             </div>
           
           {withStandoffs && (
