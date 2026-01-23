@@ -55,44 +55,32 @@ const FrameOverlay = ({ frame, frameStyle, isDorado, shape }: { frame: FrameConf
     const gapStart = armLength;
     const gapEnd = `calc(100% - ${armLength})`;
 
-    // This defines a path with multiple holes to create the corner-only effect.
     clipPath = `polygon(evenodd,
-      /* Outer frame rectangle */
       ${marginWidth} ${marginWidth},
       calc(100% - ${marginWidth}) ${marginWidth},
       calc(100% - ${marginWidth}) calc(100% - ${marginWidth}),
       ${marginWidth} calc(100% - ${marginWidth}),
       ${marginWidth} ${marginWidth},
-
-      /* Inner rectangle (the big hole in the middle) */
       ${innerMargin} ${innerMargin},
       ${innerMargin} calc(100% - ${innerMargin}),
       calc(100% - ${innerMargin}) calc(100% - ${innerMargin}),
       calc(100% - ${innerMargin}) ${innerMargin},
       ${innerMargin} ${innerMargin},
-
-      /* Top gap (another hole) */
       ${gapStart} ${marginWidth},
       ${gapEnd} ${marginWidth},
       ${gapEnd} ${innerMargin},
       ${gapStart} ${innerMargin},
       ${gapStart} ${marginWidth},
-
-      /* Bottom gap (another hole) */
       ${gapStart} calc(100% - ${innerMargin}),
       ${gapEnd} calc(100% - ${innerMargin}),
       ${gapEnd} calc(100% - ${marginWidth}),
       ${gapStart} calc(100% - ${marginWidth}),
       ${gapStart} calc(100% - ${innerMargin}),
-
-      /* Left gap (another hole) */
       ${marginWidth} ${gapStart},
       ${innerMargin} ${gapStart},
       ${innerMargin} ${gapEnd},
       ${marginWidth} ${gapEnd},
       ${marginWidth} ${gapStart},
-
-      /* Right gap (another hole) */
       calc(100% - ${innerMargin}) ${gapStart},
       calc(100% - ${marginWidth}) ${gapStart},
       calc(100% - ${marginWidth}) ${gapEnd},
