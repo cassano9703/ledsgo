@@ -30,7 +30,7 @@ const FrameOverlay = ({ frame, frameStyle, isDorado, shape }: { frame: FrameConf
 
   // Handle circular frames
   if (shape === 'circle') {
-    const borderWidthPercent = 1.5;
+    const borderWidthPercent = 3;
     if (frameStyle === 'edge') {
       const innerRadius = 100 - borderWidthPercent;
       const mask = `radial-gradient(circle farthest-side, transparent ${innerRadius}%, black ${innerRadius}%)`;
@@ -165,6 +165,7 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
 
     const isMirrorFinish = mirrorFinishColors.some(c => c.name === color.name);
     const isTransparent = mirrorColor.name === 'Plateado';
+    const isWhiteAcrylic = mirrorColor.name === 'Blanco Lechoso';
 
     const getTextStyle = (baseFont: FontConfig, fontSize: string): React.CSSProperties => {
         const style: React.CSSProperties = {
@@ -173,7 +174,9 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
             ...baseFont.style,
         };
 
-        if (isMirrorFinish) {
+        const applyMirrorEffect = isMirrorFinish && !isWhiteAcrylic;
+
+        if (applyMirrorEffect) {
             style.backgroundImage = `linear-gradient(145deg, hsla(0,0%,100%,.9) 15%, ${color.value} 50%, hsla(0,0%,100%,.9) 85%)`;
             style.backgroundClip = 'text';
             style.WebkitBackgroundClip = 'text';
@@ -181,7 +184,11 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
             style.filter = `drop-shadow(0 0 5px ${color.value})`;
         } else {
             style.color = color.value;
-            style.textShadow = `0 0 8px ${color.value}`;
+            if (isMirrorFinish && isWhiteAcrylic) {
+                // No shadow for better legibility of mirror colors on white background
+            } else {
+                style.textShadow = `0 0 8px ${color.value}`;
+            }
         }
         return style;
     };
@@ -259,7 +266,7 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
                       boxShadow: !isTransparent ? 'inset 0 0 60px rgba(255,255,255,0.1), 0 0 20px rgba(0,0,0,0.5)' : '0 0 20px rgba(0,0,0,0.5)',
                     }}
                 >
-                    {!isTransparent && <div className="absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-white/10 to-transparent" />}
+                    {!isTransparent && !isWhiteAcrylic && <div className="absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-white/10 to-transparent" />}
 
                     <p
                         className='font-bold break-words transition-all duration-300 ease-in-out select-none'
