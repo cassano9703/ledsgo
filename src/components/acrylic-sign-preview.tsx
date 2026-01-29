@@ -43,14 +43,16 @@ const FrameOverlay = ({ frame, frameStyle, shape }: { frame: FrameConfig, frameS
     }
     if (frameStyle === 'corners') {
       const borderWidthPercent = 3;
-      const halfGapDeg = 20; // Creates a 40-degree gap on each side, centered on the horizontal axis
+      const halfGapDeg = 20; // This will create top and bottom arcs, with gaps on the left and right sides.
 
       const conicGradient = `conic-gradient(
-        ${frame.value} 0deg ${90 - halfGapDeg}deg,
-        transparent ${90 - halfGapDeg}deg ${90 + halfGapDeg}deg,
-        ${frame.value} ${90 + halfGapDeg}deg ${270 - halfGapDeg}deg,
-        transparent ${270 - halfGapDeg}deg ${270 + halfGapDeg}deg,
-        ${frame.value} ${270 + halfGapDeg}deg 360deg
+        ${frame.value} ${halfGapDeg}deg,
+        ${frame.value} ${180 - halfGapDeg}deg,
+        transparent ${180 - halfGapDeg}deg,
+        transparent ${180 + halfGapDeg}deg,
+        ${frame.value} ${180 + halfGapDeg}deg,
+        ${frame.value} ${360 - halfGapDeg}deg,
+        transparent ${360 - halfGapDeg}deg
       )`;
 
       const style: React.CSSProperties = {
