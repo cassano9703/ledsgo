@@ -327,7 +327,7 @@ export function AcrylicSignConfigurator() {
                       <SelectContent>
                           <SelectItem value="edge">Al Borde</SelectItem>
                           <SelectItem value="margin">Con Margen</SelectItem>
-                          <SelectItem value="corners">Esquinas</SelectItem>
+                          {shape !== 'circle' && <SelectItem value="corners">Esquinas</SelectItem>}
                           {shape === 'circle' && <SelectItem value="arches">Arcos</SelectItem>}
                       </SelectContent>
                   </Select>
