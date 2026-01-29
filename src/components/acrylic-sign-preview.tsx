@@ -48,11 +48,11 @@ const FrameOverlay = ({ frame, frameStyle, shape }: { frame: FrameConfig, frameS
 
       const color = frame.value;
       const conicGradient = `conic-gradient(
-        transparent 0deg 30deg,
-        ${color} 30deg 150deg,
-        transparent 150deg 210deg,
-        ${color} 210deg 330deg,
-        transparent 330deg 360deg
+        ${color} 0deg 60deg,
+        transparent 60deg 120deg,
+        ${color} 120deg 240deg,
+        transparent 240deg 300deg,
+        ${color} 300deg 360deg
       )`;
 
       const mask = `radial-gradient(circle farthest-side, transparent ${innerRadius}%, black ${innerRadius}%, black ${outerRadius}%, transparent ${outerRadius}%)`;
@@ -193,19 +193,9 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
         const style: React.CSSProperties = {
             fontFamily: baseFont.style.fontFamily,
             fontSize: fontSize,
+            color: color.value,
             ...baseFont.style,
         };
-
-        const applyMirrorEffect = isMirrorFinish && !isWhiteAcrylic;
-
-        if (applyMirrorEffect) {
-            style.backgroundImage = `linear-gradient(145deg, hsla(0,0%,100%,.9) 15%, ${color.value} 50%, hsla(0,0%,100%,.9) 85%)`;
-            style.backgroundClip = 'text';
-            style.WebkitBackgroundClip = 'text';
-            style.color = 'transparent';
-        } else {
-            style.color = color.value;
-        }
         return style;
     };
     
@@ -229,9 +219,7 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
     }
 
     const hasFrame = frame.name !== "Sin Marco";
-    
-    const needsSharpFrameCorners = hasFrame && (shape === 'square' || shape === 'rectangle') && (frameStyle === 'edge' || frameStyle === 'margin');
-    
+        
     const Standoff = ({ className }: { className?: string }) => (
       <div className={cn("absolute w-4 h-4 rounded-full shadow-md border border-slate-400/50 z-20", standoffColor.twClass, className)} />
     );
@@ -266,7 +254,7 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
             <div
                 className={cn(
                     "relative w-full h-full flex items-center justify-center overflow-hidden",
-                    shape === 'circle' ? 'rounded-full' : '',
+                    shape === 'circle' ? 'rounded-full' : 'rounded-2xl',
                 )}
             >
                 {/* Acrylic Base */}
@@ -275,7 +263,6 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
                         "absolute inset-0 flex flex-col items-center justify-center gap-2 text-center px-8",
                          mirrorColor.twClass,
                          isTransparent && "bg-white/5 backdrop-blur-sm border border-white/10",
-                         shape === 'circle' ? 'rounded-full' : 'rounded-2xl',
                     )}
                     style={{
                       boxShadow: !isTransparent ? 'inset 0 0 60px rgba(255,255,255,0.1), 0 0 20px rgba(0,0,0,0.5)' : '0 0 20px rgba(0,0,0,0.5)',
