@@ -43,14 +43,14 @@ const FrameOverlay = ({ frame, frameStyle, shape }: { frame: FrameConfig, frameS
     }
     if (frameStyle === 'corners') {
       const borderWidthPercent = 3;
-      const halfGapDeg = 20; // Creates a 40-degree gap on each side
+      const halfGapDeg = 20; // Creates a 40-degree gap on each side, centered on the horizontal axis
 
       const conicGradient = `conic-gradient(
-        transparent 0deg ${halfGapDeg}deg,
-        ${frame.value} ${halfGapDeg}deg ${180 - halfGapDeg}deg,
-        transparent ${180 - halfGapDeg}deg ${180 + halfGapDeg}deg,
-        ${frame.value} ${180 + halfGapDeg}deg ${360 - halfGapDeg}deg,
-        transparent ${360 - halfGapDeg}deg 360deg
+        ${frame.value} 0deg ${90 - halfGapDeg}deg,
+        transparent ${90 - halfGapDeg}deg ${90 + halfGapDeg}deg,
+        ${frame.value} ${90 + halfGapDeg}deg ${270 - halfGapDeg}deg,
+        transparent ${270 - halfGapDeg}deg ${270 + halfGapDeg}deg,
+        ${frame.value} ${270 + halfGapDeg}deg 360deg
       )`;
 
       const style: React.CSSProperties = {
@@ -199,14 +199,8 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
             style.backgroundClip = 'text';
             style.WebkitBackgroundClip = 'text';
             style.color = 'transparent';
-            style.filter = `drop-shadow(0 0 5px ${color.value})`;
         } else {
             style.color = color.value;
-            if (isMirrorFinish && isWhiteAcrylic) {
-                // No shadow for better legibility of mirror colors on white background
-            } else {
-                style.textShadow = `0 0 8px ${color.value}`;
-            }
         }
         return style;
     };
@@ -268,7 +262,7 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
             <div
                 className={cn(
                     "relative w-full h-full flex items-center justify-center overflow-hidden",
-                    shape === 'circle' && 'rounded-full',
+                    !needsSharpFrameCorners && shapeClasses[shape],
                 )}
             >
                 {/* Acrylic Base */}
