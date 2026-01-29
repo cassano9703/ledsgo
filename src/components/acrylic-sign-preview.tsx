@@ -30,8 +30,7 @@ const FrameOverlay = ({ frame, frameStyle, shape }: { frame: FrameConfig, frameS
   if (shape === 'circle') {
     const borderWidthPercent = 3;
     if (frameStyle === 'edge') {
-      const innerRadius = 100 - borderWidthPercent;
-      const mask = `radial-gradient(circle farthest-side, transparent ${innerRadius}%, black ${innerRadius}%)`;
+      const mask = `radial-gradient(circle farthest-side, transparent ${100 - borderWidthPercent}%, black ${100 - borderWidthPercent}%)`;
       return <div className="absolute inset-0" style={{ ...frameBgStyle, WebkitMask: mask, mask: mask }} />;
     }
     if (frameStyle === 'margin') {
@@ -211,7 +210,6 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
     }
 
     const hasFrame = frame.name !== "Sin Marco";
-    const isDorado = hasFrame && frame.name === 'Dorado Brilloso';
     
     const Standoff = ({ className }: { className?: string }) => (
       <div className={cn("absolute w-4 h-4 rounded-full shadow-md border border-slate-400/50 z-20", standoffColor.twClass, className)} />
@@ -239,10 +237,7 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
           )}
           style={{ 
             transform: `translate(${position.x}px, ${position.y}px)`,
-            filter: [
-              withBacklight ? `drop-shadow(0 0 20px ${backlightColor.value})` : null,
-              isDorado ? `drop-shadow(0 0 8px ${frame.value})` : null,
-            ].filter(Boolean).join(' ') || 'none',
+            filter: withBacklight ? `drop-shadow(0 0 20px ${backlightColor.value})` : 'none',
           }}
           onMouseDown={handleDragStart}
           onTouchStart={handleDragStart}

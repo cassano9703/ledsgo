@@ -46,9 +46,9 @@ export const vinylColors: ColorConfig[] = [
 
 // Colores con acabado espejo para el grabado
 export const mirrorFinishColors: ColorConfig[] = [
-  { name: "Dorado Brilloso", value: "#D4AF37", twClass: "bg-yellow-600" },
-  { name: "Rosado Brilloso", value: "#B76E79", twClass: "bg-rose-400" },
-  { name: "Plateado Brilloso", value: "#C0C0C0", twClass: "bg-slate-400" },
+  { name: "Dorado", value: "#D4AF37", twClass: "bg-yellow-600" },
+  { name: "Rosado", value: "#B76E79", twClass: "bg-rose-400" },
+  { name: "Plateado", value: "#C0C0C0", twClass: "bg-slate-400" },
 ];
 
 // Colores del material acrílico espejo
@@ -66,7 +66,7 @@ export const lightColors: ColorConfig[] = [
 
 export const standoffColors: ColorConfig[] = [
     { name: "Plateado", value: "#C0C0C0", twClass: "bg-slate-400" },
-    { name: "Dorado Brilloso", value: "#D4AF37", twClass: "bg-yellow-600" },
+    { name: "Dorado", value: "#D4AF37", twClass: "bg-yellow-600" },
 ];
 
 export type FrameConfig = {
@@ -77,7 +77,7 @@ export type FrameConfig = {
 
 export const frameOptions: FrameConfig[] = [
     { name: "Sin Marco", value: "", twClass: "" },
-    { name: "Dorado Brilloso", value: "#D4AF37", twClass: "border-yellow-600" },
+    { name: "Dorado", value: "#D4AF37", twClass: "border-yellow-600" },
     { name: "Plateado", value: "#C0C0C0", twClass: "border-slate-300" },
     { name: "Negro", value: "#000000", twClass: "border-black" },
 ];
