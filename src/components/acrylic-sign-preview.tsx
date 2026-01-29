@@ -48,11 +48,11 @@ const FrameOverlay = ({ frame, frameStyle, shape }: { frame: FrameConfig, frameS
 
       const color = frame.value;
       const conicGradient = `conic-gradient(
-        ${color} 0deg 60deg,
-        transparent 60deg 120deg,
-        ${color} 120deg 240deg,
-        transparent 240deg 300deg,
-        ${color} 300deg 360deg
+        transparent 0deg 30deg,
+        ${color} 30deg 150deg,
+        transparent 150deg 210deg,
+        ${color} 210deg 330deg,
+        transparent 330deg 360deg
       )`;
 
       const mask = `radial-gradient(circle farthest-side, transparent ${innerRadius}%, black ${innerRadius}%, black ${outerRadius}%, transparent ${outerRadius}%)`;
@@ -314,3 +314,5 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
 );
 
 AcrylicSignPreview.displayName = "AcrylicSignPreview";
+
+    
