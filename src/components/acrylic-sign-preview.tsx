@@ -1,3 +1,4 @@
+
 'use client';
 
 import React, { forwardRef, useState, useRef, MouseEvent, TouchEvent } from 'react';
@@ -40,10 +41,30 @@ const FrameOverlay = ({ frame, frameStyle, shape }: { frame: FrameConfig, frameS
       const mask = `radial-gradient(circle farthest-side, transparent ${innerRadius}%, black ${innerRadius}%, black ${outerRadius}%, transparent ${outerRadius}%)`;
       return <div className="absolute inset-0" style={{ ...frameBgStyle, WebkitMask: mask, mask: mask }} />;
     }
+    if (frameStyle === 'corners') {
+      const borderWidthPercent = 3;
+      const halfGapDeg = 20; // Creates a 40-degree gap on each side
+
+      const conicGradient = `conic-gradient(
+        transparent 0deg ${halfGapDeg}deg,
+        ${frame.value} ${halfGapDeg}deg ${180 - halfGapDeg}deg,
+        transparent ${180 - halfGapDeg}deg ${180 + halfGapDeg}deg,
+        ${frame.value} ${180 + halfGapDeg}deg ${360 - halfGapDeg}deg,
+        transparent ${360 - halfGapDeg}deg 360deg
+      )`;
+
+      const style: React.CSSProperties = {
+        background: conicGradient,
+        mask: `radial-gradient(circle, transparent ${100 - borderWidthPercent}%, white 100%)`,
+        WebkitMask: `radial-gradient(circle, transparent ${100 - borderWidthPercent}%, white 100%)`,
+      };
+
+      return <div className="absolute inset-0" style={style} />;
+    }
   }
 
 
-  // Handle 'corners' style for all shapes (circle will be clipped by parent)
+  // Handle 'corners' style for rectangular shapes
   if (frameStyle === 'corners') {
     const margin = '8px';
     const armLength = '30%';
@@ -247,7 +268,7 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
             <div
                 className={cn(
                     "relative w-full h-full flex items-center justify-center overflow-hidden",
-                    !needsSharpFrameCorners && shapeClasses[shape],
+                    shape === 'circle' && 'rounded-full',
                 )}
             >
                 {/* Acrylic Base */}
@@ -255,7 +276,8 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
                     className={cn(
                         "absolute inset-0 flex flex-col items-center justify-center gap-2 text-center px-8",
                          mirrorColor.twClass,
-                         isTransparent && "bg-white/5 backdrop-blur-sm border border-white/10"
+                         isTransparent && "bg-white/5 backdrop-blur-sm border border-white/10",
+                         !needsSharpFrameCorners && shapeClasses[shape],
                     )}
                     style={{
                       boxShadow: !isTransparent ? 'inset 0 0 60px rgba(255,255,255,0.1), 0 0 20px rgba(0,0,0,0.5)' : '0 0 20px rgba(0,0,0,0.5)',
