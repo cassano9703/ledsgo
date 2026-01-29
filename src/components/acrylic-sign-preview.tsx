@@ -211,6 +211,8 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
 
     const hasFrame = frame.name !== "Sin Marco";
     
+    const needsSharpFrameCorners = hasFrame && (shape === 'square' || shape === 'rectangle') && (frameStyle === 'edge' || frameStyle === 'margin');
+    
     const Standoff = ({ className }: { className?: string }) => (
       <div className={cn("absolute w-4 h-4 rounded-full shadow-md border border-slate-400/50 z-20", standoffColor.twClass, className)} />
     );
@@ -245,7 +247,7 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
             <div
                 className={cn(
                     "relative w-full h-full flex items-center justify-center overflow-hidden",
-                    shapeClasses[shape],
+                    !needsSharpFrameCorners && shapeClasses[shape],
                 )}
             >
                 {/* Acrylic Base */}
@@ -253,7 +255,8 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
                     className={cn(
                         "absolute inset-0 flex flex-col items-center justify-center gap-2 text-center px-8",
                          mirrorColor.twClass,
-                         isTransparent && "bg-white/5 backdrop-blur-sm border border-white/10"
+                         isTransparent && "bg-white/5 backdrop-blur-sm border border-white/10",
+                         needsSharpFrameCorners && shapeClasses[shape]
                     )}
                     style={{
                       boxShadow: !isTransparent ? 'inset 0 0 60px rgba(255,255,255,0.1), 0 0 20px rgba(0,0,0,0.5)' : '0 0 20px rgba(0,0,0,0.5)',
