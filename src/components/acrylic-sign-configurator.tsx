@@ -47,12 +47,6 @@ export function AcrylicSignConfigurator() {
   const previewRef = useRef<HTMLDivElement>(null);
   const { toast } = useToast();
 
-  useEffect(() => {
-    if (shape !== 'circle' && frameStyle === 'arches') {
-      setFrameStyle('corners');
-    }
-  }, [shape, frameStyle]);
-
   const handleFontChange = (fontName: string) => {
     const newFont = fonts.find((f) => f.name === fontName);
     if (newFont) setFont(newFont);
@@ -89,6 +83,11 @@ export function AcrylicSignConfigurator() {
 
   const handleShapeChange = (newShape: Shape) => {
     setShape(newShape);
+    if (newShape === 'circle' && frameStyle === 'corners') {
+      setFrameStyle('edge');
+    } else if (newShape !== 'circle' && frameStyle === 'arches') {
+      setFrameStyle('corners');
+    }
   };
 
   const currentConfig = { text, text2, font, font2, color: engravingColor.name, size, capturedImage, mirrorColor: mirrorColor.name, frame: frame.name, frameStyle, withStandoffs, standoffColor: standoffColor.name, withBacklight, backlightColor: backlightColor.name };
