@@ -48,11 +48,11 @@ const FrameOverlay = ({ frame, frameStyle, shape }: { frame: FrameConfig, frameS
 
       const color = frame.value;
       const conicGradient = `conic-gradient(
-        transparent 0deg 45deg,
-        ${color} 45deg 135deg,
-        transparent 135deg 225deg,
-        ${color} 225deg 315deg,
-        transparent 315deg 360deg
+        ${color} 0deg 45deg,
+        transparent 45deg 135deg,
+        ${color} 135deg 225deg,
+        transparent 225deg 315deg,
+        ${color} 315deg 360deg
       )`;
 
       const mask = `radial-gradient(circle farthest-side, transparent ${innerRadius}%, black ${innerRadius}%, black ${outerRadius}%, transparent ${outerRadius}%)`;
@@ -64,6 +64,19 @@ const FrameOverlay = ({ frame, frameStyle, shape }: { frame: FrameConfig, frameS
       };
 
       return <div className="absolute inset-0" style={style} />;
+    }
+    // Handle 'corners' for circle
+    if (frameStyle === 'corners') {
+        const color = frame.value;
+        const conicGradient = `conic-gradient(
+            ${color} 0deg 45deg,
+            transparent 45deg 135deg,
+            ${color} 135deg 225deg,
+            transparent 225deg 315deg,
+            ${color} 315deg 360deg
+        )`;
+
+        return <div className="absolute inset-0" style={{ background: conicGradient }} />;
     }
   }
 
