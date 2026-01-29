@@ -31,7 +31,7 @@ const FrameOverlay = ({ frame, frameStyle, shape }: { frame: FrameConfig, frameS
   if (shape === 'circle') {
     const borderWidthPercent = 3;
     if (frameStyle === 'edge') {
-      const mask = `radial-gradient(circle farthest-side, transparent ${100 - borderWidthPercent}%, black ${100 - borderWidthPercent}%)`;
+      const mask = `radial-gradient(circle farthest-side, transparent ${100 - borderWidthPercent}%, black 100%)`;
       return <div className="absolute inset-0" style={{ ...frameBgStyle, WebkitMask: mask, mask: mask }} />;
     }
     if (frameStyle === 'margin') {
@@ -42,6 +42,10 @@ const FrameOverlay = ({ frame, frameStyle, shape }: { frame: FrameConfig, frameS
       return <div className="absolute inset-0" style={{ ...frameBgStyle, WebkitMask: mask, mask: mask }} />;
     }
     if (frameStyle === 'arches') {
+      const marginPercent = 4;
+      const outerRadius = 100 - marginPercent;
+      const innerRadius = 100 - marginPercent - borderWidthPercent;
+
       const color = frame.value;
       const conicGradient = `conic-gradient(
         transparent 0deg 45deg,
@@ -51,10 +55,12 @@ const FrameOverlay = ({ frame, frameStyle, shape }: { frame: FrameConfig, frameS
         transparent 315deg 360deg
       )`;
 
+      const mask = `radial-gradient(circle farthest-side, transparent ${innerRadius}%, black ${innerRadius}%, black ${outerRadius}%, transparent ${outerRadius}%)`;
+
       const style: React.CSSProperties = {
         background: conicGradient,
-        mask: `radial-gradient(circle farthest-side, transparent ${100 - borderWidthPercent}%, white 100%)`,
-        WebkitMask: `radial-gradient(circle farthest-side, transparent ${100 - borderWidthPercent}%, white 100%)`,
+        mask: mask,
+        WebkitMask: mask,
       };
 
       return <div className="absolute inset-0" style={style} />;
@@ -212,8 +218,8 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
 
     const shapeClasses = {
       circle: 'rounded-full',
-      square: 'rounded-2xl',
-      rectangle: 'rounded-2xl',
+      square: '',
+      rectangle: '',
     };
 
     const aspectRatios = {
@@ -260,7 +266,7 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
             <div
                 className={cn(
                     "relative w-full h-full flex items-center justify-center overflow-hidden",
-                    !needsSharpFrameCorners && shapeClasses[shape],
+                    shape === 'circle' ? 'rounded-full' : '',
                 )}
             >
                 {/* Acrylic Base */}
@@ -269,7 +275,7 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
                         "absolute inset-0 flex flex-col items-center justify-center gap-2 text-center px-8",
                          mirrorColor.twClass,
                          isTransparent && "bg-white/5 backdrop-blur-sm border border-white/10",
-                         !needsSharpFrameCorners && shapeClasses[shape],
+                         shape === 'circle' ? 'rounded-full' : 'rounded-2xl',
                     )}
                     style={{
                       boxShadow: !isTransparent ? 'inset 0 0 60px rgba(255,255,255,0.1), 0 0 20px rgba(0,0,0,0.5)' : '0 0 20px rgba(0,0,0,0.5)',
