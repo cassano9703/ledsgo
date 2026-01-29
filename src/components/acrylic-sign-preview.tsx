@@ -252,7 +252,8 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
                 <div
                     className={cn(
                         "absolute inset-0 flex flex-col items-center justify-center gap-2 text-center px-8",
-                         mirrorColor.twClass
+                         mirrorColor.twClass,
+                         isTransparent && "bg-white/5 backdrop-blur-sm border border-white/10"
                     )}
                     style={{
                       boxShadow: !isTransparent ? 'inset 0 0 60px rgba(255,255,255,0.1), 0 0 20px rgba(0,0,0,0.5)' : '0 0 20px rgba(0,0,0,0.5)',
