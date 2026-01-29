@@ -16,7 +16,7 @@ interface AcrylicSignPreviewProps {
   shape: 'circle' | 'square' | 'rectangle';
   background: BackgroundConfig;
   frame: FrameConfig;
-  frameStyle: 'edge' | 'margin' | 'corners';
+  frameStyle: 'edge' | 'margin' | 'corners' | 'arches';
   withStandoffs: boolean;
   standoffColor: ColorConfig;
   withBacklight: boolean;
@@ -41,18 +41,15 @@ const FrameOverlay = ({ frame, frameStyle, shape }: { frame: FrameConfig, frameS
       const mask = `radial-gradient(circle farthest-side, transparent ${innerRadius}%, black ${innerRadius}%, black ${outerRadius}%, transparent ${outerRadius}%)`;
       return <div className="absolute inset-0" style={{ ...frameBgStyle, WebkitMask: mask, mask: mask }} />;
     }
-    if (frameStyle === 'corners') {
-      const borderWidthPercent = 3;
-      const halfGapDeg = 20; // This will create top and bottom arcs, with gaps on the left and right sides.
-
+    if (frameStyle === 'arches') {
+      const halfGapDeg = 30;
+      const color = frame.value;
       const conicGradient = `conic-gradient(
-        ${frame.value} ${halfGapDeg}deg,
-        ${frame.value} ${180 - halfGapDeg}deg,
-        transparent ${180 - halfGapDeg}deg,
-        transparent ${180 + halfGapDeg}deg,
-        ${frame.value} ${180 + halfGapDeg}deg,
-        ${frame.value} ${360 - halfGapDeg}deg,
-        transparent ${360 - halfGapDeg}deg
+          transparent 0deg 30deg,
+          ${color} 30deg 150deg,
+          transparent 150deg 210deg,
+          ${color} 210deg 330deg,
+          transparent 330deg 360deg
       )`;
 
       const style: React.CSSProperties = {

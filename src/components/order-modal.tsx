@@ -44,7 +44,7 @@ interface OrderModalProps {
     capturedImage: string | null;
     mirrorColor?: string;
     frame?: string;
-    frameStyle?: 'edge' | 'margin' | 'corners';
+    frameStyle?: 'edge' | 'margin' | 'corners' | 'arches';
     withStandoffs?: boolean;
     standoffColor?: string;
     withBacklight?: boolean;
@@ -70,6 +70,7 @@ export function OrderModal({ isOpen, onClose, config }: OrderModalProps) {
       edge: 'Al Borde',
       margin: 'Con Margen',
       corners: 'Esquinas',
+      arches: 'Arcos',
     };
     const frameStyleText = config.frameStyle ? frameStyleMap[config.frameStyle] : null;
 

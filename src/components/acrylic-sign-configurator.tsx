@@ -1,7 +1,7 @@
 
 "use client";
 
-import { useState, useRef, useCallback } from "react";
+import { useState, useRef, useCallback, useEffect } from "react";
 import { fonts, vinylColors, mirrorFinishColors, sizes, backgrounds, frameOptions, mirrorColors, lightColors, standoffColors } from "@/lib/config";
 import type { FontConfig, ColorConfig, SizeConfig, BackgroundConfig, FrameConfig } from "@/lib/config";
 import { Button } from "@/components/ui/button";
@@ -21,7 +21,7 @@ import Image from "next/image";
 import { Switch } from "@/components/ui/switch";
 
 type Shape = "circle" | "square" | "rectangle";
-type FrameStyle = "edge" | "margin" | "corners";
+type FrameStyle = "edge" | "margin" | "corners" | "arches";
 
 export function AcrylicSignConfigurator() {
   const [text, setText] = useState("Dra. Sophia");
@@ -46,6 +46,12 @@ export function AcrylicSignConfigurator() {
   
   const previewRef = useRef<HTMLDivElement>(null);
   const { toast } = useToast();
+
+  useEffect(() => {
+    if (shape !== 'circle' && frameStyle === 'arches') {
+      setFrameStyle('corners');
+    }
+  }, [shape, frameStyle]);
 
   const handleFontChange = (fontName: string) => {
     const newFont = fonts.find((f) => f.name === fontName);
@@ -322,6 +328,7 @@ export function AcrylicSignConfigurator() {
                           <SelectItem value="edge">Al Borde</SelectItem>
                           <SelectItem value="margin">Con Margen</SelectItem>
                           <SelectItem value="corners">Esquinas</SelectItem>
+                          {shape === 'circle' && <SelectItem value="arches">Arcos</SelectItem>}
                       </SelectContent>
                   </Select>
                 </div>
