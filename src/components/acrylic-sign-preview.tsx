@@ -29,7 +29,7 @@ const FrameOverlay = ({ frame, frameStyle, shape }: { frame: FrameConfig, frameS
 
   // Handle circular frames
   if (shape === 'circle') {
-    const borderWidthPercent = 3;
+    const borderWidthPercent = 5;
     if (frameStyle === 'edge') {
       const mask = `radial-gradient(circle farthest-side, transparent ${100 - borderWidthPercent}%, black 100%)`;
       return <div className="absolute inset-0" style={{ ...frameBgStyle, WebkitMask: mask, mask: mask }} />;
@@ -65,19 +65,6 @@ const FrameOverlay = ({ frame, frameStyle, shape }: { frame: FrameConfig, frameS
 
       return <div className="absolute inset-0" style={style} />;
     }
-    // Handle 'corners' for circle
-    if (frameStyle === 'corners') {
-        const color = frame.value;
-        const conicGradient = `conic-gradient(
-            ${color} 0deg 45deg,
-            transparent 45deg 135deg,
-            ${color} 135deg 225deg,
-            transparent 225deg 315deg,
-            ${color} 315deg 360deg
-        )`;
-
-        return <div className="absolute inset-0" style={{ background: conicGradient }} />;
-    }
   }
 
 
@@ -85,7 +72,7 @@ const FrameOverlay = ({ frame, frameStyle, shape }: { frame: FrameConfig, frameS
   if (frameStyle === 'corners') {
     const margin = '8px';
     const armLength = '30%';
-    const armWidth = '3%'; 
+    const armWidth = '5%'; 
 
     const Corner = ({ position }: { position: 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right' }) => {
       let style: React.CSSProperties = {
@@ -128,7 +115,7 @@ const FrameOverlay = ({ frame, frameStyle, shape }: { frame: FrameConfig, frameS
 
   // Handle rectangular ('square', 'rectangle') frames for 'edge' and 'margin'
   let clipPath = '';
-  const borderWidth = '3px';
+  const borderWidth = '5px';
   const marginWidth = '8px';
 
   if (frameStyle === 'edge') {
