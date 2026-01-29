@@ -23,10 +23,8 @@ interface AcrylicSignPreviewProps {
 }
 
 
-const FrameOverlay = ({ frame, frameStyle, isDorado, shape }: { frame: FrameConfig, frameStyle: string, isDorado: boolean, shape: string }) => {
-  const frameBgStyle: React.CSSProperties = isDorado
-    ? { backgroundImage: `linear-gradient(170deg, #FFFFFF, ${frame.value}, #FFFFFF)` }
-    : { backgroundColor: frame.value };
+const FrameOverlay = ({ frame, frameStyle, shape }: { frame: FrameConfig, frameStyle: string, shape: string }) => {
+  const frameBgStyle: React.CSSProperties = { backgroundColor: frame.value };
 
   // Handle circular frames
   if (shape === 'circle') {
@@ -285,7 +283,7 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
                 </div>
 
                 {/* Frame Overlay */}
-                {hasFrame && <FrameOverlay frame={frame} frameStyle={frameStyle} isDorado={isDorado} shape={shape} />}
+                {hasFrame && <FrameOverlay frame={frame} frameStyle={frameStyle} shape={shape} />}
             </div>
           
           {withStandoffs && (
