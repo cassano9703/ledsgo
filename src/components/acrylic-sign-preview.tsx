@@ -42,20 +42,19 @@ const FrameOverlay = ({ frame, frameStyle, shape }: { frame: FrameConfig, frameS
       return <div className="absolute inset-0" style={{ ...frameBgStyle, WebkitMask: mask, mask: mask }} />;
     }
     if (frameStyle === 'arches') {
-      const halfGapDeg = 30;
       const color = frame.value;
       const conicGradient = `conic-gradient(
-          transparent 0deg 30deg,
-          ${color} 30deg 150deg,
-          transparent 150deg 210deg,
-          ${color} 210deg 330deg,
-          transparent 330deg 360deg
+        transparent 0deg 45deg,
+        ${color} 45deg 135deg,
+        transparent 135deg 225deg,
+        ${color} 225deg 315deg,
+        transparent 315deg 360deg
       )`;
 
       const style: React.CSSProperties = {
         background: conicGradient,
-        mask: `radial-gradient(circle, transparent ${100 - borderWidthPercent}%, white 100%)`,
-        WebkitMask: `radial-gradient(circle, transparent ${100 - borderWidthPercent}%, white 100%)`,
+        mask: `radial-gradient(circle farthest-side, transparent ${100 - borderWidthPercent}%, white 100%)`,
+        WebkitMask: `radial-gradient(circle farthest-side, transparent ${100 - borderWidthPercent}%, white 100%)`,
       };
 
       return <div className="absolute inset-0" style={style} />;
