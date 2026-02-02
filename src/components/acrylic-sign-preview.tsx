@@ -48,11 +48,11 @@ const FrameOverlay = ({ frame, frameStyle, shape }: { frame: FrameConfig, frameS
 
       const color = frame.value;
       const conicGradient = `conic-gradient(
-        transparent 0deg 45deg,
-        ${color} 45deg 135deg,
-        transparent 135deg 225deg,
-        ${color} 225deg 315deg,
-        transparent 315deg 360deg
+        transparent 0deg 30deg,
+        ${color} 30deg 150deg,
+        transparent 150deg 210deg,
+        ${color} 210deg 330deg,
+        transparent 330deg 360deg
       )`;
 
       const mask = `radial-gradient(circle farthest-side, transparent ${innerRadius}%, black ${innerRadius}%, black ${outerRadius}%, transparent ${outerRadius}%)`;
@@ -260,7 +260,7 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
                 {/* Acrylic Base */}
                 <div
                     className={cn(
-                        "absolute inset-0 flex flex-col items-center justify-center gap-2 text-center px-8",
+                        "absolute inset-0 flex flex-col items-center justify-center gap-2 text-center px-8 overflow-hidden",
                          shape === 'circle' ? 'rounded-full' : 'rounded-2xl',
                          mirrorColor.twClass,
                          isTransparent && "bg-white/5 backdrop-blur-sm border border-white/10"
@@ -315,6 +315,8 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
 );
 
 AcrylicSignPreview.displayName = "AcrylicSignPreview";
+
+    
 
     
 
