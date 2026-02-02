@@ -48,11 +48,11 @@ const FrameOverlay = ({ frame, frameStyle, shape }: { frame: FrameConfig, frameS
 
       const color = frame.value;
       const conicGradient = `conic-gradient(
-        transparent 0deg 30deg,
-        ${color} 30deg 150deg,
-        transparent 150deg 210deg,
-        ${color} 210deg 330deg,
-        transparent 330deg 360deg
+        ${color} 0deg 30deg,
+        transparent 30deg 150deg,
+        ${color} 150deg 210deg,
+        transparent 210deg 330deg,
+        ${color} 330deg 360deg
       )`;
 
       const mask = `radial-gradient(circle farthest-side, transparent ${innerRadius}%, black ${innerRadius}%, black ${outerRadius}%, transparent ${outerRadius}%)`;
@@ -67,6 +67,32 @@ const FrameOverlay = ({ frame, frameStyle, shape }: { frame: FrameConfig, frameS
     }
   }
 
+  const borderWidth = '5px';
+
+  // Handle rectangular 'edge' style
+  if (frameStyle === 'edge' && shape !== 'circle') {
+    return <div className="absolute inset-0 rounded-2xl" style={{ boxShadow: `inset 0 0 0 ${borderWidth} ${frame.value}` }} />;
+  }
+
+  // Handle rectangular 'margin' style
+  if (frameStyle === 'margin' && shape !== 'circle') {
+    const marginWidth = '8px';
+    return (
+      <div
+        className="absolute inset-0 rounded-2xl"
+        style={{
+          padding: marginWidth,
+        }}
+      >
+        <div
+          className="h-full w-full rounded-lg"
+          style={{
+            boxShadow: `inset 0 0 0 ${borderWidth} ${frame.value}`,
+          }}
+        />
+      </div>
+    );
+  }
 
   // Handle 'corners' style for rectangular shapes
   if (frameStyle === 'corners') {
@@ -113,31 +139,7 @@ const FrameOverlay = ({ frame, frameStyle, shape }: { frame: FrameConfig, frameS
     );
   }
 
-  // Handle rectangular ('square', 'rectangle') frames for 'edge' and 'margin'
-  let clipPath = '';
-  const borderWidth = '5px';
-  const marginWidth = '8px';
-
-  if (frameStyle === 'edge') {
-    clipPath = `polygon(evenodd, 0% 0%, 100% 0%, 100% 100%, 0% 100%, 0% 0%, ${borderWidth} ${borderWidth}, ${borderWidth} calc(100% - ${borderWidth}), calc(100% - ${borderWidth}) calc(100% - ${borderWidth}), calc(100% - ${borderWidth}) ${borderWidth}, ${borderWidth} ${borderWidth})`;
-  } else if (frameStyle === 'margin') {
-    const inner = `calc(${marginWidth} + ${borderWidth})`;
-    clipPath = `polygon(evenodd, 
-      ${marginWidth} ${marginWidth}, 
-      calc(100% - ${marginWidth}) ${marginWidth}, 
-      calc(100% - ${marginWidth}) calc(100% - ${marginWidth}), 
-      ${marginWidth} calc(100% - ${marginWidth}), 
-      ${marginWidth} ${marginWidth},
-      ${inner} ${inner}, 
-      ${inner} calc(100% - ${inner}), 
-      calc(100% - ${inner}) calc(100% - ${inner}), 
-      calc(100% - ${inner}) calc(100% - ${inner}), 
-      calc(100% - ${inner}) ${inner}, 
-      ${inner} ${inner}
-    )`;
-  }
-  
-  return <div className="absolute inset-0" style={{ ...frameBgStyle, clipPath }} />;
+  return null;
 }
 
 
