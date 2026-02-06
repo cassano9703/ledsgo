@@ -31,7 +31,7 @@ const FrameOverlay = ({ frame, frameStyle, shape }: { frame: FrameConfig, frameS
   // Handle circular frames
   if (shape === 'circle') {
     if (frameStyle === 'edge') {
-      const mask = `radial-gradient(circle farthest-side, transparent ${100 - borderWidthPercent}%, black ${100 - borderWidthPercent + 0.1}%)`;
+      const mask = `radial-gradient(circle farthest-side, transparent ${100 - borderWidthPercent}%, black ${100 - borderWidthPercent}%)`;
       return <div className="absolute inset-0" style={{ ...frameBgStyle, WebkitMask: mask, mask: mask }} />;
     }
     if (frameStyle === 'margin') {
@@ -48,7 +48,7 @@ const FrameOverlay = ({ frame, frameStyle, shape }: { frame: FrameConfig, frameS
 
       const color = frame.value;
       const conicGradient = `conic-gradient(
-        from 0deg,
+        from 90deg,
         transparent 0deg 30deg,
         ${color} 30deg 150deg,
         transparent 150deg 210deg,
@@ -67,7 +67,7 @@ const FrameOverlay = ({ frame, frameStyle, shape }: { frame: FrameConfig, frameS
       return <div className="absolute inset-0" style={style} />;
     }
   }
-
+  
   const borderWidth = '5px';
 
   // Handle rectangular 'edge' style
@@ -196,6 +196,7 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
         const style: React.CSSProperties = {
             fontFamily: baseFont.style.fontFamily,
             fontSize: fontSize,
+            fontWeight: 'bold',
             ...baseFont.style
         };
 
@@ -279,27 +280,28 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
                 >
                     {!isTransparent && !isWhiteAcrylic && <div className="absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-white/10 to-transparent" />}
                     
-                    <div className="relative">
+                    <div className="relative flex flex-col items-center justify-center gap-2">
                       <p
-                          className='font-bold break-words transition-all duration-300 ease-in-out select-none'
+                          className='break-words transition-all duration-300 ease-in-out select-none'
                           style={textStyle}
                       >
                           {previewText}
                       </p>
-                       {isGoldEngraving && <div className="absolute top-0 left-0 w-full h-full" style={{ background: 'linear-gradient(135deg, transparent 30%, rgba(255,255,255,0.3) 50%, transparent 70%)' }} />}
-                    </div>
 
-                    {text2 && (
-                       <div className="relative">
+                      {text2 && (
                         <p
                             className='break-words transition-all duration-300 ease-in-out select-none'
                             style={subtitleTextStyle}
                         >
                             {text2}
                         </p>
-                        {isGoldEngraving && <div className="absolute top-0 left-0 w-full h-full" style={{ background: 'linear-gradient(135deg, transparent 30%, rgba(255,255,255,0.3) 50%, transparent 70%)' }} />}
-                       </div>
-                    )}
+                      )}
+
+                      {isGoldEngraving && <div 
+                          className="absolute inset-0"
+                          style={{ background: 'linear-gradient(135deg, transparent 30%, rgba(255,255,255,0.1) 40%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0.1) 60%, transparent 70%)' }} 
+                      />}
+                    </div>
                 </div>
 
                 {/* Frame Overlay */}
@@ -330,3 +332,5 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
 );
 
 AcrylicSignPreview.displayName = "AcrylicSignPreview";
+
+    
