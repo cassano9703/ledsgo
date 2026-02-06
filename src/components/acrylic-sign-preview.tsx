@@ -1,4 +1,3 @@
-
 'use client';
 
 import React, { forwardRef, useState, useRef, MouseEvent, TouchEvent } from 'react';
@@ -251,7 +250,6 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
           )}
           style={{ 
             transform: `translate(${position.x}px, ${position.y}px)`,
-            filter: withBacklight ? `drop-shadow(0 0 20px ${backlightColor.value})` : 'none',
           }}
           onMouseDown={handleDragStart}
           onTouchStart={handleDragStart}
@@ -261,42 +259,49 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
                     "relative w-full h-full flex items-center justify-center overflow-hidden",
                     shapeClasses[shape],
                 )}
+                style={{
+                  filter: withBacklight ? `drop-shadow(0 0 20px ${backlightColor.value})` : 'none',
+                }}
             >
                 {/* Acrylic Base */}
                 <div
                     className={cn(
-                        "absolute inset-0 flex flex-col items-center justify-center gap-2 text-center px-8",
+                        "absolute inset-0",
                          shapeClasses[shape],
-                         mirrorColor.twClass
+                         mirrorColor.twClass,
+                         'overflow-hidden'
                     )}
                     style={{
                       boxShadow: mirrorColor.name !== 'Plateado' ? 'inset 0 0 60px rgba(255,255,255,0.1), 0 0 20px rgba(0,0,0,0.5)' : '0 0 20px rgba(0,0,0,0.5)',
                     }}
                 >
-                    {mirrorColor.name === 'Plateado' && <div className={cn("absolute inset-0 bg-white/5 backdrop-blur-sm", shapeClasses[shape])} />}
+                    {mirrorColor.name === 'Plateado' && <div className={cn("absolute inset-0 backdrop-blur-sm", shapeClasses[shape], 'overflow-hidden')} />}
                     {mirrorColor.name !== 'Plateado' && !isWhiteAcrylic && <div className="absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-white/10 to-transparent" />}
-                    
-                    <div className="relative flex flex-col items-center justify-center gap-2">
-                      <p
-                          className='break-words transition-all duration-300 ease-in-out select-none px-2 py-1'
-                          style={textStyle}
-                      >
-                          {previewText}
-                      </p>
-
-                      {text2 && (
-                        <p
-                            className='break-words transition-all duration-300 ease-in-out select-none px-2 py-1'
-                            style={subtitleTextStyle}
-                        >
-                            {text2}
-                        </p>
-                      )}
-                    </div>
                 </div>
 
                 {/* Frame Overlay */}
                 {hasFrame && <FrameOverlay frame={frame} frameStyle={frameStyle} shape={shape} />}
+            </div>
+
+             {/* Text Overlay */}
+            <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 text-center px-8 z-10">
+                <div className="relative flex flex-col items-center justify-center gap-2">
+                    <p
+                        className='break-words transition-all duration-300 ease-in-out select-none px-2 py-1'
+                        style={textStyle}
+                    >
+                        {previewText}
+                    </p>
+
+                    {text2 && (
+                    <p
+                        className='break-words transition-all duration-300 ease-in-out select-none px-2 py-1'
+                        style={subtitleTextStyle}
+                    >
+                        {text2}
+                    </p>
+                    )}
+                </div>
             </div>
           
           {withStandoffs && (
