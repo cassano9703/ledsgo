@@ -83,8 +83,11 @@ export function AcrylicSignConfigurator() {
 
   const handleShapeChange = (newShape: Shape) => {
     setShape(newShape);
-    if (newShape === 'circle' && frameStyle === 'corners') {
-      setFrameStyle('edge');
+    if (newShape === 'circle') {
+      setWithStandoffs(false);
+      if (frameStyle === 'corners') {
+        setFrameStyle('edge');
+      }
     } else if (newShape !== 'circle' && frameStyle === 'arches') {
       setFrameStyle('corners');
     }
@@ -348,6 +351,7 @@ export function AcrylicSignConfigurator() {
                       id="standoffs-switch"
                       checked={withStandoffs}
                       onCheckedChange={setWithStandoffs}
+                      disabled={shape === 'circle'}
                     />
                   </div>
                   {withStandoffs && (
