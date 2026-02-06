@@ -31,7 +31,7 @@ const FrameOverlay = ({ frame, frameStyle, shape }: { frame: FrameConfig, frameS
   // Handle circular frames
   if (shape === 'circle') {
     if (frameStyle === 'edge') {
-      const mask = `radial-gradient(circle farthest-side, transparent ${100 - borderWidthPercent}%, black ${100 - borderWidthPercent}%)`;
+      const mask = `radial-gradient(circle farthest-side, transparent ${100 - borderWidthPercent}%, black ${100 - borderWidthPercent + 0.5}%)`;
       return <div className="absolute inset-0" style={{ ...frameBgStyle, WebkitMask: mask, mask: mask }} />;
     }
     if (frameStyle === 'margin') {
@@ -44,12 +44,12 @@ const FrameOverlay = ({ frame, frameStyle, shape }: { frame: FrameConfig, frameS
     if (frameStyle === 'arches') {
       const color = frame.value;
       const conicGradient = `conic-gradient(
-        from 90deg,
-        transparent 0deg 30deg,
-        ${color} 30deg 150deg,
-        transparent 150deg 210deg,
-        ${color} 210deg 330deg,
-        transparent 330deg 360deg
+        from 0deg,
+        transparent 0deg 60deg,
+        ${color} 60deg 120deg,
+        transparent 120deg 240deg,
+        ${color} 240deg 300deg,
+        transparent 300deg 360deg
       )`;
 
       const innerRadius = 100 - borderWidthPercent - 4; // 4 is margin
@@ -197,7 +197,7 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
         };
 
         if (isGoldEngraving) {
-            style.backgroundImage = 'linear-gradient(to right, #B8860B, #FFD700, #DAA520, #B8860B)';
+            style.backgroundImage = 'linear-gradient(to bottom, #F7E094, #D6A943, #AE8328)';
             style.backgroundClip = 'text';
             style.color = 'transparent';
         } else {
@@ -267,11 +267,11 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
                         "absolute inset-0 flex flex-col items-center justify-center gap-2 text-center px-8",
                          shapeClasses[shape],
                          mirrorColor.twClass,
-                         mirrorColor.name === 'Plateado' && "bg-white/5 backdrop-blur-sm border border-white/10 overflow-hidden"
+                         mirrorColor.name === 'Plateado' && "bg-white/5 backdrop-blur-sm",
+                         "overflow-hidden"
                     )}
                     style={{
                       boxShadow: mirrorColor.name !== 'Plateado' ? 'inset 0 0 60px rgba(255,255,255,0.1), 0 0 20px rgba(0,0,0,0.5)' : '0 0 20px rgba(0,0,0,0.5)',
-                      overflow: 'hidden'
                     }}
                 >
                     {mirrorColor.name !== 'Plateado' && !isWhiteAcrylic && <div className="absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-white/10 to-transparent" />}
