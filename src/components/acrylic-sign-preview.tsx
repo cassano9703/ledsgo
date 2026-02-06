@@ -31,7 +31,7 @@ const FrameOverlay = ({ frame, frameStyle, shape }: { frame: FrameConfig, frameS
   // Handle circular frames
   if (shape === 'circle') {
     if (frameStyle === 'edge') {
-      const mask = `radial-gradient(circle farthest-side, transparent ${100 - borderWidthPercent}%, black ${100 - borderWidthPercent + 0.5}%)`;
+      const mask = `radial-gradient(circle farthest-side, transparent ${100 - borderWidthPercent}%, black ${100 - borderWidthPercent + 0.1}%)`;
       return <div className="absolute inset-0" style={{ ...frameBgStyle, WebkitMask: mask, mask: mask }} />;
     }
     if (frameStyle === 'margin') {
@@ -48,7 +48,7 @@ const FrameOverlay = ({ frame, frameStyle, shape }: { frame: FrameConfig, frameS
 
       const color = frame.value;
       const conicGradient = `conic-gradient(
-        from 90deg,
+        from 0deg,
         transparent 0deg 30deg,
         ${color} 30deg 150deg,
         transparent 150deg 210deg,
@@ -190,21 +190,28 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
 
     const isTransparent = mirrorColor.name === 'Plateado';
     const isWhiteAcrylic = mirrorColor.name === 'Blanco Lechoso';
+    const isGoldEngraving = color.name === 'Dorado';
     
-    const textStyle = {
-        fontFamily: font.style.fontFamily,
-        fontSize: dynamicFontSize,
-        color: color.value,
-        ...font.style,
+    const getTextStyle = (baseFont: FontConfig, fontSize: string): React.CSSProperties => {
+        const style: React.CSSProperties = {
+            fontFamily: baseFont.style.fontFamily,
+            fontSize: fontSize,
+            ...baseFont.style
+        };
+
+        if (isGoldEngraving) {
+            style.backgroundImage = 'linear-gradient(to right, #B8860B, #FFD700, #DAA520, #B8860B)';
+            style.backgroundClip = 'text';
+            style.color = 'transparent';
+        } else {
+            style.color = color.value;
+        }
+
+        return style;
     };
     
-    const subtitleTextStyle = {
-        fontFamily: font2.style.fontFamily,
-        fontSize: subtitleFontSize,
-        color: color.value,
-        fontWeight: '400',
-        ...font2.style,
-    };
+    const textStyle = getTextStyle(font, dynamicFontSize);
+    const subtitleTextStyle = getTextStyle(font2, subtitleFontSize);
 
     const shapeClasses = {
       circle: 'rounded-full',
@@ -267,22 +274,31 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
                     )}
                     style={{
                       boxShadow: !isTransparent ? 'inset 0 0 60px rgba(255,255,255,0.1), 0 0 20px rgba(0,0,0,0.5)' : '0 0 20px rgba(0,0,0,0.5)',
+                      overflow: 'hidden'
                     }}
                 >
                     {!isTransparent && !isWhiteAcrylic && <div className="absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-white/10 to-transparent" />}
-                    <p
-                        className='font-bold break-words transition-all duration-300 ease-in-out select-none'
-                        style={textStyle}
-                    >
-                        {previewText}
-                    </p>
+                    
+                    <div className="relative">
+                      <p
+                          className='font-bold break-words transition-all duration-300 ease-in-out select-none'
+                          style={textStyle}
+                      >
+                          {previewText}
+                      </p>
+                       {isGoldEngraving && <div className="absolute top-0 left-0 w-full h-full" style={{ background: 'linear-gradient(135deg, transparent 30%, rgba(255,255,255,0.3) 50%, transparent 70%)' }} />}
+                    </div>
+
                     {text2 && (
+                       <div className="relative">
                         <p
                             className='break-words transition-all duration-300 ease-in-out select-none'
                             style={subtitleTextStyle}
                         >
                             {text2}
                         </p>
+                        {isGoldEngraving && <div className="absolute top-0 left-0 w-full h-full" style={{ background: 'linear-gradient(135deg, transparent 30%, rgba(255,255,255,0.3) 50%, transparent 70%)' }} />}
+                       </div>
                     )}
                 </div>
 
