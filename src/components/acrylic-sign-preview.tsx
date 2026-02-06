@@ -31,7 +31,7 @@ const FrameOverlay = ({ frame, frameStyle, shape }: { frame: FrameConfig, frameS
   // Handle circular frames
   if (shape === 'circle') {
     if (frameStyle === 'edge') {
-      const mask = `radial-gradient(circle farthest-side, transparent ${100 - borderWidthPercent}%, black ${100 - borderWidthPercent + 0.5}%)`;
+       const mask = `radial-gradient(circle farthest-side, transparent calc(100% - ${borderWidthPercent}% - 0.5%), black calc(100% - ${borderWidthPercent}%))`;
       return <div className="absolute inset-0" style={{ ...frameBgStyle, WebkitMask: mask, mask: mask }} />;
     }
     if (frameStyle === 'margin') {
@@ -44,12 +44,12 @@ const FrameOverlay = ({ frame, frameStyle, shape }: { frame: FrameConfig, frameS
     if (frameStyle === 'arches') {
       const color = frame.value;
       const conicGradient = `conic-gradient(
-        from 0deg,
-        transparent 0deg 60deg,
-        ${color} 60deg 120deg,
-        transparent 120deg 240deg,
-        ${color} 240deg 300deg,
-        transparent 300deg 360deg
+        from 90deg,
+        ${color} 0deg 120deg,
+        transparent 120deg 150deg,
+        ${color} 150deg 210deg,
+        transparent 210deg 330deg,
+        ${color} 330deg 360deg
       )`;
 
       const innerRadius = 100 - borderWidthPercent - 4; // 4 is margin
@@ -69,7 +69,7 @@ const FrameOverlay = ({ frame, frameStyle, shape }: { frame: FrameConfig, frameS
   
   // Handle rectangular 'edge' style
   if (frameStyle === 'edge' && shape !== 'circle') {
-    return <div className="absolute inset-0 rounded-2xl" style={{ boxShadow: `inset 0 0 0 5px ${frame.value}` }} />;
+     return <div className="absolute inset-0 rounded-2xl" style={{ boxShadow: `inset 0 0 0 5px ${frame.value}` }} />;
   }
 
   // Handle rectangular 'margin' style
@@ -186,7 +186,6 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
     };
 
     const isWhiteAcrylic = mirrorColor.name === 'Blanco Lechoso';
-    const isGoldEngraving = color.name === 'Dorado';
     
     const getTextStyle = (baseFont: FontConfig, fontSize: string): React.CSSProperties => {
         const style: React.CSSProperties = {
@@ -195,6 +194,8 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
             ...baseFont.style,
             fontWeight: 'bold',
         };
+
+        const isGoldEngraving = color.name === 'Dorado';
 
         if (isGoldEngraving) {
             style.backgroundImage = 'linear-gradient(to bottom, #F7E094, #D6A943, #AE8328)';
@@ -266,19 +267,18 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
                     className={cn(
                         "absolute inset-0 flex flex-col items-center justify-center gap-2 text-center px-8",
                          shapeClasses[shape],
-                         mirrorColor.twClass,
-                         mirrorColor.name === 'Plateado' && "bg-white/5 backdrop-blur-sm",
-                         "overflow-hidden"
+                         mirrorColor.twClass
                     )}
                     style={{
                       boxShadow: mirrorColor.name !== 'Plateado' ? 'inset 0 0 60px rgba(255,255,255,0.1), 0 0 20px rgba(0,0,0,0.5)' : '0 0 20px rgba(0,0,0,0.5)',
                     }}
                 >
+                    {mirrorColor.name === 'Plateado' && <div className={cn("absolute inset-0 bg-white/5 backdrop-blur-sm", shapeClasses[shape])} />}
                     {mirrorColor.name !== 'Plateado' && !isWhiteAcrylic && <div className="absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-white/10 to-transparent" />}
                     
                     <div className="relative flex flex-col items-center justify-center gap-2">
                       <p
-                          className='break-words transition-all duration-300 ease-in-out select-none'
+                          className='break-words transition-all duration-300 ease-in-out select-none px-2 py-1'
                           style={textStyle}
                       >
                           {previewText}
@@ -286,7 +286,7 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
 
                       {text2 && (
                         <p
-                            className='break-words transition-all duration-300 ease-in-out select-none'
+                            className='break-words transition-all duration-300 ease-in-out select-none px-2 py-1'
                             style={subtitleTextStyle}
                         >
                             {text2}
