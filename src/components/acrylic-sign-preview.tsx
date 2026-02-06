@@ -31,7 +31,7 @@ const FrameOverlay = ({ frame, frameStyle, shape }: { frame: FrameConfig, frameS
   // Handle circular frames
   if (shape === 'circle') {
     if (frameStyle === 'edge') {
-      const mask = `radial-gradient(circle farthest-side, transparent ${100 - borderWidthPercent}%, black 100%)`;
+      const mask = `radial-gradient(circle farthest-side, transparent ${100 - borderWidthPercent}%, black ${100 - borderWidthPercent}%)`;
       return <div className="absolute inset-0" style={{ ...frameBgStyle, WebkitMask: mask, mask: mask }} />;
     }
     if (frameStyle === 'margin') {
@@ -48,11 +48,11 @@ const FrameOverlay = ({ frame, frameStyle, shape }: { frame: FrameConfig, frameS
 
       const color = frame.value;
       const conicGradient = `conic-gradient(
-        ${color} 0deg 30deg,
-        transparent 30deg 150deg,
-        ${color} 150deg 210deg,
-        transparent 210deg 330deg,
-        ${color} 330deg 360deg
+        transparent 0deg 30deg,
+        ${color} 30deg 150deg,
+        transparent 150deg 210deg,
+        ${color} 210deg 330deg,
+        transparent 330deg 360deg
       )`;
 
       const mask = `radial-gradient(circle farthest-side, transparent ${innerRadius}%, black ${innerRadius}%, black ${outerRadius}%, transparent ${outerRadius}%)`;
@@ -317,6 +317,8 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
 );
 
 AcrylicSignPreview.displayName = "AcrylicSignPreview";
+
+    
 
     
 
