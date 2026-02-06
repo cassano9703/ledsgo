@@ -31,7 +31,7 @@ const FrameOverlay = ({ frame, frameStyle, shape }: { frame: FrameConfig, frameS
   // Handle circular frames
   if (shape === 'circle') {
     if (frameStyle === 'edge') {
-      const mask = `radial-gradient(circle farthest-side, transparent ${100 - borderWidthPercent}%, black ${101 - borderWidthPercent}%)`;
+      const mask = `radial-gradient(circle farthest-side, transparent ${100 - borderWidthPercent}%, black ${100 - borderWidthPercent}%)`;
       return <div className="absolute inset-0" style={{ ...frameBgStyle, WebkitMask: mask, mask: mask }} />;
     }
     if (frameStyle === 'margin') {
@@ -44,7 +44,7 @@ const FrameOverlay = ({ frame, frameStyle, shape }: { frame: FrameConfig, frameS
     if (frameStyle === 'arches') {
       const color = frame.value;
       const conicGradient = `conic-gradient(
-        from 0deg,
+        from 90deg,
         transparent 0deg 30deg,
         ${color} 30deg 150deg,
         transparent 150deg 210deg,
@@ -67,11 +67,9 @@ const FrameOverlay = ({ frame, frameStyle, shape }: { frame: FrameConfig, frameS
     }
   }
   
-  const borderWidth = '5px';
-
   // Handle rectangular 'edge' style
   if (frameStyle === 'edge' && shape !== 'circle') {
-    return <div className="absolute inset-0 rounded-2xl" style={{ boxShadow: `inset 0 0 0 ${borderWidth} ${frame.value}` }} />;
+    return <div className="absolute inset-0 rounded-2xl" style={{ boxShadow: `inset 0 0 0 5px ${frame.value}` }} />;
   }
 
   // Handle rectangular 'margin' style
@@ -87,7 +85,7 @@ const FrameOverlay = ({ frame, frameStyle, shape }: { frame: FrameConfig, frameS
         <div
           className="h-full w-full rounded-lg"
           style={{
-            boxShadow: `inset 0 0 0 ${borderWidth} ${frame.value}`,
+            boxShadow: `inset 0 0 0 5px ${frame.value}`,
           }}
         />
       </div>
@@ -187,7 +185,6 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
       }
     };
 
-    const isTransparent = mirrorColor.name === 'Plateado';
     const isWhiteAcrylic = mirrorColor.name === 'Blanco Lechoso';
     const isGoldEngraving = color.name === 'Dorado';
     
@@ -195,17 +192,16 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
         const style: React.CSSProperties = {
             fontFamily: baseFont.style.fontFamily,
             fontSize: fontSize,
-            ...baseFont.style
+            ...baseFont.style,
+            fontWeight: 'bold',
         };
 
         if (isGoldEngraving) {
             style.backgroundImage = 'linear-gradient(to right, #B8860B, #FFD700, #DAA520, #B8860B)';
             style.backgroundClip = 'text';
             style.color = 'transparent';
-            style.fontWeight = 'bold';
         } else {
             style.color = color.value;
-            style.fontWeight = 'bold';
         }
 
         return style;
@@ -216,8 +212,8 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
 
     const shapeClasses = {
       circle: 'rounded-full',
-      square: '',
-      rectangle: '',
+      square: 'rounded-2xl',
+      rectangle: 'rounded-2xl',
     };
 
     const aspectRatios = {
@@ -262,23 +258,23 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
             <div
                 className={cn(
                     "relative w-full h-full flex items-center justify-center overflow-hidden",
-                    shape === 'circle' ? 'rounded-full' : 'rounded-2xl',
+                    shapeClasses[shape],
                 )}
             >
                 {/* Acrylic Base */}
                 <div
                     className={cn(
                         "absolute inset-0 flex flex-col items-center justify-center gap-2 text-center px-8",
-                         shape === 'circle' ? 'rounded-full' : 'rounded-2xl',
+                         shapeClasses[shape],
                          mirrorColor.twClass,
-                         isTransparent && "bg-white/5 backdrop-blur-sm border border-white/10"
+                         mirrorColor.name === 'Plateado' && "bg-white/5 backdrop-blur-sm border border-white/10 overflow-hidden"
                     )}
                     style={{
-                      boxShadow: !isTransparent ? 'inset 0 0 60px rgba(255,255,255,0.1), 0 0 20px rgba(0,0,0,0.5)' : '0 0 20px rgba(0,0,0,0.5)',
+                      boxShadow: mirrorColor.name !== 'Plateado' ? 'inset 0 0 60px rgba(255,255,255,0.1), 0 0 20px rgba(0,0,0,0.5)' : '0 0 20px rgba(0,0,0,0.5)',
                       overflow: 'hidden'
                     }}
                 >
-                    {!isTransparent && !isWhiteAcrylic && <div className="absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-white/10 to-transparent" />}
+                    {mirrorColor.name !== 'Plateado' && !isWhiteAcrylic && <div className="absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-white/10 to-transparent" />}
                     
                     <div className="relative flex flex-col items-center justify-center gap-2">
                       <p
@@ -296,11 +292,6 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
                             {text2}
                         </p>
                       )}
-
-                      {isGoldEngraving && <div 
-                          className="absolute inset-0"
-                          style={{ background: 'linear-gradient(to top, transparent 30%, rgba(255,255,255,0.4) 45%, rgba(255,255,255,0.7) 50%, rgba(255,255,255,0.4) 55%, transparent 70%)' }} 
-                      />}
                     </div>
                 </div>
 
@@ -332,5 +323,3 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
 );
 
 AcrylicSignPreview.displayName = "AcrylicSignPreview";
-
-    
