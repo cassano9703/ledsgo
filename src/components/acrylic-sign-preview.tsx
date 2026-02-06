@@ -31,7 +31,7 @@ const FrameOverlay = ({ frame, frameStyle, shape }: { frame: FrameConfig, frameS
   // Handle circular frames
   if (shape === 'circle') {
     if (frameStyle === 'edge') {
-      const mask = `radial-gradient(circle farthest-side, transparent ${100 - borderWidthPercent}%, black ${100 - borderWidthPercent}%)`;
+      const mask = `radial-gradient(circle farthest-side, transparent ${100 - borderWidthPercent}%, black ${101 - borderWidthPercent}%)`;
       return <div className="absolute inset-0" style={{ ...frameBgStyle, WebkitMask: mask, mask: mask }} />;
     }
     if (frameStyle === 'margin') {
@@ -42,19 +42,18 @@ const FrameOverlay = ({ frame, frameStyle, shape }: { frame: FrameConfig, frameS
       return <div className="absolute inset-0" style={{ ...frameBgStyle, WebkitMask: mask, mask: mask }} />;
     }
     if (frameStyle === 'arches') {
-      const marginPercent = 4;
-      const outerRadius = 100 - marginPercent;
-      const innerRadius = 100 - marginPercent - borderWidthPercent;
-
       const color = frame.value;
       const conicGradient = `conic-gradient(
-        from 90deg,
+        from 0deg,
         transparent 0deg 30deg,
         ${color} 30deg 150deg,
         transparent 150deg 210deg,
         ${color} 210deg 330deg,
         transparent 330deg 360deg
       )`;
+
+      const innerRadius = 100 - borderWidthPercent - 4; // 4 is margin
+      const outerRadius = 100 - 4;
 
       const mask = `radial-gradient(circle farthest-side, transparent ${innerRadius}%, black ${innerRadius}%, black ${outerRadius}%, transparent ${outerRadius}%)`;
 
@@ -196,7 +195,6 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
         const style: React.CSSProperties = {
             fontFamily: baseFont.style.fontFamily,
             fontSize: fontSize,
-            fontWeight: 'bold',
             ...baseFont.style
         };
 
@@ -204,8 +202,10 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
             style.backgroundImage = 'linear-gradient(to right, #B8860B, #FFD700, #DAA520, #B8860B)';
             style.backgroundClip = 'text';
             style.color = 'transparent';
+            style.fontWeight = 'bold';
         } else {
             style.color = color.value;
+            style.fontWeight = 'bold';
         }
 
         return style;
@@ -268,7 +268,7 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
                 {/* Acrylic Base */}
                 <div
                     className={cn(
-                        "absolute inset-0 flex flex-col items-center justify-center gap-2 text-center px-8 overflow-hidden",
+                        "absolute inset-0 flex flex-col items-center justify-center gap-2 text-center px-8",
                          shape === 'circle' ? 'rounded-full' : 'rounded-2xl',
                          mirrorColor.twClass,
                          isTransparent && "bg-white/5 backdrop-blur-sm border border-white/10"
@@ -299,7 +299,7 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
 
                       {isGoldEngraving && <div 
                           className="absolute inset-0"
-                          style={{ background: 'linear-gradient(135deg, transparent 30%, rgba(255,255,255,0.1) 40%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0.1) 60%, transparent 70%)' }} 
+                          style={{ background: 'linear-gradient(to top, transparent 30%, rgba(255,255,255,0.4) 45%, rgba(255,255,255,0.7) 50%, rgba(255,255,255,0.4) 55%, transparent 70%)' }} 
                       />}
                     </div>
                 </div>
