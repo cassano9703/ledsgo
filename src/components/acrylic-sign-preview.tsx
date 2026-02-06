@@ -190,31 +190,20 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
 
     const isTransparent = mirrorColor.name === 'Plateado';
     const isWhiteAcrylic = mirrorColor.name === 'Blanco Lechoso';
-    const isGoldMirrorEngraving = color.name === 'Dorado';
-
-    const getTextStyle = (baseFont: FontConfig, fontSize: string): React.CSSProperties => {
-        const style: React.CSSProperties = {
-            fontFamily: baseFont.style.fontFamily,
-            fontSize: fontSize,
-            ...baseFont.style,
-        };
-
-        if (isGoldMirrorEngraving) {
-            style.backgroundImage = 'linear-gradient(135deg, #f6e099 0%, #d4af37 50%, #a17a23 100%)';
-            style.backgroundClip = 'text';
-            style.color = 'transparent';
-        } else {
-            style.color = color.value;
-        }
-
-        return style;
+    
+    const textStyle = {
+        fontFamily: font.style.fontFamily,
+        fontSize: dynamicFontSize,
+        color: color.value,
+        ...font.style,
     };
     
-    const textStyle = getTextStyle(font, dynamicFontSize);
-    
     const subtitleTextStyle = {
-      ...getTextStyle(font2, subtitleFontSize),
-      fontWeight: '400',
+        fontFamily: font2.style.fontFamily,
+        fontSize: subtitleFontSize,
+        color: color.value,
+        fontWeight: '400',
+        ...font2.style,
     };
 
     const shapeClasses = {
@@ -281,30 +270,19 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
                     }}
                 >
                     {!isTransparent && !isWhiteAcrylic && <div className="absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-white/10 to-transparent" />}
-
-                    <div className='relative'>
-                        <p
-                            className='font-bold break-words transition-all duration-300 ease-in-out select-none'
-                            style={textStyle}
-                        >
-                            {previewText}
-                        </p>
-                        {isGoldMirrorEngraving && (
-                            <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom, rgba(255,255,255,0.6) 10%, rgba(255,255,255,0.1) 40%, transparent 50%)', mixBlendMode: 'lighten' }} />
-                        )}
-                    </div>
+                    <p
+                        className='font-bold break-words transition-all duration-300 ease-in-out select-none'
+                        style={textStyle}
+                    >
+                        {previewText}
+                    </p>
                     {text2 && (
-                        <div className='relative'>
-                            <p
-                                className='break-words transition-all duration-300 ease-in-out select-none'
-                                style={subtitleTextStyle}
-                            >
-                                {text2}
-                            </p>
-                            {isGoldMirrorEngraving && (
-                                <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom, rgba(255,255,255,0.6) 10%, rgba(255,255,255,0.1) 40%, transparent 50%)', mixBlendMode: 'lighten' }} />
-                            )}
-                        </div>
+                        <p
+                            className='break-words transition-all duration-300 ease-in-out select-none'
+                            style={subtitleTextStyle}
+                        >
+                            {text2}
+                        </p>
                     )}
                 </div>
 
