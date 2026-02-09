@@ -275,7 +275,14 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
                       boxShadow: mirrorColor.name !== 'Plateado' ? 'inset 0 0 60px rgba(255,255,255,0.1), 0 0 20px rgba(0,0,0,0.5)' : '0 0 20px rgba(0,0,0,0.5)',
                     }}
                 >
-                    {mirrorColor.name === 'Plateado' && <div className={cn("absolute inset-0 backdrop-blur-sm", shapeClasses[shape], 'overflow-hidden')} />}
+                    {mirrorColor.name === 'Plateado' && (
+                        <div
+                            className={cn("absolute inset-0 backdrop-blur-sm", shapeClasses[shape], 'overflow-hidden')}
+                            style={{
+                                boxShadow: withBacklight ? `inset 0 0 10px ${backlightColor.value}` : 'none'
+                            }}
+                        />
+                    )}
                     {mirrorColor.name !== 'Plateado' && !isWhiteAcrylic && <div className="absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-white/10 to-transparent" />}
                 </div>
 
