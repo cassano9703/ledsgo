@@ -43,12 +43,11 @@ const FrameOverlay = ({ frame, frameStyle, shape }: { frame: FrameConfig, frameS
     if (frameStyle === 'arches') {
       const color = frame.value;
       const conicGradient = `conic-gradient(
-        from 90deg,
-        ${color} 0deg 120deg,
-        transparent 120deg 150deg,
-        ${color} 150deg 210deg,
-        transparent 210deg 330deg,
-        ${color} 330deg 360deg
+        ${color} 0deg 60deg,
+        transparent 60deg 120deg,
+        ${color} 120deg 240deg,
+        transparent 240deg 300deg,
+        ${color} 300deg 360deg
       )`;
 
       const innerRadius = 100 - borderWidthPercent - 4; // 4 is margin
