@@ -58,7 +58,8 @@
       "colores": "Fuchsia",
       "ciudad": "Lima",
       "imageUrl": "https://i.imgur.com/SEbw2Ph.png",
-      "imageHint": "client neon"
+      "imageHint": "client neon",
+      "objectPosition": "center 75%"
     },
     {
       "id": "job-2",

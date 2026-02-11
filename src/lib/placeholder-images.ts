@@ -24,6 +24,7 @@ export type OurJobsImage = {
   medidas: string;
   colores: string;
   ciudad: string;
+  objectPosition?: string;
 }
 
 export type AboutUsImage = {

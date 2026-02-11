@@ -46,6 +46,7 @@ export function JobDetailsModal({ isOpen, onClose, job }: JobDetailsModalProps) 
                     width={800}
                     height={800}
                     className="w-full h-auto object-cover"
+                    style={{ objectPosition: job.objectPosition }}
                 />
             </div>
             <div className="space-y-4 text-sm">

@@ -38,6 +38,7 @@ export function OurJobsCarousel() {
                     height={600}
                     className="rounded-lg object-cover w-full h-full"
                     data-ai-hint={image.imageHint}
+                    style={{ objectPosition: image.objectPosition }}
                   />
                 </div>
               </div>
