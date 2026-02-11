@@ -1,4 +1,3 @@
-
 "use client"
 
 import * as React from "react"
@@ -32,13 +31,13 @@ export function OurJobsCarousel() {
                 onClick={() => setSelectedJob(image)}
               >
                 <div className="embla__slide__inner cursor-pointer h-full">
-                  <div className="w-full h-full rounded-lg border-2 border-white/50 overflow-hidden">
+                  <div className="w-full h-full rounded-lg border-2 border-white/50 overflow-hidden bg-black/30">
                     <Image
                       src={image.imageUrl}
                       alt={image.alt}
                       width={600}
                       height={600}
-                      className="object-cover w-full h-full"
+                      className="object-contain w-full h-full"
                       data-ai-hint={image.imageHint}
                       style={{ objectPosition: image.objectPosition }}
                     />
