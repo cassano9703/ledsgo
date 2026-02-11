@@ -1,6 +1,6 @@
 'use client';
 
-import React, { forwardRef, useState, useRef, MouseEvent, TouchEvent } from 'react';
+import React, { forwardRef, useState, useRef, MouseEvent, TouchEvent, useLayoutEffect } from 'react';
 import { cn } from '@/lib/utils';
 import { mirrorFinishColors, type FontConfig, type SizeConfig, type BackgroundConfig, type ColorConfig, type FrameConfig } from '@/lib/config';
 
@@ -43,11 +43,11 @@ const FrameOverlay = ({ frame, frameStyle, shape }: { frame: FrameConfig, frameS
     if (frameStyle === 'arches') {
       const color = frame.value;
       const conicGradient = `conic-gradient(
-        ${color} 0deg 60deg,
-        transparent 60deg 120deg,
-        ${color} 120deg 240deg,
-        transparent 240deg 300deg,
-        ${color} 300deg 360deg
+        transparent 0deg 30deg,
+        ${color} 30deg 150deg,
+        transparent 150deg 210deg,
+        ${color} 210deg 330deg,
+        transparent 330deg 360deg
       )`;
 
       const innerRadius = 100 - borderWidthPercent - 4; // 4 is margin
@@ -150,6 +150,32 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
     const [position, setPosition] = useState({ x: 0, y: 0 });
     const [isDragging, setIsDragging] = useState(false);
     const dragStartPos = useRef({ x: 0, y: 0 });
+    const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
+
+    const PIXELS_PER_CM = 3.8;
+
+    useLayoutEffect(() => {
+      const element = signContainerRef.current;
+      if (!element) return;
+
+      const observer = new ResizeObserver(entries => {
+        for (let entry of entries) {
+          const { width, height } = entry.contentRect;
+          setDimensions({
+            width: width,
+            height: height,
+          });
+        }
+      });
+
+      observer.observe(element);
+      return () => {
+        observer.disconnect();
+      };
+    }, []);
+
+    const signWidthCm = (dimensions.width / PIXELS_PER_CM).toFixed(0);
+    const signHeightCm = (dimensions.height / PIXELS_PER_CM).toFixed(0);
 
     const handleDragStart = (e: MouseEvent<HTMLDivElement> | TouchEvent<HTMLDivElement>) => {
       setIsDragging(true);
@@ -271,15 +297,14 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
                          'overflow-hidden'
                     )}
                     style={{
-                      boxShadow: mirrorColor.name !== 'Plateado' ? 'inset 0 0 60px rgba(255,255,255,0.1), 0 0 20px rgba(0,0,0,0.5)' : '0 0 20px rgba(0,0,0,0.5)',
+                      boxShadow: mirrorColor.name === 'Plateado' 
+                        ? 'inset 0 0 0 1px rgba(255, 255, 255, 0.15)' 
+                        : 'inset 0 0 60px rgba(255,255,255,0.1), 0 0 20px rgba(0,0,0,0.5)',
                     }}
                 >
                     {mirrorColor.name === 'Plateado' && (
                         <div
                             className={cn("absolute inset-0 backdrop-blur-sm", shapeClasses[shape], 'overflow-hidden')}
-                             style={{
-                                boxShadow: 'inset 0 0 0 1px rgba(255, 255, 255, 0.15)'
-                            }}
                         />
                     )}
                     {mirrorColor.name !== 'Plateado' && !isWhiteAcrylic && <div className="absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-white/10 to-transparent" />}
@@ -326,6 +351,28 @@ export const AcrylicSignPreview = forwardRef<HTMLDivElement, AcrylicSignPreviewP
                 <Standoff className="bottom-4 right-4" />
               </>
             )
+          )}
+
+          {dimensions.width > 0 && (
+            <div className="absolute inset-0 pointer-events-none">
+                {/* Horizontal measurement */}
+                <div className="absolute -bottom-8 left-0 w-full flex flex-col items-center">
+                  <div className="w-full h-px bg-white/70 relative">
+                      <div className="absolute left-0 -top-1 w-px h-2 bg-white/70"></div>
+                      <div className="absolute right-0 -top-1 w-px h-2 bg-white/70"></div>
+                  </div>
+                  <span className="text-white/80 text-xs font-mono mt-1.5 select-none">{signWidthCm} cm</span>
+                </div>
+
+                {/* Vertical measurement */}
+                <div className="absolute -left-12 top-0 h-full flex flex-row items-center">
+                  <div className="h-full w-px bg-white/70 relative">
+                      <div className="absolute top-0 -left-1 h-px w-2 bg-white/70"></div>
+                      <div className="absolute bottom-0 -left-1 h-px w-2 bg-white/70"></div>
+                  </div>
+                  <span className="text-white/80 text-xs font-mono ml-1.5 transform -rotate-90 origin-center select-none whitespace-nowrap">{signHeightCm} cm</span>
+                </div>
+            </div>
           )}
         </div>
       </div>

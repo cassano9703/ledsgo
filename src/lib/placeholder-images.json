@@ -54,10 +54,10 @@
       "id": "job-1",
       "alt": "Cliente con un letrero de neón 'Skandaloso'.",
       "nombre": "Skandaloso",
-      "medidas": "100cm x 40cm",
+      "medidas": "150cm x 80cm",
       "colores": "Fuchsia",
       "ciudad": "Lima",
-      "imageUrl": "https://picsum.photos/seed/job1/600/600",
+      "imageUrl": "https://i.imgur.com/SEbw2Ph.png",
       "imageHint": "client neon"
     },
     {
