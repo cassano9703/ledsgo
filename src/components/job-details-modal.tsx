@@ -1,3 +1,4 @@
+
 "use client";
 
 import Image from "next/image";
@@ -39,7 +40,7 @@ export function JobDetailsModal({ isOpen, onClose, job }: JobDetailsModalProps) 
           </DialogDescription>
         </DialogHeader>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
-            <div className="rounded-lg overflow-hidden border bg-black/10">
+            <div className="rounded-lg overflow-hidden border-2 border-white/50 bg-black/10">
                 <Image 
                     src={job.imageUrl} 
                     alt={job.alt}
