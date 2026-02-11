@@ -39,13 +39,13 @@ export function JobDetailsModal({ isOpen, onClose, job }: JobDetailsModalProps) 
           </DialogDescription>
         </DialogHeader>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
-            <div className="rounded-lg overflow-hidden border">
+            <div className="rounded-lg overflow-hidden border bg-black/10">
                 <Image 
                     src={job.imageUrl} 
                     alt={job.alt}
                     width={800}
                     height={800}
-                    className="w-full h-auto object-cover"
+                    className="w-full h-auto object-contain"
                     style={{ objectPosition: job.objectPosition }}
                 />
             </div>

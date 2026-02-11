@@ -36,7 +36,7 @@ export function OurJobsCarousel() {
                     alt={image.alt}
                     width={600}
                     height={600}
-                    className="rounded-lg object-cover w-full h-full"
+                    className="rounded-lg object-contain w-full h-full"
                     data-ai-hint={image.imageHint}
                     style={{ objectPosition: image.objectPosition }}
                   />
