@@ -1,0 +1,477 @@
+{
+  "entities": {
+    "User": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "User",
+      "type": "object",
+      "description": "Represents a registered user of the Leds Go Configurator application. Authentication details are managed externally.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the User entity."
+        },
+        "firstName": {
+          "type": "string",
+          "description": "The first name of the user."
+        },
+        "lastName": {
+          "type": "string",
+          "description": "The last name of the user."
+        },
+        "email": {
+          "type": "string",
+          "description": "The primary email address of the user.",
+          "format": "email"
+        },
+        "phone": {
+          "type": "string",
+          "description": "The primary phone number of the user."
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Timestamp when the user account was created.",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "description": "Timestamp when the user account was last updated.",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "id",
+        "firstName",
+        "lastName",
+        "email",
+        "createdAt"
+      ]
+    },
+    "DesignOption": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "DesignOption",
+      "type": "object",
+      "description": "Defines available customization choices for LED signs, such as fonts, colors, sizes, and backing types.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the DesignOption entity."
+        },
+        "optionType": {
+          "type": "string",
+          "description": "The category of the customization option (e.g., 'font', 'color', 'size', 'backingType')."
+        },
+        "name": {
+          "type": "string",
+          "description": "The display name of the option (e.g., 'Poppins', 'Electric Blue', 'Small')."
+        },
+        "value": {
+          "type": "string",
+          "description": "The actual value associated with the option (e.g., font family name, HEX color code, dimension string)."
+        },
+        "priceAdjustment": {
+          "type": "number",
+          "description": "The monetary adjustment (positive or negative) this option adds to the base price of a sign."
+        },
+        "imageUrl": {
+          "type": "string",
+          "description": "URL to an image representing this design option, if applicable (e.g., a swatch for a color, a preview for a font).",
+          "format": "uri"
+        }
+      },
+      "required": [
+        "id",
+        "optionType",
+        "name",
+        "value",
+        "priceAdjustment"
+      ]
+    },
+    "CustomDesign": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "CustomDesign",
+      "type": "object",
+      "description": "Represents a custom LED sign design created and potentially saved by a user.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the CustomDesign entity."
+        },
+        "userId": {
+          "type": "string",
+          "description": "Reference to the User who created or saved this design. (Relationship: User 1:N CustomDesign)"
+        },
+        "name": {
+          "type": "string",
+          "description": "A user-defined name for their custom design (e.g., 'My Office Sign')."
+        },
+        "textContent": {
+          "type": "string",
+          "description": "The actual text content displayed on the LED sign."
+        },
+        "font": {
+          "type": "string",
+          "description": "The selected font style for the text content."
+        },
+        "size": {
+          "type": "string",
+          "description": "The selected size or dimensions of the LED sign."
+        },
+        "color": {
+          "type": "string",
+          "description": "The selected color of the LED lights (e.g., HEX code or color name)."
+        },
+        "backingType": {
+          "type": "string",
+          "description": "The selected backing material and style for the sign (e.g., 'Cut to shape', 'Rectangle')."
+        },
+        "material": {
+          "type": "string",
+          "description": "The primary material used for the sign (e.g., 'Acrylic', 'PVC')."
+        },
+        "estimatedPrice": {
+          "type": "number",
+          "description": "The estimated price of the custom sign based on current selections."
+        },
+        "previewImageUrl": {
+          "type": "string",
+          "description": "URL to the generated image preview of the customized LED sign.",
+          "format": "uri"
+        },
+        "aiSuggestionsApplied": {
+          "type": "boolean",
+          "description": "Indicates if AI-powered design suggestions were applied to this design."
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Timestamp when the custom design was created.",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "description": "Timestamp when the custom design was last updated.",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "id",
+        "userId",
+        "textContent",
+        "font",
+        "size",
+        "color",
+        "backingType",
+        "material",
+        "estimatedPrice",
+        "previewImageUrl",
+        "createdAt"
+      ]
+    },
+    "PremadeDesign": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "PremadeDesign",
+      "type": "object",
+      "description": "Represents a pre-designed LED sign available in the Leds Go catalog.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the PremadeDesign entity."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the premade design (e.g., 'Dream Big Neon')."
+        },
+        "description": {
+          "type": "string",
+          "description": "A brief description of the premade design."
+        },
+        "imageUrl": {
+          "type": "string",
+          "description": "URL to the main image of the premade design.",
+          "format": "uri"
+        },
+        "basePrice": {
+          "type": "number",
+          "description": "The base price of the premade design before any customization."
+        },
+        "textContent": {
+          "type": "string",
+          "description": "The default text content of the premade LED sign."
+        },
+        "font": {
+          "type": "string",
+          "description": "The default font style of the premade design."
+        },
+        "size": {
+          "type": "string",
+          "description": "The default size or dimensions of the premade design."
+        },
+        "color": {
+          "type": "string",
+          "description": "The default color of the LED lights in the premade design."
+        },
+        "backingType": {
+          "type": "string",
+          "description": "The default backing material and style for the premade design."
+        },
+        "material": {
+          "type": "string",
+          "description": "The default primary material used for the premade design."
+        },
+        "category": {
+          "type": "string",
+          "description": "The category the premade design belongs to (e.g., 'Quotes', 'Logos')."
+        },
+        "tags": {
+          "type": "array",
+          "description": "A list of tags for searching and filtering premade designs.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "description",
+        "imageUrl",
+        "basePrice",
+        "textContent",
+        "font",
+        "size",
+        "color",
+        "backingType",
+        "material",
+        "category"
+      ]
+    },
+    "Order": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "Order",
+      "type": "object",
+      "description": "Represents a customer's placed order for one or more LED signs.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the Order entity."
+        },
+        "userId": {
+          "type": "string",
+          "description": "Reference to the User who placed the order. (Relationship: User 1:N Order)"
+        },
+        "orderedCustomDesignId": {
+          "type": "string",
+          "description": "Reference to the CustomDesign that was ordered. If the order is for a customized premade sign, this would be a custom design instance created from a premade one. (Relationship: Order 1:1 CustomDesign)"
+        },
+        "originalPremadeDesignId": {
+          "type": "string",
+          "description": "Reference to the original PremadeDesign if the order was based on one. This helps track the origin of the design. (Relationship: Order N:1 PremadeDesign)"
+        },
+        "finalPrice": {
+          "type": "number",
+          "description": "The total final price of the order, including any shipping or taxes."
+        },
+        "orderDate": {
+          "type": "string",
+          "description": "Timestamp when the order was placed.",
+          "format": "date-time"
+        },
+        "status": {
+          "type": "string",
+          "description": "The current status of the order (e.g., 'Pending', 'Processing', 'Shipped', 'Delivered', 'Cancelled')."
+        },
+        "shippingAddressStreet": {
+          "type": "string",
+          "description": "The street address for shipping."
+        },
+        "shippingAddressCity": {
+          "type": "string",
+          "description": "The city for shipping."
+        },
+        "shippingAddressState": {
+          "type": "string",
+          "description": "The state or province for shipping."
+        },
+        "shippingAddressZipCode": {
+          "type": "string",
+          "description": "The postal or zip code for shipping."
+        },
+        "shippingAddressCountry": {
+          "type": "string",
+          "description": "The country for shipping."
+        },
+        "billingAddressStreet": {
+          "type": "string",
+          "description": "The street address for billing."
+        },
+        "billingAddressCity": {
+          "type": "string",
+          "description": "The city for billing."
+        },
+        "billingAddressState": {
+          "type": "string",
+          "description": "The state or province for billing."
+        },
+        "billingAddressZipCode": {
+          "type": "string",
+          "description": "The postal or zip code for billing."
+        },
+        "billingAddressCountry": {
+          "type": "string",
+          "description": "The country for billing."
+        },
+        "contactEmail": {
+          "type": "string",
+          "description": "The contact email for the order, potentially different from user's primary email.",
+          "format": "email"
+        },
+        "contactPhone": {
+          "type": "string",
+          "description": "The contact phone number for the order."
+        },
+        "notes": {
+          "type": "string",
+          "description": "Any special instructions or notes provided by the customer for the order."
+        },
+        "paymentStatus": {
+          "type": "string",
+          "description": "The status of the payment for this order (e.g., 'Paid', 'Pending', 'Failed')."
+        },
+        "updatedAt": {
+          "type": "string",
+          "description": "Timestamp when the order was last updated.",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "id",
+        "userId",
+        "orderedCustomDesignId",
+        "finalPrice",
+        "orderDate",
+        "status",
+        "shippingAddressStreet",
+        "shippingAddressCity",
+        "shippingAddressState",
+        "shippingAddressZipCode",
+        "shippingAddressCountry",
+        "contactEmail",
+        "paymentStatus"
+      ]
+    }
+  },
+  "auth": {
+    "providers": [
+      "password",
+      "anonymous"
+    ]
+  },
+  "firestore": {
+    "structure": [
+      {
+        "path": "/users/{userId}",
+        "definition": {
+          "entityName": "User",
+          "schema": {
+            "$ref": "#/backend/entities/User"
+          },
+          "description": "Stores individual user profiles. Access is restricted to the authenticated user matching the 'userId' in the path. Includes denormalized 'id' for authorization independence, matching the path parameter.",
+          "params": [
+            {
+              "name": "userId",
+              "description": "The unique identifier of the user, corresponding to Firebase Authentication UID."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/design_options/{optionId}",
+        "definition": {
+          "entityName": "DesignOption",
+          "schema": {
+            "$ref": "#/backend/entities/DesignOption"
+          },
+          "description": "Stores configuration options for LED signs (fonts, colors, sizes, etc.). Publicly readable by all users, writeable only by administrators.",
+          "params": [
+            {
+              "name": "optionId",
+              "description": "The unique identifier for a specific design option."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/users/{userId}/custom_designs/{customDesignId}",
+        "definition": {
+          "entityName": "CustomDesign",
+          "schema": {
+            "$ref": "#/backend/entities/CustomDesign"
+          },
+          "description": "Stores custom LED sign designs created and saved by a specific user. Ownership is enforced via the 'userId' in the path, which must match 'request.auth.uid'. Includes denormalized 'userId' field for authorization independence and data integrity.",
+          "params": [
+            {
+              "name": "userId",
+              "description": "The unique identifier of the user who owns this custom design, corresponding to Firebase Authentication UID."
+            },
+            {
+              "name": "customDesignId",
+              "description": "The unique identifier for a custom LED sign design."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/premade_designs/{premadeDesignId}",
+        "definition": {
+          "entityName": "PremadeDesign",
+          "schema": {
+            "$ref": "#/backend/entities/PremadeDesign"
+          },
+          "description": "Stores a catalog of pre-designed LED signs. Publicly readable by all users, writeable only by administrators.",
+          "params": [
+            {
+              "name": "premadeDesignId",
+              "description": "The unique identifier for a premade LED sign design."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/users/{userId}/orders/{orderId}",
+        "definition": {
+          "entityName": "Order",
+          "schema": {
+            "$ref": "#/backend/entities/Order"
+          },
+          "description": "Stores orders placed by a specific user. Ownership is enforced via the 'userId' in the path, which must match 'request.auth.uid'. Includes denormalized 'userId' field for authorization independence and data integrity.",
+          "params": [
+            {
+              "name": "userId",
+              "description": "The unique identifier of the user who placed this order, corresponding to Firebase Authentication UID."
+            },
+            {
+              "name": "orderId",
+              "description": "The unique identifier for an order."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/roles_admin/{adminUid}",
+        "definition": {
+          "entityName": "roles_admin",
+          "schema": {
+            "$ref": "#/backend/entities/User"
+          },
+          "description": "Admin roles collection for Database Access Control (DBAC). The existence of a document at '/roles_admin/{uid}' grants administrative privileges to the user with the matching UID. Used for authorization independence by checking document existence.",
+          "params": [
+            {
+              "name": "adminUid",
+              "description": "The unique identifier (UID) of a user granted administrator privileges."
+            }
+          ]
+        }
+      }
+    ],
+    "reasoning": "The Firestore structure is designed to be secure, scalable, and debuggable by strictly adhering to the core design principles and strategy mandates. \n\n**Authorization Independence via Denormalization:**\n\n*   **User-owned data (Custom Designs, Orders):** For entities like `CustomDesign` and `Order` that are intrinsically linked to a `User`, the `userId` is denormalized by being included directly in the document's path (`/users/{userId}/custom_designs/{customDesignId}`) and also as a field within the document (`customDesign.userId`). This ensures that security rules can perform authorization checks solely by comparing `request.auth.uid` with the `{userId}` wildcard in the path, without needing to perform any `get()` operations on parent documents. This prevents cascading authorization dependencies and enables atomic operations for creating related data. The redundancy of `userId` in the document body serves as an additional integrity check and improves rule clarity.\n*   **Public Data (Design Options, Premade Designs):** These collections (`/design_options` and `/premade_designs`) contain data that is intended to be publicly readable by all users (including unauthenticated ones) for browsing and configuration purposes. Since their access does not depend on any specific user's attributes or relationships, they are inherently authorization independent. Write access for these collections would typically be restricted to administrators, managed through a separate role collection.\n*   **Admin Roles:** A dedicated collection `/roles_admin/{uid}` is used to determine administrative privileges. Authorization rules for administrative actions can simply check for the `exists()` of a document at `/roles_admin/$(request.auth.uid)`, which is an atomic and independent operation.\n\n**QAPs (Query as Authorization Predicate) Support:**\n\n*   **Secure List Operations for User-owned Data:** By structuring `CustomDesign` and `Order` as subcollections under `/users/{userId}`, `list` queries naturally align with authorization rules. A user can only `list` documents within their own `/users/$(request.auth.uid)/custom_designs` or `/users/$(request.auth.uid)/orders` path. The rules can enforce that `{userId}` in the path must match `request.auth.uid`, thus implicitly filtering the results by the authenticated user and preventing unauthorized data access.\n*   **Secure List Operations for Public Data:** For collections like `/design_options` and `/premade_designs`, all documents are intended to be publicly readable. Therefore, `list` queries on these collections are inherently secure, as all documents are accessible by design, fulfilling the QAPs by allowing full public reads.\n\n**Structural Segregation and Access Modeling:**\n\n*   **`User` data** is kept under `/users/{userId}` for private, path-based ownership.\n*   **`CustomDesign` and `Order`** are nested under `/users/{userId}` to maintain strict 1:N user-ownership, simplifying rules to `match /users/{userId}/... { allow read, write: if request.auth.uid == userId; }`.\n*   **`DesignOption` and `PremadeDesign`** are top-level collections (`/design_options`, `/premade_designs`) because they represent public catalog data with homogeneous security (public read, admin write).\n*   **Global Roles** are managed in `/roles_admin/{uid}` using an existence check for admin privileges."
+  }
+}

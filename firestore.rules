@@ -1,0 +1,174 @@
+/**
+ * # Core Philosophy
+ * This ruleset enforces a strict, user-centric security model. All user-generated data,
+ * such as custom designs and orders, is private and accessible only by its owner.
+ * Publicly browsable catalog data, like design options and premade templates, is
+ * globally readable but writable only by administrators.
+ *
+ * # Data Structure
+ * - `/users/{userId}`: Private user profile data.
+ * - `/users/{userId}/custom_designs/{designId}`: Designs created by and only accessible to the user.
+ * - `/users/{userId}/orders/{orderId}`: Orders placed by and only accessible to the user.
+ * - `/design_options/{optionId}`: Public catalog of design choices (e.g., fonts, colors).
+ * - `/premade_designs/{designId}`: Public catalog of pre-made sign templates.
+ * - `/roles_admin/{adminUid}`: A list of user UIDs that have administrative privileges.
+ *
+ * # Key Security Decisions
+ * - **Strict Ownership**: Data in user-specific subcollections (`custom_designs`, `orders`) is
+ *   strictly confined to the user whose ID is in the path.
+ * - **No User Enumeration**: Listing the top-level `/users` collection is disallowed to protect user privacy.
+ * - **Public Read-Only Catalogs**: Collections like `design_options` and `premade_designs`
+ *   are public for reading to allow all users (including anonymous ones) to browse the catalog,
+ *   but are protected against unauthorized writes.
+ * - **Role-Based Admin Access**: A dedicated `/roles_admin` collection is used to manage
+ *   administrator privileges. The existence of a user's UID in this collection grants them
+ *   write access to protected public collections.
+ * - **Denormalization for Authorization**: User-owned documents (like CustomDesign and Order)
+ *   contain a `userId` field that is validated against the path. This ensures data integrity
+ *   and allows for fast, simple authorization checks without extra database reads.
+ * - **Structural Segregation**: Private user data (`custom_designs`) and public catalog data
+ *   (`premade_designs`) are stored in separate collections to create a clear and secure
+ *   security boundary, simplifying rules for list operations.
+ */
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // --------------------------------
+    // Helper Functions
+    // --------------------------------
+
+    /**
+     * Checks if a user is authenticated.
+     */
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    /**
+     * Checks if the currently authenticated user has administrative privileges.
+     * Admin status is granted if a document with the user's UID exists in the /roles_admin collection.
+     */
+    function isAdmin() {
+      return isSignedIn() && exists(/databases/$(database)/documents/roles_admin/$(request.auth.uid));
+    }
+
+    /**
+     * Checks if the request is coming from the owner of a document,
+     * based on the userId wildcard from the path.
+     */
+    function isOwner(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+
+    /**
+     * Checks if the request is from the document owner AND the document already exists.
+     * Crucial for secure update and delete operations.
+     */
+    function isExistingOwner(userId) {
+      return isOwner(userId) && resource != null;
+    }
+
+    // --------------------------------
+    // User Data Rules
+    // --------------------------------
+
+    /**
+     * @description Controls access to a user's own profile document.
+     * @path /users/{userId}
+     * @allow (create) An authenticated user creating their own user document.
+     * @deny (list) Any user attempting to list all user documents.
+     * @principle Restricts access to a user's own data tree and prevents user enumeration.
+     */
+    match /users/{userId} {
+      allow get: if isOwner(userId);
+      allow list: if false; // Disallow listing/querying all users for privacy
+      allow create: if isOwner(userId) && request.resource.data.id == userId;
+      allow update: if isExistingOwner(userId) && request.resource.data.id == resource.data.id;
+      allow delete: if isExistingOwner(userId);
+
+      /**
+       * @description Controls access to a user's saved custom designs.
+       * @path /users/{userId}/custom_designs/{customDesignId}
+       * @allow (create, read, update, delete) A user managing their own custom designs.
+       * @deny (read) Another user trying to access a design they do not own.
+       * @principle Enforces strict document ownership within a user's private subcollection.
+       */
+      match /custom_designs/{customDesignId} {
+        allow get: if isOwner(userId);
+        allow list: if isOwner(userId);
+        allow create: if isOwner(userId) && request.resource.data.userId == userId;
+        allow update: if isExistingOwner(userId) && request.resource.data.userId == resource.data.userId;
+        allow delete: if isExistingOwner(userId);
+      }
+
+      /**
+       * @description Controls access to a user's placed orders.
+       * @path /users/{userId}/orders/{orderId}
+       * @allow (create, read, update, delete) A user managing their own orders.
+       * @deny (read) Another user trying to access an order they do not own.
+       * @principle Enforces strict document ownership for sensitive transaction data.
+       */
+      match /orders/{orderId} {
+        allow get: if isOwner(userId);
+        allow list: if isOwner(userId);
+        allow create: if isOwner(userId) && request.resource.data.userId == userId;
+        allow update: if isExistingOwner(userId) && request.resource.data.userId == resource.data.userId;
+        allow delete: if isExistingOwner(userId);
+      }
+    }
+
+    // --------------------------------
+    // Public Catalog Rules
+    // --------------------------------
+
+    /**
+     * @description Controls access to public design options (fonts, colors, etc.).
+     * @path /design_options/{optionId}
+     * @allow (read) Any user, including unauthenticated ones, can read design options.
+     * @deny (create) A non-admin user trying to add a new font or color.
+     * @principle Allows public read access for catalog data but restricts modifications to administrators.
+     */
+    match /design_options/{optionId} {
+      allow get: if true;
+      allow list: if true;
+      allow create: if isAdmin();
+      allow update: if isAdmin() && resource != null;
+      allow delete: if isAdmin() && resource != null;
+    }
+
+    /**
+     * @description Controls access to the catalog of premade sign designs.
+     * @path /premade_designs/{premadeDesignId}
+     * @allow (read) Any user, including unauthenticated ones, can browse premade designs.
+     * @deny (update) A non-admin user trying to change the price of a premade design.
+     * @principle Allows public read access for catalog data but restricts modifications to administrators.
+     */
+    match /premade_designs/{premadeDesignId} {
+      allow get: if true;
+      allow list: if true;
+      allow create: if isAdmin();
+      allow update: if isAdmin() && resource != null;
+      allow delete: if isAdmin() && resource != null;
+    }
+
+    // --------------------------------
+    // Administrative Roles
+    // --------------------------------
+
+    /**
+     * @description Controls access to the admin role collection.
+     * @path /roles_admin/{adminUid}
+     * @allow (get) An admin can check if another user is an admin.
+     * @deny (create, update, delete) All users are denied write access to prevent privilege escalation.
+     * @principle Secures the admin role system. Roles should be managed via the Firebase Console or a trusted backend server.
+     */
+    match /roles_admin/{adminUid} {
+      allow get: if isAdmin();
+      allow list: if isAdmin();
+      allow create: if false;
+      allow update: if false;
+      allow delete: if false;
+    }
+  }
+}
