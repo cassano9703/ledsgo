@@ -11,22 +11,23 @@ import {
   DialogFooter,
   DialogDescription
 } from "@/components/ui/dialog";
-import type { OurJobsImage } from "@/lib/placeholder-images";
 import { Separator } from "./ui/separator";
-import { colors } from "@/lib/config";
+import { colors as colorOptions } from "@/lib/config";
 import { cn } from "@/lib/utils";
+import type { NeonJob } from "@/lib/types";
+
 
 interface JobDetailsModalProps {
   isOpen: boolean;
   onClose: () => void;
-  job: OurJobsImage | null;
+  job: NeonJob | null;
 }
 
 export function JobDetailsModal({ isOpen, onClose, job }: JobDetailsModalProps) {
   if (!job) return null;
 
-  const jobColors = job.colores.split(',').map(c => c.trim().toLowerCase());
-  const colorDetails = colors.filter(c => jobColors.includes(c.name.toLowerCase()));
+  const jobColors = job.colors.split(',').map(c => c.trim().toLowerCase());
+  const colorDetails = colorOptions.filter(c => jobColors.includes(c.name.toLowerCase()));
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
@@ -34,7 +35,7 @@ export function JobDetailsModal({ isOpen, onClose, job }: JobDetailsModalProps) 
         className="sm:max-w-3xl border-accent shadow-[0_0_20px_hsl(var(--accent))]"
       >
         <DialogHeader>
-          <DialogTitle>{job.nombre}</DialogTitle>
+          <DialogTitle>{job.name}</DialogTitle>
           <DialogDescription>
             {job.alt}
           </DialogDescription>
@@ -55,10 +56,10 @@ export function JobDetailsModal({ isOpen, onClose, job }: JobDetailsModalProps) 
                 <Separator />
                 <div className="grid grid-cols-2 gap-x-4 gap-y-2">
                     <p className="font-semibold text-muted-foreground">Nombre:</p>
-                    <p>{job.nombre}</p>
+                    <p>{job.name}</p>
 
                     <p className="font-semibold text-muted-foreground">Medidas:</p>
-                    <p>{job.medidas}</p>
+                    <p>{job.measurements}</p>
 
                     <p className="font-semibold text-muted-foreground flex items-center">Colores:</p>
                     <div className="flex items-center gap-2 flex-wrap">
@@ -71,7 +72,7 @@ export function JobDetailsModal({ isOpen, onClose, job }: JobDetailsModalProps) 
                     </div>
 
                     <p className="font-semibold text-muted-foreground">Ciudad:</p>
-                    <p>{job.ciudad}</p>
+                    <p>{job.city}</p>
                 </div>
             </div>
         </div>

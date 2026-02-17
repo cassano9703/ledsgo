@@ -151,6 +151,21 @@ service cloud.firestore {
       allow update: if isAdmin() && resource != null;
       allow delete: if isAdmin() && resource != null;
     }
+    
+    /**
+     * @description Controls access to the neon jobs gallery.
+     * @path /neon_jobs/{jobId}
+     * @allow (read) Any user, including unauthenticated ones, can browse neon jobs.
+     * @deny (write) A non-admin user trying to modify the neon jobs.
+     * @principle Allows public read access for gallery data but restricts modifications to administrators.
+     */
+    match /neon_jobs/{jobId} {
+      allow get: if true;
+      allow list: if true;
+      allow create: if isAdmin();
+      allow update: if isAdmin() && resource != null;
+      allow delete: if isAdmin() && resource != null;
+    }
 
     // --------------------------------
     // Administrative Roles

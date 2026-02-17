@@ -357,6 +357,56 @@
         "contactEmail",
         "paymentStatus"
       ]
+    },
+    "NeonJob": {
+      "title": "Neon Job",
+      "description": "Represents a completed neon sign job to be displayed in the gallery.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the project or client."
+        },
+        "alt": {
+          "type": "string",
+          "description": "Alt text for the image."
+        },
+        "imageUrl": {
+          "type": "string",
+          "description": "URL of the job's image.",
+          "format": "uri"
+        },
+        "measurements": {
+          "type": "string",
+          "description": "Dimensions of the sign."
+        },
+        "colors": {
+          "type": "string",
+          "description": "Comma-separated list of colors used."
+        },
+        "city": {
+          "type": "string",
+          "description": "City where the job was delivered."
+        },
+        "objectPosition": {
+          "type": "string",
+          "description": "CSS object-position value for the image."
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Timestamp of creation.",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "name",
+        "alt",
+        "imageUrl",
+        "measurements",
+        "colors",
+        "city",
+        "createdAt"
+      ]
     }
   },
   "auth": {
@@ -467,6 +517,22 @@
             {
               "name": "adminUid",
               "description": "The unique identifier (UID) of a user granted administrator privileges."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/neon_jobs/{jobId}",
+        "definition": {
+          "entityName": "NeonJob",
+          "schema": {
+            "$ref": "#/backend/entities/NeonJob"
+          },
+          "description": "Stores neon sign projects added by administrators. Publicly readable, admin-writable.",
+          "params": [
+            {
+              "name": "jobId",
+              "description": "The unique identifier for a neon sign project."
             }
           ]
         }

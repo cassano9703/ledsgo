@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Loader2 } from "lucide-react";
+import { NeonJobManager } from "@/components/admin/neon-job-manager";
 
 export default function AdminDashboardPage() {
     const auth = useAuth();
@@ -31,13 +32,13 @@ export default function AdminDashboardPage() {
     }
 
     return (
-        <div className="flex flex-col min-h-screen items-center justify-center p-8">
-            <div className="w-full max-w-4xl">
+        <div className="flex flex-col min-h-screen items-center p-8">
+            <div className="w-full max-w-6xl">
                 <div className="flex justify-between items-center mb-8">
                     <h1 className="text-3xl font-bold">Panel de Administrador</h1>
                     <Button onClick={handleLogout} variant="outline">Cerrar Sesión</Button>
                 </div>
-                <p>Bienvenido, {user.email}. ¡Desde aquí podrás gestionar tus imágenes!</p>
+                <NeonJobManager />
             </div>
         </div>
     );
