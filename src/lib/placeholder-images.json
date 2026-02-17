@@ -43,9 +43,9 @@
     },
     {
       "id": "premade-4",
-      "title": "Eventos y Fiestas",
+      "title": "Neón",
       "description": "El detalle perfecto para cumpleaños, aniversarios o cualquier celebración. ¡Haz que tu evento brille!",
-      "imageUrl": "https://images.unsplash.com/photo-1718096551424-910dff37709f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxwYXJ0eSUyMGV2ZW50fGVufDB8fHx8MTc2NzA0NDk0Nnww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://i.imgur.com/nmuZ51D.jpeg",
       "imageHint": "party event"
     }
   ],
@@ -80,26 +80,6 @@
       "ciudad": "Cusco",
       "imageUrl": "https://i.imgur.com/iXSOjzn.png",
       "imageHint": "chair neon"
-    },
-    {
-      "id": "job-4",
-      "alt": "Cliente con un letrero de neón 'Box Brand Box'.",
-      "nombre": "Box Brand Box",
-      "medidas": "90cm x 90cm",
-      "colores": "Blue, Red",
-      "ciudad": "Trujillo",
-      "imageUrl": "https://picsum.photos/seed/job4/600/600",
-      "imageHint": "box neon"
-    },
-    {
-      "id": "job-5",
-      "alt": "Cliente con un letrero de neón de los Rolling Stones.",
-      "nombre": "Rolling Stones",
-      "medidas": "70cm x 70cm",
-      "colores": "Red",
-      "ciudad": "Lima",
-      "imageUrl": "https://picsum.photos/seed/job5/600/600",
-      "imageHint": "stones neon"
     }
   ],
   "aboutUsImages": [
@@ -114,7 +94,7 @@
     {
       "id": "vid-1",
       "title": "Neón para Bares ¡Increíble!",
-      "thumbnailUrl": "https://i.imgur.com/T3P9IPP.mp4",
+      "thumbnailUrl": "https://i.imgur.com/BVr9CRz.mp4",
       "creator": {
         "name": "Alex Neon",
         "avatarUrl": "https://i.imgur.com/T3P9IPP.mp4",
@@ -124,7 +104,7 @@
     {
       "id": "vid-2",
       "title": "Decorando mi Habitación",
-      "thumbnailUrl": "https://i.imgur.com/T3P9IPP.mp4",
+      "thumbnailUrl": "https://i.imgur.com/zhqVzuP.mp4",
       "creator": {
         "name": "Diseño Interior",
         "avatarUrl": "https://picsum.photos/seed/avatar2/100/100",
@@ -134,7 +114,7 @@
     {
       "id": "vid-3",
       "title": "El Logo de mi Negocio en Neón",
-      "thumbnailUrl": "https://picsum.photos/seed/vid3/540/960",
+      "thumbnailUrl": "https://i.imgur.com/ngjKWI2.mp4",
       "creator": {
         "name": "Emprendedor PRO",
         "avatarUrl": "https://picsum.photos/seed/avatar3/100/100",
@@ -144,7 +124,7 @@
     {
       "id": "vid-4",
       "title": "Fiesta Neón Inolvidable",
-      "thumbnailUrl": "https://picsum.photos/seed/vid4/540/960",
+      "thumbnailUrl": "https://i.imgur.com/yJVsklD.mp4",
       "creator": {
         "name": "Party Planners",
         "avatarUrl": "https://picsum.photos/seed/avatar4/100/100",
@@ -154,7 +134,7 @@
     {
       "id": "vid-5",
       "title": "Instalación Fácil y Rápida",
-      "thumbnailUrl": "https://picsum.photos/seed/vid5/540/960",
+      "thumbnailUrl": "https://i.imgur.com/0wxa7Hw.mp4",
       "creator": {
         "name": "Leds Go",
         "avatarUrl": "https://picsum.photos/seed/avatar5/100/100",
