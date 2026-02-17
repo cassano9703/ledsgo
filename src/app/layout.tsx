@@ -1,6 +1,7 @@
 import type {Metadata} from 'next';
 import './globals.css';
 import { Toaster } from "@/components/ui/toaster"
+import { FirebaseClientProvider } from '@/firebase/client-provider';
 
 export const metadata: Metadata = {
   title: 'Leds Go Configurator',
@@ -20,7 +21,9 @@ export default function RootLayout({
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Lobster&family=Pacifico&family=Bebas+Neue&family=Dancing+Script&family=Kalam&family=Alex+Brush&family=Parisienne&family=Caveat&family=Allura&family=Cedarville+Cursive&family=Orbitron&family=Tangerine&family=Yeseva+One&display=swap" rel="stylesheet" crossOrigin="anonymous" />
       </head>
       <body className="font-body antialiased min-h-screen">
-        {children}
+        <FirebaseClientProvider>
+          {children}
+        </FirebaseClientProvider>
         <Toaster />
       </body>
     </html>
