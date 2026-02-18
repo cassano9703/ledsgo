@@ -13,7 +13,6 @@ import { LedSignPreview } from "./led-sign-preview";
 import { OrderModal } from "./order-modal";
 import { cn } from "@/lib/utils";
 import { Heart, Star } from "lucide-react";
-import { toPng } from 'html-to-image';
 import { useToast } from "@/hooks/use-toast";
 import Image from "next/image";
 
@@ -66,16 +65,18 @@ export function LedSignConfigurator() {
       return;
     }
 
-    toPng(previewRef.current, { cacheBust: true, pixelRatio: 1.5 })
-      .then(callback)
-      .catch((err) => {
-        console.error(err);
-        toast({
-          variant: "destructive",
-          title: "Error al capturar la imagen",
-          description: "No se pudo generar la imagen. Por favor, inténtalo de nuevo.",
+    import('html-to-image').then(({ toPng }) => {
+        toPng(previewRef.current, { cacheBust: true, pixelRatio: 1.5 })
+        .then(callback)
+        .catch((err) => {
+            console.error(err);
+            toast({
+            variant: "destructive",
+            title: "Error al capturar la imagen",
+            description: "No se pudo generar la imagen. Por favor, inténtalo de nuevo.",
+            });
         });
-      });
+    });
   }, [previewRef, toast]);
   
   const handleOpenOrderModal = () => {
