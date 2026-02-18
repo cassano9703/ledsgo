@@ -25,7 +25,7 @@ export function Differentiators() {
 
   return (
     <section 
-      className="relative py-12 md:py-20 lg:py-24"
+      className="relative py-12 md:py-16"
       style={{ 
         backgroundImage: `url('${backgroundImageUrl}')`, 
         backgroundSize: 'cover', 
