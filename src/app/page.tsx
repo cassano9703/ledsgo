@@ -33,7 +33,7 @@ export default function Home() {
             <ColorPalette />
           </div>
         </section>
-        <section id="catalog" className="py-12">
+        <section id="catalog" className="pb-12 pt-4">
           <div className="w-full px-6 md:px-10 lg:px-16">
             <div className="mb-8">
               <div className="space-y-2">
