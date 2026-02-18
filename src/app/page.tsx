@@ -50,7 +50,7 @@ export default function Home() {
           </div>
         </section>
         <Differentiators />
-        <section id="videos" className="py-12 md:py-20 lg:py-24">
+        <section id="videos" className="pt-12 md:pt-20 lg:pt-24 pb-6 md:pb-10 lg:pb-12">
           <div className="w-full px-4 md:px-6">
             <div className="flex flex-col items-center space-y-4 text-center">
               <div className="space-y-2">
@@ -65,7 +65,7 @@ export default function Home() {
             <VideoGallery />
           </div>
         </section>
-        <section id="about-us" className="py-12 md:py-20 lg:py-24 bg-secondary">
+        <section id="about-us" className="pt-6 md:pt-10 lg:pt-12 pb-12 md:pb-20 lg:pb-24 bg-secondary">
           <div className="w-full px-6 md:px-10 lg:px-16">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
               <div className="lg:col-span-4 flex flex-col gap-8">
