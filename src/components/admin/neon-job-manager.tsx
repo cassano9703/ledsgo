@@ -87,7 +87,7 @@ export function NeonJobManager() {
 
   const neonJobsQuery = useMemoFirebase(() => {
     if (!firestore) return null;
-    return query(collection(firestore, 'neon_jobs'), orderBy('createdAt', 'desc'));
+    return query(collection(firestore, 'neon_jobs'));
   }, [firestore]);
 
   const { data: neonJobs, isLoading } = useCollection<NeonJob>(neonJobsQuery);
