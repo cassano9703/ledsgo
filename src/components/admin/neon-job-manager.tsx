@@ -97,7 +97,6 @@ export function NeonJobManager() {
         const q = query(collection(firestore, 'neon_jobs'));
         const querySnapshot = await getDocs(q);
         const jobs = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as NeonJob));
-        // Sort jobs by creation date, newest first
         jobs.sort((a, b) => (b.createdAt?.seconds || 0) - (a.createdAt?.seconds || 0));
         setNeonJobs(jobs);
       } catch (error) {
@@ -144,15 +143,30 @@ export function NeonJobManager() {
         createdAt: serverTimestamp(),
       };
 
-      await addDoc(collection(firestore, 'neon_jobs'), docData);
+      const docRef = await addDoc(collection(firestore, 'neon_jobs'), docData);
       
       toast({
         title: '¡Éxito!',
         description: 'El nuevo trabajo ha sido añadido a la galería.',
       });
+      
+      // Optimistically update the UI instead of refetching
+      const newJobForState: NeonJob = {
+        id: docRef.id,
+        name: data.name,
+        alt: data.alt,
+        measurements: data.measurements,
+        colors: data.colors,
+        city: data.city,
+        objectPosition: data.objectPosition,
+        imageUrl: imageUrl,
+        // Use a client-side timestamp for immediate display. The server will have the server one.
+        createdAt: { seconds: Date.now() / 1000, nanoseconds: 0 }, 
+      };
 
-      // Refetch jobs to get the latest list with the new item
-      await fetchJobs();
+      // Add the new job to the top of the list
+      setNeonJobs(prevJobs => [newJobForState, ...prevJobs]);
+
       form.reset();
 
     } catch (error) {
