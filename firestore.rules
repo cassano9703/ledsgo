@@ -153,15 +153,14 @@ service cloud.firestore {
     }
     
     /**
-     * @description Controls access to the neon jobs gallery.
+     * @description Controls access to the neon jobs gallery. Publicly readable, admin-writable.
      * @path /neon_jobs/{jobId}
-     * @allow (read, write) Any user can read and write to the neon jobs gallery.
-     * @principle Allows public read and write access for the gallery.
+     * @principle Allows public read access for the gallery, but write is restricted to admins.
      */
     match /neon_jobs/{jobId} {
       allow get: if true;
       allow list: if true;
-      allow write: if true;
+      allow write: if isAdmin();
     }
 
     // --------------------------------

@@ -40,7 +40,7 @@ export function OurJobsCarousel() {
                       height={600}
                       className="object-contain w-full h-full"
                       data-ai-hint={image.imageHint}
-                      style={{ objectPosition: image.objectPosition }}
+                      style={{ objectPosition: image.objectPosition || 'center' }}
                     />
                   </div>
                 </div>
