@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { useFirestore } from '@/firebase';
+import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import {
   collection,
   addDoc,
@@ -63,7 +64,9 @@ const jobSchema = z.object({
   colors: z.string().min(3, 'Añade al menos un color.'),
   city: z.string().min(3, 'Especifica la ciudad.'),
   objectPosition: z.string().optional(),
-  imageUrl: z.string().url('Por favor, introduce una URL de imagen válida.'),
+  image: z
+    .instanceof(FileList)
+    .refine((files) => files?.length === 1, 'Debes subir una imagen.'),
 });
 
 type JobFormValues = z.infer<typeof jobSchema>;
@@ -84,19 +87,18 @@ export function NeonJobManager() {
       colors: '',
       city: '',
       objectPosition: 'center',
-      imageUrl: '',
     },
   });
 
-  useEffect(() => {
-    if (!firestore) return;
-
-    const fetchJobs = async () => {
+  const fetchJobs = async () => {
+      if (!firestore) return;
       setIsLoading(true);
       try {
         const q = query(collection(firestore, 'neon_jobs'));
         const querySnapshot = await getDocs(q);
         const jobs = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as NeonJob));
+        // Sort jobs by creation date, newest first
+        jobs.sort((a, b) => (b.createdAt?.seconds || 0) - (a.createdAt?.seconds || 0));
         setNeonJobs(jobs);
       } catch (error) {
         console.error(error);
@@ -106,39 +108,60 @@ export function NeonJobManager() {
       }
     };
 
+  useEffect(() => {
     fetchJobs();
-  }, [firestore, toast]);
+  }, [firestore]);
 
 
   const onSubmit = async (data: JobFormValues) => {
     if (!firestore) {
-      toast({
-        variant: 'destructive',
-        title: 'Error de Conexión',
-        description: 'No se pudo conectar a la base de datos.',
-      });
+      toast({ variant: 'destructive', title: 'Error', description: 'No se pudo conectar a la base de datos.' });
       return;
     }
+    
+    const imageFile = data.image[0];
+    if (!imageFile) {
+        toast({ variant: 'destructive', title: 'Error', description: 'No se ha seleccionado ninguna imagen.' });
+        return;
+    }
+
     try {
-      const docRef = await addDoc(collection(firestore, 'neon_jobs'), {
-        ...data,
+      // 1. Upload image to Firebase Storage
+      const storage = getStorage();
+      const storageRef = ref(storage, `neon_jobs/${Date.now()}_${imageFile.name}`);
+      const uploadResult = await uploadBytes(storageRef, imageFile);
+      const imageUrl = await getDownloadURL(uploadResult.ref);
+
+      // 2. Save job data to Firestore
+      const docData = {
+        name: data.name,
+        alt: data.alt,
+        measurements: data.measurements,
+        colors: data.colors,
+        city: data.city,
+        objectPosition: data.objectPosition,
+        imageUrl: imageUrl,
         createdAt: serverTimestamp(),
-      });
+      };
+
+      await addDoc(collection(firestore, 'neon_jobs'), docData);
+      
       toast({
         title: '¡Éxito!',
         description: 'El nuevo trabajo ha sido añadido a la galería.',
       });
 
-      const newJob = { id: docRef.id, ...data, createdAt: new Date() } as NeonJob;
-      setNeonJobs(prevJobs => [newJob, ...prevJobs]);
-
+      // Refetch jobs to get the latest list with the new item
+      await fetchJobs();
       form.reset();
+
     } catch (error) {
       console.error(error);
+      const errorMessage = error instanceof Error ? error.message : 'Ocurrió un error desconocido.';
       toast({
         variant: 'destructive',
-        title: 'Error',
-        description: 'Ocurrió un error al guardar el trabajo.',
+        title: 'Error al guardar',
+        description: `Ocurrió un error al subir la imagen o guardar los datos. ${errorMessage}`,
       });
     }
   };
@@ -168,7 +191,7 @@ export function NeonJobManager() {
         <CardHeader>
           <CardTitle>Añadir Nuevo Trabajo</CardTitle>
           <CardDescription>
-            Completa los detalles y pega la URL de la imagen para añadirla a la galería.
+            Completa los detalles y sube la imagen para añadirla a la galería.
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -200,19 +223,17 @@ export function NeonJobManager() {
                   </FormItem>
                 )}
               />
-              <FormField
-                control={form.control}
-                name="imageUrl"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>URL de la Imagen</FormLabel>
-                    <FormControl>
-                      <Input placeholder="https://i.imgur.com/..." {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+              <FormItem>
+                <FormLabel>Imagen del trabajo</FormLabel>
+                <FormControl>
+                    <Input 
+                        type="file" 
+                        accept="image/png, image/jpeg, image/webp" 
+                        {...form.register("image")}
+                    />
+                </FormControl>
+                <FormMessage>{form.formState.errors.image?.message as React.ReactNode}</FormMessage>
+              </FormItem>
               <FormField
                 control={form.control}
                 name="measurements"
