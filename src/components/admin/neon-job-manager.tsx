@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { useFirestore, useCollection, useMemoFirebase } from '@/firebase';
+import { useAuth, useFirestore, useCollection, useMemoFirebase } from '@/firebase';
 import {
   collection,
   addDoc,
@@ -71,6 +71,7 @@ type JobFormValues = z.infer<typeof jobSchema>;
 export function NeonJobManager() {
   const { toast } = useToast();
   const firestore = useFirestore();
+  const auth = useAuth();
 
   const form = useForm<JobFormValues>({
     resolver: zodResolver(jobSchema),
@@ -93,7 +94,15 @@ export function NeonJobManager() {
   const { data: neonJobs, isLoading } = useCollection<NeonJob>(neonJobsQuery);
 
   const onSubmit = async (data: JobFormValues) => {
-    if (!firestore) return;
+    if (!firestore || !auth.currentUser) {
+      toast({
+        variant: 'destructive',
+        title: 'Error de Autenticación',
+        description:
+          'No estás autenticado. Por favor, recarga la página e inicia sesión de nuevo.',
+      });
+      return;
+    }
     try {
       await addDoc(collection(firestore, 'neon_jobs'), {
         ...data,
