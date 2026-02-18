@@ -61,7 +61,7 @@ export function Header() {
         >
           Nuestros Trabajos
         </Link>
-        <Button asChild variant="outline" className="rounded-full border-primary/80 hover:border-primary hover:bg-primary/10 text-primary hover:text-primary animate-glow" style={{ "--glow-color": "hsl(var(--primary))" } as React.CSSProperties}>
+        <Button asChild variant="outline" className="rounded-full border-primary/80 hover:border-primary hover:bg-primary/10 text-primary hover:text-primary">
           <Link href="/crear">Cotiza tu Diseño</Link>
         </Button>
       </nav>
