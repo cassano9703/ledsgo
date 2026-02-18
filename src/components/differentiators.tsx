@@ -16,7 +16,7 @@ const differentiators = [
   {
     name: "Bajo Consumo",
     icon: Zap,
-    description: "Tecnología LED eficiente para un menor gasto energético.",
+    description: "Tec. LED para un menor gasto de energía",
   },
 ];
 
