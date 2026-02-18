@@ -1,5 +1,6 @@
 import { Header } from "@/components/layout/header";
 import { LedSignConfigurator } from "@/components/led-sign-configurator";
+import { Footer } from "@/components/layout/footer";
 
 export default function CreatePage() {
   return (
@@ -25,9 +26,7 @@ export default function CreatePage() {
       </main>
 
 
-      <footer className="flex flex-col gap-2 sm:flex-row py-6 w-full shrink-0 items-center px-4 md:px-6 border-t">
-        <p className="text-xs text-muted-foreground">&copy; {new Date().getFullYear()} Leds Go. Todos los derechos reservados.</p>
-      </footer>
+      <Footer />
     </div>
 
   );

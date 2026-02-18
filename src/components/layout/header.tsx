@@ -39,7 +39,7 @@ export function Header() {
         
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="flex items-center gap-1 text-sm font-medium text-foreground/80 hover:text-accent transition-colors">
+            <Button suppressHydrationWarning variant="ghost" className="flex items-center gap-1 text-sm font-medium text-foreground/80 hover:text-accent transition-colors">
               Diseña tu Letrero
               <ChevronDown className="w-4 h-4" />
             </Button>

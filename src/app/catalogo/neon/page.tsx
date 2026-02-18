@@ -1,6 +1,7 @@
 
 import { Header } from "@/components/layout/header";
 import { NeonGallery } from "@/components/neon-gallery";
+import { Footer } from "@/components/layout/footer";
 
 export const dynamic = 'force-dynamic';
 
@@ -25,9 +26,7 @@ export default function NeonCatalogPage() {
           </div>
         </section>
       </main>
-      <footer className="flex flex-col gap-2 sm:flex-row py-6 w-full shrink-0 items-center px-4 md:px-6 border-t">
-        <p className="text-xs text-muted-foreground">&copy; {new Date().getFullYear()} Leds Go. Todos los derechos reservados.</p>
-      </footer>
+      <Footer />
     </div>
   );
 }
