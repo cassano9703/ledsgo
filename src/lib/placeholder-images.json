@@ -49,36 +49,36 @@
       "imageHint": "party event"
     }
   ],
-  "ourJobsImages": [
+  "neonJobs": [
     {
       "id": "job-1",
+      "name": "Skandaloso",
       "alt": "Cliente con un letrero de neón 'Skandaloso'.",
-      "nombre": "Skandaloso",
-      "medidas": "150cm x 80cm",
-      "colores": "Fuchsia",
-      "ciudad": "Lima",
       "imageUrl": "https://i.imgur.com/htY9X3E.png",
-      "imageHint": "client neon",
-      "objectPosition": "center 75%"
+      "measurements": "150cm x 80cm",
+      "colors": "Fuchsia",
+      "city": "Lima",
+      "objectPosition": "center 75%",
+      "imageHint": "client neon"
     },
     {
       "id": "job-2",
+      "name": "Lucas Art",
       "alt": "Cliente con un letrero de neón de alas y 'Lucas Art'.",
-      "nombre": "Lucas Art",
-      "medidas": "120cm x 80cm",
-      "colores": "Cyan, Yellow",
-      "ciudad": "Arequipa",
       "imageUrl": "https://i.imgur.com/OMeRgOs.png",
+      "measurements": "120cm x 80cm",
+      "colors": "Cyan, Yellow",
+      "city": "Arequipa",
       "imageHint": "wings neon"
     },
     {
       "id": "job-3",
+      "name": "Love Your Smile",
       "alt": "Letrero de neón 'Fall in love with your smile' en una silla elegante.",
-      "nombre": "Love Your Smile",
-      "medidas": "80cm x 60cm",
-      "colores": "Red",
-      "ciudad": "Cusco",
       "imageUrl": "https://i.imgur.com/iXSOjzn.png",
+      "measurements": "80cm x 60cm",
+      "colors": "Red",
+      "city": "Cusco",
       "imageHint": "chair neon"
     }
   ],

@@ -1,4 +1,5 @@
 import data from './placeholder-images.json';
+import type { NeonJob } from './types';
 
 export type ImagePlaceholder = {
   id: string;
@@ -13,18 +14,6 @@ export type HeroImage = {
   alt: string;
   imageUrl: string;
   imageHint: string;
-}
-
-export type OurJobsImage = {
-  id: string;
-  alt: string;
-  imageUrl: string;
-  imageHint: string;
-  nombre: string;
-  medidas: string;
-  colores: string;
-  ciudad: string;
-  objectPosition?: string;
 }
 
 export type AboutUsImage = {
@@ -47,6 +36,6 @@ export type VideoData = {
 
 export const HeroImages: HeroImage[] = data.heroImages;
 export const PlaceHolderImages: ImagePlaceholder[] = data.placeholderImages;
-export const OurJobsImages: OurJobsImage[] = data.ourJobsImages;
+export const NeonJobs: NeonJob[] = data.neonJobs;
 export const AboutUsImages: AboutUsImage[] = data.aboutUsImages;
 export const VideoDataItems: VideoData[] = data.videoGallery;

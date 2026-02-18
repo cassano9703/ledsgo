@@ -5,7 +5,8 @@ import Autoplay from "embla-carousel-autoplay"
 import useEmblaCarousel, { type EmblaCarouselType, type EmblaOptionsType } from 'embla-carousel-react'
 import Image from "next/image"
 
-import { OurJobsImages, type OurJobsImage } from "@/lib/placeholder-images"
+import { NeonJobs } from "@/lib/placeholder-images"
+import type { NeonJob } from "@/lib/types"
 import { JobDetailsModal } from "./job-details-modal"
 import { ChevronDown } from "lucide-react"
 
@@ -17,14 +18,14 @@ const OPTIONS: EmblaOptionsType = {
 
 export function OurJobsCarousel() {
   const [emblaRef, emblaApi] = useEmblaCarousel(OPTIONS, [Autoplay({ delay: 3000, stopOnInteraction: false })]);
-  const [selectedJob, setSelectedJob] = React.useState<OurJobsImage | null>(null);
+  const [selectedJob, setSelectedJob] = React.useState<NeonJob | null>(null);
 
   return (
     <>
       <div className="w-full h-full relative">
         <div className="w-full h-full overflow-hidden rounded-lg" ref={emblaRef}>
           <div className="embla__container--vertical h-full">
-            {OurJobsImages.map((image) => (
+            {NeonJobs.map((image) => (
               <div 
                 className="embla__slide--vertical" 
                 key={image.id}

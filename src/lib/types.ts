@@ -7,5 +7,5 @@ export type NeonJob = {
   colors: string;
   city: string;
   objectPosition?: string;
-  createdAt: any; // Firestore timestamp
+  imageHint?: string;
 };
