@@ -1,16 +1,16 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { useFirestore, useCollection, useMemoFirebase } from '@/firebase';
+import { useFirestore } from '@/firebase';
 import {
   collection,
   addDoc,
   serverTimestamp,
   query,
-  orderBy,
+  getDocs,
   deleteDoc,
   doc,
 } from 'firebase/firestore';
@@ -72,6 +72,9 @@ export function NeonJobManager() {
   const { toast } = useToast();
   const firestore = useFirestore();
 
+  const [neonJobs, setNeonJobs] = useState<NeonJob[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+
   const form = useForm<JobFormValues>({
     resolver: zodResolver(jobSchema),
     defaultValues: {
@@ -85,12 +88,27 @@ export function NeonJobManager() {
     },
   });
 
-  const neonJobsQuery = useMemoFirebase(() => {
-    if (!firestore) return null;
-    return query(collection(firestore, 'neon_jobs'));
-  }, [firestore]);
+  useEffect(() => {
+    if (!firestore) return;
 
-  const { data: neonJobs, isLoading } = useCollection<NeonJob>(neonJobsQuery);
+    const fetchJobs = async () => {
+      setIsLoading(true);
+      try {
+        const q = query(collection(firestore, 'neon_jobs'));
+        const querySnapshot = await getDocs(q);
+        const jobs = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as NeonJob));
+        setNeonJobs(jobs);
+      } catch (error) {
+        console.error(error);
+        toast({ variant: 'destructive', title: 'Error', description: 'No se pudieron cargar los trabajos.' });
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchJobs();
+  }, [firestore, toast]);
+
 
   const onSubmit = async (data: JobFormValues) => {
     if (!firestore) {
@@ -102,7 +120,7 @@ export function NeonJobManager() {
       return;
     }
     try {
-      await addDoc(collection(firestore, 'neon_jobs'), {
+      const docRef = await addDoc(collection(firestore, 'neon_jobs'), {
         ...data,
         createdAt: serverTimestamp(),
       });
@@ -110,6 +128,10 @@ export function NeonJobManager() {
         title: '¡Éxito!',
         description: 'El nuevo trabajo ha sido añadido a la galería.',
       });
+
+      const newJob = { id: docRef.id, ...data, createdAt: new Date() } as NeonJob;
+      setNeonJobs(prevJobs => [newJob, ...prevJobs]);
+
       form.reset();
     } catch (error) {
       console.error(error);
@@ -129,6 +151,7 @@ export function NeonJobManager() {
         title: 'Eliminado',
         description: 'El trabajo ha sido eliminado de la galería.',
       });
+      setNeonJobs(prevJobs => prevJobs.filter(job => job.id !== id));
     } catch (error) {
       console.error(error);
       toast({
