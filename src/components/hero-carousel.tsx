@@ -51,8 +51,11 @@ export function HeroCarousel() {
               <Button asChild size="lg">
                 <Link href="/crear">Letrero Neón</Link>
               </Button>
-              <Button asChild size="lg" variant="outline" className="border-white/50 bg-white/10 hover:bg-white/20 text-white backdrop-blur-sm">
-                <Link href="/crear/acrilico-espejo">Acrílico Espejo</Link>
+              <Button asChild size="lg" className="bg-gradient-to-r from-amber-400 to-yellow-500 text-black font-semibold shadow-lg hover:shadow-amber-500/40 transition-all duration-300 relative overflow-hidden group">
+                <Link href="/crear/acrilico-espejo">
+                  Acrílico Espejo
+                  <span className="absolute top-0 left-[-100%] w-full h-full bg-gradient-to-r from-transparent via-white/30 to-transparent transition-all duration-700 ease-in-out group-hover:left-[100%]"></span>
+                </Link>
               </Button>
             </div>
           </div>
