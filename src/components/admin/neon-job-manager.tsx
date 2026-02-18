@@ -6,12 +6,6 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { useFirestore, useCollection, useMemoFirebase } from '@/firebase';
 import {
-  getStorage,
-  ref,
-  uploadBytesResumable,
-  getDownloadURL,
-} from 'firebase/storage';
-import {
   collection,
   addDoc,
   serverTimestamp,
@@ -30,7 +24,6 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { Progress } from '@/components/ui/progress';
 import { useToast } from '@/hooks/use-toast';
 import {
   Card,
@@ -70,7 +63,7 @@ const jobSchema = z.object({
   colors: z.string().min(3, 'Añade al menos un color.'),
   city: z.string().min(3, 'Especifica la ciudad.'),
   objectPosition: z.string().optional(),
-  image: z.instanceof(File).refine((file) => file.size > 0, 'La imagen es requerida.'),
+  imageUrl: z.string().url('Por favor, introduce una URL de imagen válida.'),
 });
 
 type JobFormValues = z.infer<typeof jobSchema>;
@@ -78,8 +71,6 @@ type JobFormValues = z.infer<typeof jobSchema>;
 export function NeonJobManager() {
   const { toast } = useToast();
   const firestore = useFirestore();
-  const [uploadProgress, setUploadProgress] = useState(0);
-  const [isUploading, setIsUploading] = useState(false);
 
   const form = useForm<JobFormValues>({
     resolver: zodResolver(jobSchema),
@@ -90,6 +81,7 @@ export function NeonJobManager() {
       colors: '',
       city: '',
       objectPosition: 'center',
+      imageUrl: '',
     },
   });
 
@@ -102,46 +94,16 @@ export function NeonJobManager() {
 
   const onSubmit = async (data: JobFormValues) => {
     if (!firestore) return;
-    setIsUploading(true);
-    setUploadProgress(0);
-
     try {
-      const storage = getStorage();
-      const storageRef = ref(storage, `neon-jobs/${Date.now()}_${data.image.name}`);
-      const uploadTask = uploadBytesResumable(storageRef, data.image);
-
-      uploadTask.on(
-        'state_changed',
-        (snapshot) => {
-          const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          setUploadProgress(progress);
-        },
-        (error) => {
-          console.error(error);
-          toast({
-            variant: 'destructive',
-            title: 'Error en la subida',
-            description: 'No se pudo subir la imagen.',
-          });
-          setIsUploading(false);
-        },
-        async () => {
-          const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
-          await addDoc(collection(firestore, 'neon_jobs'), {
-            ...data,
-            imageUrl: downloadURL,
-            image: null, // No guardar el objeto File
-            createdAt: serverTimestamp(),
-          });
-          toast({
-            title: '¡Éxito!',
-            description: 'El nuevo trabajo ha sido añadido a la galería.',
-          });
-          form.reset();
-          setIsUploading(false);
-          setUploadProgress(0);
-        }
-      );
+      await addDoc(collection(firestore, 'neon_jobs'), {
+        ...data,
+        createdAt: serverTimestamp(),
+      });
+      toast({
+        title: '¡Éxito!',
+        description: 'El nuevo trabajo ha sido añadido a la galería.',
+      });
+      form.reset();
     } catch (error) {
       console.error(error);
       toast({
@@ -149,7 +111,6 @@ export function NeonJobManager() {
         title: 'Error',
         description: 'Ocurrió un error al guardar el trabajo.',
       });
-      setIsUploading(false);
     }
   };
 
@@ -177,7 +138,7 @@ export function NeonJobManager() {
         <CardHeader>
           <CardTitle>Añadir Nuevo Trabajo</CardTitle>
           <CardDescription>
-            Sube una imagen y completa los detalles para añadirla a la galería de neón.
+            Completa los detalles y pega la URL de la imagen para añadirla a la galería.
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -204,6 +165,19 @@ export function NeonJobManager() {
                     <FormLabel>Texto Alternativo (Descripción)</FormLabel>
                     <FormControl>
                       <Input placeholder="Letrero de neón fucsia en pared de ladrillos" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="imageUrl"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>URL de la Imagen</FormLabel>
+                    <FormControl>
+                      <Input placeholder="https://i.imgur.com/..." {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -261,31 +235,12 @@ export function NeonJobManager() {
                   </FormItem>
                 )}
               />
-              <FormField
-                control={form.control}
-                name="image"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Imagen</FormLabel>
-                    <FormControl>
-                      <Input
-                        type="file"
-                        accept="image/*"
-                        onChange={(e) => field.onChange(e.target.files?.[0])}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              {isUploading && <Progress value={uploadProgress} className="w-full" />}
               
-              <Button type="submit" className="w-full" disabled={isUploading}>
-                {isUploading ? (
+              <Button type="submit" className="w-full" disabled={form.formState.isSubmitting}>
+                {form.formState.isSubmitting ? (
                   <>
                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    Subiendo...
+                    Guardando...
                   </>
                 ) : (
                   'Añadir Trabajo'
