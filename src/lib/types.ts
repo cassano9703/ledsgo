@@ -8,4 +8,5 @@ export type NeonJob = {
   city: string;
   objectPosition?: string;
   imageHint?: string;
+  createdAt?: { seconds: number, nanoseconds: number };
 };

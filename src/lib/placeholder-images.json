@@ -135,6 +135,60 @@
       "city": "Surco",
       "objectPosition": "center",
       "imageHint": "bedroom sign"
+    },
+    {
+      "id": "job-9",
+      "name": "Barbería Clásica",
+      "alt": "Letrero de neón de un poste de barbero.",
+      "imageUrl": "https://i.imgur.com/8Q9lJ4P.jpeg",
+      "measurements": "50cm x 80cm",
+      "colors": "Rojo, Blanco, Azul",
+      "city": "Barranco",
+      "imageHint": "barber pole"
+    },
+    {
+      "id": "job-10",
+      "name": "Amor de Verano",
+      "alt": "Letrero de neón en forma de corazón en la playa.",
+      "imageUrl": "https://i.imgur.com/k4f7uZN.jpeg",
+      "measurements": "70cm x 70cm",
+      "colors": "Fucsia",
+      "city": "Máncora",
+      "objectPosition": "center",
+      "imageHint": "beach heart"
+    },
+    {
+      "id": "job-11",
+      "name": "Game On",
+      "alt": "Letreros de neón de controles de videojuegos.",
+      "imageUrl": "https://i.imgur.com/Y1Z2c9B.jpeg",
+      "measurements": "60cm x 40cm cada uno",
+      "colors": "Cian, Fucsia",
+      "city": "San Borja",
+      "objectPosition": "center",
+      "imageHint": "game controller"
+    },
+    {
+      "id": "job-12",
+      "name": "Tattoo Studio",
+      "alt": "Letrero de neón para un estudio de tatuajes.",
+      "imageUrl": "https://i.imgur.com/L3r0ZtX.jpeg",
+      "measurements": "100cm x 60cm",
+      "colors": "Rojo",
+      "city": "Miraflores",
+      "objectPosition": "center",
+      "imageHint": "tattoo sign"
+    },
+    {
+      "id": "job-13",
+      "name": "Coffee Time",
+      "alt": "Letrero de neón de una taza de café.",
+      "imageUrl": "https://i.imgur.com/5J3L3vG.jpeg",
+      "measurements": "50cm x 50cm",
+      "colors": "Blanco",
+      "city": "San Isidro",
+      "objectPosition": "center",
+      "imageHint": "coffee cup"
     }
   ],
   "aboutUsImages": [
