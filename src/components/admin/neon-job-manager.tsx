@@ -65,7 +65,7 @@ const jobSchema = z.object({
   city: z.string().min(3, 'Especifica la ciudad.'),
   objectPosition: z.string().optional(),
   image: z
-    .instanceof(FileList)
+    .any()
     .refine((files) => files?.length === 1, 'Debes subir una imagen.'),
 });
 
