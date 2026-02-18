@@ -2,6 +2,8 @@
 import { Header } from "@/components/layout/header";
 import { NeonGallery } from "@/components/neon-gallery";
 
+export const dynamic = 'force-dynamic';
+
 export default function NeonCatalogPage() {
   return (
     <div className="flex flex-col min-h-screen">
