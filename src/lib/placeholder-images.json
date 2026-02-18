@@ -80,6 +80,61 @@
       "colors": "Red",
       "city": "Cusco",
       "imageHint": "chair neon"
+    },
+    {
+      "id": "job-4",
+      "name": "Good Vibes",
+      "alt": "Letrero de neón 'Good Vibes' en una pared con plantas.",
+      "imageUrl": "https://i.imgur.com/5J3L3vG.jpeg",
+      "measurements": "100cm x 50cm",
+      "colors": "Cyan",
+      "city": "Miraflores",
+      "objectPosition": "center",
+      "imageHint": "neon quote"
+    },
+    {
+      "id": "job-5",
+      "name": "Crazy in Love",
+      "alt": "Letrero de neón 'Crazy in Love' en un evento de boda.",
+      "imageUrl": "https://i.imgur.com/h5E8P5P.jpeg",
+      "measurements": "120cm x 70cm",
+      "colors": "Blanco",
+      "city": "Punta Cana",
+      "objectPosition": "center",
+      "imageHint": "wedding sign"
+    },
+    {
+      "id": "job-6",
+      "name": "Barbería Royal",
+      "alt": "Logo de neón para una barbería con una corona.",
+      "imageUrl": "https://i.imgur.com/A8S5wI4.jpeg",
+      "measurements": "90cm x 90cm",
+      "colors": "Amber",
+      "city": "San Isidro",
+      "objectPosition": "center",
+      "imageHint": "barber neon"
+    },
+    {
+      "id": "job-7",
+      "name": "Planeta Neón",
+      "alt": "Letrero de neón con la forma del planeta Saturno.",
+      "imageUrl": "https://i.imgur.com/Q2zY6qL.jpeg",
+      "measurements": "60cm x 40cm",
+      "colors": "Purple, Yellow",
+      "city": "La Molina",
+      "objectPosition": "center",
+      "imageHint": "planet neon"
+    },
+    {
+      "id": "job-8",
+      "name": "To The Moon",
+      "alt": "Letrero de neón 'To the moon and back' sobre una cama.",
+      "imageUrl": "https://i.imgur.com/3f4A6Yf.jpeg",
+      "measurements": "150cm x 30cm",
+      "colors": "Fuchsia",
+      "city": "Surco",
+      "objectPosition": "center",
+      "imageHint": "bedroom sign"
     }
   ],
   "aboutUsImages": [
