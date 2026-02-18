@@ -33,14 +33,14 @@ export default function Home() {
             <ColorPalette />
           </div>
         </section>
-        <section id="catalog" className="py-12 md:py-20 lg:py-24">
+        <section id="catalog" className="py-12">
           <div className="w-full px-6 md:px-10 lg:px-16">
-            <div className="flex flex-col items-center space-y-4 text-center">
+            <div className="mb-8">
               <div className="space-y-2">
                 <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl font-headline">
                   Explora Nuestro Catálogo
                 </h2>
-                <p className="mx-auto max-w-[700px] text-muted-foreground md:text-xl">
+                <p className="max-w-[700px] text-muted-foreground md:text-xl">
                   Inspírate con nuestros diseños predefinidos o crea el tuyo desde cero.
                 </p>
               </div>
