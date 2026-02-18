@@ -39,7 +39,7 @@ export function Differentiators() {
           {differentiators.map((item) => (
             <div key={item.name} className="flex flex-col items-center gap-4 text-center">
               <div
-                className="w-24 h-24 rounded-full border-2 border-primary/50 flex items-center justify-center bg-secondary/80"
+                className="w-24 h-24 rounded-full border-2 border-white flex items-center justify-center bg-secondary/80"
                 style={{
                   boxShadow: "0 0 15px hsl(var(--primary) / 0.5)",
                 }}
