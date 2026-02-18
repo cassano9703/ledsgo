@@ -46,9 +46,14 @@ export function HeroCarousel() {
                 Iluminamos tus ideas con estrategia y diseño.
               </p>
             </div>
-            <Button asChild size="lg" className="pointer-events-auto">
-              <Link href="/crear">Crea tu letrero</Link>
-            </Button>
+            <div className="flex flex-col sm:flex-row gap-4 items-center pointer-events-auto">
+              <Button asChild size="lg">
+                <Link href="/crear">Crea tu Letrero Neón</Link>
+              </Button>
+              <Button asChild size="lg" variant="outline" className="border-white/50 bg-white/10 hover:bg-white/20 text-white backdrop-blur-sm">
+                <Link href="/crear/acrilico-espejo">Crea tu Letrero Acrílico Espejo</Link>
+              </Button>
+            </div>
           </div>
         </div>
       </div>
