@@ -55,7 +55,7 @@ export function Header() {
         </DropdownMenu>
 
         <Link
-          href="/#about-us"
+          href="/#client-photos"
           className="text-sm font-medium text-foreground/80 hover:text-accent transition-colors"
           prefetch={false}
         >

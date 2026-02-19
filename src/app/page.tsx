@@ -65,34 +65,40 @@ export default function Home() {
             <VideoGallery />
           </div>
         </section>
-        <section id="about-us" className="pt-6 md:pt-10 lg:pt-12 pb-12 md:pb-20 lg:pb-24 bg-secondary">
+        <section id="client-photos" className="py-12 md:py-20 lg:py-24">
+            <div className="w-full px-4 md:px-6">
+                <div className="grid md:grid-cols-2 gap-12 items-center">
+                    <div className="order-2 md:order-1 h-[600px]">
+                        <OurJobsCarousel />
+                    </div>
+                    <div className="order-1 md:order-2 space-y-4 text-center md:text-left">
+                        <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl font-headline">
+                            La Galería de Nuestros Clientes
+                        </h2>
+                        <p className="mx-auto max-w-[700px] text-muted-foreground md:text-xl">
+                            Cada letrero es una historia de éxito. Aquí puedes ver algunos de los proyectos que hemos realizado para nuestros clientes.
+                        </p>
+                        <Button asChild size="lg">
+                            <Link href="/catalogo/neon">Ver Galería Completa</Link>
+                        </Button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="process" className="py-12 md:py-20 lg:py-24 bg-secondary">
           <div className="w-full px-6 md:px-10 lg:px-16">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-              <div className="lg:col-span-4 flex flex-col gap-8">
-                <div className="space-y-4 text-center lg:text-left">
-                  <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl font-headline">
-                    Nuestros Clientes
-                  </h2>
-                  <p className="text-muted-foreground md:text-lg">
-                    Cada letrero es una historia de éxito. Aquí puedes ver algunos de los proyectos que hemos realizado para nuestros clientes.
-                  </p>
-                  <Button asChild>
-                    <Link href="/catalogo/neon">Ver catálogo completo</Link>
-                  </Button>
-                </div>
-                <div className="h-[500px]">
-                  <OurJobsCarousel />
-                </div>
+            <div className="flex flex-col items-center space-y-4 text-center mb-12">
+              <div className="space-y-2">
+                <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl font-headline">
+                  Nuestro Proceso de Atención
+                </h2>
+                <p className="mx-auto max-w-[700px] text-muted-foreground md:text-xl">
+                  Iluminamos tu marca en 5 simples pasos.
+                </p>
               </div>
-              <div className="lg:col-span-8">
-                 <div className="space-y-4 text-center lg:text-left">
-                    <h3 className="text-2xl font-bold tracking-tighter text-primary sm:text-3xl font-headline">
-                      Proceso de Atención
-                    </h3>
-                    <p className="text-muted-foreground">Iluminamos tu marca en 5 simples pasos.</p>
-                  </div>
-                <ProcessSteps />
-              </div>
+            </div>
+            <div className="max-w-4xl mx-auto">
+              <ProcessSteps />
             </div>
           </div>
         </section>
