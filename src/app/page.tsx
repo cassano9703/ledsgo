@@ -9,7 +9,6 @@ import { ColorPalette } from "@/components/color-palette";
 import { ProcessSteps } from "@/components/process-steps";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { VideoGallery } from "@/components/video-gallery";
 import { Footer } from "@/components/layout/footer";
 
 export default function Home() {
@@ -50,43 +49,44 @@ export default function Home() {
           </div>
         </section>
         <Differentiators />
-        <section id="our-jobs" className="py-12 md:py-20 lg:py-24">
-          <div className="w-full px-4 md:px-6">
-            <div className="flex flex-col items-center space-y-4 text-center mb-12">
-              <div className="space-y-2">
-                <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl font-headline">
-                  Nuestros Trabajos
-                </h2>
-                <p className="mx-auto max-w-[700px] text-muted-foreground md:text-xl">
-                  Inspírate con la galería de nuestros clientes y mira nuestros trabajos en acción.
-                </p>
-              </div>
-            </div>
-            <div className="h-[600px] mb-20 max-w-4xl mx-auto">
-              <OurJobsCarousel />
-            </div>
-            <VideoGallery />
-            <div className="mt-12 text-center">
-              <Button asChild size="lg">
-                <Link href="/catalogo/neon">Ver Galería Completa</Link>
-              </Button>
-            </div>
-          </div>
-        </section>
-        <section id="process" className="py-12 md:py-20 lg:py-24 bg-secondary">
+        <section id="our-jobs" className="py-12 md:py-20 lg:py-24 bg-secondary">
           <div className="w-full px-6 md:px-10 lg:px-16">
-            <div className="flex flex-col items-center space-y-4 text-center mb-12">
-              <div className="space-y-2">
-                <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl font-headline">
-                  Nuestro Proceso de Atención
-                </h2>
-                <p className="mx-auto max-w-[700px] text-muted-foreground md:text-xl">
-                  Iluminamos tu marca en 5 simples pasos.
-                </p>
+            <div className="grid lg:grid-cols-2 gap-16 items-start max-w-7xl mx-auto">
+              
+              {/* Left Column: Nuestros Clientes */}
+              <div className="flex flex-col gap-8">
+                <div className="space-y-2">
+                  <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl font-headline">
+                    Nuestros Clientes
+                  </h2>
+                  <p className="max-w-[500px] text-muted-foreground md:text-xl">
+                    Cada letrero es una historia de éxito. Aquí puedes ver algunos de los proyectos que hemos realizado para nuestros clientes.
+                  </p>
+                </div>
+                <div className="h-[500px] w-full max-w-md mx-auto lg:mx-0">
+                  <OurJobsCarousel />
+                </div>
+                <div className="mt-4">
+                  <Button asChild size="lg">
+                    <Link href="/catalogo/neon">Ver catálogo completo</Link>
+                  </Button>
+                </div>
               </div>
-            </div>
-            <div className="max-w-4xl mx-auto">
-              <ProcessSteps />
+
+              {/* Right Column: Proceso de Atención */}
+              <div className="flex flex-col gap-8">
+                <div className="space-y-2">
+                  <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl font-headline">
+                    Proceso de Atención
+                  </h2>
+                  <p className="max-w-[700px] text-muted-foreground md:text-xl">
+                    Iluminamos tu marca en 5 simples pasos.
+                  </p>
+                </div>
+                <div className="w-full">
+                  <ProcessSteps />
+                </div>
+              </div>
             </div>
           </div>
         </section>

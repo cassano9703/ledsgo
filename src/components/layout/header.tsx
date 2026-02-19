@@ -59,7 +59,7 @@ export function Header() {
           className="text-sm font-medium text-foreground/80 hover:text-accent transition-colors"
           prefetch={false}
         >
-          Nuestros Trabajos
+          Nuestros Clientes
         </Link>
         <Button asChild variant="outline" className="rounded-full border-primary/80 hover:border-primary hover:bg-primary/10 text-primary hover:text-primary">
           <Link href="/crear">Cotiza tu Diseño</Link>
