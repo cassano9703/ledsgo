@@ -52,15 +52,23 @@ export default function Home() {
         <Differentiators />
         <section id="our-jobs" className="py-12 md:py-20 lg:py-24">
             <div className="w-full px-4 md:px-6">
+                <div className="flex flex-col items-center space-y-4 text-center mb-12">
+                    <div className="space-y-2">
+                        <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl font-headline">
+                            Nuestros Trabajos
+                        </h2>
+                        <p className="mx-auto max-w-[700px] text-muted-foreground md:text-xl">
+                            Inspírate con la galería de nuestros clientes y mira nuestros trabajos en acción.
+                        </p>
+                    </div>
+                </div>
+
                 <div className="grid md:grid-cols-2 gap-12 items-center">
                     <div className="order-2 md:order-1 h-[600px]">
                         <OurJobsCarousel />
                     </div>
                     <div className="order-1 md:order-2 space-y-4 text-center md:text-left">
-                        <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl font-headline">
-                            La Galería de Nuestros Clientes
-                        </h2>
-                        <p className="mx-auto max-w-[700px] text-muted-foreground md:text-xl">
+                         <p className="mx-auto max-w-[700px] text-muted-foreground md:text-xl">
                             Cada letrero es una historia de éxito. Aquí puedes ver algunos de los proyectos que hemos realizado para nuestros clientes.
                         </p>
                         <Button asChild size="lg">
@@ -68,17 +76,8 @@ export default function Home() {
                         </Button>
                     </div>
                 </div>
+
                 <div className="mt-20">
-                    <div className="flex flex-col items-center space-y-4 text-center">
-                        <div className="space-y-2">
-                            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl font-headline">
-                            Mira Nuestros Trabajos en Acción
-                            </h2>
-                            <p className="mx-auto max-w-[700px] text-muted-foreground md:text-xl">
-                            Videos de clientes y proyectos que te inspirarán.
-                            </p>
-                        </div>
-                    </div>
                     <VideoGallery />
                 </div>
             </div>
