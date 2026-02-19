@@ -24,7 +24,7 @@
       "id": "premade-1",
       "title": "Acrílico Espejo",
       "description": "Dale un toque de elegancia y profesionalismo a tu espacio con letreros en acrílico espejo. Ideal para logos y nombres de empresa.",
-      "imageUrl": "https://i.imgur.com/3rx6xmL.png",
+      "imageUrl": "https://i.imgur.com/zym0iDi.png",
       "imageHint": "barber sign",
       "link": "/catalogo/acrilico-espejo",
       "buttonText": "Ver Catálogo",
@@ -72,7 +72,6 @@
       "city": "Lima",
       "objectPosition": "center 75%",
       "imageHint": "client neon",
-      "category": "Negocios",
       "createdAt": {
         "seconds": 1672531200,
         "nanoseconds": 0
@@ -87,7 +86,6 @@
       "colors": "Cyan, Yellow",
       "city": "Arequipa",
       "imageHint": "wings neon",
-      "category": "Negocios",
       "createdAt": {
         "seconds": 1672531201,
         "nanoseconds": 0
@@ -102,7 +100,6 @@
       "colors": "Red",
       "city": "Cusco",
       "imageHint": "chair neon",
-      "category": "Negocios",
       "createdAt": {
         "seconds": 1672531202,
         "nanoseconds": 0
@@ -118,7 +115,6 @@
       "city": "Miraflores",
       "objectPosition": "center",
       "imageHint": "neon quote",
-      "category": "Hogar",
       "createdAt": {
         "seconds": 1672531203,
         "nanoseconds": 0
@@ -134,7 +130,6 @@
       "city": "Punta Cana",
       "objectPosition": "center",
       "imageHint": "wedding sign",
-      "category": "Personalizados",
       "createdAt": {
         "seconds": 1672531204,
         "nanoseconds": 0
@@ -150,7 +145,6 @@
       "city": "La Molina",
       "objectPosition": "center",
       "imageHint": "planet neon",
-      "category": "Hogar",
       "createdAt": {
         "seconds": 1672531206,
         "nanoseconds": 0
@@ -166,7 +160,6 @@
       "city": "Surco",
       "objectPosition": "center",
       "imageHint": "bedroom sign",
-      "category": "Hogar",
       "createdAt": {
         "seconds": 1672531207,
         "nanoseconds": 0
@@ -181,7 +174,6 @@
       "colors": "Rojo, Blanco, Azul",
       "city": "Barranco",
       "imageHint": "barber pole",
-      "category": "Negocios",
       "createdAt": {
         "seconds": 1672531208,
         "nanoseconds": 0
@@ -197,7 +189,6 @@
       "city": "Máncora",
       "objectPosition": "center",
       "imageHint": "beach heart",
-      "category": "Ciudad",
       "createdAt": {
         "seconds": 1672531209,
         "nanoseconds": 0
@@ -213,7 +204,6 @@
       "city": "San Borja",
       "objectPosition": "center",
       "imageHint": "game controller",
-      "category": "Hogar",
       "createdAt": {
         "seconds": 1672531210,
         "nanoseconds": 0
@@ -229,7 +219,6 @@
       "city": "Miraflores",
       "objectPosition": "center",
       "imageHint": "tattoo sign",
-      "category": "Negocios",
       "createdAt": {
         "seconds": 1672531211,
         "nanoseconds": 0
@@ -245,7 +234,6 @@
       "city": "San Isidro",
       "objectPosition": "center",
       "imageHint": "coffee cup",
-      "category": "Negocios",
       "createdAt": {
         "seconds": 1672531212,
         "nanoseconds": 0
@@ -261,7 +249,6 @@
       "city": "San Borja",
       "objectPosition": "center",
       "imageHint": "woman neon",
-      "category": "Personalizados",
       "createdAt": {
         "seconds": 1672531213,
         "nanoseconds": 0
@@ -277,7 +264,6 @@
       "city": "Barranco",
       "objectPosition": "center",
       "imageHint": "cocktail sign",
-      "category": "Negocios",
       "createdAt": {
         "seconds": 1672531214,
         "nanoseconds": 0
@@ -293,7 +279,6 @@
       "city": "La Molina",
       "objectPosition": "center",
       "imageHint": "birthday party",
-      "category": "Personalizados",
       "createdAt": {
         "seconds": 1672531215,
         "nanoseconds": 0
@@ -309,7 +294,6 @@
       "city": "Miraflores",
       "objectPosition": "center",
       "imageHint": "store neon",
-      "category": "Ciudad",
       "createdAt": {
         "seconds": 1672531216,
         "nanoseconds": 0
@@ -325,7 +309,6 @@
       "city": "Surco",
       "objectPosition": "center",
       "imageHint": "ice cream",
-      "category": "Negocios",
       "createdAt": {
         "seconds": 1672531217,
         "nanoseconds": 0
@@ -343,7 +326,6 @@
       "city": "San Isidro",
       "objectPosition": "center",
       "imageHint": "barber sign",
-      "category": "Negocios",
       "createdAt": {
         "seconds": 1672531205,
         "nanoseconds": 0
@@ -358,7 +340,6 @@
       "colors": "Plateado sobre Blanco",
       "city": "Cusco",
       "imageHint": "chair sign",
-      "category": "Negocios",
       "createdAt": {
         "seconds": 1672531202,
         "nanoseconds": 0
