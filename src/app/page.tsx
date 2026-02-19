@@ -50,22 +50,7 @@ export default function Home() {
           </div>
         </section>
         <Differentiators />
-        <section id="videos" className="pt-12 md:pt-20 lg:pt-24 pb-6 md:pb-10 lg:pb-12">
-          <div className="w-full px-4 md:px-6">
-            <div className="flex flex-col items-center space-y-4 text-center">
-              <div className="space-y-2">
-                <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl font-headline">
-                  Mira Nuestros Trabajos en Acción
-                </h2>
-                <p className="mx-auto max-w-[700px] text-muted-foreground md:text-xl">
-                  Videos de clientes y proyectos que te inspirarán.
-                </p>
-              </div>
-            </div>
-            <VideoGallery />
-          </div>
-        </section>
-        <section id="client-photos" className="py-12 md:py-20 lg:py-24">
+        <section id="our-jobs" className="py-12 md:py-20 lg:py-24">
             <div className="w-full px-4 md:px-6">
                 <div className="grid md:grid-cols-2 gap-12 items-center">
                     <div className="order-2 md:order-1 h-[600px]">
@@ -82,6 +67,19 @@ export default function Home() {
                             <Link href="/catalogo/neon">Ver Galería Completa</Link>
                         </Button>
                     </div>
+                </div>
+                <div className="mt-20">
+                    <div className="flex flex-col items-center space-y-4 text-center">
+                        <div className="space-y-2">
+                            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl font-headline">
+                            Mira Nuestros Trabajos en Acción
+                            </h2>
+                            <p className="mx-auto max-w-[700px] text-muted-foreground md:text-xl">
+                            Videos de clientes y proyectos que te inspirarán.
+                            </p>
+                        </div>
+                    </div>
+                    <VideoGallery />
                 </div>
             </div>
         </section>
