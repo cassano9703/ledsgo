@@ -71,13 +71,13 @@ export default function Home() {
               <div className="lg:col-span-4 flex flex-col gap-8">
                 <div className="space-y-4 text-center lg:text-left">
                   <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl font-headline">
-                    Nuestros Trabajos
+                    Nuestros Clientes
                   </h2>
                   <p className="text-muted-foreground md:text-lg">
                     Cada letrero es una historia de éxito. Aquí puedes ver algunos de los proyectos que hemos realizado para nuestros clientes.
                   </p>
                   <Button asChild>
-                    <Link href="/crear">Crea tu propio diseño</Link>
+                    <Link href="/catalogo/neon">Ver catálogo completo</Link>
                   </Button>
                 </div>
                 <div className="h-[500px]">

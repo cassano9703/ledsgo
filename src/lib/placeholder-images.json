@@ -59,7 +59,11 @@
       "colors": "Fuchsia",
       "city": "Lima",
       "objectPosition": "center 75%",
-      "imageHint": "client neon"
+      "imageHint": "client neon",
+      "createdAt": {
+        "seconds": 1672531200,
+        "nanoseconds": 0
+      }
     },
     {
       "id": "job-2",
@@ -69,7 +73,11 @@
       "measurements": "120cm x 80cm",
       "colors": "Cyan, Yellow",
       "city": "Arequipa",
-      "imageHint": "wings neon"
+      "imageHint": "wings neon",
+      "createdAt": {
+        "seconds": 1672531201,
+        "nanoseconds": 0
+      }
     },
     {
       "id": "job-3",
@@ -79,7 +87,11 @@
       "measurements": "80cm x 60cm",
       "colors": "Red",
       "city": "Cusco",
-      "imageHint": "chair neon"
+      "imageHint": "chair neon",
+      "createdAt": {
+        "seconds": 1672531202,
+        "nanoseconds": 0
+      }
     },
     {
       "id": "job-4",
@@ -90,7 +102,11 @@
       "colors": "Cyan",
       "city": "Miraflores",
       "objectPosition": "center",
-      "imageHint": "neon quote"
+      "imageHint": "neon quote",
+      "createdAt": {
+        "seconds": 1672531203,
+        "nanoseconds": 0
+      }
     },
     {
       "id": "job-5",
@@ -101,7 +117,11 @@
       "colors": "Blanco",
       "city": "Punta Cana",
       "objectPosition": "center",
-      "imageHint": "wedding sign"
+      "imageHint": "wedding sign",
+      "createdAt": {
+        "seconds": 1672531204,
+        "nanoseconds": 0
+      }
     },
     {
       "id": "job-6",
@@ -112,7 +132,11 @@
       "colors": "Amber",
       "city": "San Isidro",
       "objectPosition": "center",
-      "imageHint": "barber neon"
+      "imageHint": "barber neon",
+      "createdAt": {
+        "seconds": 1672531205,
+        "nanoseconds": 0
+      }
     },
     {
       "id": "job-7",
@@ -123,7 +147,11 @@
       "colors": "Purple, Yellow",
       "city": "La Molina",
       "objectPosition": "center",
-      "imageHint": "planet neon"
+      "imageHint": "planet neon",
+      "createdAt": {
+        "seconds": 1672531206,
+        "nanoseconds": 0
+      }
     },
     {
       "id": "job-8",
@@ -134,7 +162,11 @@
       "colors": "Fuchsia",
       "city": "Surco",
       "objectPosition": "center",
-      "imageHint": "bedroom sign"
+      "imageHint": "bedroom sign",
+      "createdAt": {
+        "seconds": 1672531207,
+        "nanoseconds": 0
+      }
     },
     {
       "id": "job-9",
@@ -144,7 +176,11 @@
       "measurements": "50cm x 80cm",
       "colors": "Rojo, Blanco, Azul",
       "city": "Barranco",
-      "imageHint": "barber pole"
+      "imageHint": "barber pole",
+      "createdAt": {
+        "seconds": 1672531208,
+        "nanoseconds": 0
+      }
     },
     {
       "id": "job-10",
@@ -155,7 +191,11 @@
       "colors": "Fucsia",
       "city": "Máncora",
       "objectPosition": "center",
-      "imageHint": "beach heart"
+      "imageHint": "beach heart",
+      "createdAt": {
+        "seconds": 1672531209,
+        "nanoseconds": 0
+      }
     },
     {
       "id": "job-11",
@@ -166,7 +206,11 @@
       "colors": "Cian, Fucsia",
       "city": "San Borja",
       "objectPosition": "center",
-      "imageHint": "game controller"
+      "imageHint": "game controller",
+      "createdAt": {
+        "seconds": 1672531210,
+        "nanoseconds": 0
+      }
     },
     {
       "id": "job-12",
@@ -177,18 +221,162 @@
       "colors": "Rojo",
       "city": "Miraflores",
       "objectPosition": "center",
-      "imageHint": "tattoo sign"
+      "imageHint": "tattoo sign",
+      "createdAt": {
+        "seconds": 1672531211,
+        "nanoseconds": 0
+      }
     },
     {
       "id": "job-13",
       "name": "Coffee Time",
       "alt": "Letrero de neón de una taza de café.",
-      "imageUrl": "https://i.imgur.com/5J3L3vG.jpeg",
+      "imageUrl": "https://i.imgur.com/IUMkleZ.jpeg",
       "measurements": "50cm x 50cm",
       "colors": "Blanco",
       "city": "San Isidro",
       "objectPosition": "center",
-      "imageHint": "coffee cup"
+      "imageHint": "coffee cup",
+      "createdAt": {
+        "seconds": 1672531212,
+        "nanoseconds": 0
+      }
+    },
+    {
+      "id": "job-14",
+      "name": "Haz lo que Amas",
+      "alt": "Una mujer sonriendo junto a un letrero de neón 'Do what you love'.",
+      "imageUrl": "https://i.imgur.com/b9S5XgN.jpeg",
+      "measurements": "120cm x 40cm",
+      "colors": "Rosa",
+      "city": "San Borja",
+      "objectPosition": "center",
+      "imageHint": "woman neon",
+      "createdAt": {
+        "seconds": 1672531213,
+        "nanoseconds": 0
+      }
+    },
+    {
+      "id": "job-15",
+      "name": "Bar de Cócteles",
+      "alt": "Letrero de neón de un cóctel en la pared de un bar oscuro.",
+      "imageUrl": "https://i.imgur.com/eQp8zTE.jpeg",
+      "measurements": "60cm x 80cm",
+      "colors": "Rosa, Verde",
+      "city": "Barranco",
+      "objectPosition": "center",
+      "imageHint": "cocktail sign",
+      "createdAt": {
+        "seconds": 1672531214,
+        "nanoseconds": 0
+      }
+    },
+    {
+      "id": "job-16",
+      "name": "Fiesta de Cumpleaños",
+      "alt": "Letrero de neón 'Happy Birthday' colgado en una pared de globos.",
+      "imageUrl": "https://i.imgur.com/c4JSS1T.jpeg",
+      "measurements": "100cm x 50cm",
+      "colors": "Blanco",
+      "city": "La Molina",
+      "objectPosition": "center",
+      "imageHint": "birthday party",
+      "createdAt": {
+        "seconds": 1672531215,
+        "nanoseconds": 0
+      }
+    },
+    {
+      "id": "job-17",
+      "name": "Tienda Urbana",
+      "alt": "Un hombre en una tienda de ropa con letreros de neón de fondo.",
+      "imageUrl": "https://i.imgur.com/5J3L3vG.jpeg",
+      "measurements": "Varios",
+      "colors": "Cian, Blanco",
+      "city": "Miraflores",
+      "objectPosition": "center",
+      "imageHint": "store neon",
+      "createdAt": {
+        "seconds": 1672531216,
+        "nanoseconds": 0
+      }
+    },
+    {
+      "id": "job-18",
+      "name": "Heladería Delicia",
+      "alt": "Letrero de neón con forma de cono de helado en una pared de ladrillos.",
+      "imageUrl": "https://i.imgur.com/S5kG4hR.jpeg",
+      "measurements": "50cm x 80cm",
+      "colors": "Rosa, Amarillo",
+      "city": "Surco",
+      "objectPosition": "center",
+      "imageHint": "ice cream",
+      "createdAt": {
+        "seconds": 1672531217,
+        "nanoseconds": 0
+      }
+    }
+  ],
+  "clientPhotos": [
+    {
+      "id": "client-1",
+      "name": "Skandaloso",
+      "alt": "Cliente con un letrero de neón 'Skandaloso'.",
+      "imageUrl": "https://i.imgur.com/htY9X3E.png",
+      "measurements": "150cm x 80cm",
+      "colors": "Fuchsia",
+      "city": "Lima",
+      "objectPosition": "center 75%",
+      "imageHint": "client neon",
+      "createdAt": {
+        "seconds": 1672531200,
+        "nanoseconds": 0
+      }
+    },
+    {
+      "id": "client-2",
+      "name": "Lucas Art",
+      "alt": "Cliente con un letrero de neón de alas y 'Lucas Art'.",
+      "imageUrl": "https://i.imgur.com/OMeRgOs.png",
+      "measurements": "120cm x 80cm",
+      "colors": "Cyan, Yellow",
+      "city": "Arequipa",
+      "imageHint": "wings neon",
+      "createdAt": {
+        "seconds": 1672531201,
+        "nanoseconds": 0
+      }
+    },
+    {
+      "id": "client-3",
+      "name": "Haz lo que Amas",
+      "alt": "Una mujer sonriendo junto a un letrero de neón 'Do what you love'.",
+      "imageUrl": "https://i.imgur.com/b9S5XgN.jpeg",
+      "measurements": "120cm x 40cm",
+      "colors": "Rosa",
+      "city": "San Borja",
+      "objectPosition": "center",
+      "imageHint": "woman neon",
+      "createdAt": {
+        "seconds": 1672531213,
+        "nanoseconds": 0
+      }
+    },
+    {
+      "id": "client-4",
+      "name": "Tienda Urbana",
+      "alt": "Un hombre en una tienda de ropa con letreros de neón de fondo.",
+      "imageUrl": "https://i.imgur.com/5J3L3vG.jpeg",
+      "measurements": "Varios",
+      "colors": "Cian, Blanco",
+      "city": "Miraflores",
+      "objectPosition": "center",
+      "imageHint": "store neon",
+      "createdAt": {
+        "seconds": 1672531216,
+        "nanoseconds": 0
+      }
     }
   ],
   "aboutUsImages": [
