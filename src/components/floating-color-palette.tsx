@@ -38,7 +38,7 @@ export function FloatingColorPalette() {
           isOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10 pointer-events-none'
         )}
       >
-        <Card className="w-[350px] sm:w-[550px] max-w-lg shadow-2xl border-primary neon-glow-primary">
+        <Card className="w-[300px] shadow-2xl border-primary neon-glow-primary">
           <CardHeader>
             <CardTitle>Nuestra Paleta de Colores</CardTitle>
             <CardDescription>
