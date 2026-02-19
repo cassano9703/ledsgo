@@ -82,7 +82,7 @@ export default function Home() {
                     Cada letrero es una historia de éxito. Aquí puedes ver algunos de los proyectos que hemos realizado para nuestros clientes.
                   </p>
                 </div>
-                <div className="h-[650px] w-full max-w-md mx-auto lg:mx-0">
+                <div className="h-[650px] w-full">
                   <OurJobsCarousel />
                 </div>
                 <div className="mt-4">
