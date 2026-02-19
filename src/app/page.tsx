@@ -49,8 +49,9 @@ export default function Home() {
             <PremadeDesigns />
           </div>
         </section>
-        <Differentiators />
         
+        <Differentiators />
+
         <section id="videos" className="py-12 md:py-20 lg:py-24">
           <div className="w-full px-4 md:px-6">
             <div className="flex flex-col items-center space-y-4 text-center">
@@ -81,7 +82,7 @@ export default function Home() {
                     Cada letrero es una historia de éxito. Aquí puedes ver algunos de los proyectos que hemos realizado para nuestros clientes.
                   </p>
                 </div>
-                <div className="h-[500px] w-full max-w-md mx-auto lg:mx-0">
+                <div className="h-[650px] w-full max-w-md mx-auto lg:mx-0">
                   <OurJobsCarousel />
                 </div>
                 <div className="mt-4">
