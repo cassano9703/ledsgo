@@ -22,31 +22,43 @@
   "placeholderImages": [
     {
       "id": "premade-1",
-      "title": "Neón para Bodas",
-      "description": "Crea un ambiente mágico en tu día especial con un letrero de neón personalizado. Perfecto para iniciales, fechas o frases románticas.",
-      "imageUrl": "https://i.imgur.com/D9TVlw5.jpeg",
-      "imageHint": "wedding neon"
+      "title": "Acrílico Espejo",
+      "description": "Dale un toque de elegancia y profesionalismo a tu espacio con letreros en acrílico espejo. Ideal para logos y nombres de empresa.",
+      "imageUrl": "https://i.imgur.com/OUije3Q.png",
+      "imageHint": "office sign",
+      "link": "/crear/acrilico-espejo",
+      "buttonText": "Personalizar y Ordenar",
+      "featured": true
     },
     {
       "id": "premade-2",
-      "title": "Logotipo para Negocio",
+      "title": "Neón para Negocios",
       "description": "Destaca la identidad de tu marca con un logotipo de neón vibrante. Ideal para oficinas, tiendas, bares y restaurantes.",
-      "imageUrl": "https://i.imgur.com/D9TVlw5.jpeg",
-      "imageHint": "business logo"
+      "imageUrl": "https://i.imgur.com/htY9X3E.png",
+      "imageHint": "business logo",
+      "link": "/crear",
+      "buttonText": "Personalizar y Ordenar",
+      "featured": false
     },
     {
       "id": "premade-3",
       "title": "Decoración para el Hogar",
-      "description": "Dale un toque moderno y personal a cualquier habitación. Desde tu frase favorita hasta un diseño abstracto.",
-      "imageUrl": "https://i.imgur.com/D9TVlw5.jpeg",
-      "imageHint": "home decor"
+      "description": "Dale un toque moderno y personal a cualquier habitación. Desde tu frase favorita hasta un diseño abstracto y único.",
+      "imageUrl": "https://i.imgur.com/BelxKLM.png",
+      "imageHint": "home decor",
+      "link": "/crear",
+      "buttonText": "Personalizar y Ordenar",
+      "featured": false
     },
     {
       "id": "premade-4",
-      "title": "Neón",
-      "description": "El detalle perfecto para cumpleaños, aniversarios o cualquier celebración. ¡Haz que tu evento brille!",
+      "title": "Explora el Catálogo",
+      "description": "El detalle perfecto para cualquier ocasión. ¡Inspírate con todos nuestros proyectos y haz que tu espacio brille!",
       "imageUrl": "https://i.imgur.com/nmuZ51D.jpeg",
-      "imageHint": "party event"
+      "imageHint": "party event",
+      "link": "/catalogo/neon",
+      "buttonText": "Ver Catálogo",
+      "featured": false
     }
   ],
   "neonJobs": [

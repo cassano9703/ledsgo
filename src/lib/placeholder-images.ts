@@ -7,6 +7,9 @@ export type ImagePlaceholder = {
   description: string;
   imageUrl: string;
   imageHint: string;
+  link: string;
+  buttonText: string;
+  featured: boolean;
 };
 
 export type HeroImage = {
@@ -40,3 +43,5 @@ export const NeonJobs: NeonJob[] = data.neonJobs;
 export const ClientPhotos: NeonJob[] = data.clientPhotos;
 export const AboutUsImages: AboutUsImage[] = data.aboutUsImages;
 export const VideoDataItems: VideoData[] = data.videoGallery;
+
+    
