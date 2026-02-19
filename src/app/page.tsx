@@ -5,12 +5,12 @@ import { MovingTextBar } from "@/components/moving-text-bar";
 import { PremadeDesigns } from "@/components/premade-designs";
 import { Differentiators } from "@/components/differentiators";
 import { OurJobsCarousel } from "@/components/our-jobs-carousel";
-import { ColorPalette } from "@/components/color-palette";
 import { ProcessSteps } from "@/components/process-steps";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Footer } from "@/components/layout/footer";
 import { VideoGallery } from "@/components/video-gallery";
+import { FloatingColorPalette } from "@/components/floating-color-palette";
 
 export default function Home() {
   return (
@@ -19,22 +19,7 @@ export default function Home() {
       <main className="flex-1">
         <HeroCarousel />
         <MovingTextBar />
-        <section id="colors" className="py-12 md:py-20 lg:py-24">
-          <div className="w-full">
-            <div className="flex flex-col items-center space-y-4 text-center">
-              <div className="space-y-2">
-                <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl font-headline">
-                  Nuestra Paleta de Colores
-                </h2>
-                <p className="mx-auto max-w-[700px] text-muted-foreground md:text-xl">
-                  Elige entre nuestra vibrante selección para crear un letrero único.
-                </p>
-              </div>
-            </div>
-            <ColorPalette />
-          </div>
-        </section>
-        <section id="catalog" className="pb-12 pt-4">
+        <section id="catalog" className="py-12 md:py-20 lg:py-24">
           <div className="w-full px-6 md:px-10 lg:px-16">
             <div className="mb-8">
               <div className="space-y-2">
@@ -52,7 +37,7 @@ export default function Home() {
         
         <Differentiators />
 
-        <section id="videos" className="py-12 md:py-20 lg:py-24">
+        <section id="videos" className="py-12 md:py-20 lg:py-24 bg-secondary">
           <div className="w-full px-4 md:px-6">
             <div className="flex flex-col items-center space-y-4 text-center">
               <div className="space-y-2">
@@ -68,7 +53,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="our-jobs" className="py-12 md:py-20 lg:py-24 bg-secondary">
+        <section id="our-jobs" className="py-12 md:py-20 lg:py-24">
           <div className="w-full px-6 md:px-10 lg:px-16">
             <div className="grid lg:grid-cols-2 gap-16 items-start max-w-7xl mx-auto">
               
@@ -111,6 +96,7 @@ export default function Home() {
         </section>
 
       </main>
+      <FloatingColorPalette />
       <Footer />
     </div>
   );
