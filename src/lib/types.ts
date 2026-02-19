@@ -1,3 +1,4 @@
+
 export type NeonJob = {
   id: string;
   name: string;
@@ -9,4 +10,5 @@ export type NeonJob = {
   objectPosition?: string;
   imageHint?: string;
   createdAt?: { seconds: number, nanoseconds: number };
+  category?: string;
 };

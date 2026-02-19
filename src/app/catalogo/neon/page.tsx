@@ -2,6 +2,7 @@
 import { Header } from "@/components/layout/header";
 import { NeonGallery } from "@/components/neon-gallery";
 import { Footer } from "@/components/layout/footer";
+import { NeonJobs } from "@/lib/placeholder-images";
 
 export default function NeonCatalogPage() {
   return (
@@ -20,7 +21,7 @@ export default function NeonCatalogPage() {
                 </p>
               </div>
             </div>
-            <NeonGallery />
+            <NeonGallery jobs={NeonJobs} />
           </div>
         </section>
       </main>
