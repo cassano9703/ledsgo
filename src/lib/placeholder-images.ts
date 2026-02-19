@@ -40,8 +40,7 @@ export type VideoData = {
 export const HeroImages: HeroImage[] = data.heroImages;
 export const PlaceHolderImages: ImagePlaceholder[] = data.placeholderImages;
 export const NeonJobs: NeonJob[] = data.neonJobs;
+export const AcrylicMirrorJobs: NeonJob[] = data.acrylicMirrorJobs;
 export const ClientPhotos: NeonJob[] = data.clientPhotos;
 export const AboutUsImages: AboutUsImage[] = data.aboutUsImages;
 export const VideoDataItems: VideoData[] = data.videoGallery;
-
-    

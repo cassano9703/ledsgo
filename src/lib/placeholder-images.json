@@ -26,8 +26,8 @@
       "description": "Dale un toque de elegancia y profesionalismo a tu espacio con letreros en acrílico espejo. Ideal para logos y nombres de empresa.",
       "imageUrl": "https://i.imgur.com/OUije3Q.png",
       "imageHint": "office sign",
-      "link": "/crear/acrilico-espejo",
-      "buttonText": "Personalizar y Ordenar",
+      "link": "/catalogo/acrilico-espejo",
+      "buttonText": "Ver Catálogo",
       "featured": true
     },
     {
@@ -137,22 +137,6 @@
       "category": "Personalizados",
       "createdAt": {
         "seconds": 1672531204,
-        "nanoseconds": 0
-      }
-    },
-    {
-      "id": "job-6",
-      "name": "Barbería Royal",
-      "alt": "Logo de neón para una barbería con una corona.",
-      "imageUrl": "https://i.imgur.com/OUije3Q.png",
-      "measurements": "90cm x 90cm",
-      "colors": "Amber",
-      "city": "San Isidro",
-      "objectPosition": "center",
-      "imageHint": "barber neon",
-      "category": "Negocios",
-      "createdAt": {
-        "seconds": 1672531205,
         "nanoseconds": 0
       }
     },
@@ -344,6 +328,39 @@
       "category": "Negocios",
       "createdAt": {
         "seconds": 1672531217,
+        "nanoseconds": 0
+      }
+    }
+  ],
+  "acrylicMirrorJobs": [
+    {
+      "id": "acrylic-1",
+      "name": "Barbería Royal",
+      "alt": "Logo de acrílico espejo para una barbería con una corona.",
+      "imageUrl": "https://i.imgur.com/OUije3Q.png",
+      "measurements": "90cm x 90cm",
+      "colors": "Dorado sobre Negro",
+      "city": "San Isidro",
+      "objectPosition": "center",
+      "imageHint": "barber sign",
+      "category": "Negocios",
+      "createdAt": {
+        "seconds": 1672531205,
+        "nanoseconds": 0
+      }
+    },
+    {
+      "id": "acrylic-2",
+      "name": "Love Your Smile Dental",
+      "alt": "Letrero de acrílico espejo 'Fall in love with your smile' en una silla elegante.",
+      "imageUrl": "https://i.imgur.com/bEsWIOu.png",
+      "measurements": "80cm x 60cm",
+      "colors": "Plateado sobre Blanco",
+      "city": "Cusco",
+      "imageHint": "chair sign",
+      "category": "Negocios",
+      "createdAt": {
+        "seconds": 1672531202,
         "nanoseconds": 0
       }
     }
