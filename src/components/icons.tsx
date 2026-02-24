@@ -3,12 +3,12 @@ import Image from "next/image";
 
 export function Logo(props: { className?: string }) {
   return (
-    <div className={`relative ${props.className || ''}`}>
+    <div className={`relative ${props.className || ''} overflow-hidden`}>
       <Image
-        src="https://i.imgur.com/M6L3e2u.png"
+        src="https://i.imgur.com/Xa1CLsJ.png"
         alt="Leds Go Logo"
         fill
-        className="object-contain"
+        className="object-contain transform scale-150"
       />
     </div>
   );
