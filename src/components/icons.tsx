@@ -1,54 +1,16 @@
 import type { SVGProps } from "react";
+import Image from "next/image";
 
-export function Logo(props: SVGProps<SVGSVGElement>) {
+export function Logo(props: { className?: string }) {
   return (
-    <svg 
-      viewBox="0 0 200 100" 
-      width="80" 
-      height="40"
-      {...props}
-    >
-      <defs>
-        <filter id="neon-glow-accent">
-          <feGaussianBlur stdDeviation="3.5" result="coloredBlur" />
-          <feMerge>
-            <feMergeNode in="coloredBlur" />
-            <feMergeNode in="SourceGraphic" />
-          </feMerge>
-        </filter>
-        <filter id="neon-glow-primary">
-          <feGaussianBlur stdDeviation="3.5" result="coloredBlur" />
-          <feMerge>
-            <feMergeNode in="coloredBlur" />
-            <feMergeNode in="SourceGraphic" />
-          </feMerge>
-        </filter>
-      </defs>
-      <text
-        x="50%"
-        y="40%"
-        dominantBaseline="middle"
-        textAnchor="middle"
-        fontSize="40"
-        fontWeight="bold"
-        fill="hsl(var(--accent))"
-        style={{ filter: 'url(#neon-glow-accent)', textShadow: '0 0 10px hsl(var(--accent))' }}
-      >
-        LEDS
-      </text>
-      <text
-        x="50%"
-        y="75%"
-        dominantBaseline="middle"
-        textAnchor="middle"
-        fontSize="40"
-        fontWeight="bold"
-        fill="hsl(var(--primary))"
-        style={{ filter: 'url(#neon-glow-primary)', textShadow: '0 0 10px hsl(var(--primary))' }}
-      >
-        GO
-      </text>
-    </svg>
+    <div className={`relative ${props.className || ''}`}>
+      <Image
+        src="https://i.imgur.com/M6L3e2u.png"
+        alt="Leds Go Logo"
+        fill
+        className="object-contain"
+      />
+    </div>
   );
 }
 
