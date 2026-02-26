@@ -6,6 +6,9 @@ import { FirebaseClientProvider } from '@/firebase/client-provider';
 export const metadata: Metadata = {
   title: 'Leds Go Configurator',
   description: 'Personaliza y ordena tus propios letreros de neón LED.',
+  icons: {
+    icon: 'https://i.imgur.com/Xa1CLsJ.png',
+  },
 };
 
 export default function RootLayout({
