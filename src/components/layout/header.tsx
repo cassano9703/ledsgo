@@ -17,7 +17,7 @@ export function Header() {
         className="flex items-center justify-center"
         prefetch={false}
       >
-        <Logo className="h-10 w-20" />
+        <Logo className="h-14 w-28" />
         <span className="sr-only">LEDS GO</span>
       </Link>
       <nav className="ml-auto flex gap-4 sm:gap-6 items-center">
