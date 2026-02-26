@@ -7,7 +7,9 @@ export const metadata: Metadata = {
   title: 'Leds Go Configurator',
   description: 'Personaliza y ordena tus propios letreros de neón LED.',
   icons: {
-    icon: 'https://i.imgur.com/Xa1CLsJ.png',
+    icon: 'https://i.imgur.com/Xa1CLsJ.png?v=1',
+    shortcut: 'https://i.imgur.com/Xa1CLsJ.png?v=1',
+    apple: 'https://i.imgur.com/Xa1CLsJ.png?v=1',
   },
 };
 

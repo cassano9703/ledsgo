@@ -8,7 +8,7 @@ export function Logo(props: { className?: string }) {
         src="https://i.imgur.com/Xa1CLsJ.png"
         alt="Leds Go Logo"
         fill
-        className="object-contain transform scale-[2.2]"
+        className="object-contain transform scale-[2.5]"
       />
     </div>
   );
