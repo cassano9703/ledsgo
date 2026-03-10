@@ -38,13 +38,13 @@ export function HeroCarousel() {
         <div 
           className="relative bg-black/60 backdrop-blur-sm p-8 md:p-12 rounded-xl shadow-2xl overflow-hidden"
         >
-          <div className="relative z-10 flex flex-col items-center space-y-6">
-            <div>
-              <h1 className="text-4xl font-extrabold tracking-tight lg:text-6xl xl:text-7xl font-headline">
+          <div className="relative z-10 flex flex-col items-center space-y-6 text-center">
+            <div className="flex flex-col items-center">
+              <h1 className="text-4xl font-extrabold tracking-tight lg:text-6xl xl:text-7xl font-headline text-center">
                 Diseña tu letrero <span className="text-accent animate-glow" style={{"--glow-color": "hsl(var(--accent))"} as React.CSSProperties}>Neón</span>
               </h1>
-              <p className="max-w-2xl mt-4 text-lg text-neutral-200">
-                Iluminamos tus ideas con estrategia y diseño.
+              <p className="max-w-2xl mt-4 text-lg text-neutral-200 text-center mx-auto">
+              Brindamos letreros a medida para resaltar la identidad visual de tu marca.!!
               </p>
             </div>
             <div className="flex flex-col sm:flex-row gap-4 items-center pointer-events-auto">
