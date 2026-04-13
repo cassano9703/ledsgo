@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState } from 'react';
@@ -27,7 +28,7 @@ export function FloatingColorPalette() {
       {/* Palette Backdrop (for closing when clicking outside) */}
       <div
         className={cn(
-          'fixed inset-0 z-40 bg-black/20 backdrop-blur-[2px] transition-opacity duration-300',
+          'fixed inset-0 z-40 bg-black/10 backdrop-blur-[1px] transition-opacity duration-300',
           isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
         )}
         onClick={() => setIsOpen(false)}
@@ -36,15 +37,15 @@ export function FloatingColorPalette() {
       {/* Palette Panel */}
       <div
         className={cn(
-          'fixed bottom-24 right-6 z-50 transition-all duration-300 ease-in-out',
+          'fixed bottom-20 right-6 z-50 transition-all duration-300 ease-in-out',
           isOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10 pointer-events-none'
         )}
       >
-        <Card className="w-[180px] shadow-2xl border-primary/50 neon-glow-primary bg-background/60 backdrop-blur-xl">
-          <CardHeader className="p-3 pb-0 text-center">
-            <CardTitle className="text-sm font-bold tracking-tight">Colores</CardTitle>
+        <Card className="w-[160px] shadow-2xl border-primary/30 neon-glow-primary bg-background/20 backdrop-blur-md">
+          <CardHeader className="p-2 pb-0 text-center">
+            <CardTitle className="text-xs font-bold tracking-tight opacity-70">Colores</CardTitle>
           </CardHeader>
-          <CardContent className="p-3">
+          <CardContent className="p-2">
             <ColorPalette />
           </CardContent>
         </Card>
